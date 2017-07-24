@@ -1,0 +1,310 @@
+#
+# ~/.functions
+#
+
+#!/usr/bin/env bash
+
+# CREATE A NEW DIRECTORY AND ENTER IT.
+function mkd() {
+    mkdir -p "$@" && cd "$_";
+}
+
+# CHANGE WORKING DIRECTORY TO THE TOP-MOST FINDER WINDOW LOCATION.
+function cdf() { # short for `cdfinder`
+    cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
+}
+
+# CREATE A .tar.gz ARCHIVE, USING `zopfli`, `pigz` OR `gzip` FOR COMPRESSION.
+function targz() {
+    local tmpFile="${@%/}.tar";
+    tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
+
+    size=$(
+        stat -f"%z" "${tmpFile}" 2> /dev/null; # macOS `stat`
+        stat -c"%s" "${tmpFile}" 2> /dev/null;  # GNU `stat`
+    );
+
+    local cmd="";
+    if (( size < 52428800 )) && hash zopfli 2> /dev/null; then
+        # THE .tar FILE IS SMALLER THAN 50 MB AND ZOPFLI IS AVAILABLE; USE IT.
+        cmd="zopfli";
+    else
+        if hash pigz 2> /dev/null; then
+            cmd="pigz";
+        else
+            cmd="gzip";
+        fi;
+    fi;
+
+    echo "Compressing .tar ($((size / 1000)) kB) using \`${cmd}\`…";
+    "${cmd}" -v "${tmpFile}" || return 1;
+    [ -f "${tmpFile}" ] && rm "${tmpFile}";
+
+    zippedSize=$(
+        stat -f"%z" "${tmpFile}.gz" 2> /dev/null; # macOS `stat`
+        stat -c"%s" "${tmpFile}.gz" 2> /dev/null; # GNU `stat`
+    );
+
+    echo "${tmpFile}.gz ($((zippedSize / 1000)) kB) created successfully.";
+}
+
+# DETERMINE SIZE OF A FILE OR TOTAL SIZE OF A DIRECTORY.
+function fs() {
+    if du -b /dev/null > /dev/null 2>&1; then
+        local arg=-sbh;
+    else
+        local arg=-sh;
+    fi
+    if [[ -n "$@" ]]; then
+        du $arg -- "$@";
+    else
+        du $arg .[^.]* ./*;
+    fi;
+}
+
+# USE GIT’S COLORED DIFF WHEN AVAILABLE
+hash git &>/dev/null;
+if [ $? -eq 0 ]; then
+    function diff() {
+        git diff --no-index --color-words "$@";
+    }
+fi;
+
+# CREATE A DATA URL FROM A FILE
+function dataurl() {
+    local mimeType=$(file -b --mime-type "$1");
+    if [[ $mimeType == text/* ]]; then
+        mimeType="${mimeType};charset=utf-8";
+    fi
+    echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
+}
+
+# CREATE A GIT.IO SHORT URL
+function gitio() {
+    if [ -z "${1}" -o -z "${2}" ]; then
+        echo "Usage: \`gitio slug url\`";
+        return 1;
+    fi;
+    curl -i https://git.io/ -F "url=${2}" -F "code=${1}";
+}
+
+# START AN HTTP SERVER FROM A DIRECTORY, OPTIONALLY SPECIFYING THE PORT
+function server() {
+    local port="${1:-8000}";
+    sleep 1 && open "http://localhost:${port}/" &
+    # SET THE DEFAULT CONTENT-TYPE TO `text/plain` INSTEAD OF `application/octet-stream`
+    # AND SERVE EVERYTHING AS UTF-8 (ALTHOUGH NOT TECHNICALLY CORRECT, THIS DOESN’T BREAK ANYTHING FOR BINARY FILES)
+    python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
+}
+
+# START A PHP SERVER FROM A DIRECTORY, OPTIONALLY SPECIFYING THE PORT.
+# (REQUIRES PHP 5.4.0+.)
+function phpserver() {
+    local port="${1:-4000}";
+    local ip=$(ipconfig getifaddr en1);
+    sleep 1 && open "http://${ip}:${port}/" &
+    php -S "${ip}:${port}";
+}
+
+# COMPARE ORIGINAL AND GZIPPED FILE SIZE.
+function gz() {
+    local origsize=$(wc -c < "$1");
+    local gzipsize=$(gzip -c "$1" | wc -c);
+    local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
+    printf "orig: %d bytes\n" "$origsize";
+    printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
+}
+
+# SYNTAX-HIGHLIGHT JSON STRINGS OR FILES.
+# USAGE: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
+function json() {
+    if [ -t 0 ]; then # argument
+        python -mjson.tool <<< "$*" | pygmentize -l javascript;
+    else # pipe
+        python -mjson.tool | pygmentize -l javascript;
+    fi;
+}
+
+# RUN `dig` AND DISPLAY THE MOST USEFUL INFO.
+function digga() {
+    dig +nocmd "$1" any +multiline +noall +answer;
+}
+
+# UTF-8-ENCODE A STRING OF UNICODE SYMBOLS.
+function escape() {
+    printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u);
+    # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
+    if [ -t 1 ]; then
+        echo ""; # newline
+    fi;
+}
+
+# DECODE \x{ABCD}-STYLE UNICODE ESCAPE SEQUENCES.
+function unidecode() {
+    perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
+    # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
+    if [ -t 1 ]; then
+        echo ""; # newline
+    fi;
+}
+
+# GET A CHARACTER’S UNICODE CODE POINT.
+function codepoint() {
+    perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))";
+    # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
+    if [ -t 1 ]; then
+        echo ""; # newline
+    fi;
+}
+
+# SHOW ALL THE NAMES (CNS AND SANS) LISTED IN THE SSL CERTIFICATE
+# FOR A GIVEN DOMAIN.
+function getcertnames() {
+    if [ -z "${1}" ]; then
+        echo "ERROR: No domain specified.";
+        return 1;
+    fi;
+
+    local domain="${1}";
+    echo "Testing ${domain}…";
+    echo ""; # newline
+
+    local tmp=$(echo -e "GET / HTTP/1.0\nEOT" \
+        | openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1);
+
+    if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
+        local certText=$(echo "${tmp}" \
+            | openssl x509 -text -certopt "no_aux, no_header, no_issuer, no_pubkey, \
+            no_serial, no_sigdump, no_signame, no_validity, no_version");
+        echo "Common Name:";
+        echo ""; # newline
+        echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//" | sed -e "s/\/emailAddress=.*//";
+        echo ""; # newline
+        echo "Subject Alternative Name(s):";
+        echo ""; # newline
+        echo "${certText}" | grep -A 1 "Subject Alternative Name:" \
+            | sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2;
+        return 0;
+    else
+        echo "ERROR: Certificate not found.";
+        return 1;
+    fi;
+}
+
+# `s` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN SUBLIME TEXT, OTHERWISE
+# OPENS THE GIVEN LOCATION.
+function s() {
+    if [ $# -eq 0 ]; then
+        subl .;
+    else
+        subl "$@";
+    fi;
+}
+
+# `a` wITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN ATOM EDITOR, OTHERWISE
+# OPENS THE GIVEN LOCATION.
+function a() {
+    if [ $# -eq 0 ]; then
+        atom .;
+    else
+        atom "$@";
+    fi;
+}
+
+# `v` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN VIM, OTHERWISE OPENS THE
+# GIVEN LOCATION.
+function v() {
+    if [ $# -eq 0 ]; then
+        vim .;
+    else
+        vim "$@";
+    fi;
+}
+
+# `o` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY, OTHERWISE OPENS THE GIVEN
+# LOCATION.
+function o() {
+    if [ $# -eq 0 ]; then
+        open .;
+    else
+        open "$@";
+    fi;
+}
+
+# `tre` IS A SHORTHAND FOR `tree` WITH HIDDEN FILES AND COLOR ENABLED, IGNORING
+# THE `.git` DIRECTORY, LISTING DIRECTORIES FIRST. THE OUTPUT GETS PIPED INTO
+# `less` WITH OPTIONS TO PRESERVE COLOR AND LINE NUMBERS, UNLESS THE OUTPUT IS
+# SMALL ENOUGH FOR ONE SCREEN.
+function tre() {
+    tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
+
+# GET KEYCLOAK AUTHENTICATION TOKEN
+function getAuthToken() {
+    source $PYTHON/mbo/local-start/bin/activate &&
+    python $DEV/mbo/scripts/local_start/local_start.py -a connect-webapp -u $1 -p $2 -v $3 | pbcopy &&
+    deactivate
+}
+
+function importmongodb() {
+    # KRIS'S SOLUTION - JULY 19, 2017
+    if [[ $1 =~ (.+)\/([^\/]+)\.(.{3})$ ]]; then
+        LOC=${BASH_REMATCH[1]}
+        FILE=${BASH_REMATCH[2]}
+        EXT=${BASH_REMATCH[3]}
+    fi
+    if [ "$EXT" == "agz" ]; then
+        if [ -n "$2" ]; then
+            LOC=$2
+        fi
+        7z e $1 -o$LOC
+    fi
+    # dockerexec $3 "mongorestore --drop $4 --archive=$DOCKER_CONNECT_API_DB/$FILE"
+    mongorestore --drop --gzip --archive=$LOC/$FILE $4
+
+    # Data Import
+    echo $'\n\nImporting Data ...'
+    echo $'Done.'
+}
+
+# START CONNECT API PYTHON SERVER - (without PyCharm)
+function connectapistartserver() {
+    mongod --dbpath $DATA/db --fork --logpath /dev/null
+    # Start MongoDB
+    echo $'\nStarting MongoDB ...'
+    echo $'Done.\n'
+
+    # Start Connect API
+    echo $'Starting the Connect API development server ...'
+    cd $CONNECT_API &&
+    source $CONNECT_API_VENV/bin/activate &&
+    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" python manage.py runserver &&
+    deactivate &&
+    echo $'\n\nShutting down the Connect API development server ...'
+    echo $'Done.'
+
+    # Stop MongoDB
+    echo $'\nShutting down MongoDB ...'
+    mongo admin --eval 'db.shutdownServer()' > /dev/null
+    echo $'Done.'
+}
+
+function startcelery() {
+    # Starting Celery
+    echo $'Starting Celery ...'
+    cd $CONNECT_API &&
+    source $CONNECT_API_VENV/bin/activate &&
+    env MBO_ENV="development celery -A connect -l INFO worker" &&
+    deactivate
+    # Stop Celery
+    echo $'\n\nShutting down Celery ...'
+    echo $'Done.'
+}
+
+# Ansible
+function startansible() {
+    pyenv shell 2.7.13
+    printf 'Now using Python v%s ... \n' ${PYENV_VERSION}
+    source $PYTHON/personal/ansible/bin/activate
+}
+

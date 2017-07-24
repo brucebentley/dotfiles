@@ -1,0 +1,4 @@
+# 127.0.0.1 ansible_connection=local
+
+dev.careercombo.com ansible_connection=local
+dev.sugarcodeit.com ansible_connection=local

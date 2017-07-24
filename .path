@@ -1,0 +1,66 @@
+#
+# ~/.path
+#
+
+# ADD `~/bin` TO THE `$PATH`
+export PATH="$HOME/bin:$PATH";
+
+### JAVA JRE CONFIGURATION
+#export JAVA_HOME=`/usr/libexec/java_home`;
+#PATH="$JAVA_HOME/bin:$PATH";
+
+# MAVEN CONFIGURATION
+PATH="/opt/apache-maven/bin:$PATH"
+#export M2_HOME="/usr/local/Cellar/maven/3.2.5";
+#export M2="$M2_HOME/bin";
+#export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
+#PATH="$M2:$PATH";
+
+# BASH UTILITIES
+PATH="/usr/local/bin:$PATH"
+PATH="/usr/local/lib:$PATH"
+
+# HOMEBREW'S CORE CONFIGURATION
+PATH="/usr/local/sbin:$PATH"
+
+# HOMEBREW'S `coreutils` — `$(brew --prefix coreutils)/libexec/gnubin`
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+
+# HOMEBREW'S CURL --with-openssl
+PATH="/usr/local/opt/curl/bin:$PATH"
+
+##################################################
+# pyenv — "Python Version Manager"               #
+##################################################
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+## PATH FOR PYTHON
+# PATH=/usr/local/share/python:${PATH}
+# ## FOR HOMEBREWED BOTTLES
+# PATH=/usr/local/bin:/usr/local/sbin:${PATH}
+## FOR CUSTOM SCRIPTS
+# PATH=$HOME/bin:${PATH}
+## FOR pyenv
+PYENV_ROOT=$HOME/.pyenv
+PATH=$PYENV_ROOT/bin:${PATH}
+
+##################################################
+# rbenv - "Ruby Environment Manager"  #
+##################################################
+# ADD & LOAD `rbenv` EVERY TIME YOU OPEN A TERMINAL
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+## FOR rbenv
+RBENV_ROOT=$HOME/.rbenv
+## FOR CUSTOM SCRIPTS
+PATH=$RBENV_ROOT/bin:${PATH}
+
+
+export PATH;
+
+export PATH="/opt/chefdk/bin:$PATH"
+
+# INITIALIZE NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
