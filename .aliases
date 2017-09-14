@@ -207,9 +207,18 @@ alias stoppostgres="brew services stop postgresql"
 # alias importconnectdata="importMongoDB"
 
 # Get Authentication Tokens From Keycloak
+### ASSOCIATE
+# alias associatetoken="getAuthToken blee@mbo-tst.com Mbo.2011 associate";
 alias associatetoken="getAuthToken cclark1@mbo-tst.com Mbo.2011 associate";
-alias enterprisetoken="getAuthToken mlucero@mbo-tst.com Mbo.2015 enterprise";
-alias entadmintoken="getAuthToken tberg@mbo-tst.com Mbo.2015 enterprise";
+# alias associatetoken="getAuthToken sevans@mbo-tst.com Mbo.2011 associate";
+# alias associatetoken="getAuthToken thansen@mbo-tst.com Mbo.2011 associate";
+### ENTERPRISE
+alias enterprisetoken="getAuthToken blucas@mbo-tst.com Mbo.2015 enterprise";
+# alias enterprisetoken="getAuthToken dcooke@mbo-tst.com Mbo.2015 enterprise";
+# alias enterprisetoken="getAuthToken mcavaluzzi@mbo-tst.com Mbo.2015 enterprise";
+# alias enterprisetoken="getAuthToken mlucero@mbo-tst.com Mbo.2015 enterprise";
+### ENTERPRISE ADMIN
+alias entadmintoken="getAuthToken tberg@mbo-tst.com Mbo.2011 enterprise";
 
 # Ansible
 # alias startansible="pyenv shell 2.7.13 && source $PYTHON/personal/ansible/bin/activate";
