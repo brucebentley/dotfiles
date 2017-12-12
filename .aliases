@@ -170,8 +170,11 @@ alias path='echo -e ${PATH//:/\\n}'
 
 
 # Apache v2.4.23_2
+# alias startapache="sudo brew services start httpd"
+# alias stopapache="sudo brew services stop httpd"
+# alias restartapache="sudo brew services restart -k httpd"
 alias startapache="sudo apachectl start"
-alias stopapache="sudo apachectl stop"
+alias stopapache="sudo apachectl -k stop"
 alias restartapache="sudo apachectl -k restart"
 
 # DNSMASQ
@@ -210,6 +213,7 @@ alias stoppostgres="brew services stop postgresql"
 ### ASSOCIATE
 # alias associatetoken="getAuthToken blee@mbo-tst.com Mbo.2011 associate";
 alias associatetoken="getAuthToken cclark1@mbo-tst.com Mbo.2011 associate";
+# alias associatetoken="getAuthToken agreen@mbo-tst.com Mbo.2011 associate";
 # alias associatetoken="getAuthToken sevans@mbo-tst.com Mbo.2011 associate";
 # alias associatetoken="getAuthToken thansen@mbo-tst.com Mbo.2011 associate";
 ### ENTERPRISE

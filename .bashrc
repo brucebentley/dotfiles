@@ -25,3 +25,6 @@ export PATH="$PATH:$GOROOT/bin"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
+
+# added by travis gem
+[ -f /Users/bbentley/.travis/travis.sh ] && source /Users/bbentley/.travis/travis.sh

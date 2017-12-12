@@ -78,7 +78,9 @@
 
 [core]
     # Use Sublime Text as the default editor.
+    #     `-n -w` Opens a new window & waits for the files to be closed before returning.
     editor = subl -n -w
+    #editor = code --wait
 
     # Use custom `.gitignore` and `.gitattributes`
 	excludesfile = /Users/bbentley/.gitignore_global

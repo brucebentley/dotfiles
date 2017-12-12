@@ -4,17 +4,23 @@
 
 #!/usr/bin/env bash
 
+#
 # CREATE A NEW DIRECTORY AND ENTER IT.
+#
 function mkd() {
     mkdir -p "$@" && cd "$_";
 }
 
+#
 # CHANGE WORKING DIRECTORY TO THE TOP-MOST FINDER WINDOW LOCATION.
+#
 function cdf() { # short for `cdfinder`
     cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
 }
 
+#
 # CREATE A .tar.gz ARCHIVE, USING `zopfli`, `pigz` OR `gzip` FOR COMPRESSION.
+#
 function targz() {
     local tmpFile="${@%/}.tar";
     tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
@@ -48,7 +54,9 @@ function targz() {
     echo "${tmpFile}.gz ($((zippedSize / 1000)) kB) created successfully.";
 }
 
+#
 # DETERMINE SIZE OF A FILE OR TOTAL SIZE OF A DIRECTORY.
+#
 function fs() {
     if du -b /dev/null > /dev/null 2>&1; then
         local arg=-sbh;
@@ -62,7 +70,9 @@ function fs() {
     fi;
 }
 
+#
 # USE GIT’S COLORED DIFF WHEN AVAILABLE
+#
 hash git &>/dev/null;
 if [ $? -eq 0 ]; then
     function diff() {
@@ -70,7 +80,9 @@ if [ $? -eq 0 ]; then
     }
 fi;
 
+#
 # CREATE A DATA URL FROM A FILE
+#
 function dataurl() {
     local mimeType=$(file -b --mime-type "$1");
     if [[ $mimeType == text/* ]]; then
@@ -79,7 +91,9 @@ function dataurl() {
     echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
 }
 
+#
 # CREATE A GIT.IO SHORT URL
+#
 function gitio() {
     if [ -z "${1}" -o -z "${2}" ]; then
         echo "Usage: \`gitio slug url\`";
@@ -88,7 +102,9 @@ function gitio() {
     curl -i https://git.io/ -F "url=${2}" -F "code=${1}";
 }
 
+#
 # START AN HTTP SERVER FROM A DIRECTORY, OPTIONALLY SPECIFYING THE PORT
+#
 function server() {
     local port="${1:-8000}";
     sleep 1 && open "http://localhost:${port}/" &
@@ -97,8 +113,10 @@ function server() {
     python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
 }
 
+#
 # START A PHP SERVER FROM A DIRECTORY, OPTIONALLY SPECIFYING THE PORT.
 # (REQUIRES PHP 5.4.0+.)
+#
 function phpserver() {
     local port="${1:-4000}";
     local ip=$(ipconfig getifaddr en1);
@@ -106,7 +124,9 @@ function phpserver() {
     php -S "${ip}:${port}";
 }
 
+#
 # COMPARE ORIGINAL AND GZIPPED FILE SIZE.
+#
 function gz() {
     local origsize=$(wc -c < "$1");
     local gzipsize=$(gzip -c "$1" | wc -c);
@@ -115,8 +135,10 @@ function gz() {
     printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
 }
 
+#
 # SYNTAX-HIGHLIGHT JSON STRINGS OR FILES.
 # USAGE: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
+#
 function json() {
     if [ -t 0 ]; then # argument
         python -mjson.tool <<< "$*" | pygmentize -l javascript;
@@ -125,12 +147,16 @@ function json() {
     fi;
 }
 
+#
 # RUN `dig` AND DISPLAY THE MOST USEFUL INFO.
+#
 function digga() {
     dig +nocmd "$1" any +multiline +noall +answer;
 }
 
+#
 # UTF-8-ENCODE A STRING OF UNICODE SYMBOLS.
+#
 function escape() {
     printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u);
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
@@ -139,7 +165,9 @@ function escape() {
     fi;
 }
 
+#
 # DECODE \x{ABCD}-STYLE UNICODE ESCAPE SEQUENCES.
+#
 function unidecode() {
     perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
@@ -148,7 +176,9 @@ function unidecode() {
     fi;
 }
 
+#
 # GET A CHARACTER’S UNICODE CODE POINT.
+#
 function codepoint() {
     perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))";
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
@@ -157,8 +187,10 @@ function codepoint() {
     fi;
 }
 
+#
 # SHOW ALL THE NAMES (CNS AND SANS) LISTED IN THE SSL CERTIFICATE
 # FOR A GIVEN DOMAIN.
+#
 function getcertnames() {
     if [ -z "${1}" ]; then
         echo "ERROR: No domain specified.";
@@ -191,8 +223,10 @@ function getcertnames() {
     fi;
 }
 
+#
 # `s` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN SUBLIME TEXT, OTHERWISE
 # OPENS THE GIVEN LOCATION.
+#
 function s() {
     if [ $# -eq 0 ]; then
         subl .;
@@ -201,8 +235,10 @@ function s() {
     fi;
 }
 
+#
 # `a` wITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN ATOM EDITOR, OTHERWISE
 # OPENS THE GIVEN LOCATION.
+#
 function a() {
     if [ $# -eq 0 ]; then
         atom .;
@@ -211,8 +247,10 @@ function a() {
     fi;
 }
 
+#
 # `v` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN VIM, OTHERWISE OPENS THE
 # GIVEN LOCATION.
+#
 function v() {
     if [ $# -eq 0 ]; then
         vim .;
@@ -221,8 +259,10 @@ function v() {
     fi;
 }
 
+#
 # `o` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY, OTHERWISE OPENS THE GIVEN
 # LOCATION.
+#
 function o() {
     if [ $# -eq 0 ]; then
         open .;
@@ -231,21 +271,19 @@ function o() {
     fi;
 }
 
+#
 # `tre` IS A SHORTHAND FOR `tree` WITH HIDDEN FILES AND COLOR ENABLED, IGNORING
 # THE `.git` DIRECTORY, LISTING DIRECTORIES FIRST. THE OUTPUT GETS PIPED INTO
 # `less` WITH OPTIONS TO PRESERVE COLOR AND LINE NUMBERS, UNLESS THE OUTPUT IS
 # SMALL ENOUGH FOR ONE SCREEN.
+#
 function tre() {
     tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
-# GET KEYCLOAK AUTHENTICATION TOKEN
-function getAuthToken() {
-    source $PYTHON/mbo/local-start/bin/activate &&
-    python $DEV/mbo/scripts/local_start/local_start.py -a connect-webapp -u $1 -p $2 -v $3 | pbcopy &&
-    deactivate
-}
-
+#
+# —[ GENERAL ]— IMPORT MONGO DATABASE
+#
 function importmongodb() {
     # KRIS'S SOLUTION - JULY 19, 2017
     if [[ $1 =~ (.+)\/([^\/]+)\.(.{3})$ ]]; then
@@ -259,52 +297,100 @@ function importmongodb() {
         fi
         7z e $1 -o$LOC
     fi
+
+    # DATA IMPORT
+    echo -e "${bold}${yellow}Importing Data ...${reset}"
     # dockerexec $3 "mongorestore --drop $4 --archive=$DOCKER_CONNECT_API_DB/$FILE"
     mongorestore --drop --gzip --archive=$LOC/$FILE $4
-
-    # Data Import
-    echo $'\n\nImporting Data ...'
-    echo $'Done.'
+    echo $'\n'
+    echo -e "${bold}${green}Done!${reset}"
 }
 
-# START CONNECT API PYTHON SERVER - (without PyCharm)
-function connectapistartserver() {
-    mongod --dbpath $DATA/db --fork --logpath /dev/null
-    # Start MongoDB
-    echo $'\nStarting MongoDB ...'
-    echo $'Done.\n'
-
-    # Start Connect API
-    echo $'Starting the Connect API development server ...'
-    cd $CONNECT_API &&
-    source $CONNECT_API_VENV/bin/activate &&
-    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" python manage.py runserver &&
-    deactivate &&
-    echo $'\n\nShutting down the Connect API development server ...'
-    echo $'Done.'
-
-    # Stop MongoDB
-    echo $'\nShutting down MongoDB ...'
-    mongo admin --eval 'db.shutdownServer()' > /dev/null
-    echo $'Done.'
-}
-
-function startcelery() {
-    # Starting Celery
-    echo $'Starting Celery ...'
-    cd $CONNECT_API &&
-    source $CONNECT_API_VENV/bin/activate &&
-    env MBO_ENV="development celery -A connect -l INFO worker" &&
-    deactivate
-    # Stop Celery
-    echo $'\n\nShutting down Celery ...'
-    echo $'Done.'
-}
-
-# Ansible
+#
+# —[ DEVOPS ]— START ANSIBLE
+#
 function startansible() {
     pyenv shell 2.7.13
     printf 'Now using Python v%s ... \n' ${PYENV_VERSION}
     source $PYTHON/personal/ansible/bin/activate
 }
 
+#
+# —[ CONNECT ]— START CONNECT-API - (w/out PyCharm)
+#
+function connectapistartserver() {
+    cd $CONNECT_API &&
+    # PULL LATEST CHANGES FROM GITHUB
+    echo -e "${bold}${yellow}Pulling latest code from GitHub...${reset}"
+    git fetch origin &&
+    git pull origin develop
+    echo -e "${bold}${green}Done!${reset}"
+    echo $'\n'
+
+    # START MONGODB
+    echo -e "${bold}${yellow}Starting MongoDB...${reset}"
+    mongod --dbpath $DATA/db --fork --logpath /dev/null
+    echo -e "${bold}${green}Done!${reset}"
+    echo $'\n'
+
+    # START CONNECT API
+    echo -e "${bold}${yellow}Starting the Connect API development server...${reset}"
+    source $CONNECT_API_VENV/bin/activate &&
+    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" python manage.py runserver &&
+    deactivate &&
+    echo $'\n'
+    echo -e "${bold}${yellow}Shutting down the Connect API development server...${reset}"
+    echo -e "${bold}${green}Done!${reset}"
+
+    # STOP MONGODB
+    echo $'\n'
+    echo -e "${bold}${yellow}Shutting down MongoDB...${reset}"
+    mongo admin --eval 'db.shutdownServer()' > /dev/null
+    echo -e "${bold}${green}Done!${reset}"
+}
+
+#
+# —[ CONNECT ]— START CELERY
+#
+function connectstartcelery() {
+    cd $CONNECT_API &&
+
+    # WAIT FOR `connect-api` TO INITIALIZE
+    echo -e "${bold}${yellow}Waiting for connect-api to initialize...${reset}"
+    echo $'\n'
+    sleep 10 &&
+
+    # STARTING CELERY
+    echo -e "${bold}${yellow}Starting Celery...${reset}"
+    source $CONNECT_API_VENV/bin/activate &&
+    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" celery -A connect -l info worker &&
+    deactivate
+
+    # STOP CELERY
+    echo $'\n'
+    echo -e "${bold}${yellow}Shutting down Celery...${reset}"
+    echo -e "${bold}${green}Done!${reset}"
+}
+
+#
+# —[ KEYCLOAK ]— GET AUTHENTICATION TOKEN
+#
+function getAuthToken() {
+    echo -en "${bold}${violet}Enter Username: ${reset}"
+    read username_var
+    echo -en "${bold}${violet}Enter Password: ${reset}"
+    read -s password_var
+    echo
+    echo -en "${bold}${violet}Enter User Type: ${reset} ${violet}[associate, enterprise] ${reset}"
+    read role_var
+    echo
+
+    source $PYTHON/mbo/local-start/bin/activate &&
+    echo -e "${bold}${yellow}Generating authenication token for $username_var ... ${reset}"
+    python $DEV/mbo/scripts/local_start/local_start.py -a connect-webapp -u $username_var -p $password_var -v $role_var | pbcopy &&
+    deactivate
+    echo
+    clipboard_contents=$(pbpaste)
+    echo -e "${white}$clipboard_contents${reset}"
+    echo
+}
