@@ -1,124 +1,132 @@
-# If you come from bash you might have to change your $PATH.
+#
+# If You Come From Bash You Might Have To Change Your $PATH.
+#
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 
 ##################################################
-# Oh My Zsh                                      #
+# GENERAL                                        #
 ##################################################
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.dotfiles/oh-my-zsh"
+## Shortcut To This Dotfiles Path Is $zsh.
+export ZSH=$HOME/dotfiles
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
+## Your Project Folder That We Can `c [tab]` To.
+export PROJECTS=~/Projects
+
+## Set Name Of The Theme To Load. Optionally, If You Set This To "random"
+## It'll Load A Random Theme Each Time That Oh-my-zsh Is Loaded.
+##   @URL: https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 ZSH_THEME="agnoster"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+##################################################
+# DOTFILES                                       #
+##################################################
+## Stash Your Environment Variables In `~/.localrc`. This Means They'll Stay Out
+## Of Your Main Dotfiles Repository (which May Be Public, Like This One), But
+## You'll Have Access To Them In Your Scripts.
+if [[ -a ~/.localrc ]]
+then
+  source ~/.localrc
+fi
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+## Load The Shell Dotfiles.
+typeset -U config_files
+config_files=($ZSH/**/*.zsh)
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+## Load The Path Files.
+for file in ${(M)config_files:#*/path.zsh}
+do
+  source $file
+done
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+## Load Everything But The Path And Completion Files.
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
+do
+  source $file
+done
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+## Initialize Autocomplete Here, Otherwise Functions Won't Be Loaded.
+autoload -U compinit
+compinit
 
-# Uncomment the following line to enable command auto-correction.
+## Load Every Completion After Autocomplete Loads.
+for file in ${(M)config_files:#*/completion.zsh}
+do
+  source $file
+done
+
+unset config_files
+
+
+##################################################
+# MISC. CONFIGURATION SETTINGS                   #
+##################################################
+## Enable Command Auto-correction.
 ENABLE_CORRECTION="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
+## Display Red Dots Whilst Waiting For Completion.
 COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+## Change The Command Execution Time Stamp Shown In The History Command Output.
+##   @AVAILABLE FORMATS: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="dd.mm.yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-ZSH_CUSTOM="$HOME/.dotfiles/zsh"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow history zsh-syntax-highlighting)
-
-###########################################################################
-# `USER CONFIGURATION                                                     #
-###########################################################################
-# LOAD THE SHELL DOTFILES
-for file in $HOME/.dotfiles/zsh/.{exports,aliases,functions,config}; do
-  [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
-
-# if [ -f `brew --prefix`/etc/bash_completion ]; then
-#   . `brew --prefix`/etc/bash_completion
-# fi
-
-# AUTOMATICALLY LIST DIRECTORY CONTENTS ON `cd`.
-# auto-ls () {
-#   emulate -L zsh;
-#     # EXPLICIT SEXY ls'ing AS ALIASES ARENT HONORED IN HERE.
-#   hash gls >/dev/null 2>&1 && CLICOLOR_FORCE=1 gls -aFh --color --group-directories-first || ls
-# }
-# chpwd_functions=( auto-ls $chpwd_functions )
-
-
-source $ZSH/oh-my-zsh.sh
-
-
-# Do not overwrite files when redirecting using ">". Note that you can still override this with ">|"
+## Do Not Overwrite Files When Redirecting Using ">".
+##   @NOTE: You Can Still Override This With ">|"
 set -o noclobber
 
-# Preferred editor for local and remote sessions
+## Preferred Editor For Local And Remote Sessions.
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='nano'
 else
     export EDITOR='subl'
 fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+## Better History.
+##  @CREDIT: https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search    # UP
+bindkey "^[[B" down-line-or-beginning-search  # DOWN
 
 
-## Enable `zsh-syntax-highlighting`
-[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+##################################################
+# PLUGINS                                        #
+##################################################
+## Which Plugins Would You Like To Load? (Plugins Can Be Found In ~/dotfiles/zsh/plugins/*)
+## Custom Plugins May Be Added To `~/dotfiles/zsh/plugins/`
+## Add Wisely, As Too Many Plugins Slow Down Shell Startup.
+##
+##   @EXAMPLE: Plugins=(rails Git Textmate Ruby Lighthouse)
+##
+plugins=(git git-flow history zsh-syntax-highlighting)
 
-## Disable sharing history between terminals enabled by Oh My Zsh
-unsetopt share_history
 
-## Load extra (private) settings
-[ -f ~/.dotfiles/.zshlocal ] && source ~/.dotfiles/.zshlocal
+##################################################
+# NVM                                            #
+##################################################
+## Automatically Activate `nvm` (When Available).
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
 
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 

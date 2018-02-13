@@ -369,23 +369,23 @@ logs/
 #########################
 ## PACKAGE DIRECTORIES
 #########################
-bower_components
-jspm_packages
-node_modules
-
-## Probably should include this once the rest of the
-## MBO Connect team learns how to use it...
-.nvmrc
+bower_components/
+node_modules/
+jspm_packages/
+typings/
 
 #########################
 ## LOCK FILES
 #########################
-yarn.lock
+#package-lock.json
+#yarn.lock
 
 #########################
 ## LOGS
 #########################
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 #########################
 ## MISCELLANEOUS

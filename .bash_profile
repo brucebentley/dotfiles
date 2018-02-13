@@ -8,7 +8,7 @@ export PATH="$HOME/bin:$PATH";
 # LOAD THE SHELL DOTFILES, AND THEN SOME:
 ## * ~/.path CAN BE USED TO EXTEND `$PATH`.
 ## * ~/.extra CAN BE USED FOR OTHER SETTINGS YOU DON'T WANT TO COMMIT.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/dotfiles/.{path,bash_prompt,exports,aliases,functions,extra,profile}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -58,25 +58,9 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 ### THIS WILL SET YOUR WINDOW TITLE.
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 
-## SHELL INTEGRATION
+# iTerm SHELL INTEGRATION.
 # test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-source ~/.iterm2_shell_integration.`basename $SHELL`
-
-### THIS CREATES THE VAR CURRENTDIR TO USE LATER ON.
-# function iterm2_print_user_vars() {
-#   iterm2_set_user_var currentDir $(echo ${PWD##*/})
-# }
-
-function iterm2_print_user_vars() {
-    iterm2_set_user_var currentDir $(echo ${PWD##*/})
-}
-
-
-##################################################
-# Visual Studio Code                             #
-##################################################
-### RUN VSCODE FROM THE TERMINAL
-
+# source ~/.iterm2_shell_integration.`basename $SHELL`
 
 
 ##################################################
@@ -85,30 +69,56 @@ function iterm2_print_user_vars() {
 # eval "$(chef shell-init bash)";
 
 
+##################################################
+# GOOGLE CLOUD PLATFORM                          #
+##################################################
+## THE NEXT LINE UPDATES PATH FOR THE GOOGLE CLOUD SDK.
+if [ -f "$HOME/.google/cloud-sdk/path.bash.inc" ]; then source "$HOME/.google/cloud-sdk/path.bash.inc"; fi
+
+## THE NEXT LINE ENABLES SHELL COMMAND COMPLETION FOR GCLOUD.
+if [ -f "$HOME/.google/cloud-sdk/completion.bash.inc" ]; then source "$HOME/.google/cloud-sdk/completion.bash.inc"; fi
+
+
 
 ##################################################
 # NVM                                            #
 ##################################################
-# ADD TAB COMPLETION FOR NVM COMMANDS
+## Add Tab Completion For nvm Commands.
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
 
-# CHANGE TITLE NAME OF TAB IN TERMINAL.
+## Change Title Name Of Tab In Terminal..
 function title {
     echo -ne "\033]0;"$*"\007"
 }
 
-cd() {
-  builtin cd "$@" || return
-  # echo $PREV_PWD
-  if [ "$PWD" != "$PREV_PWD" ]; then
-    PREV_PWD="$PWD";
-    title $(echo ${PWD##*/}) $(node -v);
-    if [ -e ".nvmrc" ]; then
-      nvm use;
-      # SET TAB TERMINAL NAME TO BE `cwd` AND `node version`.
-      title $(echo ${PWD##*/}) $(node -v);
-    else
-      nvm use default;
+## Check For A `.nvmrc` File When Entering A Directory, Then
+## Automatically Activate The Required Version Of NodeJS. If The
+## Required Version Is Not Currently Installed, It Will Download,
+## Install & Activate The Correct Version For You.
+cd () {
+  builtin cd "$@" && chNodeVersion;
+}
+pushd () {
+  builtin pushd "$@" && chNodeVersion;
+}
+popd () {
+  builtin popd "$@" && chNodeVersion;
+}
+chNodeVersion() {
+  local NODE_VERSION="$(nvm version)"
+  local NVMRC_PATH="$(nvm_find_nvmrc)"
+
+  if [ -n "$NVMRC_PATH" ]; then
+    local NVMRC_NODE_VERSION=$(nvm version "$(cat "${NVMRC_PATH}")")
+
+    if [ "$NVMRC_NODE_VERSION" = "N/A" ]; then
+      echo -e "${bold}${yellow}—[ WARNING ]— Required version NodeJS is not currently installed. ${green}Downloading Now!${reset}";
+      nvm install
+    elif [ "$NVMRC_NODE_VERSION" != "$NODE_VERSION" ]; then
+      nvm use
     fi
+  elif [ "$NODE_VERSION" != "$(nvm version default)" ]; then
+    nvm use default
   fi
 }
+chNodeVersion;

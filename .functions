@@ -385,7 +385,7 @@ function getAuthToken() {
     read role_var
     echo
 
-    source $PYTHON/mbo/local-start/bin/activate &&
+    source $DEV/mbo/venvs/local-start/bin/activate &&
     echo -e "${bold}${yellow}Generating authenication token for $username_var ... ${reset}"
     python $DEV/mbo/scripts/local_start/local_start.py -a connect-webapp -u $username_var -p $password_var -v $role_var | pbcopy &&
     deactivate

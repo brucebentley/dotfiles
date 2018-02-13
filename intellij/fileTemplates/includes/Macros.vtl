@@ -1,0 +1,34 @@
+#* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Velocity Macros For Use In PhpStorm's Templating Engine.
+ *
+ *  AUTHOR: Bruce Bentley <brucebentley@me.com>
+ *  COPYRIGHT: 2018 Bruce Bentley
+ *  LICENSE: https://opensource.org/licenses/MIT MIT
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*#
+
+#* - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ *  Transform text to a filename secure string (ASCII only) and print it.
+ *
+ *  @param string $text The text to transform.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*#
+#macro( filename $text )#
+$text.toLowerCase().replaceAll("[!-,/:-@\\\\x5B-\\\\^`{-~]+", '').replace(' ', '-')#
+#end
+
+#* - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Transform text to camelCase and print it.
+ *
+ * @param string $text The text to transform.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*#
+#macro( camelCase $text )
+#set( $text = $text.replaceAll("[\\\\x00-\\\\x2F\\\\x3A-\\\\x40\\\\x5B-\\\\x60\\\\x7B-\\\\x7F]+", '-') )
+#set( $camelCase = '' )
+#foreach( $string in $text.split('-') )
+    #set( $string = $string.substring(0, 1).toUpperCase() + $string.substring(1) )
+    #set( $camelCase = "$camelCase$string" )
+#end
+$camelCase
+#end

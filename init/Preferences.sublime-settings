@@ -1,0 +1,195 @@
+{
+    "added_words":
+    [
+        "Stormpath",
+        "dropdown"
+    ],
+    "always_prompt_for_file_reload": false,
+    "always_show_minimap_viewport": false,
+    "animation_enabled": true,
+    "atomic_save": false,
+    "auto_close_tags": true,
+    "auto_complete": false,
+    "auto_complete_commit_on_tab": false,
+    "auto_complete_delay": 50,
+    "auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin",
+    "auto_complete_size_limit": 4194304,
+    "auto_complete_triggers":
+    [
+        {
+            "characters": "<",
+            "selector": "text.html"
+        },
+        {
+            "characters": " ",
+            "selector": "text.html meta.tag"
+        }
+    ],
+    "auto_complete_with_fields": false,
+    "auto_find_in_selection": false,
+    "auto_indent": true,
+    "auto_match_enabled": true,
+    "binary_file_patterns":
+    [
+        "**/{.bundle,bundle}/**",
+        "**/.git/**",
+        "**/.hg/**",
+        "**/.idea/**",
+        "**/.svn/**",
+        "**/.tmp/**",
+        "**/tmp/**",
+        "**/bower_components/**",
+        "**/CVS/**",
+        "**/dist/**",
+        "**/jspm_packages/**",
+        "**/node_modules/**",
+        "**/typings/**"
+    ],
+    "bold_folder_labels": true,
+    "caret_extra_bottom": 2,
+    "caret_extra_top": 2,
+    "caret_extra_width": 1,
+    "caret_style": "phase",
+    "close_windows_when_empty": false,
+    "color_scheme": "Packages/ayu/ayu-mirage.tmTheme",
+    "copy_with_empty_selection": true,
+    "create_window_at_startup": true,
+    "default_encoding": "UTF-8",
+    "default_line_ending": "system",
+    "detect_indentation": true,
+    "dictionary": "Packages/Language - English/en_US.dic",
+    "drag_text": true,
+    "draw_centered": false,
+    "draw_indent_guides": true,
+    "draw_minimap_border": false,
+    "draw_white_space": "all",
+    "enable_hexadecimal_encoding": true,
+    "enable_tab_scrolling": true,
+    "ensure_newline_at_eof_on_save": false,
+    "fade_fold_buttons": false,
+    "fallback_encoding": "Western (Windows 1252)",
+    "file_exclude_patterns":
+    [
+        "**/._*",
+        "**/.DS_Store",
+        "**/.sass-cache",
+        "**/*.sublime-workspace"
+    ],
+    "find_selected_text": true,
+    "fold_buttons": true,
+    "folder_exclude_patterns":
+    [
+        "**/{.bundle,bundle}",
+        "**/.git",
+        "**/.hg",
+        "**/.idea",
+        "**/.svn",
+        "**/{.tmp,tmp}",
+        "**/CVS",
+        "**/jspm_packages",
+        "**/typings"
+    ],
+    "font_face": "Fira Code Retina",
+    "font_options":
+    [
+        "gray_antialias",
+        "subpixel_antialias"
+    ],
+    "font_size": 13,
+    "gpu_window_buffer": "auto",
+    "gutter": true,
+    "highlight_line": true,
+    "highlight_modified_tabs": true,
+    "hot_exit": true,
+    "ignored_packages":
+    [
+        "Markdown",
+        "Vintage"
+    ],
+    "indent_guide_options":
+    [
+        "draw_normal"
+    ],
+    "indent_subsequent_lines": true,
+    "indent_to_bracket": false,
+    "index_exclude_patterns":
+    [
+        "*.dds",
+        "*.{eot,otf,ttf,woff,woff2}",
+        "*.jar",
+        "*.{gif,ico,jpeg,jpg,png}",
+        "*.log",
+        "*.pdf",
+        "*.swf",
+        "*.tga",
+        "*.zip",
+        "**/{.bundle,bundle}",
+        "**/.sass-cache",
+        "**/{.tmp,tmp}/**",
+        "**/bower_components/**",
+        "**/CVS/**",
+        "**/dist/**",
+        "**/jspm_packages/**",
+        "**/node_modules/**",
+        "**/typings/**"
+    ],
+    "index_files": true,
+    "line_numbers": true,
+    "line_padding_bottom": 2,
+    "line_padding_top": 2,
+    "margin": 8,
+    "match_brackets": true,
+    "match_brackets_angle": false,
+    "match_brackets_braces": true,
+    "match_brackets_content": true,
+    "match_brackets_square": true,
+    "match_selection": true,
+    "match_tags": true,
+    "move_to_limit_on_up_down": false,
+    "node_path": "$HOME/.nvm/versions/node/default/bin/node",
+    "open_files_in_new_window": false,
+    "overlay_scroll_bars": "enabled",
+    "preview_on_click": true,
+    "remember_full_screen": false,
+    "remember_open_files": true,
+    "rulers":
+    [
+        80,
+        120
+    ],
+    "save_on_focus_lost": false,
+    "scroll_past_end": true,
+    "scroll_speed": 1.0,
+    "shift_tab_unindent": false,
+    "show_encoding": false,
+    "show_full_path": false,
+    "show_line_endings": true,
+    "show_panel_on_build": true,
+    "show_tab_close_buttons": true,
+    "skin": "ayu/ayu mirage",
+    "smart_indent": true,
+    "spell_check": false,
+    "tab_completion": false,
+    "tab_size": 4,
+    "theme": "ayu-mirage.sublime-theme",
+    "theme_font_options":
+    [
+        "gray_antialias"
+    ],
+    "translate_tabs_to_spaces": true,
+    "tree_animation_enabled": true,
+    "trim_automatic_white_space": true,
+    "trim_trailing_white_space_on_save": true,
+    "ui_big_tabs": false,
+    "ui_fix_tab_labels": true,
+    "ui_font_default": false,
+    "ui_font_size_small": true,
+    "ui_font_source_code_pro": true,
+    "ui_separator": true,
+    "ui_wide_scrollbars": false,
+    "use_simple_full_screen": false,
+    "use_tab_stops": true,
+    "word_separators": "./\\()\"':,;<>~!@#$%^&*|+=[]{}`?-…",
+    "word_wrap": true,
+    "wrap_width": 0
+}

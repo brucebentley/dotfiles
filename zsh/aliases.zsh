@@ -1,12 +1,16 @@
-#!/usr/bin/env bash
+#
+# aliases.zsh
+#
 
-# Easier navigation: .., ..., ...., ....., ~ and -
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
+alias reload!='. ~/.zshrc'
+
+# Easier Navigation: .., ..., ...., ....., ~ And -
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ~='cd ~'    # `cd` Is Probably Faster To Type Though
+alias -- -='cd -'
 
 # Shortcuts
 alias d="cd ~/Documents"
@@ -19,8 +23,8 @@ alias g="git"
 alias h="history"
 alias j="jobs"
 
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
+# Detect Which `ls` Flavor Is In Use
+if ls --color > /dev/null 2>&1; then # Gnu `ls`
   colorflag="--color"
   export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
 else # macOS `ls`
@@ -28,97 +32,96 @@ else # macOS `ls`
   export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
 fi
 
-# List all files colorized in long format
+# List All Files Colorized In Long Format
 alias l="ls -lF ${colorflag}"
 
-# List all files colorized in long format, including dot files
+# List All Files Colorized In Long Format, Including Dot Files
 alias la="ls -laF ${colorflag}"
 
-# List only directories
+# List Only Directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 
-# Always use color output for `ls`
+# Always Use Color Output For `ls`
 alias ls="command ls ${colorflag}"
 
-# Always enable colored `grep` output
-# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+# Always Enable Colored `grep` Output
+#   @NOTE: `grep_options="--color=auto"` Is Deprecated, Hence The Alias Usage
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# Enable aliases to be sudo’ed
+# Enable Aliases To Be sudo’ed
 alias sudo='sudo '
 
-# Get week number
+# Get Week Number
 alias week='date +%V'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
-# Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-#alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
+# Get Macos Software Updates, And Update Installed Ruby Gems, Homebrew, npm, And Their Installed Packages
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
 
 # Google Chrome
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 alias canary='/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary'
 
-# IP addresses
+# IP Addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-# Show active network interfaces
+# Show Active Network Interfaces
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
-# Flush Directory Service cache
+# Flush Directory Service Cache
 alias flush="sudo killall -HUP mDNSResponder"
 
-# Clean up LaunchServices to remove duplicates in the “Open With” menu
+# Clean Up Launchservices To Remove Duplicates In The “open With” Menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
-# View HTTP traffic
+# View Http Traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
-# Canonical hex dump; some systems have this symlinked
+# Canonical Hex Dump; Some Systems Have This Symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"
 
-# macOS has no `md5sum`, so use `md5` as a fallback
+# Macos Has No `md5sum`, So Use `md5` As A Fallback
 command -v md5sum > /dev/null || alias md5sum="md5"
 
-# macOS has no `sha1sum`, so use `shasum` as a fallback
+# Macos Has No `sha1sum`, So Use `shasum` As A Fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
-# JavaScriptCore REPL
+# Javascriptcore Repl
 jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc";
 [ -e "${jscbin}" ] && alias jsc="${jscbin}";
 unset jscbin;
 
-# Trim new lines and copy to clipboard
+# Trim New Lines And Copy To Clipboard
 alias c="tr -d '\n' | pbcopy"
 
-# Recursively delete `.DS_Store` files
+# Recursively Delete `.ds_store` Files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
-# Empty the Trash on all mounted volumes and the main HDD.
-# Also, clear Apple’s System Logs to improve shell startup speed.
-# Finally, clear download history from quarantine. https://mths.be/bum
+# Empty The Trash On All Mounted Volumes And The Main Hdd
+# Also, Clear Apple’s System Logs To Improve Shell Startup Speed
+# Finally, Clear Download History From Quarantine
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
-# Show/hide hidden files in Finder
+# Show/hide Hidden Files In Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-# Hide/show all desktop icons (useful when presenting)
+# Hide/show All Desktop Icons (useful When Presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-# URL-encode strings
+# URL-Encode Strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
-# Merge PDF files
-# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
+# Merge PDF Files
+#   @USAGE: `mergepdf -o Output.pdf Input{1,2,3}.pdf`
 alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
 
 # Disable Spotlight
@@ -126,104 +129,104 @@ alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
 alias spoton="sudo mdutil -a -i on"
 
-# PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
+# Plistbuddy Alias, Because Sometimes `defaults` Just Doesn’t Cut It
 alias plistbuddy="/usr/libexec/PlistBuddy"
 
-# Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
-# (useful when executing time-consuming commands)
+# Ring The Terminal Bell, And Put A Badge On Terminal.app’s Dock Icon
 alias badge="tput bel"
 
-# Intuitive map function
-# For example, to list all directories that contain a certain file:
-# find . -name .gitattributes | map dirname
+# Intuitive Map Function
+# @EXAMPLE: To List All Directories That Contain A Certain File:
+#             find . -name .gitattributes | Map Dirname
 alias map="xargs -n1"
 
-# One of @janmoesen’s ProTip™s
+# One Of @janmoesen’s Protip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
   alias "$method"="lwp-request -m '$method'"
 done
 
-# Make Grunt print stack traces by default
+# Make Grunt Print Stack Traces By Default.
 command -v grunt > /dev/null && alias grunt="grunt --stack"
 
-# Stuff I never really use but cannot delete either because of http://xkcd.com/530/
+# Stuff I Never Really Use But Cannot Delete Either Because Of Http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume output volume 100'"
 
-# Kill all the tabs in Chrome to free up memory
-# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+# Kill All The Tabs In Chrome To Free Up Memory
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
-# Lock the screen (when going AFK)
+# Lock The Screen (When Going afk)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
-# Reload the shell (i.e. invoke as a login shell)
+# Reload The Shell (i.e. Invoke As A Login Shell)
 alias reload="exec $SHELL -l"
 
-# Print each PATH entry on a separate line
+# Print Each Path Entry On A Separate Line
 alias path='echo -e ${PATH//:/\\n}'
 
 
-################################################################################
-# **************************************************************************** #
-################################################################################
+##################################################
+# APPLICATIONS                                   #
+##################################################
+## START ANSIBLE
+# alias startansible="pyenv shell 2.7.13 && source $python/personal/ansible/bin/activate";
 
-
-# Apache v2.4.23_2
-# alias startapache="sudo brew services start httpd"
-# alias stopapache="sudo brew services stop httpd"
-# alias restartapache="sudo brew services restart -k httpd"
+## APACHE
 alias startapache="sudo apachectl start"
 alias stopapache="sudo apachectl -k stop"
 alias restartapache="sudo apachectl -k restart"
 
-# DNSMASQ
+## DNSMASQ
 alias startdnsmasq="sudo brew services start dnsmasq"
 alias stopdnsmasq="sudo brew services stop dnsmasq"
 
-# GIT
+## GIT
 alias gitdelete='git branch | egrep -v "(master|staging|develop|\*)" | xargs git branch -D'
 
-# Mongo Database
+## MONGO DATABASE
 alias startmongo="mongod --dbpath ~/data/db --fork --logpath  /dev/null"
 alias stopmongo="mongo admin --eval 'db.shutdownServer()' > /dev/null"
 
-# MySQL Database
+## MYSQL DATABASE
 alias startmysql="brew services start mariadb"
 alias stopmysql="brew services stop mariadb"
 
-# PostgreSQL Database
+# POSTGRESQL DATABASE
 alias startpostgres="brew services start postgresql"
 alias stoppostgres="brew services stop postgresql"
 
-# Celery
-# alias startcelery="cd ~/Projects/MBO/CONNECT/connect-api &&
-#     source ~/.virtualenvs/mbo/connect-api/bin/activate &&
-#     MBO_ENV=development celery -A connect -l INFO worker";
 
-# Import MongoDB For CONNECT-API
+##################################################
+# FUNCTIONS                                      #
+##################################################
+## START CELERY
+# alias startcelery="cd ~/projects/mbo/connect/connect-api &&
+#     source ~/.virtualenvs/mbo/connect-api/bin/activate &&
+#     mbo_env=development celery -a connect -l info worker";
+
+### IMPORT MONGODB FOR CONNECT-API
 # alias importmongo="
 #     cd ~/dev/mbo/scripts/import_mongo &&
-#     source $PYTHON/mbo/import_mongo/bin/activate &&
-#     python db_import.py -f ~/Downloads/connect-qa &&
+#     source $python/mbo/import_mongo/bin/activate &&
+#     python db_import.py -f ~/downloads/connect-qa &&
 #     deactivate";
-# alias importconnectdata="importMongoDB"
+# alias importconnectdata="importmongodb"
 
-# Get Authentication Tokens From Keycloak
-### ASSOCIATE
-# alias associatetoken="getAuthToken blee@mbo-tst.com Mbo.2011 associate";
+
+## GET AUTHENTICATION TOKENS FROM KEYCLOAK
+### Associate
+# alias associatetoken="getauthtoken blee@mbo-tst.com Mbo.2011 associate";
 alias associatetoken="getAuthToken cclark1@mbo-tst.com Mbo.2011 associate";
-# alias associatetoken="getAuthToken agreen@mbo-tst.com Mbo.2011 associate";
-# alias associatetoken="getAuthToken sevans@mbo-tst.com Mbo.2011 associate";
-# alias associatetoken="getAuthToken thansen@mbo-tst.com Mbo.2011 associate";
-### ENTERPRISE
-alias enterprisetoken="getAuthToken blucas@mbo-tst.com Mbo.2015 enterprise";
-# alias enterprisetoken="getAuthToken dcooke@mbo-tst.com Mbo.2015 enterprise";
-# alias enterprisetoken="getAuthToken mcavaluzzi@mbo-tst.com Mbo.2015 enterprise";
-# alias enterprisetoken="getAuthToken mlucero@mbo-tst.com Mbo.2015 enterprise";
-### ENTERPRISE ADMIN
-alias entadmintoken="getAuthToken tberg@mbo-tst.com Mbo.2011 enterprise";
+# alias associatetoken="getauthtoken agreen@mbo-tst.com Mbo.2011 associate";
+# alias associatetoken="getauthtoken sevans@mbo-tst.com Mbo.2011 associate";
+# alias associatetoken="getauthtoken thansen@mbo-tst.com Mbo.2011 associate";
 
-# Ansible
-# alias startansible="pyenv shell 2.7.13 && source $PYTHON/personal/ansible/bin/activate";
+### Enterprise
+alias enterprisetoken="getAuthToken blucas@mbo-tst.com Mbo.2015 enterprise";
+# alias enterprisetoken="getauthtoken dcooke@mbo-tst.com Mbo.2015 enterprise";
+# alias enterprisetoken="getauthtoken mcavaluzzi@mbo-tst.com Mbo.2015 enterprise";
+# alias enterprisetoken="getauthtoken mlucero@mbo-tst.com Mbo.2015 enterprise";
+
+### Enterprise Admin
+alias entadmintoken="getAuthToken tberg@mbo-tst.com Mbo.2011 enterprise";
 

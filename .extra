@@ -23,8 +23,8 @@ CONNECT_API="$MBO/CONNECT/connect-api"
 CONNECT_CLIENT_NG="$MBO/CONNECT/connect-client-ng"
 CONNECT_WEBAPP_NG2="$MBO/CONNECT/connect-webapp-ng2"
 
-PYTHON="$WORKSPACE/.virtualenvs"
-CONNECT_API_VENV="$PYTHON/mbo/connect-api"
+PYTHON="$WORKSPACE/dev/mbo/venvs"
+CONNECT_API_VENV="$PYTHON/connect-api"
 CONNECT_API_ENVIRONMENT="$DEV/mbo/environments/connect-api"
 
 

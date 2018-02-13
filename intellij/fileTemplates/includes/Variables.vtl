@@ -1,0 +1,23 @@
+#* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ *  Pre-Process Various Variables For Easier Templating.
+ *
+ *  AUTHOR: Bruce Bentley <brucebentley@me.com>
+ *  COPYRIGHT: 2018 Bruce Bentley
+ *  LICENSE: https://opensource.org/licenses/MIT MIT
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*#
+
+#parse("Author.vtl")
+#parse("${PROJECT_NAME}.vtl")
+
+#if(${PROJECT_YEAR})
+    #set( $COPYRIGHT_YEAR = "${PROJECT_YEAR}" )
+#else
+    #set( $COPYRIGHT_YEAR = "${YEAR}" )
+#end
+
+#if(${PROJECT_COPYRIGHT})
+    #set( $COPYRIGHT_OWNER = "${PROJECT_COPYRIGHT}" )
+#else
+    #set( $COPYRIGHT_OWNER = "${AUTHOR_NAME}" )
+#end
