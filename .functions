@@ -1,8 +1,8 @@
+#!/usr/bin/env bash
+
 #
 # ~/.functions
 #
-
-#!/usr/bin/env bash
 
 #
 # CREATE A NEW DIRECTORY AND ENTER IT.
@@ -282,6 +282,56 @@ function tre() {
 }
 
 #
+# ALWAYS USE THE CORRECT PROGRAM TO EXTRACT FILES.
+#
+function extract {
+    if [ -z "$1" ]; then
+        # DISPLAY USAGE IF NO PARAMETERS GIVEN
+        echo -en "${bold}${violet}@USAGE:${reset}\n${yellow}extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>${reset}"
+        echo
+    else
+        if [ -f $1 ] ; then
+            # NAME=${1%.*}
+            # mkdir $NAME && cd $NAME
+            case $1 in
+                *.tar.bz2)   tar xvjf ./$1    ;;
+                *.tar.gz)    tar xvzf ./$1    ;;
+                *.tar.xz)    tar xvJf ./$1    ;;
+                *.lzma)      unlzma ./$1      ;;
+                *.bz2)       bunzip2 ./$1     ;;
+                *.rar)       unrar x -ad ./$1 ;;
+                *.gz)        gunzip ./$1      ;;
+                *.tar)       tar xvf ./$1     ;;
+                *.tbz2)      tar xvjf ./$1    ;;
+                *.tgz)       tar xvzf ./$1    ;;
+                *.zip)       unzip ./$1       ;;
+                *.Z)         uncompress ./$1  ;;
+                *.7z)        7z x ./$1        ;;
+                *.xz)        unxz ./$1        ;;
+                *.exe)       cabextract ./$1  ;;
+                *)           echo "extract: '$1' - unknown archive method" ;;
+            esac
+        else
+            echo "$1 - file does not exist"
+        fi
+    fi
+}
+
+#
+# CONVERT HEX COLOR VALUE TO A (NEAREST) 0-256 COLOR INDEX
+#
+function fromhex() {
+    hex=${1#"#"}
+    r=$(printf '0x%0.2s' "$hex")
+    g=$(printf '0x%0.2s' ${hex#??})
+    b=$(printf '0x%0.2s' ${hex#????})
+    printf '%03d' "$(( (r<75?0:(r-35)/40)*6*6 +
+                       (g<75?0:(g-35)/40)*6   +
+                       (b<75?0:(b-35)/40)     + 16 ))"
+}
+
+
+#
 # —[ GENERAL ]— IMPORT MONGO DATABASE
 #
 function importmongodb() {
@@ -335,9 +385,9 @@ function connectapistartserver() {
 
     # START CONNECT API
     echo -e "${bold}${yellow}Starting the Connect API development server...${reset}"
-    source $CONNECT_API_VENV/bin/activate &&
-    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" python manage.py runserver &&
-    deactivate &&
+    source $CONNECT_API_VENV/bin/activate;
+    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" python manage.py runserver;
+    deactivate;
     echo $'\n'
     echo -e "${bold}${yellow}Shutting down the Connect API development server...${reset}"
     echo -e "${bold}${green}Done!${reset}"
@@ -345,8 +395,9 @@ function connectapistartserver() {
     # STOP MONGODB
     echo $'\n'
     echo -e "${bold}${yellow}Shutting down MongoDB...${reset}"
-    mongo admin --eval 'db.shutdownServer()' > /dev/null
+    mongo admin --eval 'db.shutdownServer()' > /dev/null;
     echo -e "${bold}${green}Done!${reset}"
+    echo
 }
 
 #
@@ -362,8 +413,9 @@ function connectstartcelery() {
 
     # STARTING CELERY
     echo -e "${bold}${yellow}Starting Celery...${reset}"
-    source $CONNECT_API_VENV/bin/activate &&
-    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" celery -A connect -l info worker &&
+
+    source $CONNECT_API_VENV/bin/activate;
+    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" celery -A connect -l info worker;
     deactivate
 
     # STOP CELERY
@@ -375,22 +427,92 @@ function connectstartcelery() {
 #
 # —[ KEYCLOAK ]— GET AUTHENTICATION TOKEN
 #
-function getAuthToken() {
-    echo -en "${bold}${violet}Enter Username: ${reset}"
-    read username_var
-    echo -en "${bold}${violet}Enter Password: ${reset}"
-    read -s password_var
-    echo
-    echo -en "${bold}${violet}Enter User Type: ${reset} ${violet}[associate, enterprise] ${reset}"
-    read role_var
+function getauthtoken() {
+    # BASE KEYCLOAK & API VARIABLE DEFINITION(S)
+    KC_BASE_URL=https://sso2-dev.mbopartners.com/auth/realms;
+    KC_REALM_NAME=dev;
+    KC_CLIENT_ID=connect-web;
+    CONNECT_API_URL=http://localhost:8000;
+
+    # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
+    echo -en "${bold}${blue}Enter Username: ${reset}"
+    read -r USERNAME_INPUT
+    echo -en "${bold}${blue}Enter Password: ${reset}"
+    read -rs PASSWORD_INPUT
     echo
 
-    source $DEV/mbo/venvs/local-start/bin/activate &&
-    echo -e "${bold}${yellow}Generating authenication token for $username_var ... ${reset}"
-    python $DEV/mbo/scripts/local_start/local_start.py -a connect-webapp -u $username_var -p $password_var -v $role_var | pbcopy &&
-    deactivate
+    # NORMALIZING USER INPUT PARAMETERS
+    KC_USERNAME=${USERNAME_INPUT,,};
+    KC_PASSWORD=$PASSWORD_INPUT;
+
+    echo -e "${bold}${yellow}Generating authenication token for $KC_USERNAME ... ${reset}";
+    curl -s \
+      "${KC_BASE_URL}/${KC_REALM_NAME}/protocol/openid-connect/token" \
+      -H 'Cache-Control: no-cache' -H 'Accept: application/json' \
+      -d "client_id=${KC_CLIENT_ID}" \
+      -d "username=${KC_USERNAME}" \
+      -d "password=${KC_PASSWORD}" \
+      -d 'grant_type=password' \
+      | jq -r '.access_token' \
+      | pbcopy;
+
+    # GRAB THE `ACCESS_TOKEN` FROM CLIPBOARD
+    KC_ACCESS_TOKEN=$(pbpaste)
+
+    # COPY THE FULL SNIPPET TO THE CLIPBOARD
+    echo -e "document.cookie=\"ACCESS_TOKEN=$KC_ACCESS_TOKEN;path=/;\"\\ndocument.cookie=\"CONNECT_API_URL=$CONNECT_API_URL;path=/;\"" | pbcopy;
     echo
-    clipboard_contents=$(pbpaste)
-    echo -e "${white}$clipboard_contents${reset}"
+    CLIPBOARD_CONTENTS=$(pbpaste)
+    # DISPLAY THE OUTPUT TO THE USER IN TERMINAL
+    echo -e "${white}$CLIPBOARD_CONTENTS${reset}"
     echo
 }
+
+#
+# —[ KEYCLOAK ]— GET KEYCLOAK TOKEN
+#
+function getkeycloaktoken() {
+    if [ -z "${1}" ]; then
+        # DISPLAY USAGE IF NO PARAMETERS GIVEN
+        echo -en "${bold}${violet}@USAGE:${reset}\n${yellow}getauthtoken <associate|enterprise>${reset}"
+        echo
+    else
+        # SAVE INITIAL BASH ARGUMENTS IN VARIABLE(S)
+        ROLE_TYPE_INPUT="$1"
+
+        # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
+        echo -en "${bold}${violet}Enter Username: ${reset}"
+        read USERNAME_INPUT
+        echo -en "${bold}${violet}Enter Password: ${reset}"
+        read -s PASSWORD_INPUT
+        echo
+
+        # NORMALIZING USER INPUT(S)
+        KC_USERNAME=${USERNAME_INPUT,,};
+        KC_PASSWORD=$PASSWORD_INPUT;
+        ROLE_TYPE=${ROLE_TYPE_INPUT,,};
+
+        source $DEV/mbo/venvs/local-start/bin/activate;
+        echo -e "${bold}${yellow}Generating authenication token for $KC_USERNAME ... ${reset}";
+        python $DEV/mbo/scripts/local_start/local_start.py -a connect-webapp -u $KC_USERNAME -p $KC_PASSWORD -v $ROLE_TYPE | pbcopy;
+        deactivate;
+        echo
+
+        # STORE CLIPBOARD CONTENTS IN VARIABLE
+        CLIPBOARD_CONTENTS=$(pbpaste);
+        echo -e "${white}$CLIPBOARD_CONTENTS${reset}";
+        echo
+    fi
+}
+
+#
+# —[ DOCKER ]— GET AUTHENTICATION TOKEN
+#
+dockerssh() {
+  dockerexec $1 /bin/bash
+}
+
+dockerexec() {
+  sudo docker exec -i -t $1 $2
+}
+

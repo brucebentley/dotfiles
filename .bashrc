@@ -19,11 +19,11 @@ export PATH="$PATH:$GOROOT/bin"
 #export RANCHER_SECRET_KEY="bcaZWu5xwq8mHXxUDeqWKWFnK2bTduRaWm1Gid93"
 
 
-##################################################
-# INITIALIZE `nvm`                               #
-##################################################
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+# ##################################################
+# # INITIALIZE `nvm`                               #
+# ##################################################
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 
 # added by travis gem

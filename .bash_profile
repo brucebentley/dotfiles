@@ -80,11 +80,12 @@ if [ -f "$HOME/.google/cloud-sdk/completion.bash.inc" ]; then source "$HOME/.goo
 
 
 
-##################################################
-# NVM                                            #
-##################################################
-## Add Tab Completion For nvm Commands.
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+# ##################################################
+# # NVM                                            #
+# ##################################################
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ## Change Title Name Of Tab In Terminal..
 function title {

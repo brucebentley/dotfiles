@@ -1,14 +1,16 @@
+#!/usr/bin/env bash
+
 #
 # ~/.extra
 #
-
-#!/usr/bin/env bash
 
 # CONSTANTS
 ##################################################
 WORKSPACE="/Users/bbentley"
 DATA="$WORKSPACE/data"
 DEV="$WORKSPACE/dev"
+CERTS="$DEV/certs"
+LOCALHOST="$CERTS/localhost"
 SITES="$WORKSPACE/Sites"
 
 PROJECTS="$WORKSPACE/Projects"

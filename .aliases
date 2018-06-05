@@ -168,8 +168,78 @@ alias path='echo -e ${PATH//:/\\n}'
 # **************************************************************************** #
 ################################################################################
 
+##################################################
+# ANSIBLE                                        #
+##################################################
+# alias startansible="pyenv shell 2.7.13 && source $PYTHON/personal/ansible/bin/activate";
 
-# Apache v2.4.23_2
+##################################################
+# NPM                                            #
+##################################################
+# `npm` alias
+alias np='npm';
+
+# `npm install` alias
+alias npi='npm i';
+alias npis='npm i --save';
+alias npig='npm i -g';
+
+# `npm list` alias
+alias npl='npm ls --depth=0';
+alias nplg='npm ls -g --depth=0';
+
+# `npm search`
+alias nps='npm search';
+
+# `npm test` alias
+alias npt='npm t';
+
+# `npm update` alias
+alias npu='npm up';
+alias npug='npm up -g';
+
+# `npm uninstall` alias
+alias npun='npm un';
+alias npung='npm un -g';
+
+##################################################
+# YARN                                           #
+##################################################
+# `yarn` alias
+alias yar='yarn';
+
+# `yarn add` alias
+alias yarna='yarn add';
+alias yarnad='yarn add -D';
+alias yarnap='yarn add -P';
+alias yarnag='yarn global add';
+
+# `yarn install` alias
+alias yarni='yarn install';
+
+# `yarn list` alias
+alias yarnl='yarn list --depth=0';
+alias yarnlg='yarn global list --depth=0';
+
+# `yarn remove` alias
+alias yarnr='yarn remove';
+alias yarnrg='yarn global remove';
+
+# `yarn search` alias
+alias yarns='yarn search';
+
+# `yarn test` alias
+alias yarnt='yarn test';
+
+# `yarn upgrade` alias
+alias yarnu='yarn upgrade';
+alias yarnui='yarn upgrade-interactive';
+alias yarnuig='yarn global upgrade-interactive';
+
+
+##################################################
+# APACHE - v2.4.23_2                             #
+##################################################
 # alias startapache="sudo brew services start httpd"
 # alias stopapache="sudo brew services stop httpd"
 # alias restartapache="sudo brew services restart -k httpd"
@@ -177,53 +247,59 @@ alias startapache="sudo apachectl start"
 alias stopapache="sudo apachectl -k stop"
 alias restartapache="sudo apachectl -k restart"
 
-# DNSMASQ
+##################################################
+# DNSMASQ                                        #
+##################################################
 alias startdnsmasq="sudo brew services start dnsmasq"
 alias stopdnsmasq="sudo brew services stop dnsmasq"
 
-# GIT
+##################################################
+# GIT                                            #
+##################################################
 alias gitdelete='git branch | egrep -v "(master|staging|develop|\*)" | xargs git branch -D'
 
-# Mongo Database
+##################################################
+# MONGO DATABASE                                 #
+##################################################
 alias startmongo="mongod --dbpath ~/data/db --fork --logpath  /dev/null"
 alias stopmongo="mongo admin --eval 'db.shutdownServer()' > /dev/null"
 
-# MySQL Database
+##################################################
+# MYSQL DATABASE                                 #
+##################################################
 alias startmysql="brew services start mariadb"
 alias stopmysql="brew services stop mariadb"
 
-# PostgreSQL Database
+##################################################
+# POSTGRESQL DATABASE                                #
+##################################################
 alias startpostgres="brew services start postgresql"
 alias stoppostgres="brew services stop postgresql"
 
-# Celery
+##################################################
+# CELERY                                         #
+##################################################
 # alias startcelery="cd ~/Projects/MBO/CONNECT/connect-api &&
 #     source ~/.virtualenvs/mbo/connect-api/bin/activate &&
 #     MBO_ENV=development celery -A connect -l INFO worker";
 
-# Import MongoDB For CONNECT-API
-# alias importmongo="
-#     cd ~/dev/mbo/scripts/import_mongo &&
-#     source $PYTHON/mbo/import_mongo/bin/activate &&
-#     python db_import.py -f ~/Downloads/connect-qa &&
-#     deactivate";
-# alias importconnectdata="importMongoDB"
-
-# Get Authentication Tokens From Keycloak
+##################################################
+# GET AUTHENTICATION TOKENS FROM KEYCLOAK        #
+##################################################
 ### ASSOCIATE
+alias associatetoken="getauthtoken";
 # alias associatetoken="getAuthToken blee@mbo-tst.com Mbo.2011 associate";
-alias associatetoken="getAuthToken cclark1@mbo-tst.com Mbo.2011 associate";
+# alias associatetoken="getAuthToken cclark1@mbo-tst.com Mbo.2011 associate";
 # alias associatetoken="getAuthToken agreen@mbo-tst.com Mbo.2011 associate";
 # alias associatetoken="getAuthToken sevans@mbo-tst.com Mbo.2011 associate";
 # alias associatetoken="getAuthToken thansen@mbo-tst.com Mbo.2011 associate";
 ### ENTERPRISE
-alias enterprisetoken="getAuthToken blucas@mbo-tst.com Mbo.2015 enterprise";
+alias enterprisetoken="getauthtoken";
+# alias enterprisetoken="getAuthToken blucas@mbo-tst.com Mbo.2015 enterprise";
 # alias enterprisetoken="getAuthToken dcooke@mbo-tst.com Mbo.2015 enterprise";
 # alias enterprisetoken="getAuthToken mcavaluzzi@mbo-tst.com Mbo.2015 enterprise";
 # alias enterprisetoken="getAuthToken mlucero@mbo-tst.com Mbo.2015 enterprise";
 ### ENTERPRISE ADMIN
-alias entadmintoken="getAuthToken tberg@mbo-tst.com Mbo.2011 enterprise";
-
-# Ansible
-# alias startansible="pyenv shell 2.7.13 && source $PYTHON/personal/ansible/bin/activate";
+alias entadmintoken="getauthtoken";
+# alias entadmintoken="getAuthToken tberg@mbo-tst.com Mbo.2011 enterprise";
 

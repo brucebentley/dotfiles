@@ -18,6 +18,11 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 # HOMEBREW'S CURL --with-openssl
 PATH="/usr/local/opt/curl/bin:$PATH"
 
+# MAVEN CONFIGURATION
+export M2_HOME="/usr/local/Cellar/apache-maven"
+#export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
+PATH="$PATH:$M2_HOME/bin"
+
 ##################################################
 # pyenv — "Python Version Manager"               #
 ##################################################
@@ -50,10 +55,13 @@ export PATH;
 # AWS CLI
 export PATH="$HOME/.local/bin:$PATH"
 
+# CHEF
+# export PATH="/opt/chefdk/bin:$PATH"
+
 # COMPOSER
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
-# INITIALIZE NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# # INITIALIZE NVM
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 

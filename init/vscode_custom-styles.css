@@ -1,0 +1,33 @@
+.type.storage,
+.type.storage.declaration,
+.storage.class.modifier {
+  font-family: 'flottflott';
+  font-size: 1.7em;
+}
+
+.type.storage.arrow.function {
+  font-family: 'FiraCode-Retina'
+}
+
+.decorator.name,
+.decorator.punctuation:not(.block),
+.import.keyword {
+    color: #68F39B !important;
+    font-family: 'flottflott';
+    font-size: 1.7em;
+}
+.attribute-name {
+    font-family: 'flottflott';
+    font-size: 1.5em;
+}
+
+.html.quoted.double {
+    color: #A6F3A6 !important;
+}
+.comment {
+	color: #C5C5FD !important;
+}
+.comment:not(.punctuation) {
+    font-family: flottflott;
+    font-size: 1.5em;
+}

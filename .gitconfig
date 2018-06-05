@@ -90,8 +90,9 @@
 [core]
     # Use Sublime Text as the default editor.
     #     `-n -w` Opens a new window & waits for the files to be closed before returning.
-    editor = subl -n -w
     #editor = code --wait
+    editor = code-insiders --wait
+    #editor = subl --wait
 
     # Use custom `.gitignore` and `.gitattributes`
 	excludesfile = /Users/bbentley/dotfiles/.gitignore_global
@@ -138,7 +139,7 @@
     # https://help.github.com/articles/signing-commits-using-gpg/
     #gpgsign = true
 
-	template = ~/dotfiles/.gitmessage
+	template = /Users/bbentley/.stCommitMsg
 
 [credential]
     helper = osxkeychain
@@ -151,10 +152,15 @@
     # attempt to make the resulting patch easier to read.
     indentHeuristic = true
 
+    tool = default-difftool
+
 [diff "bin"]
 
     # Use `hexdump` to diff binary files
     textconv = hexdump -v -C
+
+[difftool "default-difftool"]
+    cmd = code-insiders --wait --diff $LOCAL $REMOTE
 
 [help]
 
@@ -169,7 +175,7 @@
 [push]
 
     # https://git-scm.com/docs/git-config#git-config-pushdefault
-    default = simple
+	default = current
     # Make `git push` push relevant annotated tags when pushing branches out.
     followTags = true
 
@@ -201,3 +207,5 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[pull]
+	default = current

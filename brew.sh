@@ -123,50 +123,52 @@ brew tap caskroom/cask
 brew tap caskroom/versions
 
 # CORE CASKS
-#brew cask install --appdir="~/Applications" java
-brew cask install --appdir="~/Applications" xquartz
+#brew cask install java                         #
+brew cask install xquartz                       #
 
 # DEVELOPMENT CASKS
-brew cask install --appdir="/Applications" insomnia
-brew cask install --appdir="/Applications" iterm2
-#brew cask install --appdir="/Applications" macdown
-#brew cask install --appdir="/Applications" parallels-desktop
-brew cask install --appdir="/Applications" sequel-pro
-brew cask install --appdir="/Applications" sourcetree
-brew cask install --appdir="/Applications" sublime-text3
-brew cask install --appdir="/Applications" vagrant
-brew cask install --appdir="/Applications" vagrant-manager
-brew cask install --appdir="/Applications" virtualbox
+brew cask install insomnia                      #
+brew cask install iterm2                        #
+#brew cask install macdown                      #
+#brew cask install parallels-desktop            #
+brew cask install sequel-pro                    #
+brew cask install sourcetree                    #
+brew cask install sublime-text3                 #
+brew cask install vagrant                       #
+brew cask install vagrant-manager               #
+brew cask install virtualbox                    #
 
 # BROWSER CASKS
-brew cask install --appdir="/Applications" firefox
-brew cask install --appdir="/Applications" firefox-developer-edition
-brew cask install --appdir="/Applications" google-chrome
-brew cask install --appdir="/Applications" google-chrome-canary
-brew cask install --appdir="/Applications" opera
-brew cask install --appdir="/Applications" opera-neon
+brew cask install firefox                       #
+brew cask install firefox-developer             #
+brew cask install google-chrome                 #
+brew cask install google-chrome-canary          #
+brew cask install opera                         #
+brew cask install opera-neon                    #
 
 # MISC. CASKS
-#brew cask install --appdir="/Applications" 1password
-brew cask install --appdir="/Applications" alfred
-#brew cask install --appdir="/Applications" caffeine     # Keep Mac Awake
-#brew cask install --appdir="/Applications" cloudapp
-brew cask install --appdir="/Applications" dash
-brew cask install --appdir="/Applications" dropbox
-brew cask install --appdir="/Applications" evernote
-#brew cask install --appdir="/Applications" gimp         # Image Editor
-#brew cask install --appdir="/Applications" inkscape     # Vector Graphics Editor
-#brew cask install --appdir="/Applications" licecap      # Screen Capture
-#brew cask install --appdir="/Applications" mou          # Markdown Editor
-#brew cask install --appdir="/Applications" skype
-brew cask install --appdir="/Applications" slack
-brew cask install --appdir="/Applications" spotify
-#brew cask install --appdir="/Applications" screenflow   # Video Editing
-brew cask install --appdir="/Applications" vlc
-#brew cask install --appdir="/Applications" webtorrent   # Streaming Torrent Client
+#brew cask install 1password                    #
+brew cask install alfred                        #
+brew cask install bitbar                        # Put Anything In Your macOS Menu Bar
+#brew cask install caffeine                     # Keep Mac Awake
+#brew cask install cloudapp                     #
+brew cask install dash                          #
+brew cask install dropbox                       #
+brew cask install evernote                      #
+#brew cask install gimp                         # Image Editor
+#brew cask install inkscape                     # Vector Graphics Editor
+#brew cask install licecap                      # Screen Capture
+#brew cask install mou                          # Markdown Editor
+#brew cask install skype                        #
+brew cask install slack                         #
+brew cask install spotify                       #
+#brew cask install screenflow                   # Video Editing
+brew cask install synergy                       # Share keyboard/mouse between computers
+brew cask install vlc                           #
+#brew cask install webtorrent                   # Streaming Torrent Client
 
 # REMOVE COMMENT TO INSTALL LATEX DISTRIBUTION MacTex
-#brew cask install --appdir="/Applications" mactex
+#brew cask install mactex                       #
 
 
 ##################################################
