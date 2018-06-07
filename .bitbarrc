@@ -1,5 +1,0 @@
-[github_ci]
-access_token=
-username=brucebentley
-repos[]=mbopartnersinc/connect-client-ng
-repos[]=mbopartnersinc/mbo-keycloak
