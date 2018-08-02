@@ -36,3 +36,6 @@ export MANPAGER='less -X';
 # SET ANSIBLE CONFIGURATION.
 export ANSIBLE_CONFIG=~/dotfiles/.ansible/ansible.cfg
 export ANSIBLE_INVENTORY=~/dotfiles/.ansible/.ansible_hosts
+
+# SET NODE MAX CPU SIZE
+export NODE_OPTIONS=--max_old_space_size=4096
