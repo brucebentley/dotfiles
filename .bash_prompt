@@ -10,45 +10,96 @@ elif infocmp xterm-256color >/dev/null 2>&1; then
     export TERM='xterm-256color';
 fi;
 
-# COLOR SCHEME
+# FOREGROUND COLOR SCHEME
 if tput setaf 1 &> /dev/null; then
     tput sgr0;
     bold=$(tput bold);
     reset=$(tput sgr0);
-    black=$(tput setaf 16);
-    red=$(tput setaf 203);
-    green=$(tput setaf 71);
-    yellow=$(tput setaf 226);
-    blue=$(tput setaf 33);
-    magenta=$(tput setaf 161);
-    cyan=$(tput setaf 38);
-    white=$(tput setaf 231);
-    pink=$(tput setaf 161);
-    purple=$(tput setaf 127);
-    deeppurple=$(tput setaf 55);
-    indigo=$(tput setaf 25);
-    lightblue=$(tput setaf 39);
-    teal=$(tput setaf 30);
-    lightgreen=$(tput setaf 112);
-    lime=$(tput setaf 184);
-    amber=$(tput setaf 214);
-    orange=$(tput setaf 208);
-    deeporange=$(tput setaf 202);
-    brown=$(tput setaf 94);
-    gray=$(tput setaf 102);
+    fgBlack=$(tput setaf 16);
+    fgRed=$(tput setaf 203);
+    fgGreen=$(tput setaf 71);
+    fgYellow=$(tput setaf 226);
+    fgBlue=$(tput setaf 33);
+    fgMagenta=$(tput setaf 161);
+    fgCyan=$(tput setaf 38);
+    fgWhite=$(tput setaf 231);
+    fgPink=$(tput setaf 161);
+    fgPurple=$(tput setaf 127);
+    fgDeeppurple=$(tput setaf 55);
+    fgIndigo=$(tput setaf 25);
+    fgLightblue=$(tput setaf 39);
+    fgTeal=$(tput setaf 30);
+    fgLightgreen=$(tput setaf 112);
+    fgLime=$(tput setaf 184);
+    fgAmber=$(tput setaf 214);
+    fgOrange=$(tput setaf 208);
+    fgDeeporange=$(tput setaf 202);
+    fgBrown=$(tput setaf 94);
+    fgGray=$(tput setaf 102);
 else
     bold='';
     reset="\e[0m";
-    black="\e[1;30m";
-    blue="\e[1;34m";
-    cyan="\e[1;36m";
-    green="\e[1;32m";
-    orange="\e[1;33m";
-    purple="\e[1;35m";
-    red="\e[1;31m";
-    violet="\e[1;35m";
-    white="\e[1;37m";
-    yellow="\e[1;33m";
+    fgDefault="\e[39m;"
+    fgBlack="\e[30m;"
+    fgRed="\e[31m;"
+    fgGreen="\e[32m;"
+    fgYellow="\e[33m;"
+    fgBlue="\e[34m;"
+    fgMagenta="\e[35m;"
+    fgCyan="\e[36m;"
+    fgDarkgray="\e[90m;"
+    fgLightgray="\e[37m;"
+    fgLightred="\e[91m;"
+    fgLightgreen="\e[92m;"
+    fgLightyellow="\e[93m;"
+    fgLightblue="\e[94m;"
+    fgLightmagenta="\e[95m;"
+    fgLightcyan="\e[96m;"
+    fgWhite="\e[97m;"
+fi;
+
+# BACKGROUND COLOR SCHEME
+if tput setab 1 &> /dev/null; then
+    tput sgr0;
+    bgBlack=$(tput setab 16);
+    bgRed=$(tput setab 203);
+    bgGreen=$(tput setab 71);
+    bgYellow=$(tput setab 226);
+    bgBlue=$(tput setab 33);
+    bgMagenta=$(tput setab 161);
+    bgCyan=$(tput setab 38);
+    bgWhite=$(tput setab 231);
+    bgPink=$(tput setab 161);
+    bgPurple=$(tput setab 127);
+    bgDeeppurple=$(tput setab 55);
+    bgIndigo=$(tput setab 25);
+    bgLightblue=$(tput setab 39);
+    bgTeal=$(tput setab 30);
+    bgLightgreen=$(tput setab 112);
+    bgLime=$(tput setab 184);
+    bgAmber=$(tput setab 214);
+    bgOrange=$(tput setab 208);
+    bgDeeporange=$(tput setab 202);
+    bgBrown=$(tput setab 94);
+    bgGray=$(tput setab 102);
+else
+    bgDefault="\e[49m";
+    bgBlack="\e[40m";
+    bgRed="\e[41m";
+    bgGreen="\e[42m";
+    bgYellow="\e[43m";
+    bgBlue="\e[44m";
+    bgMagenta="\e[45m";
+    bgCyan="\e[46m";
+    bgDarkgray="\e[100m";
+    bgLightgray="\e[47m";
+    bgLightred="\e[101m";
+    bgLightgreen="\e[102m";
+    bgLightyellow="\e[103m";
+    bgLightblue="\e[104m";
+    bgLightmagenta="\e[105m";
+    bgLightcyan="\e[106m";
+    bgWhite="\e[107m";
 fi;
 
 prompt_git() {
@@ -66,22 +117,22 @@ prompt_git() {
 
             # Check for uncommitted changes in the index.
             if ! $(git diff --quiet --ignore-submodules --cached); then
-                s+='+';
+                s+="${i_oct_plus} ";
             fi;
 
             # Check for unstaged changes.
             if ! $(git diff-files --quiet --ignore-submodules --); then
-                s+='!';
+                s+="${i_oct_zap} ";
             fi;
 
             # Check for untracked files.
             if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-                s+='?';
+                s+="${i_oct_x} ";
             fi;
 
             # Check for stashed files.
             if $(git rev-parse --verify refs/stash &>/dev/null); then
-                s+='$';
+                s+="${i_oct_squirrel} ";
             fi;
 
         fi;
@@ -93,9 +144,11 @@ prompt_git() {
             git rev-parse --short HEAD 2> /dev/null || \
             echo '(unknown)')";
 
-        [ -n "${s}" ] && s=" [${s}]";
+        [ -n "${s}" ] && s="[ ${s}]";
 
-        echo -e "${1}${branchName}${2}${s}";
+        gitHubLogo="${i_oct_octoface} ";
+
+        echo -e " ${gitHubLogo}${1}${branchName} ${2}${s}";
     else
         return;
     fi;
@@ -104,24 +157,24 @@ prompt_git() {
 # Platform Dependent Prompt Symbols
 if [[ -z "$PS_SYMBOL" ]]; then
     case "$(uname)" in
-        Darwin)   PS_SYMBOL='';;
-        Linux)    PS_SYMBOL='$';;
-        *)        PS_SYMBOL='%';;
+        Darwin)   PS_SYMBOL="${i_dev_apple} ";;
+        Linux)    PS_SYMBOL="${i_dev_linux} ";;
+        *)        PS_SYMBOL="${i_dev_windows} ";;
     esac
 fi
 
 # Highlight The User Name When Logged In As Root.
 if [[ "${USER}" == "root" ]]; then
-    userStyle="${bold}${red}";
+    userStyle="${bold}${fgRed}";
 else
-    userStyle="${bold}${orange}";
+    userStyle="${bold}${fgOrange}";
 fi;
 
 # Highlight The Hostname When Connected Via Ssh.
 if [[ "${SSH_TTY}" ]]; then
-    hostStyle="${bold}${red}";
+    hostStyle="${bold}${fgRed}";
 else
-    hostStyle="${yellow}";
+    hostStyle="${fgYellow}";
 fi;
 
 # SET THE TERMINAL TITLE TO THE CURRENT WORKING DIRECTORY.
@@ -135,13 +188,13 @@ PS1+="\n";
 #PS1+="\[${hostStyle}\]\h";
 #PS1+="\[${white}\] in ";
 # WORKING DIRECTORY
-PS1+="\[${lightblue}\]~/\W\[$(tput sgr0)\]";
+PS1+="\[${bgLightblue}${fgBlack}\] ${i_mdi_folder_open} ~/\W ";
 # GIT REPOSITORY DETAILS
-PS1+="\$(prompt_git \"\[${white}\] \[${cyan}\]⑂\" \"\[${pink}\]\")";
+PS1+="\[${bgGreen}\]\$(prompt_git \" ${i_oct_git_branch} \" \"\")\[${reset}\]";
 PS1+="\n";
 # OS SYMBOL
-PS1+="\[${green}\]\${PS_SYMBOL} \[${reset}\]";
+PS1+="\[${fgGreen}\] ${PS_SYMBOL}\[${reset}\]";
 export PS1;
 
-PS2="\[${yellow}\]→ \[${reset}\]";
+PS2="\[${fgYellow}\]→ \[${reset}\]";
 export PS2;
