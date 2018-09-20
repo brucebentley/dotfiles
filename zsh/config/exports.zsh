@@ -1,0 +1,216 @@
+################################################################################
+#                                                                              #
+# EXPORTS                                                                      #
+#                                                                              #
+################################################################################
+
+# Initialize $PATH with system binaries
+path=(
+    /usr/local/bin
+    /usr/local/sbin
+    /usr/bin
+    /bin
+    /usr/sbin
+    /sbin
+    $path
+)
+
+# Platform specific variables
+case $OSTYPE {
+    darwin*)
+        export GNU_COREUTILS_HOME='/usr/local/opt/coreutils/libexec/gnubin'
+        export GNU_COREUTILS_MAN_HOME='/usr/local/opt/coreutils/libexec/gnuman'
+        export GNU_FINDUTILS_HOME='/usr/local/opt/findutils/libexec/gnubin'
+        export GNU_FINDUTILS_MAN_HOME='/usr/local/opt/findutils/libexec/gnuman'
+        export CURL_HOME='/usr/local/opt/curl/bin'
+        export CURL_MAN_HOME='/usr/local/opt/curl/share/man'
+        export NCURSES_HOME='/usr/local/opt/ncurses/bin'
+        export OPENSSL_HOME='/usr/local/opt/openssl/bin'
+        export OPENSSL_MAN_HOME='/usr/local/opt/openssl/man'
+        export PYTHON_SYMLINKS_HOME='/usr/local/opt/python/libexec/bin'
+        export ANDROID_HOME="${HOME}/Library/Android/sdk"
+        export JAVA_HOME=$(/usr/libexec/java_home)
+
+        path=(
+            $GNU_COREUTILS_HOME
+            $GNU_FINDUTILS_HOME
+            $CURL_HOME
+            $NCURSES_HOME
+            $OPENSSL_HOME
+            $PYTHON_SYMLINKS_HOME
+            $ANDROID_HOME/{tools,platform-tools}
+            $path
+        )
+
+        manpath=(
+            $GNU_COREUTILS_MAN_HOME
+            $GNU_FINDUTILS_MAN_HOME
+            $CURL_MAN_HOME
+            $OPENSSL_MAN_HOME
+            $manpath
+        )
+        ;;
+
+    linux-android*)
+        export SHELL=$(which zsh)
+
+        path=(
+            ${HOME}/.termux/bin
+            $path
+        )
+        ;;
+}
+
+# Term
+export TERM='xterm-256color'
+
+# Default Editor
+# export EDITOR='nvim'
+
+# Default Pager
+# export PAGER='less'
+
+# Browser
+# export BROWSER='xdg-open'
+
+# Default Config and Cache Home
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CACHE_HOME="${HOME}/.cache"
+
+# Mailcap
+# export MAILCAPS="${HOME}/.mutt/mailcap"
+
+# Locale
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+export LANGUAGE='en_US.UTF-8'
+
+# dircolors
+# eval $(dircolors --sh "${HOME}/.dircolors")
+
+# man
+export MANWIDTH='100' # Fixed line width for man pages
+    if ([[ $OSTYPE =~ 'linux-android*' ]] 2>/dev/null) { MANWIDTH='50' }
+export MANPAGER="nvim +'set filetype=man' -"
+    if ([[ $OSTYPE =~ 'linux-android*' ]] 2>/dev/null) { unset MANPAGER }
+
+# nvim
+# export NVIM_RPLUGIN_MANIFEST="${HOME}/.vim/cache/share/rplugin.vim"
+# export NVIM_NODE_LOG_FILE="${HOME}/.vim/cache/log/node.log"
+# export NVIM_NODE_LOG_LEVEL='4'
+
+# npm
+export NPM_CONFIG_INIT_AUTHOR_NAME='Bruce Bentley'
+export NPM_CONFIG_INIT_AUTHOR_EMAIL='bbentley@mbopartners.com'
+export NPM_CONFIG_INIT_AUTHOR_URL='https://github.com/brucebentley'
+export NPM_CONFIG_INIT_LICENSE='MIT'
+export NPM_CONFIG_INIT_VERSION='0.0.0'
+export NPM_CONFIG_SAVE_PREFIX='~'
+export NPM_CONFIG_SIGN_GIT_TAG='true'
+
+# GnuPG
+export GPG_TTY=$(tty)
+
+# wget
+export WGETRC="${HOME}/.config/wget/wgetrc"
+
+# ranger
+export RANGER_LOAD_DEFAULT_RC='false'
+export RANGER_LAST_DIRECTORY_BUFFER="$XDG_DATA_HOME/ranger/last_directory"
+
+# fzf
+export FZF_DEFAULT_COMMAND="rg \
+    --files \
+    --no-messages \
+    --no-ignore \
+    --hidden \
+    --follow \
+    --ignore-case \
+    --glob '!{.git,node_modules}/*'"
+export FZF_DEFAULT_COLORS='--color=dark,fg:7,fg+:7,bg:0,bg+:8,hl:4,hl+:4,info:8,border:8,prompt:4,pointer:3,marker:3,spinner:8,header:6'
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_COLORS \
+    --exact \
+    --no-bold \
+    --inline-info \
+    --height='40%' \
+    --jump-labels='bmvenritusldkfjgh' \
+    --bind='ctrl-f:jump-accept'"
+
+# transmission
+export TRANSMISSION_HOME="${HOME}/.config/transmission"
+
+# highlight
+export HIGHLIGHT_OPTIONS='--out-format="xterm256" --style="pablo"'
+
+# sdcv
+export SDCV_PAGER='fold -s -w 100 | less'
+
+# less
+export LESS=" \
+    --ignore-case \
+    --tilde \
+    --chop-long-lines \
+    --status-column \
+    --LONG-PROMPT \
+    --jump-target=10 \
+    --RAW-CONTROL-CHARS \
+    --clear-screen \
+    --silent \
+    --tabs=4 \
+    --shift=5"
+export LESSOPEN="| highlight ${HIGHLIGHT_OPTIONS} -- %s 2>/dev/null"    # Use `highlight` program to try to highlight
+                                                                        # opened file according to its extension.
+export LESSHISTFILE="${HOME}/.config/less/lesshistory"                  # Command and search history file.
+export LESSKEYRC="${HOME}/.config/less/lesskey"                         # Path of the uncompiled lesskey file.
+export LESSKEY="${LESSKEYRC}.lwc"                                       # Path of the compiled lesskey file.
+export LESS_TERMCAP_md=$(tput bold; tput setaf 4)                       # Turn on bold mode.
+export LESS_TERMCAP_me=$(tput sgr0)                                     # Turn off all attributes.
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3)                       # Begin standout mode.
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)                          # Exit standout mode.
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 250)          # Begin underline mode.
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)                          # Exit underline mode.
+export LESS_TERMCAP_mr=$(tput rev)                                      # Turn on reverse video mode.
+export LESS_TERMCAP_mh=$(tput dim)                                      # Turn on half-bright mode.
+export LESS_TERMCAP_ZN=$(tput ssubm)                                    # Enter subscript mode.
+export LESS_TERMCAP_ZV=$(tput rsubm)                                    # End subscript mode.
+export LESS_TERMCAP_ZO=$(tput ssupm)                                    # Enter superscript mode.
+export LESS_TERMCAP_ZW=$(tput rsupm)                                    # End superscript mode.
+
+
+
+# MAKE VIM THE DEFAULT EDITOR.
+export EDITOR='vim';
+
+# ENABLE PERSISTENT REPL HISTORY FOR `node`.
+export NODE_REPL_HISTORY=~/.node_history;
+# ALLOW 32³ ENTRIES; THE DEFAULT IS 1000.
+export NODE_REPL_HISTORY_SIZE='32768';
+# USE SLOPPY MODE BY DEFAULT, MATCHING WEB BROWSERS.
+export NODE_REPL_MODE='sloppy';
+
+# MAKE PYTHON USE UTF-8 ENCODING FOR OUTPUT TO stdin, stdout, and stderr.
+export PYTHONIOENCODING='UTF-8';
+
+# INCREASE BASH HISTORY SIZE. ALLOW 32³ ENTRIES; THE DEFAULT IS 500.
+export HISTSIZE='32768';
+export HISTFILESIZE="${HISTSIZE}";
+# OMIT DUPLICATES AND COMMANDS THAT BEGIN WITH A SPACE FROM HISTORY.
+export HISTCONTROL='ignoreboth';
+
+# PREFER US ENGLISH AND USE UTF-8.
+export LANG='en_US.UTF-8';
+export LC_ALL='en_US.UTF-8';
+
+# HIGHLIGHT SECTION TITLES IN MANUAL PAGES.
+export LESS_TERMCAP_md="${yellow}";
+
+# DON’T CLEAR THE SCREEN AFTER QUITTING A MANUAL PAGE.
+export MANPAGER='less -X';
+
+# SET ANSIBLE CONFIGURATION.
+export ANSIBLE_CONFIG=~/dotfiles/.ansible/ansible.cfg
+export ANSIBLE_INVENTORY=~/dotfiles/.ansible/.ansible_hosts
+
+# SET NODE MAX CPU SIZE
+export NODE_OPTIONS=--max_old_space_size=4096

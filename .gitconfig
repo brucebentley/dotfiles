@@ -1,6 +1,6 @@
 [user]
-	name = Bruce Bentley
-	email = bbentley@mbopartners.com
+	name = Bruce Bentley}
+	email = bbentley@mbopartners.com}
 
 [alias]
 
@@ -203,9 +203,14 @@
     insteadOf = "gist:"
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [pull]
 	default = current
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
