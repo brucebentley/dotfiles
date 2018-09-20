@@ -10,13 +10,14 @@ alias -- -="cd -"
 
 # Shortcuts
 alias d="cd ~/Documents"
-alias dev="cd ~/dev"
 alias dl="cd ~/Downloads"
 alias dr="cd ~/Dropbox"
-alias dot="cd ~/dotfiles"
 alias dt="cd ~/Desktop"
 alias p="cd ~/Projects"
 alias s="cd ~/Sites"
+alias data="cd ~/data"
+alias dev="cd ~/dev"
+alias dot="cd ~/dotfiles"
 alias g="git"
 
 # Detect which `ls` flavor is in use
@@ -137,7 +138,7 @@ alias map="xargs -n1"
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-  alias "${method}"="lwp-request -m '${method}'"
+    alias "${method}"="lwp-request -m '${method}'"
 done
 
 # Make Grunt print stack traces by default

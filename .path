@@ -3,7 +3,7 @@
 #
 
 # ADD `~/bin` TO THE `$PATH`
-export PATH="$HOME/bin:$PATH";
+# export PATH="$HOME/bin:$PATH";
 
 # BASH UTILITIES
 PATH="/usr/local/bin:$PATH"
@@ -19,9 +19,9 @@ PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 PATH="/usr/local/opt/curl/bin:$PATH"
 
 # MAVEN CONFIGURATION
-export M2_HOME="/usr/local/Cellar/apache-maven"
-#export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
-PATH="$PATH:$M2_HOME/bin"
+# M2_HOME="/usr/local/Cellar/apache-maven"
+# export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
+# PATH=$M2_HOME/bin:$PATH
 
 ##################################################
 # pyenv — "Python Version Manager"               #
@@ -29,14 +29,14 @@ PATH="$PATH:$M2_HOME/bin"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 ## PATH FOR PYTHON
-# PATH=/usr/local/share/python:${PATH}
+# PATH=/usr/local/share/python:$PATH
 # ## FOR HOMEBREWED BOTTLES
-# PATH=/usr/local/bin:/usr/local/sbin:${PATH}
+# PATH=/usr/local/bin:/usr/local/sbin:$PATH
 ## FOR CUSTOM SCRIPTS
-# PATH=$HOME/bin:${PATH}
+# PATH=$HOME/bin:$PATH
 ## FOR pyenv
 PYENV_ROOT=$HOME/.pyenv
-PATH=$PYENV_ROOT/bin:${PATH}
+PATH=$PYENV_ROOT/bin:$PATH
 
 ##################################################
 # rbenv - "Ruby Environment Manager"  #
@@ -47,10 +47,12 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 ## FOR rbenv
 RBENV_ROOT=$HOME/.rbenv
 ## FOR CUSTOM SCRIPTS
-PATH=$RBENV_ROOT/bin:${PATH}
+PATH=$RBENV_ROOT/bin:$PATH
 
 
-export PATH;
+# KEYCLOAK CLI
+KEYCLOAK_HOME=$HOME/dev/mbo/environments/keycloak
+PATH=$KEYCLOAK_HOME/bin:$PATH
 
 # AWS CLI
 export PATH="$HOME/.local/bin:$PATH"
@@ -59,7 +61,8 @@ export PATH="$HOME/.local/bin:$PATH"
 # export PATH="/opt/chefdk/bin:$PATH"
 
 # COMPOSER
-export PATH="$HOME/.composer/vendor/bin:$PATH"
+COMPOSER_HOME=$HOME/.composer
+PATH=$COMPOSER_HOME/vendor/bin:$PATH
 
 # # INITIALIZE NVM
 # export NVM_DIR="$HOME/.nvm"

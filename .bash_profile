@@ -5,6 +5,8 @@
 # ADD `~/bin` TO THE `$PATH`
 export PATH="$HOME/bin:$PATH";
 
+source "$HOME/bin/nerd-fonts/i_all.sh";
+
 # LOAD THE SHELL DOTFILES, AND THEN SOME:
 ## * ~/.path CAN BE USED TO EXTEND `$PATH`.
 ## * ~/.extra CAN BE USED FOR OTHER SETTINGS YOU DON'T WANT TO COMMIT.
@@ -59,8 +61,23 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 
 # iTerm SHELL INTEGRATION.
-# test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-# source ~/.iterm2_shell_integration.`basename $SHELL`
+# test -e "$HOME/.iterm2_shell_integration.bash" && source "~/.iterm2_shell_integration.bash"
+source ~/.iterm2_shell_integration.`basename $SHELL`
+
+# ADD CUSTOM BADGES
+function iterm2_print_user_vars() {
+  iterm2_set_user_var badge $(dir_badges)
+}
+
+function dir_badges() {
+    while read directory badge || [[ -n "$directory" ]]
+    do
+        if [[ "$PWD" == $directory* ]]; then
+            echo $badge
+            break
+        fi
+    done < $HOME/dotfiles/.badges
+}
 
 
 ##################################################

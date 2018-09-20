@@ -330,7 +330,6 @@ function fromhex() {
                        (b<75?0:(b-35)/40)     + 16 ))"
 }
 
-
 #
 # —[ GENERAL ]— IMPORT MONGO DATABASE
 #
@@ -349,11 +348,11 @@ function importmongodb() {
     fi
 
     # DATA IMPORT
-    echo -e "${bold}${yellow}Importing Data ...${reset}"
+    echo -e "${bold}${fgYellow}Importing Data ...${reset}"
     # dockerexec $3 "mongorestore --drop $4 --archive=$DOCKER_CONNECT_API_DB/$FILE"
     mongorestore --drop --gzip --archive=$LOC/$FILE $4
     echo $'\n'
-    echo -e "${bold}${green}Done!${reset}"
+    echo -e "${bold}${fgGreen}Done!${reset}"
 }
 
 #
@@ -371,32 +370,32 @@ function startansible() {
 function connectapistartserver() {
     cd $CONNECT_API &&
     # PULL LATEST CHANGES FROM GITHUB
-    echo -e "${bold}${yellow}Pulling latest code from GitHub...${reset}"
+    echo -e "${bold}${fgYellow}Pulling latest code from GitHub...${reset}"
     git fetch origin &&
     git pull origin develop
-    echo -e "${bold}${green}Done!${reset}"
+    echo -e "${bold}${fgGreen}Done!${reset}"
     echo $'\n'
 
     # START MONGODB
-    echo -e "${bold}${yellow}Starting MongoDB...${reset}"
+    echo -e "${bold}${fgYellow}Starting MongoDB...${reset}"
     mongod --dbpath $DATA/db --fork --logpath /dev/null
-    echo -e "${bold}${green}Done!${reset}"
+    echo -e "${bold}${fgGreen}Done!${reset}"
     echo $'\n'
 
     # START CONNECT API
-    echo -e "${bold}${yellow}Starting the Connect API development server...${reset}"
+    echo -e "${bold}${fgYellow}Starting the Connect API development server...${reset}"
     source $CONNECT_API_VENV/bin/activate;
     env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" python manage.py runserver;
     deactivate;
     echo $'\n'
-    echo -e "${bold}${yellow}Shutting down the Connect API development server...${reset}"
-    echo -e "${bold}${green}Done!${reset}"
+    echo -e "${bold}${fgYellow}Shutting down the Connect API development server...${reset}"
+    echo -e "${bold}${fgGreen}Done!${reset}"
 
     # STOP MONGODB
     echo $'\n'
-    echo -e "${bold}${yellow}Shutting down MongoDB...${reset}"
+    echo -e "${bold}${fgYellow}Shutting down MongoDB...${reset}"
     mongo admin --eval 'db.shutdownServer()' > /dev/null;
-    echo -e "${bold}${green}Done!${reset}"
+    echo -e "${bold}${fgGreen}Done!${reset}"
     echo
 }
 
@@ -407,12 +406,12 @@ function connectstartcelery() {
     cd $CONNECT_API &&
 
     # WAIT FOR `connect-api` TO INITIALIZE
-    echo -e "${bold}${yellow}Waiting for connect-api to initialize...${reset}"
+    echo -e "${bold}${fgYellow}Waiting for connect-api to initialize...${reset}"
     echo $'\n'
     sleep 10 &&
 
     # STARTING CELERY
-    echo -e "${bold}${yellow}Starting Celery...${reset}"
+    echo -e "${bold}${fgYellow}Starting Celery...${reset}"
 
     source $CONNECT_API_VENV/bin/activate;
     env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" celery -A connect -l info worker;
@@ -420,8 +419,8 @@ function connectstartcelery() {
 
     # STOP CELERY
     echo $'\n'
-    echo -e "${bold}${yellow}Shutting down Celery...${reset}"
-    echo -e "${bold}${green}Done!${reset}"
+    echo -e "${bold}${fgYellow}Shutting down Celery...${reset}"
+    echo -e "${bold}${fgGreen}Done!${reset}"
 }
 
 #
@@ -435,9 +434,9 @@ function getauthtoken() {
     CONNECT_API_URL=http://localhost:8000;
 
     # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
-    echo -en "${bold}${blue}Enter Username: ${reset}"
+    echo -en "${bold}${fgBlue}Enter Username: ${reset}"
     read -r USERNAME_INPUT
-    echo -en "${bold}${blue}Enter Password: ${reset}"
+    echo -en "${bold}${fgBlue}Enter Password: ${reset}"
     read -rs PASSWORD_INPUT
     echo
 
@@ -445,7 +444,7 @@ function getauthtoken() {
     KC_USERNAME=${USERNAME_INPUT,,};
     KC_PASSWORD=$PASSWORD_INPUT;
 
-    echo -e "${bold}${yellow}Generating authenication token for $KC_USERNAME ... ${reset}";
+    echo -e "${bold}${fgYellow}Generating authenication token for $KC_USERNAME ... ${reset}";
     curl -s \
       "${KC_BASE_URL}/${KC_REALM_NAME}/protocol/openid-connect/token" \
       -H 'Cache-Control: no-cache' -H 'Accept: application/json' \
@@ -464,7 +463,7 @@ function getauthtoken() {
     echo
     CLIPBOARD_CONTENTS=$(pbpaste)
     # DISPLAY THE OUTPUT TO THE USER IN TERMINAL
-    echo -e "${white}$CLIPBOARD_CONTENTS${reset}"
+    echo -e "${fgWhite}$CLIPBOARD_CONTENTS${reset}"
     echo
 }
 
@@ -474,16 +473,16 @@ function getauthtoken() {
 function getkeycloaktoken() {
     if [ -z "${1}" ]; then
         # DISPLAY USAGE IF NO PARAMETERS GIVEN
-        echo -en "${bold}${violet}@USAGE:${reset}\n${yellow}getauthtoken <associate|enterprise>${reset}"
+        echo -en "${bold}${fgViolet}@USAGE:${reset}\n${fgYellow}getauthtoken <associate|enterprise>${reset}"
         echo
     else
         # SAVE INITIAL BASH ARGUMENTS IN VARIABLE(S)
         ROLE_TYPE_INPUT="$1"
 
         # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
-        echo -en "${bold}${violet}Enter Username: ${reset}"
+        echo -en "${bold}${fgViolet}Enter Username: ${reset}"
         read USERNAME_INPUT
-        echo -en "${bold}${violet}Enter Password: ${reset}"
+        echo -en "${bold}${fgViolet}Enter Password: ${reset}"
         read -s PASSWORD_INPUT
         echo
 
@@ -492,15 +491,15 @@ function getkeycloaktoken() {
         KC_PASSWORD=$PASSWORD_INPUT;
         ROLE_TYPE=${ROLE_TYPE_INPUT,,};
 
-        source $DEV/mbo/venvs/local-start/bin/activate;
-        echo -e "${bold}${yellow}Generating authenication token for $KC_USERNAME ... ${reset}";
-        python $DEV/mbo/scripts/local_start/local_start.py -a connect-webapp -u $KC_USERNAME -p $KC_PASSWORD -v $ROLE_TYPE | pbcopy;
+        source $VENVS_MBO/local-start/bin/activate;
+        echo -e "${bold}${fgYellow}Generating authenication token for $KC_USERNAME ... ${reset}";
+        python $SCRIPTS_MBO/local_start/local_start.py -a connect-webapp -u $KC_USERNAME -p $KC_PASSWORD -v $ROLE_TYPE | pbcopy;
         deactivate;
         echo
 
         # STORE CLIPBOARD CONTENTS IN VARIABLE
         CLIPBOARD_CONTENTS=$(pbpaste);
-        echo -e "${white}$CLIPBOARD_CONTENTS${reset}";
+        echo -e "${fgWhite}$CLIPBOARD_CONTENTS${reset}";
         echo
     fi
 }
