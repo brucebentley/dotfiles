@@ -1806,7 +1806,7 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>268 124 599 501 0 0 1440 878 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>211 314 937 512 0 0 1440 878 </string>
+	<string>211 288 918 512 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>710 0 730 878 0 0 1440 878 </string>
 	<key>New Bookmarks</key>
@@ -2057,7 +2057,7 @@
 				<real>1</real>
 			</dict>
 			<key>Badge Text</key>
-			<string></string>
+			<string>\(user.badge)</string>
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
@@ -8634,7 +8634,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-09-19T10:59:31Z</date>
+	<date>2018-09-20T13:47:45Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>

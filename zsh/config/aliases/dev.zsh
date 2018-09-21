@@ -57,7 +57,7 @@ alias startcelery="cd ${CONNECT_API} && source ${CONNECT_API_VENV}/bin/activate 
 ##################################################
 # KEYCLOAK                                       #
 ##################################################
-alias associatetoken="getauthtoken";     # blee, cclark1, agreen, sevans, thansen
-alias enterprisetoken="getauthtoken";    # blucas, dcooke, mcavaluzzi, mlucero
-alias entadmintoken="getauthtoken";      # tberg
+alias associatetoken="getauthtoken"; # blee, cclark1, agreen, sevans, thansen
+alias enterprisetoken="getauthtoken"; # blucas, dcooke, mcavaluzzi, mlucero
+alias entadmintoken="getauthtoken"; # tberg
 
