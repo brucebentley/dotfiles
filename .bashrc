@@ -13,11 +13,6 @@ export GOROOT="/usr/local/opt/go/libexec"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$GOROOT/bin"
 
-# SETTING VARIABLES FOR RANCHER — `rancher-compose` CLI
-#export RANCHER_URL="http://docker-mgmt.mbopartners.com:8080/v1/projects/1a43"
-#export RANCHER_ACCESS_KEY="0F697B3E45C5D6ACE0AB"
-#export RANCHER_SECRET_KEY="bcaZWu5xwq8mHXxUDeqWKWFnK2bTduRaWm1Gid93"
-
 
 # ##################################################
 # # INITIALIZE `nvm`                               #

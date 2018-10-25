@@ -1,7 +1,6 @@
 [user]
-	name = Kutsan Kaplan
-	email = me@kutsankaplan.com
-	signingkey = 439AC30C
+	name = Bruce Bentley
+	email = brucebentley@me.com
 
 [core]
 	editor = $EDITOR

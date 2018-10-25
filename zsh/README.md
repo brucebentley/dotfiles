@@ -1,4 +1,4 @@
-# kutsan's dotfiles
+# Bruce's Zsh dotfiles
 
 ![](https://i.imgur.com/cjUnlYR.png)
 
@@ -115,7 +115,7 @@
 - [ ] [`Emacs`](https://www.gnu.org/software/emacs) - GUI version of Emacs the operation-system-like text editor
 - [ ] [`mpv`](https://github.com/mpv-player/mpv) - Minimalist video player based on MPlayer
 - [ ] [`Telegram`](https://telegram.org) - Cloud-based instant messaging service
-  - [ ] [`Arc-2`](https://github.com/kutsan/dotfiles/tree/master/.config/telegram) - Desktop theme
+  - [ ] [`Arc-2`](https://github.com/brucebentley/dotfiles/tree/master/.config/telegram) - Desktop theme
 - [ ] [`Adobe Photoshop`](https://www.adobe.com/products/photoshop.html) - Graphic editor
 - [ ] [`Adobe XD`](https://www.adobe.com/products/xd.html) - User interface and user experience design editor
 
@@ -124,7 +124,7 @@
 - [`F-Droid`](https://github.com/f-droid/fdroidclient) - FOSS application store
 - [`Termux`](https://github.com/termux/termux-app) - Terminal emulator
     - [`Styling`](https://github.com/termux/termux-styling) - Color schemes and powerline-ready font support
-   - [`Iceberg`](https://github.com/kutsan/dotfiles/blob/master/.termux/colors.properties) - Color scheme
+   - [`Iceberg`](https://github.com/brucebentley/dotfiles/blob/master/.termux/colors.properties) - Color scheme
    - FiraCode - Font
 - [`FastHub`](https://github.com/k0shk0sh/FastHub) - GitHub client
 - [`android-mpv`](https://github.com/mpv-android/mpv-android) - Video player for Android based on libmpv
@@ -136,4 +136,4 @@
 
 ## License
 
-GPL-3.0
+MIT

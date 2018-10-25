@@ -6,11 +6,11 @@
 	"description": "",
 	"preferGlobal": false,
 	"license": "GPL-3.0",
-	"repository": "github:kutsan/",
+	"repository": "github:brucebentley/",
 	"homepage": "",
 	"keywords": [],
 
-	"author": "Kutsan Kaplan <me@kutsankaplan.com> (https://kutsankaplan.com)",
+	"author": "Bruce Bentley <brucebentley@me.com> (https://brucebentley.io/)",
 	"contributors": [],
 
 	"engines": {},
