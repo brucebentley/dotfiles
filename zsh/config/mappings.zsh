@@ -4,7 +4,9 @@
 #                                                                              #
 ################################################################################
 
-# Insert Mode
+##
+# INSERT MODE
+##
 bindkey -M viins '^K' up-history # ^K to previous command.
 bindkey -M viins '^J' down-history # ^J to next command.
 bindkey -M viins '^F' vi-forward-char # Go forward char or complete current completion.
@@ -15,7 +17,9 @@ bindkey -M viins ' ' custom-expand-global-alias # Space key to expand global ali
 bindkey -M viins '^Y' custom-insert-last-typed-word # Insert last typed word for quick copy-paste.
 bindkey -M viins '^R' custom-fzf-launch-from-history # Select command from history into the command line.
 
-# Normal Mode
+##
+# NORMAL MODE
+##
 bindkey -M vicmd 'j' down-line # Override down-line-or-history.
 bindkey -M vicmd 'k' up-line # Override up-line-or-history.
 bindkey -M vicmd '^K' up-history # ^K to previous command.
@@ -29,20 +33,26 @@ bindkey -M vicmd '^Y' custom-tmux-scroll-up # Activate tmux copy-mode and scroll
 bindkey -M vicmd '^U' custom-tmux-scroll-up # Activate tmux copy-mode and scroll up depending on key stroke.
 bindkey -M vicmd ':' custom-fzf-execute-widget # Execute Zsh Line Editor widgets.
 
-# Visual Mode
+##
+# VISUAL MODE
+##
 bindkey -M visual 'H' vi-beginning-of-line # Go beginning of line.
 bindkey -M visual 'L' vi-end-of-line # Go end of line.
 bindkey -M visual 'S' add-surround # Add surround.
 foreach char ({a,i}{\',\",\`}) { bindkey -M visual $char select-quoted } && unset char # Text objects for delimiters.
 foreach char ({a,i}${(s..)^:-'()[]{}<>bB'}) { bindkey -M visual $char select-bracketed } && unset char # Text objects for pairs of brackets.
 
-# Operator Mode
+##
+# OPERATOR MODE
+##
 bindkey -M viopp 'H' vi-beginning-of-line # Go beginning of line.
 bindkey -M viopp 'L' vi-end-of-line # Go end of line.
 foreach char ({a,i}{\',\",\`}) { bindkey -M viopp $char select-quoted } && unset char # Text objects for delimiters.
 foreach char ({a,i}${(s..)^:-'()[]{}<>bB'}) { bindkey -M viopp $char select-bracketed } && unset char # Text objects for pairs of brackets.
 
-# Completion Mode
+##
+# COMPLETION MODE
+##
 bindkey -M menuselect '^?' undo # Backspace for deleting suggesting completion as a whole.
 bindkey -M menuselect '+' accept-and-hold # Accept the selection but keep the completion list open.
 bindkey -M menuselect '^K' up-line-or-history # Navigate up completion.

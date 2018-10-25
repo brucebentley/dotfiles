@@ -24,7 +24,9 @@ function should_launch_multiplexer() {
     return 1
 }
 
-# Auto-attach tmux or start at launch with different sessions based on platforms.
+##
+# AUTO-ATTACH TMUX OR START AT LAUNCH WITH DIFFERENT SESSIONS BASED ON PLATFORMS
+##
 if (should_launch_multiplexer) {
     typeset -g session='main'
     typeset -g launch_options='\; '
@@ -39,7 +41,7 @@ if (should_launch_multiplexer) {
     tmux attach-session -t "$session" 2>/dev/null \
         && exit 0
 
-    eval tmux -f "$HOME/.tmux/tmux.conf" new-session -s "$session" $launch_options \
+    eval tmux -f "$HOME/dotfiles/tmux/tmux.conf" new-session -s "$session" $launch_options \
         && exit 0
 
     unset session

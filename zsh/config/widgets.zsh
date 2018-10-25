@@ -4,16 +4,18 @@
 #                                                                              #
 ################################################################################
 
-# Register functions as widgets.
+##
+# REGISTER FUNCTIONS AS WIDGETS
+##
 foreach widget (
-    # Built-in
+    # BUILT-IN
     'add-surround surround'
     'delete-surround surround'
     'change-surround surround'
     select-quoted
     select-bracketed
 
-    # Custom
+    # CUSTOM
     custom-expand-global-alias
     custom-insert-last-typed-word
     custom-tmux-scroll-up
@@ -24,7 +26,9 @@ foreach widget (
 }
 unset widget
 
-# Expand global alias to its full form.
+##
+# EXPAND GLOBAL ALIAS TO ITS FULL FORM
+##
 function custom-expand-global-alias() {
     if [[ "$LBUFFER" =~ ' [A-Z0-9]+$' ]] {
         zle _expand_alias
@@ -33,12 +37,16 @@ function custom-expand-global-alias() {
     zle self-insert
 }
 
-# Insert last typed word for quick copy-paste.
+##
+# INSERT LAST TYPED WORD FOR QUICK COPY-PASTE
+##
 function custom-insert-last-typed-word() {
     zle insert-last-word -- 0 -1
 }
 
-# Activate tmux copy-mode and scroll up depending on key stroke.
+##
+# ACTIVATE TMUX COPY-MODE AND SCROLL UP DEPENDING ON KEY STROKE
+##
 function custom-tmux-scroll-up() {
     if (! hash tmux &>/dev/null || [[ "$TMUX" == '' ]]) {
         return 1
@@ -56,7 +64,9 @@ function custom-tmux-scroll-up() {
     }
 }
 
-# Select command from history into the command line.
+##
+# SELECT COMMAND FROM HISTORY INTO THE COMMAND LINE
+##
 function custom-fzf-launch-from-history() {
     if (! hash fzf &>/dev/null) {
         return 1
@@ -96,7 +106,9 @@ function custom-fzf-launch-from-history() {
     return $stat
 }
 
-# Execute Zsh Line Editor widgets.
+##
+# EXECUTE ZSH LINE EDITOR WIDGETS
+##
 function custom-fzf-execute-widget() {
     if (! hash fzf &>/dev/null) {
         return 1

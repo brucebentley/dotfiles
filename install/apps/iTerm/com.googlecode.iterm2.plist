@@ -1800,15 +1800,15 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>427 429 583 94 0 0 1440 878 </string>
+	<string>427 312 583 77 0 0 1440 878 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 364 620 392 0 0 1440 878 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>268 124 599 501 0 0 1440 878 </string>
+	<string>268 124 606 469 0 0 1440 878 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>211 288 918 512 0 0 1440 878 </string>
+	<string>211 342 770 429 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>710 0 730 878 0 0 1440 878 </string>
+	<string>0 0 1440 878 0 0 1440 878 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2540,7 +2540,7 @@
 			<key>Use Non-ASCII Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
-			<real>1.1000000000000001</real>
+			<real>1.1156049981174698</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -4800,7 +4800,7 @@
 			<key>Window Type</key>
 			<integer>7</integer>
 			<key>Working Directory</key>
-			<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker</string>
+			<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -6303,7 +6303,7 @@
 			<key>Window Type</key>
 			<integer>7</integer>
 			<key>Working Directory</key>
-			<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+			<string>/Users/bbentley/Projects/MBO/CLIENTS/mbo-client-suite</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -8634,11 +8634,15 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-09-20T13:47:45Z</date>
+	<date>2018-10-24T13:25:21Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
 	<false/>
+	<key>ToolbeltTools</key>
+	<array>
+		<string>Jobs</string>
+	</array>
 	<key>Window Arrangements</key>
 	<dict>
 		<key>DEFAULT</key>
@@ -9568,7 +9572,7 @@
 							<array>
 								<dict>
 									<key>Is Active</key>
-									<integer>0</integer>
+									<integer>1</integer>
 									<key>Session</key>
 									<dict>
 										<key>Bookmark</key>
@@ -9923,7 +9927,7 @@
 												<real>0.9781760573387146</real>
 											</dict>
 											<key>Guid</key>
-											<string>AF1B0D2C-CF88-41C7-A963-77099C50179E</string>
+											<string>B27AF699-F449-40AB-B44C-7587AFFD5108</string>
 											<key>Horizontal Spacing</key>
 											<real>1</real>
 											<key>Idle Code</key>
@@ -10323,14 +10327,16 @@
 											<key>Window Type</key>
 											<integer>7</integer>
 											<key>Working Directory</key>
-											<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+											<string>/Users/bbentley/Projects/MBO/CLIENTS/mbo-client-suite</string>
 										</dict>
 										<key>Bookmark Name</key>
 										<string>—[ DEFAULT ]—</string>
 										<key>Columns</key>
 										<integer>178</integer>
 										<key>Commands</key>
-										<array/>
+										<array>
+											<string>clear</string>
+										</array>
 										<key>Directories</key>
 										<array>
 											<string>/Users/bbentley/Projects</string>
@@ -10404,6 +10410,12 @@
 											<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
 											<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
 											<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+											<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+											<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+											<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+											<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+											<string>/Users/bbentley/Projects/MBO/CLIENTS/mbo-client-suite</string>
+											<string>/Users/bbentley/Projects/MBO/CLIENTS/mbo-client-suite</string>
 										</array>
 										<key>Environment</key>
 										<dict>
@@ -10412,6 +10424,42 @@
 										</dict>
 										<key>Hosts</key>
 										<array>
+											<dict>
+												<key>Host name</key>
+												<string>bbentley-mbp.mbopartners.com</string>
+												<key>User name</key>
+												<string>bbentley</string>
+											</dict>
+											<dict>
+												<key>Host name</key>
+												<string>bbentley-mbp.mbopartners.com</string>
+												<key>User name</key>
+												<string>bbentley</string>
+											</dict>
+											<dict>
+												<key>Host name</key>
+												<string>bbentley-mbp.mbopartners.com</string>
+												<key>User name</key>
+												<string>bbentley</string>
+											</dict>
+											<dict>
+												<key>Host name</key>
+												<string>bbentley-mbp.mbopartners.com</string>
+												<key>User name</key>
+												<string>bbentley</string>
+											</dict>
+											<dict>
+												<key>Host name</key>
+												<string>bbentley-mbp.mbopartners.com</string>
+												<key>User name</key>
+												<string>bbentley</string>
+											</dict>
+											<dict>
+												<key>Host name</key>
+												<string>bbentley-mbp.mbopartners.com</string>
+												<key>User name</key>
+												<string>bbentley</string>
+											</dict>
 											<dict>
 												<key>Host name</key>
 												<string>bbentley-mbp.mbopartners.com</string>
@@ -10461,17 +10509,17 @@
 										<key>Session Default Name</key>
 										<string>NodeJS —[ CONNECT ]—</string>
 										<key>Session GUID</key>
-										<string>9D4FAB40-2509-4ABB-918F-37FD0587ABFB</string>
+										<string>8C05890B-CECF-4606-AFC3-16B9630BEF49</string>
 										<key>Session Name</key>
-										<string>~/Projects/MBO/CONNECT/connect-client-ng</string>
+										<string>~/Projects/MBO/CLIENTS/mbo-client-suite</string>
 										<key>Session Window Title</key>
-										<string>~/Projects/MBO/CONNECT/connect-client-ng</string>
+										<string>~/Projects/MBO/CLIENTS/mbo-client-suite</string>
 										<key>Shell Integration Ever Used</key>
 										<true/>
 										<key>Substitutions</key>
 										<dict/>
 										<key>Working Directory</key>
-										<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+										<string>/Users/bbentley/Projects/MBO/CLIENTS/mbo-client-suite</string>
 									</dict>
 									<key>View Type</key>
 									<string>SessionView</string>
@@ -10847,7 +10895,7 @@
 														<real>0.9781760573387146</real>
 													</dict>
 													<key>Guid</key>
-													<string>AEE6BACD-D44E-4005-8602-BCE3972B0934</string>
+													<string>38937B70-CA5D-4E58-9CDA-B04FCB74620E</string>
 													<key>Horizontal Spacing</key>
 													<real>1</real>
 													<key>Idle Code</key>
@@ -11247,7 +11295,7 @@
 													<key>Window Type</key>
 													<integer>7</integer>
 													<key>Working Directory</key>
-													<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+													<string>/Users/bbentley/Projects/MBO/CLIENTS/mbo-client-suite</string>
 												</dict>
 												<key>Bookmark Name</key>
 												<string>—[ DEFAULT ]—</string>
@@ -11255,6 +11303,10 @@
 												<integer>88</integer>
 												<key>Commands</key>
 												<array>
+													<string>clear</string>
+													<string>git fetch origin</string>
+													<string>git pull origin develop</string>
+													<string>clear</string>
 													<string>clear</string>
 												</array>
 												<key>Directories</key>
@@ -11357,8 +11409,8 @@
 													<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
 													<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
 													<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
-													<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
-													<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+													<string>/Users/bbentley/Projects/MBO/CLIENTS/mbo-client-suite</string>
+													<string>/Users/bbentley/Projects/MBO/CLIENTS/mbo-client-suite</string>
 												</array>
 												<key>Environment</key>
 												<dict>
@@ -11367,6 +11419,66 @@
 												</dict>
 												<key>Hosts</key>
 												<array>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
 													<dict>
 														<key>Host name</key>
 														<string>bbentley-mbp.mbopartners.com</string>
@@ -11422,17 +11534,17 @@
 												<key>Session Default Name</key>
 												<string>NodeJS —[ CONNECT ]—</string>
 												<key>Session GUID</key>
-												<string>DB66B4DB-CEA6-4287-8A19-19EE994CA06C</string>
+												<string>A6DAAB77-E007-453F-9BD6-95E7C14A1F06</string>
 												<key>Session Name</key>
-												<string>~/Projects/MBO/CONNECT/connect-client-ng</string>
+												<string>~/Projects/MBO/CLIENTS/mbo-client-suite</string>
 												<key>Session Window Title</key>
-												<string>~/Projects/MBO/CONNECT/connect-client-ng</string>
+												<string>~/Projects/MBO/CLIENTS/mbo-client-suite</string>
 												<key>Shell Integration Ever Used</key>
 												<true/>
 												<key>Substitutions</key>
 												<dict/>
 												<key>Working Directory</key>
-												<string>/Users/bbentley/Projects/MBO/CONNECT/connect-client-ng</string>
+												<string>/Users/bbentley/Projects/MBO/CLIENTS/mbo-client-suite</string>
 											</dict>
 											<key>View Type</key>
 											<string>SessionView</string>
@@ -11441,7 +11553,7 @@
 												<key>height</key>
 												<real>506</real>
 												<key>width</key>
-												<real>719.5</real>
+												<real>719</real>
 												<key>x</key>
 												<real>0.0</real>
 												<key>y</key>
@@ -11450,7 +11562,7 @@
 										</dict>
 										<dict>
 											<key>Is Active</key>
-											<integer>1</integer>
+											<integer>0</integer>
 											<key>Session</key>
 											<dict>
 												<key>Bookmark</key>
@@ -11805,7 +11917,7 @@
 														<real>0.9781760573387146</real>
 													</dict>
 													<key>Guid</key>
-													<string>5F0B9A96-8502-4CB6-83FE-678A6ABA619C</string>
+													<string>9D0671B2-2877-411F-A26B-D51348ABD81B</string>
 													<key>Has Hotkey</key>
 													<false/>
 													<key>Horizontal Spacing</key>
@@ -12206,7 +12318,7 @@
 													<key>Window Type</key>
 													<integer>7</integer>
 													<key>Working Directory</key>
-													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker</string>
+													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
 												</dict>
 												<key>Bookmark Name</key>
 												<string>Personal –[ DEFAULT ]–</string>
@@ -12217,6 +12329,8 @@
 													<string>p</string>
 													<string>cd MBO/DOCKER/mbo-docker/</string>
 													<string>clear</string>
+													<string>cd connect/compose/dev/</string>
+													<string>clear</string>
 												</array>
 												<key>Directories</key>
 												<array>
@@ -12225,14 +12339,56 @@
 													<string>/Users/bbentley/Projects</string>
 													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker</string>
 													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker</string>
+													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker</string>
+													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker</string>
+													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
+													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
+													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
+													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
 												</array>
 												<key>Environment</key>
 												<dict>
 													<key>PWD</key>
-													<string>/Users/bbentley</string>
+													<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
 												</dict>
 												<key>Hosts</key>
 												<array>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
+													<dict>
+														<key>Host name</key>
+														<string>bbentley-mbp.mbopartners.com</string>
+														<key>User name</key>
+														<string>bbentley</string>
+													</dict>
 													<dict>
 														<key>Host name</key>
 														<string>bbentley-mbp.mbopartners.com</string>
@@ -12276,17 +12432,17 @@
 												<key>Session Default Name</key>
 												<string>Docker –[  MBO ]–</string>
 												<key>Session GUID</key>
-												<string>02C6EB20-66FF-4F6B-BDA3-CA73DFE974F7</string>
+												<string>AAF9BD0D-AA57-4BE4-9594-55B7F7ED9A0F</string>
 												<key>Session Name</key>
-												<string>~/Projects/MBO/DOCKER/mbo-docker</string>
+												<string>~/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
 												<key>Session Window Title</key>
-												<string>~/Projects/MBO/DOCKER/mbo-docker</string>
+												<string>~/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
 												<key>Shell Integration Ever Used</key>
 												<true/>
 												<key>Substitutions</key>
 												<dict/>
 												<key>Working Directory</key>
-												<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker</string>
+												<string>/Users/bbentley/Projects/MBO/DOCKER/mbo-docker/connect/compose/dev</string>
 											</dict>
 											<key>View Type</key>
 											<string>SessionView</string>
@@ -12295,9 +12451,9 @@
 												<key>height</key>
 												<real>506</real>
 												<key>width</key>
-												<real>719.5</real>
+												<real>720</real>
 												<key>x</key>
-												<real>720.5</real>
+												<real>720</real>
 												<key>y</key>
 												<real>0.0</real>
 											</dict>
@@ -15775,7 +15931,7 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.2.0</string>
+	<string>3.2.4</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>7</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

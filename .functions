@@ -223,34 +223,40 @@ function getcertnames() {
     fi;
 }
 
+##
+# —[ GENERAL ]— OPEN CURRENT DIRECTORY IN SUBLIME
 #
 # `s` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN SUBLIME TEXT, OTHERWISE
 # OPENS THE GIVEN LOCATION.
-#
+##
 function s() {
     if [ $# -eq 0 ]; then
-        subl .;
+        subl -n .;
     else
-        subl "$@";
+        subl -n "$@";
     fi;
 }
 
+##
+# —[ GENERAL ]— OPEN CURRENT DIRECTORY IN VISUAL STUDIO CODE
 #
-# `a` wITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN ATOM EDITOR, OTHERWISE
+# `a` wITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN VS CODE EDITOR, OTHERWISE
 # OPENS THE GIVEN LOCATION.
-#
-function a() {
+##
+function vs() {
     if [ $# -eq 0 ]; then
-        atom .;
+        code-insiders -n .;
     else
-        atom "$@";
+        code-insiders -n "$@";
     fi;
 }
 
+##
+# —[ GENERAL ]— OPEN CURRENT DIRECTORY IN VIM
 #
 # `v` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN VIM, OTHERWISE OPENS THE
 # GIVEN LOCATION.
-#
+##
 function v() {
     if [ $# -eq 0 ]; then
         vim .;
@@ -259,10 +265,12 @@ function v() {
     fi;
 }
 
+##
+# —[ GENERAL ]— OPEN CURRENT DIRECTORY
 #
-# `o` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY, OTHERWISE OPENS THE GIVEN
-# LOCATION.
-#
+#`o` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY, OTHERWISE OPENS THE
+# GIVEN LOCATION.
+##
 function o() {
     if [ $# -eq 0 ]; then
         open .;
@@ -370,11 +378,11 @@ function startansible() {
 function connectapistartserver() {
     cd $CONNECT_API &&
     # PULL LATEST CHANGES FROM GITHUB
-    echo -e "${bold}${fgYellow}Pulling latest code from GitHub...${reset}"
-    git fetch origin &&
-    git pull origin develop
-    echo -e "${bold}${fgGreen}Done!${reset}"
-    echo $'\n'
+    # echo -e "${bold}${fgYellow}Pulling latest code from GitHub...${reset}"
+    # git fetch origin &&
+    # git pull origin develop
+    # echo -e "${bold}${fgGreen}Done!${reset}"
+    # echo $'\n'
 
     # START MONGODB
     echo -e "${bold}${fgYellow}Starting MongoDB...${reset}"
