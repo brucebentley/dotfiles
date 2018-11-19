@@ -95,7 +95,7 @@
     #editor = subl --wait
 
     # Use custom `.gitignore` and `.gitattributes`
-	excludesfile = /Users/bbentley/dotfiles/.gitignore
+	excludesfile = /Users/bbentley/dotfiles/.gitignore_global
     attributesfile = ~/dotfiles/.gitattributes
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -139,7 +139,7 @@
     # https://help.github.com/articles/signing-commits-using-gpg/
     #gpgsign = true
 
-	template = /Users/bbentley/dotfiles/.gitmessage
+	template = /Users/bbentley/.stCommitMsg
 
 [credential]
     helper = osxkeychain

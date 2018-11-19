@@ -1,11 +1,13 @@
 # SUBJECT —
-
+{{ INSERT_SUBJECT_HERE }}
 
 # BODY —
-
+{{ INSERT_BODY_HERE }}
 
 # FOOTER —
-
+Resolves: CONN-0000, CONN-0000
+Closes: CONN-0000
+See Also: CONN-0000, CONN-0000
 
 ################################################################################
 #

@@ -2,51 +2,75 @@
 # ~/.editorconfig
 #
 
+#
 # For more information about the properties used in
 # this file, please see the EditorConfig documentation:
 # http://editorconfig.org/
+#
 
+# Top-most EditorConfig file
 root = true
 
 # Unix-style newlines with a newline ending every file
-[**]
+[*]
 charset = utf-8
 end_of_line = lf
-indent_style = space
 indent_size = 4
+indent_style = space
 insert_final_newline = true
-trim_trailing_whitespace = true
-
-# Standard at: https://github.com/felixge/node-style-guide
-[**.{js,json,ts}]
-trim_trailing_whitespace = true
-indent_style = space
-indent_size = 2
-quote_type = single
-# curly_bracket_next_line = false
-spaces_around_operators = true
-space_after_control_statements = true
-space_after_anonymous_functions = false
-# spaces_in_brackets = false
-
-# No Standard.  Please document a standard if different from .js
-[**.{html,css,sass,scss,less,yml}]
-indent_style = space
-indent_size = 4
-trim_trailing_whitespace = true
-
-[**.md]
-indent_style = space
-indent_size = 4
 max_line_length = 0
+tab_width = 4
+trim_trailing_whitespace = true
+quote_type = single
+#curly_bracket_next_line = false
+#spaces_around_brackets = inside
+#spaces_around_operators = true
+
+# No Standard. Please document a standard if different from *.js
+[*.{css,styl,scss,less,sass}]
+indent_size = 4
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.{ftl,html,svg,xml}]
+indent_size = 4
+indent_style = space
+trim_trailing_whitespace = true
+
+# Standard At: https://github.com/felixge/node-style-guide
+[*.{js,json,ts,yml}]
+indent_size = 2
+indent_style = space
+quote_type = single
+trim_trailing_whitespace = true
+
+[*.md]
+indent_size = 2
+indent_style = space
+max_line_length = 120
 trim_trailing_whitespace = false
 
+[*.php]
+indent_size = 4
+
+[*.rb]
+indent_size = 2
+
+[*.py]
+indent_size = 2
+indent_style = space
+max_line_length = 120
+
+[*.sh]
+indent_size = 2
+
+[*.txt]
+indent_size = 4
+
+# Matches the exact files either package.json or .travis.yml
 [{package.json,.travis.yml}]
-; The indent size used in the `package.json` file cannot be changed
-; https://github.com/npm/npm/pull/3180#issuecomment-16336516
 indent_size = 2
 indent_style = space
 
-[**.py]
-indent_style = space
-indent_size = 2
+[COMMIT_EDITMSG]
+max_line_length = 72
