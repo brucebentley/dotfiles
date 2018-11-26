@@ -1,9 +1,8 @@
 [user]
-	name = Bruce Bentley
-	email = bbentley@mbopartners.com
+    name = Bruce Bentley
+    email = bbentley@mbopartners.com
 
 [alias]
-
     # View abbreviated SHA, description, and history graph of the latest 20 commits
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
@@ -95,7 +94,7 @@
     #editor = subl --wait
 
     # Use custom `.gitignore` and `.gitattributes`
-	excludesfile = /Users/bbentley/dotfiles/.gitignore_global
+    excludesfile = /Users/bbentley/dotfiles/.gitignore_global
     attributesfile = ~/dotfiles/.gitattributes
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -139,7 +138,7 @@
     # https://help.github.com/articles/signing-commits-using-gpg/
     #gpgsign = true
 
-	template = /Users/bbentley/.stCommitMsg
+    template = /Users/bbentley/.stCommitMsg
 
 [credential]
     helper = osxkeychain
@@ -155,62 +154,57 @@
     tool = default-difftool
 
 [diff "bin"]
-
     # Use `hexdump` to diff binary files
     textconv = hexdump -v -C
 
 [difftool "default-difftool"]
     cmd = code-insiders --wait --diff $LOCAL $REMOTE
 
-[help]
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 
+[help]
     # Automatically correct and execute mistyped commands
     autocorrect = 1
 
 [merge]
-
     # Include summaries of merged commits in newly created merge commit messages
     log = true
 
-[push]
+[pull]
+    default = current
 
+[push]
     # https://git-scm.com/docs/git-config#git-config-pushdefault
-	default = current
+    default = current
     # Make `git push` push relevant annotated tags when pushing branches out.
     followTags = true
 
-
 # URL shorthands
-
 [url "git@github.com:"]
-
     insteadOf = "gh:"
     pushInsteadOf = "github:"
     pushInsteadOf = "git://github.com/"
 
 [url "git://github.com/"]
-
     insteadOf = "github:"
 
 [url "git@gist.github.com:"]
-
     insteadOf = "gst:"
     pushInsteadOf = "gist:"
     pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-
     insteadOf = "gist:"
+
+# SourceTree settings
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path =
+
 [mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[pull]
-	default = current
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
