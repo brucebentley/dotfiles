@@ -1,6 +1,7 @@
 [user]
     name = Bruce Bentley
     email = bbentley@mbopartners.com
+    signingkey = C9AD9FD44346059D
 
 [alias]
     # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -135,10 +136,12 @@
     untracked = cyan
 
 [commit]
-    # https://help.github.com/articles/signing-commits-using-gpg/
-    #gpgsign = true
-
-    template = /Users/bbentley/.stCommitMsg
+    # Helpful Links:
+    #   - https://help.github.com/articles/signing-commits-using-gpg/
+    #   - https://medium.com/@pandermatt/macos-high-sierra-gpg-signing-2b7cfcd90e3c
+    #   - https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
+    gpgsign = true
+    template = /Users/bbentley/dotfiles/.gitmessage
 
 [credential]
     helper = osxkeychain
@@ -165,6 +168,9 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
+
+[gpg]
+    program = /usr/local/bin/gpg
 
 [help]
     # Automatically correct and execute mistyped commands
@@ -200,7 +206,7 @@
 [url "git://gist.github.com/"]
     insteadOf = "gist:"
 
-# SourceTree settings
+# SourceTree Settings
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
     path =

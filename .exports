@@ -33,6 +33,10 @@ export LESS_TERMCAP_md="${yellow}";
 # DON’T CLEAR THE SCREEN AFTER QUITTING A MANUAL PAGE.
 export MANPAGER='less -X';
 
+# AVOID ISSUES WITH `gpg` AS INSTALLED VIA HOMEBREW.
+# https://stackoverflow.com/a/42265848/96656
+export GPG_TTY=$(tty);
+
 # SET ANSIBLE CONFIGURATION.
 export ANSIBLE_CONFIG=~/dotfiles/.ansible/ansible.cfg
 export ANSIBLE_INVENTORY=~/dotfiles/.ansible/.ansible_hosts
