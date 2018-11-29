@@ -1,6 +1,6 @@
 [user]
 	name = Bruce Bentley
-	email = brucebentley@me.com
+	email = bbentley@mbopartners.com
     signingkey = C9AD9FD44346059D
 
 [alias]
@@ -95,7 +95,7 @@
     #editor = subl --wait
 
     # Use custom `.gitignore` and `.gitattributes`
-    excludesfile = /Users/bbentley/dotfiles/.gitignore_global
+    excludesfile = ~/dotfiles/.gitignore_global
     attributesfile = ~/dotfiles/.gitattributes
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -141,7 +141,7 @@
     #   - https://medium.com/@pandermatt/macos-high-sierra-gpg-signing-2b7cfcd90e3c
     #   - https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
     gpgsign = true
-    template = /Users/bbentley/dotfiles/.gitmessage
+    template = ~/dotfiles/.gitmessage
 
 [credential]
     helper = osxkeychain
@@ -208,9 +208,9 @@
 
 # SourceTree Settings
 [difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-    path =
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 
 [mergetool "sourcetree"]
-    cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
