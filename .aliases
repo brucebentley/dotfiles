@@ -329,3 +329,4 @@ alias enterprisetoken="getauthtoken";
 alias entadmintoken="getauthtoken";
 # alias entadmintoken="getAuthToken tberg@mbo-tst.com Mbo.2011 enterprise";
 
+alias cleansnagit="rm -rfv ~/Library/Group\ Containers/*.com.techsmith.snagit/Snagit\ 2018/Temporary/*"
