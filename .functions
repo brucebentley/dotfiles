@@ -266,6 +266,20 @@ function v() {
 }
 
 ##
+# —[ GENERAL ]— NORMALIZE `open` across Linux, macOS, and Windows.
+#
+# THIS IS NEEDED TO MAKE THE `o` FUNCTION (SEE BELOW) CROSS-PLATFORM.
+##
+if [ ! $(uname -s) = 'Darwin' ]; then
+    if grep -q Microsoft /proc/version; then
+        # UBUNTU ON WINDOWS USING THE LINUX SUBSYSTEM
+        alias open='explorer.exe';
+    else
+        alias open='xdg-open';
+    fi
+fi
+
+##
 # —[ GENERAL ]— OPEN CURRENT DIRECTORY
 #
 #`o` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY, OTHERWISE OPENS THE
@@ -279,19 +293,19 @@ function o() {
     fi;
 }
 
-#
+##
 # `tre` IS A SHORTHAND FOR `tree` WITH HIDDEN FILES AND COLOR ENABLED, IGNORING
 # THE `.git` DIRECTORY, LISTING DIRECTORIES FIRST. THE OUTPUT GETS PIPED INTO
 # `less` WITH OPTIONS TO PRESERVE COLOR AND LINE NUMBERS, UNLESS THE OUTPUT IS
 # SMALL ENOUGH FOR ONE SCREEN.
-#
+##
 function tre() {
     tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
-#
+##
 # ALWAYS USE THE CORRECT PROGRAM TO EXTRACT FILES.
-#
+##
 function extract {
     if [ -z "$1" ]; then
         # DISPLAY USAGE IF NO PARAMETERS GIVEN
@@ -325,9 +339,9 @@ function extract {
     fi
 }
 
-#
+##
 # CONVERT HEX COLOR VALUE TO A (NEAREST) 0-256 COLOR INDEX
-#
+##
 function fromhex() {
     hex=${1#"#"}
     r=$(printf '0x%0.2s' "$hex")
@@ -338,9 +352,9 @@ function fromhex() {
                        (b<75?0:(b-35)/40)     + 16 ))"
 }
 
-#
+##
 # —[ GENERAL ]— IMPORT MONGO DATABASE
-#
+##
 function importmongodb() {
     # KRIS'S SOLUTION - JULY 19, 2017
     if [[ $1 =~ (.+)\/([^\/]+)\.(.{3})$ ]]; then
@@ -372,9 +386,9 @@ function startansible() {
     source $PYTHON/personal/ansible/bin/activate
 }
 
-#
+##
 # —[ CONNECT ]— START CONNECT-API - (w/out PyCharm)
-#
+##
 function connectapistartserver() {
     cd $CONNECT_API &&
     # PULL LATEST CHANGES FROM GITHUB
@@ -407,9 +421,9 @@ function connectapistartserver() {
     echo
 }
 
-#
+##
 # —[ CONNECT ]— START CELERY
-#
+##
 function connectstartcelery() {
     cd $CONNECT_API &&
 
@@ -431,9 +445,9 @@ function connectstartcelery() {
     echo -e "${bold}${fgGreen}Done!${reset}"
 }
 
-#
+##
 # —[ KEYCLOAK ]— GET AUTHENTICATION TOKEN
-#
+##
 function getauthtoken() {
     # BASE KEYCLOAK & API VARIABLE DEFINITION(S)
     KC_BASE_URL=https://sso2-dev.mbopartners.com/auth/realms;
@@ -475,9 +489,9 @@ function getauthtoken() {
     echo
 }
 
-#
+##
 # —[ KEYCLOAK ]— GET KEYCLOAK TOKEN
-#
+##
 function getkeycloaktoken() {
     if [ -z "${1}" ]; then
         # DISPLAY USAGE IF NO PARAMETERS GIVEN
@@ -512,14 +526,14 @@ function getkeycloaktoken() {
     fi
 }
 
-#
+##
 # —[ DOCKER ]— GET AUTHENTICATION TOKEN
-#
+##
 dockerssh() {
-  dockerexec $1 /bin/bash
+    dockerexec $1 /bin/bash
 }
 
 dockerexec() {
-  sudo docker exec -i -t $1 $2
+    sudo docker exec -i -t $1 $2
 }
 

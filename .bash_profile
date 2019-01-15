@@ -53,7 +53,6 @@ complete -W "NSGlobalDomain" defaults;
 # ADD `killall` TAB COMPLETION FOR COMMON APPS
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
-
 ##################################################
 # iTerm2                                         #
 ##################################################

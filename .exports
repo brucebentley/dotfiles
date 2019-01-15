@@ -36,6 +36,8 @@ export MANPAGER='less -X';
 # AVOID ISSUES WITH `gpg` AS INSTALLED VIA HOMEBREW.
 # https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty);
+gpgconf --launch gpg-agent
+export SSH_AUTH_SOCKET=$HOME/.gnupg/S.gpg-agent.ssh
 
 # SET ANSIBLE CONFIGURATION.
 export ANSIBLE_CONFIG=~/dotfiles/.ansible/ansible.cfg

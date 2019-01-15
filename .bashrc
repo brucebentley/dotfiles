@@ -8,10 +8,10 @@
 export PIP_REQUIRE_VIRTUALENV=true;
 
 # SETTING VARIABLES FOR `Go` INSTALLATION — `aws-cli`
-export GOPATH="$HOME/bin/go/go"
-export GOROOT="/usr/local/opt/go/libexec"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$GOROOT/bin"
+#export GOPATH="$HOME/bin/go/go"
+#export GOROOT="/usr/local/opt/go/libexec"
+#export PATH="$PATH:$GOPATH/bin"
+#export PATH="$PATH:$GOROOT/bin"
 
 
 # ##################################################
@@ -21,5 +21,5 @@ export PATH="$PATH:$GOROOT/bin"
 # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 
-# added by travis gem
-[ -f /Users/bbentley/.travis/travis.sh ] && source /Users/bbentley/.travis/travis.sh
+# ADDED BY TRAVIS GEM
+#[ -f /Users/bbentley/.travis/travis.sh ] && source /Users/bbentley/.travis/travis.sh

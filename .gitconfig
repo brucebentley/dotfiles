@@ -1,7 +1,7 @@
 [user]
 	name = Bruce Bentley
-	email = bbentley@mbopartners.com
-    signingkey = C9AD9FD44346059D
+	email = brucebentley@me.com
+    signingkey = ECD3D9B71F200A6C
 
 [alias]
     # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -205,12 +205,3 @@
 
 [url "git://gist.github.com/"]
     insteadOf = "gist:"
-
-# SourceTree Settings
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
