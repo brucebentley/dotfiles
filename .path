@@ -35,24 +35,24 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 ## FOR CUSTOM SCRIPTS
 # PATH=$HOME/bin:$PATH
 ## FOR pyenv
-PYENV_ROOT=$HOME/.pyenv
-PATH=$PYENV_ROOT/bin:$PATH
+#PYENV_ROOT=$HOME/.pyenv
+#PATH=$PYENV_ROOT/bin:$PATH
 
 ##################################################
 # rbenv - "Ruby Environment Manager"  #
 ##################################################
 # ADD & LOAD `rbenv` EVERY TIME YOU OPEN A TERMINAL
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 ## FOR rbenv
-RBENV_ROOT=$HOME/.rbenv
+#RBENV_ROOT=$HOME/.rbenv
 ## FOR CUSTOM SCRIPTS
-PATH=$RBENV_ROOT/bin:$PATH
+#PATH=$RBENV_ROOT/bin:$PATH
 
 
 # KEYCLOAK CLI
-KEYCLOAK_HOME=$HOME/dev/mbo/environments/keycloak
-PATH=$KEYCLOAK_HOME/bin:$PATH
+#KEYCLOAK_HOME=$HOME/dev/mbo/environments/keycloak
+#PATH=$KEYCLOAK_HOME/bin:$PATH
 
 # AWS CLI
 export PATH="$HOME/.local/bin:$PATH"
@@ -63,8 +63,4 @@ export PATH="$HOME/.local/bin:$PATH"
 # COMPOSER
 COMPOSER_HOME=$HOME/.composer
 PATH=$COMPOSER_HOME/vendor/bin:$PATH
-
-# # INITIALIZE NVM
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
