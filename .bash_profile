@@ -8,8 +8,8 @@ export PATH="$HOME/bin:$PATH";
 source "$HOME/bin/nerd-fonts/i_all.sh";
 
 # LOAD THE SHELL DOTFILES, AND THEN SOME:
-## * ~/.path CAN BE USED TO EXTEND `$PATH`.
-## * ~/.extra CAN BE USED FOR OTHER SETTINGS YOU DON'T WANT TO COMMIT.
+##  ~/.path CAN BE USED TO EXTEND `$PATH`.
+##  ~/.extra CAN BE USED FOR OTHER SETTINGS YOU DON'T WANT TO COMMIT.
 for file in ~/dotfiles/.{path,bash_prompt,exports,aliases,functions,extra,profile}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
@@ -25,8 +25,8 @@ shopt -s histappend;
 shopt -s cdspell;
 
 # ENABLE SOME BASH 4 FEATURES WHEN POSSIBLE:
-## * `autocd`, E.G. `**/qux` WILL ENTER `./foo/bar/baz/qux`
-## * RECURSIVE GLOBBING, e.g. `echo **/*.txt`
+##  `autocd`, E.G. `**/qux` WILL ENTER `./foo/bar/baz/qux`
+##  RECURSIVE GLOBBING, e.g. `echo **/*.txt`
 for option in autocd globstar; do
     shopt -s "$option" 2> /dev/null;
 done;
@@ -96,9 +96,9 @@ if [ -f "$HOME/.google/cloud-sdk/completion.bash.inc" ]; then source "$HOME/.goo
 
 
 
-# ##################################################
-# # NVM                                            #
-# ##################################################
+##################################################
+# NVM                                            #
+##################################################
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -139,3 +139,4 @@ chNodeVersion() {
   fi
 }
 chNodeVersion;
+
