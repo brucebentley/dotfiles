@@ -12,7 +12,7 @@
 root = true
 
 # Unix-style newlines with a newline ending every file
-[*]
+[**]
 charset = utf-8
 end_of_line = lf
 indent_size = 4
@@ -26,46 +26,53 @@ quote_type = single
 #spaces_around_brackets = inside
 #spaces_around_operators = true
 
+[**.{bash*,zsh*]
+indent_size  = 2
+indent_style = space
+
 # No Standard. Please document a standard if different from *.js
-[*.{css,styl,scss,less,sass}]
+[**.{css,styl,scss,less,sass}]
 indent_size = 4
 indent_style = space
 trim_trailing_whitespace = true
 
-[*.{ftl,html,svg,xml}]
+[**.{ftl,html,svg,xml}]
 indent_size = 4
 indent_style = space
 trim_trailing_whitespace = true
 
 # Standard At: https://github.com/felixge/node-style-guide
-[*.{js,json,ts,yml}]
+[**.{js,json,ts,yml}]
 indent_size = 2
 indent_style = space
 quote_type = single
 trim_trailing_whitespace = true
 
-[*.md]
+[**.md]
 indent_size = 2
 indent_style = space
 max_line_length = 120
 trim_trailing_whitespace = false
 
-[*.php]
+[**.php]
 indent_size = 4
 
-[*.rb]
+[**.rb]
 indent_size = 2
+indent_style = space
 
-[*.py]
+[**.py]
 indent_size = 2
 indent_style = space
 max_line_length = 120
 
-[*.sh]
-indent_size = 2
+[**.sh]
+indent_size  = 2
+indent_style = space
 
-[*.txt]
+[**.txt]
 indent_size = 4
+indent_style = space
 
 # Matches the exact files either package.json or .travis.yml
 [{package.json,.travis.yml}]

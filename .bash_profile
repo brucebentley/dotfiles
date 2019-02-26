@@ -60,12 +60,11 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 
 # iTerm SHELL INTEGRATION.
-# test -e "$HOME/.iterm2_shell_integration.bash" && source "~/.iterm2_shell_integration.bash"
-source ~/.iterm2_shell_integration.`basename $SHELL`
+test -e "$HOME/.iterm2_shell_integration.bash" && source ~/.iterm2_shell_integration.`basename $SHELL`
 
 # ADD CUSTOM BADGES
 function iterm2_print_user_vars() {
-  iterm2_set_user_var badge $(dir_badges)
+    iterm2_set_user_var badge $(dir_badges)
 }
 
 function dir_badges() {
@@ -75,15 +74,8 @@ function dir_badges() {
             echo $badge
             break
         fi
-    done < $HOME/dotfiles/.badges
+    done < "$HOME/dotfiles/.badges"
 }
-
-
-##################################################
-# ChefDK                                         #
-##################################################
-# eval "$(chef shell-init bash)";
-
 
 ##################################################
 # GOOGLE CLOUD PLATFORM                          #
@@ -93,7 +85,6 @@ if [ -f "$HOME/.google/cloud-sdk/path.bash.inc" ]; then source "$HOME/.google/cl
 
 ## THE NEXT LINE ENABLES SHELL COMMAND COMPLETION FOR GCLOUD.
 if [ -f "$HOME/.google/cloud-sdk/completion.bash.inc" ]; then source "$HOME/.google/cloud-sdk/completion.bash.inc"; fi
-
 
 
 ##################################################
@@ -140,3 +131,9 @@ chNodeVersion() {
 }
 chNodeVersion;
 
+
+##################################################
+# TRAVIS CI                                      #
+##################################################
+# ADDED BY TRAVIS GEM
+#[ -f /Users/bbentley/.travis/travis.sh ] && source /Users/bbentley/.travis/travis.sh

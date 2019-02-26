@@ -18,6 +18,9 @@ alias s="cd ~/Sites"
 alias data="cd ~/data"
 alias dev="cd ~/dev"
 alias dot="cd ~/dotfiles"
+alias notes="cd ~/Desktop/—\[\ DEV\ NOTES\ \]—"
+alias ss="cd ~/.ssh"
+
 alias g="git"
 
 # Detect which `ls` flavor is in use
@@ -161,6 +164,7 @@ alias reload="exec ${SHELL} -l"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
+alias adddockspacer="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}' && killall Dock";
 
 ################################################################################
 # **************************************************************************** #

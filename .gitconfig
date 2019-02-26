@@ -1,7 +1,11 @@
 [user]
 	name = Bruce Bentley
-	email = brucebentley@me.com
-    signingkey = ECD3D9B71F200A6C
+	email = bruce.bentley@gocanvas.com
+    signingkey = 67C8FE357295FA13
+
+# GoCanvas Conditional Git Configuration
+[includeIf "gitdir:~/Projects/GoCanvas/"]
+    path = ~/Projects/GoCanvas/.gitconfig-gocanvas
 
 [alias]
     # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -140,6 +144,8 @@
     #   - https://help.github.com/articles/signing-commits-using-gpg/
     #   - https://medium.com/@pandermatt/macos-high-sierra-gpg-signing-2b7cfcd90e3c
     #   - https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
+    #   - https://nathanhoad.net/how-to-git-signing-commits/
+    #   - https://sabbour.me/setting-up-signed-git-commits-on-macos/
     gpgsign = true
     template = ~/dotfiles/.gitmessage
 

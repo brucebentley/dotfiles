@@ -4,21 +4,6 @@
 # ~/.exports
 #
 
-# MAKE VIM THE DEFAULT EDITOR.
-export EDITOR='vim';
-
-# ENABLE PERSISTENT REPL HISTORY FOR `node`.
-export NODE_REPL_HISTORY=~/.node_history;
-# ALLOW 32³ ENTRIES; THE DEFAULT IS 1000.
-export NODE_REPL_HISTORY_SIZE='32768';
-# USE SLOPPY MODE BY DEFAULT, MATCHING WEB BROWSERS.
-export NODE_REPL_MODE='sloppy';
-
-# SET CFLAGS TO AN ACCEPTED SAFE VALUES TO HELP HELP SPEED UP PYTHON.
-export CFLAGS='-O2';
-# MAKE PYTHON USE UTF-8 ENCODING FOR OUTPUT TO stdin, stdout, and stderr.
-export PYTHONIOENCODING='UTF-8';
-
 # INCREASE BASH HISTORY SIZE. ALLOW 32³ ENTRIES; THE DEFAULT IS 500.
 export HISTSIZE='32768';
 export HISTFILESIZE="${HISTSIZE}";
@@ -36,10 +21,39 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER='less -X';
 
 # AVOID ISSUES WITH `gpg` AS INSTALLED VIA HOMEBREW.
-# https://stackoverflow.com/a/42265848/96656
+# SEE https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty);
-gpgconf --launch gpg-agent
-export SSH_AUTH_SOCKET=$HOME/.gnupg/S.gpg-agent.ssh
+#gpgconf --launch gpg-agent
+#export SSH_AUTH_SOCKET=$HOME/.gnupg/S.gpg-agent.ssh
 
-# SET NODE MAX CPU SIZE
+# SETTING VARIABLES FOR `Go` INSTALLATION FOR THE `aws-cli`.
+#export GOPATH="$HOME/bin/go/go";
+#export GOROOT="/usr/local/opt/go/libexec";
+#export PATH="$PATH:$GOPATH/bin";
+#export PATH="$PATH:$GOROOT/bin";
+
+# SET NODE MAX CPU SIZE.
 export NODE_OPTIONS=--max_old_space_size=4096
+# ENABLE PERSISTENT REPL HISTORY FOR `node`.
+export NODE_REPL_HISTORY=~/.node_history;
+# ALLOW 32³ ENTRIES; THE DEFAULT IS 1000.
+export NODE_REPL_HISTORY_SIZE='32768';
+# USE SLOPPY MODE BY DEFAULT, MATCHING WEB BROWSERS.
+export NODE_REPL_MODE='sloppy';
+
+# SET THE OPENSSL DIRECTORIES TO USE FROM HOMEBREW.
+export CPPFLAGS="-I$(brew --prefix openssl)/include";
+export LDFLAGS="-L$(brew --prefix openssl)/lib";
+
+# SET CFLAGS TO AN ACCEPTED SAFE VALUES TO HELP HELP SPEED UP PYTHON.
+export CFLAGS='-O2';
+# MAKE PYTHON USE UTF-8 ENCODING FOR OUTPUT TO `stdin`, `stdout`, and `stderr`.
+export PYTHONIOENCODING='UTF-8';
+# TELL `pyenv-virtualenvwrapper` TO USE `pyenv` WHEN CREATING NEW PYTHON ENVIRONMENTS.
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+
+# MAKE VIM THE DEFAULT EDITOR.
+export EDITOR='vim';
+
+# SET THE DEFAULT AWS USER.
+export AWS_DEFAULT_PROFILE=default;

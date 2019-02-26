@@ -4,11 +4,16 @@
 # ~/.extra
 #
 
-##################################################
-# WORKSPACES                                     #
-##################################################
-WORKSPACE="/Users/bbentley"
+################################################################################
+#                                                                              #
+# WORKSPACES                                                                   #
+#                                                                              #
+################################################################################
+WORKSPACE="/Users/bruce.bentley"
 
+#
+# —[ USER DIRECTORIES ]—
+#
 DESKTOP="$WORKSPACE/Desktop"
 DOCUMENTS="$WORKSPACE/Documents"
 DOWNLOADS="$WORKSPACE/Downloads"
@@ -17,103 +22,117 @@ PICTURES="$WORKSPACE/Pictures"
 VIDEOS="$WORKSPACE/Videos"
 PROJECTS="$WORKSPACE/Projects"
 SITES="$WORKSPACE/Sites"
+BIN="$WORKSPACE/bin"
 DATA="$WORKSPACE/data"
 DEV="$WORKSPACE/dev"
 DOTFILES="$WORKSPACE/dotfiles"
+NOTES="$WORKSPACE/—[ DEV NOTES ]—"
+SSH="$WORKSPACE/.ssh"
 
-GITHUB_PROJECTS="$PROJECTS/GitHub"
-MBO_PROJECTS="$PROJECTS/MBO"
-PERSONAL_PROJECTS="$PROJECTS/Personal"
-PROTOTYPES_PROJECTS="$PROJECTS/Prototypes"
-SAMPLES_PROJECTS="$PROJECTS/Samples"
-SUGARCODEIT_PROJECTS="$PROJECTS/SugarCodeIt"
 
-CONNECT_HOME="$MBO_PROJECTS/CONNECT"
-DEVOPS_HOME="$MBO_PROJECTS/DEVOPS"
-DOCKER_HOME="$MBO_PROJECTS/DOCKER"
-INTRANET_HOME="$MBO_PROJECTS/INTRANET"
-KEYCLOAK_HOME="$MBO_PROJECTS/KEYCLOAK"
-MARKETING_HOME="$MBO_PROJECTS/MARKETING"
-MISC_HOME="$MBO_PROJECTS/MISC"
-PARDOT_HOME="$MBO_PROJECTS/PARDOT"
-
+################################################################################
+#                                                                              #
+# DEV UTILITIES                                                                #
+#                                                                              #
+################################################################################
 DEV_PERSONAL="$DEV/personal"
+DEV_GOCANVAS="$DEV/gocanvas"
 DEV_MBO="$DEV/mbo"
-DEV_CERTS="$DEV/certs"
-CERT_LOCALHOST="$DEV_CERTS/localhost"
-CERT_MBOPARTNERS="$DEV_CERTS/mbopartners.com.test"
 
+#
+# —[ PERSONAL ]—
+#
+CERTS_PERSONAL="$DEV/certs"
+CERT_LOCALHOST="$DEV_CERTS/localhost"
 ENVIRONMENTS_PERSONAL="$DEV_PERSONAL/environments"
 SCRIPTS_PERSONAL="$DEV_PERSONAL/scripts"
 VENVS_PERSONAL="$DEV_PERSONAL/venvs"
 
+#
+# —[ GoCanvas ]—
+#
+CERTS_GOCANVAS="$DEV_GOCANVAS/certs"
+CERT_GOCANVAS="$DEV_CERTS/gocanvas.com.test"
+ENVIRONMENTS_GOCANVAS="$DEV_GOCANVAS/environments"
+SCRIPTS_GOCANVAS="$DEV_GOCANVAS/scripts"
+VENVS_GOCANVAS="$DEV_GOCANVAS/venvs"
+
+#
+# —[ MBO ]—
+#
+CERTS_MBO="$DEV_MBO/certs"
+CERT_MBOPARTNERS="$DEV_CERTS/mbopartners.com.test"
 ENVIRONMENTS_MBO="$DEV_MBO/environments"
 SCRIPTS_MBO="$DEV_MBO/scripts"
 VENVS_MBO="$DEV_MBO/venvs"
 
-CONNECT_API="$CONNECT_HOME/connect-api"
+
+################################################################################
+#                                                                              #
+# PROJECTS                                                                     #
+#                                                                              #
+################################################################################
+GITHUB_PROJECTS="$PROJECTS/GitHub"
+GITLAB_PROJECTS="$PROJECTS/GitLab"
+GOCANVAS_PROJECTS="$PROJECTS/GoCanvas"
+MBO_PROJECTS="$PROJECTS/MBO"
+PERSONAL_PROJECTS="$PROJECTS/Personal"
+PROTOTYPES_PROJECTS="$PROJECTS/Prototypes"
+SAMPLES_PROJECTS="$PROJECTS/Samples"
+
+#
+# —[ PERSONAL ]—
+#
+PERSONAL_DOTFILES="$PERSONAL_PROJECTS/dotfiles"
+PERSONAL_WEBSITE="$PERSONAL_PROJECTS/brucebentley.io"
+PERSONAL_UTILITIES="$PERSONAL_PROJECTS/utilities"
+
+#
+# —[ GoCanvas ]—
+#
+GOCANVAS_WEB_HOME="$GOCANVAS_PROJECTS/web"
+GOCANVAS_PILLARS_HOME="$GOCANVAS_PROJECTS/pillars"
+
+WEB_APPBUILDER="$GOCANVAS_WEB_HOME/appbuilder"
+WEB_MAIN="$GOCANVAS_WEB_HOME/main"
+
+#
+# —[ MBO ]—
+#
+MBO_CLIENTS_HOME="$MBO_PROJECTS/CLIENTS"
+MBO_CONNECT_HOME="$MBO_PROJECTS/CONNECT"
+MBO_DEVOPS_HOME="$MBO_PROJECTS/DEVOPS"
+MBO_DOCKER_HOME="$MBO_PROJECTS/DOCKER"
+MBO_INTRANET_HOME="$MBO_PROJECTS/INTRANET"
+MBO_KEYCLOAK_HOME="$MBO_PROJECTS/KEYCLOAK"
+MBO_MARKETING_HOME="$MBO_PROJECTS/MARKETING"
+MBO_MISC_HOME="$MBO_PROJECTS/MISC"
+MBO_PARDOT_HOME="$MBO_PROJECTS/PARDOT"
+
+CONNECT_API="$MBO_CONNECT_HOME/connect-api"
 CONNECT_API_VENV="$VENVS_MBO/connect-api"
 CONNECT_API_ENVIRONMENT="$ENVIRONMENTS_MBO/connect-api"
-CONNECT_CLIENT="$CONNECT_HOME/connect-client-ng"
-CONNECT_WEBAPP="$CONNECT_HOME/connect-webapp-ng2"
+CONNECT_CLIENT="$MBO_CLIENTS_HOME/connect-client-ng"
+CONNECT_WEBAPP="$MBO_CONNECT_HOME/connect-webapp-ng2"
 
 
-##################################################
-# GIT                                            #
-##################################################
+################################################################################
+#                                                                              #
+# GIT                                                                          #
+#                                                                              #
+################################################################################
 GIT_AUTHOR_NAME="Bruce Bentley"
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 git config --global user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="brucebentley@me.com"
+GIT_AUTHOR_EMAIL="bruce.bentley@gocanvas.com"
+#GIT_AUTHOR_EMAIL="brucebentley@me.com"
 GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git config --global user.email "$GIT_AUTHOR_EMAIL"
 
 
-##################################################
-# `@angular/cli` AUTOCOMPLETION                  #
-##################################################
-## `ng` COMMAND COMPLETION SCRIPT
-##  THIS COMMAND SUPPORTS 3 CASES.
-##    1. (DEFAULT CASE) IT PRINTS A COMMON COMPLETION INITIALISATION FOR BOTH bash AND zsh.
-##       IT IS THE RESULT OF EITHER CALLING:    `ng completion`       OR    `ng completion -a`
-##    2. PRODUCE bash (ONLY) COMPLETION:        `ng completion -b`    OR    `ng completion --bash`
-##    3. PRODUCE zsh (ONLY) COMPLETION:         `ng completion -z`    OR    `ng completion --zsh`
-##
-##  @USAGE: . <(ng completion --bash)    # PLACE IT APPROPRIATELY IN `.bashrc`  OR
-##          . <(ng completion --zsh)     # FIND A SPOT FOR IT IN `.zshrc`
-##
-_ng_completion() {
-    local cword pword opts
+################################################################################
+#                                                                              #
+# ADDITIONAL GOODIES                                                           #
+#                                                                              #
+################################################################################
 
-    COMPREPLY=()
-    cword=${COMP_WORDS[COMP_CWORD]}
-    pword=${COMP_WORDS[COMP_CWORD - 1]}
-
-    case ${pword} in
-        ng|help) opts="--version -v b build completion doc e e2e eject g generate get help l lint new s serve server set t test v version xi18n" ;;
-        b|build) opts="--aot --app --base-href --deploy-url --environment --extract-css --i18n-file --i18n-format --locale --output-hashing --output-path --poll --progress --sourcemaps --stats-json --target --vendor-chunk --verbose --watch -a -aot -bh -d -e -ec -i18nFile -i18nFormat -locale -oh -op -poll -pr -sm -statsJson -t -v -vc -w" ;;
-        completion) opts="--all --bash --zsh -a -b -z" ;;
-        e|e2e) opts="--aot --app --base-href --config --deploy-url --element-explorer --environment --extract-css --hmr --host --i18n-file --i18n-format --live-reload --live-reload-client --locale --open --output-hashing --output-path --poll --port --progress --proxy-config --serve --sourcemaps --specs --ssl --ssl-cert --ssl-key --target --vendor-chunk --verbose --watch --webdriver-update -H -a -aot -bh -c -d -e -ec -ee -hmr -i18nFile -i18nFormat -liveReloadClient -locale -lr -o -oh -op -p -pc -poll -pr -s -sm -sp -ssl -sslCert -sslKey -t -v -vc -w -wu" ;;
-        eject) opts="--aot --app --base-href --deploy-url --environment --extract-css --force --i18n-file --i18n-format --locale --output-hashing --output-path --poll --progress --sourcemaps --target --vendor-chunk --verbose --watch -a -aot -bh -d -e -ec -force -i18nFile -i18nFormat -locale -oh -op -poll -pr -sm -t -v -vc -w" ;;
-        g|generate) opts="--dry-run --verbose -d -v" ;;
-        get) opts="--global -global" ;;
-        l|lint) opts="--fix --force --format --type-check -fix -force -format -typeCheck" ;;
-        new) opts="--directory --dry-run --inline-style --inline-template --link-cli --prefix --routing --skip-commit --skip-git --skip-install --skip-tests --source-dir --style --verbose -d -dir -is -it -lc -p -routing -sc -sd -sg -si -st -style -v" ;;
-        s|serve|server) opts="--aot --app --base-href --deploy-url --environment --extract-css --hmr --host --i18n-file --i18n-format --live-reload --live-reload-client --locale --open --output-hashing --output-path --poll --port --progress --proxy-config --sourcemaps --ssl --ssl-cert --ssl-key --target --vendor-chunk --verbose --watch -H -a -aot -bh -d -e -ec -hmr -i18nFile -i18nFormat -liveReloadClient -locale -lr -o -oh -op -p -pc -poll -pr -sm -ssl -sslCert -sslKey -t -v -vc -w" ;;
-        set) opts="--global -g" ;;
-        t|test) opts="--app --browsers --code-coverage --colors --config --log-level --poll --port --progress --reporters --single-run --sourcemaps --watch -a -browsers -c -cc -colors -logLevel -poll -port -progress -reporters -sm -sr -w" ;;
-        --version|-v|v|version) opts="--verbose -verbose" ;;
-        xi18n) opts="--app --i18n-format --locale --out-file --output-path --progress --verbose -a -f -l -of -op -progress -verbose" ;;
-        *) opts="" ;;
-    esac
-
-    COMPREPLY=( $(compgen -W '${opts}' -- $cword) )
-
-    return 0
-}
-
-complete -o default -F _ng_completion ng
-
-
-# ADDITIONAL GOODIES ...
-##################################################
