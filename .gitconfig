@@ -1,11 +1,11 @@
 [user]
 	name = Bruce Bentley
-	email = bruce.bentley@gocanvas.com
+    email = brucebentley@me.com
     signingkey = 67C8FE357295FA13
 
 # GoCanvas Conditional Git Configuration
-[includeIf "gitdir:~/Projects/GoCanvas/"]
-    path = ~/Projects/GoCanvas/.gitconfig-gocanvas
+[includeIf "gitdir:~/Projects/GoCanvas/**"]
+    path = "~/Projects/GoCanvas/.gitconfig-gocanvas"
 
 [alias]
     # View abbreviated SHA, description, and history graph of the latest 20 commits
