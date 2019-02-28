@@ -1,83 +1,90 @@
+# For more information about the configurations used
+# in this file, please see the EditorConfig documentation.
 #
-# ~/.editorconfig
-#
+# https://editorconfig.org
 
-#
-# For more information about the properties used in
-# this file, please see the EditorConfig documentation:
-# http://editorconfig.org/
-#
-
-# Top-most EditorConfig file
 root = true
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*]
+
 # Unix-style newlines with a newline ending every file
-[**]
+
 charset = utf-8
 end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
-max_line_length = 0
-tab_width = 4
-trim_trailing_whitespace = true
-quote_type = single
-#curly_bracket_next_line = false
-#spaces_around_brackets = inside
-#spaces_around_operators = true
-
-[**.{bash*,zsh*]
-indent_size  = 2
-indent_style = space
-
-# No Standard. Please document a standard if different from *.js
-[**.{css,styl,scss,less,sass}]
-indent_size = 4
-indent_style = space
-trim_trailing_whitespace = true
-
-[**.{ftl,html,svg,xml}]
-indent_size = 4
-indent_style = space
-trim_trailing_whitespace = true
-
-# Standard At: https://github.com/felixge/node-style-guide
-[**.{js,json,ts,yml}]
-indent_size = 2
-indent_style = space
-quote_type = single
-trim_trailing_whitespace = true
-
-[**.md]
-indent_size = 2
-indent_style = space
 max_line_length = 120
+trim_trailing_whitespace = true
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*.{bash,sh,zsh}]
+
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*.{js,json,ts}]
+
+indent_size = 2
+indent_style = space
+quote_type = single
+trim_trailing_whitespace = true
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*.md]
+
+# Markdown uses the trailing whitespaces.
+# https://daringfireball.net/projects/markdown/syntax#block
+
+max_line_length = 0
 trim_trailing_whitespace = false
 
-[**.php]
-indent_size = 4
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[**.rb]
-indent_size = 2
-indent_style = space
+[*.py]
 
-[**.py]
-indent_size = 2
-indent_style = space
-max_line_length = 120
-
-[**.sh]
-indent_size  = 2
-indent_style = space
-
-[**.txt]
 indent_size = 4
 indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
 
-# Matches the exact files either package.json or .travis.yml
-[{package.json,.travis.yml}]
-indent_size = 2
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[{*.rb,Rakefile}]
+
 indent_style = space
+indent_size = 2
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*.snippets]
+
+indent_style = space
+indent_size = 4
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[*.vim]
+
+indent_style = space
+indent_size = 4
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 [COMMIT_EDITMSG]
-max_line_length = 72
+
+max_line_length = 0
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[Makefile]
+
+indent_style = tab
