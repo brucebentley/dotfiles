@@ -5,6 +5,7 @@
 ## Status
 
 [![pipeline status](https://gitlab.com/brucebentley/dotfiles/badges/macOS/Mojave/pipeline.svg)](https://gitlab.com/brucebentley/dotfiles/commits/macOS/Mojave
+[![coverage report](https://gitlab.com/brucebentley/dotfiles/badges/macOS/Mojave/coverage.svg)](https://gitlab.com/brucebentley/dotfiles/commits/macOS/Mojave)
 
 ## Installation
 
