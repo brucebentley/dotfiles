@@ -82,5 +82,6 @@ mas install 568494494     # Pocket              - News & Read It Later
 mas install 425955336     # Skitch              - Screenshots, Annotations & Markup
 mas install 1006087419    # SnippetsLab         - Code Snippet Organizer & Library
 mas install 1176895641    # Spark               - Email App
+mas install 1109319285    # SSH Config Editor   - Easily Manage Your SSH Configurations
 mas install 425424353     # TheUnarchiver       - Unarchiving Utility
 mas install 1436522307    # Transmit 5          - Fast & Easy File Transfers

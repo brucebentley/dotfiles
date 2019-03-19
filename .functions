@@ -1,32 +1,32 @@
 #!/usr/bin/env bash
 
-#
+###
 # ~/.functions
-#
+##
 
-#
+##
 # CREATE A NEW DIRECTORY AND ENTER IT.
-#
+##
 function mkd() {
     mkdir -p "$@" && cd "$_";
 }
 
-#
+##
 # CHANGE WORKING DIRECTORY TO THE TOP-MOST FINDER WINDOW LOCATION.
-#
+##
 function cdf() { # short for `cdfinder`
     cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
 }
 
-#
+##
 # CREATE A .tar.gz ARCHIVE, USING `zopfli`, `pigz` OR `gzip` FOR COMPRESSION.
-#
+##
 function targz() {
     local tmpFile="${@%/}.tar";
     tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
 
     size=$(
-        stat -f"%z" "${tmpFile}" 2> /dev/null; # macOS `stat`
+        stat# -f"%z" "${tmpFile}" 2> /dev/null; # macOS `stat`
         stat -c"%s" "${tmpFile}" 2> /dev/null;  # GNU `stat`
     );
 
@@ -47,16 +47,16 @@ function targz() {
     [ -f "${tmpFile}" ] && rm "${tmpFile}";
 
     zippedSize=$(
-        stat -f"%z" "${tmpFile}.gz" 2> /dev/null; # macOS `stat`
+        stat -f"%z#" "${tmpFile}.gz" 2> /dev/null; # macOS `stat`
         stat -c"%s" "${tmpFile}.gz" 2> /dev/null; # GNU `stat`
     );
 
     echo "${tmpFile}.gz ($((zippedSize / 1000)) kB) created successfully.";
 }
 
-#
+##
 # DETERMINE SIZE OF A FILE OR TOTAL SIZE OF A DIRECTORY.
-#
+##
 function fs() {
     if du -b /dev/null > /dev/null 2>&1; then
         local arg=-sbh;
@@ -70,9 +70,9 @@ function fs() {
     fi;
 }
 
-#
+##
 # USE GIT’S COLORED DIFF WHEN AVAILABLE
-#
+##
 hash git &>/dev/null;
 if [ $? -eq 0 ]; then
     function diff() {
@@ -80,9 +80,9 @@ if [ $? -eq 0 ]; then
     }
 fi;
 
-#
+##
 # CREATE A DATA URL FROM A FILE
-#
+##
 function dataurl() {
     local mimeType=$(file -b --mime-type "$1");
     if [[ $mimeType == text/* ]]; then
@@ -91,9 +91,9 @@ function dataurl() {
     echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
 }
 
-#
+##
 # CREATE A GIT.IO SHORT URL
-#
+##
 function gitio() {
     if [ -z "${1}" -o -z "${2}" ]; then
         echo "Usage: \`gitio slug url\`";
@@ -102,9 +102,9 @@ function gitio() {
     curl -i https://git.io/ -F "url=${2}" -F "code=${1}";
 }
 
-#
+##
 # START AN HTTP SERVER FROM A DIRECTORY, OPTIONALLY SPECIFYING THE PORT
-#
+##
 function server() {
     local port="${1:-8000}";
     sleep 1 && open "http://localhost:${port}/" &
@@ -113,10 +113,10 @@ function server() {
     python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
 }
 
-#
+##
 # START A PHP SERVER FROM A DIRECTORY, OPTIONALLY SPECIFYING THE PORT.
 # (REQUIRES PHP 5.4.0+.)
-#
+##
 function phpserver() {
     local port="${1:-4000}";
     local ip=$(ipconfig getifaddr en1);
@@ -124,9 +124,9 @@ function phpserver() {
     php -S "${ip}:${port}";
 }
 
-#
+##
 # COMPARE ORIGINAL AND GZIPPED FILE SIZE.
-#
+##
 function gz() {
     local origsize=$(wc -c < "$1");
     local gzipsize=$(gzip -c "$1" | wc -c);
@@ -135,10 +135,10 @@ function gz() {
     printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
 }
 
-#
+##
 # SYNTAX-HIGHLIGHT JSON STRINGS OR FILES.
 # USAGE: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-#
+##
 function json() {
     if [ -t 0 ]; then # argument
         python -mjson.tool <<< "$*" | pygmentize -l javascript;
@@ -147,16 +147,16 @@ function json() {
     fi;
 }
 
-#
+##
 # RUN `dig` AND DISPLAY THE MOST USEFUL INFO.
-#
+##
 function digga() {
     dig +nocmd "$1" any +multiline +noall +answer;
 }
 
-#
+##
 # UTF-8-ENCODE A STRING OF UNICODE SYMBOLS.
-#
+##
 function escape() {
     printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u);
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
@@ -165,9 +165,9 @@ function escape() {
     fi;
 }
 
-#
+##
 # DECODE \x{ABCD}-STYLE UNICODE ESCAPE SEQUENCES.
-#
+##
 function unidecode() {
     perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
@@ -176,9 +176,9 @@ function unidecode() {
     fi;
 }
 
-#
+##
 # GET A CHARACTER’S UNICODE CODE POINT.
-#
+##
 function codepoint() {
     perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))";
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
@@ -187,10 +187,10 @@ function codepoint() {
     fi;
 }
 
-#
+##
 # SHOW ALL THE NAMES (CNS AND SANS) LISTED IN THE SSL CERTIFICATE
 # FOR A GIVEN DOMAIN.
-#
+##
 function getcertnames() {
     if [ -z "${1}" ]; then
         echo "ERROR: No domain specified.";
@@ -223,12 +223,12 @@ function getcertnames() {
     fi;
 }
 
-##
+###
 # —[ GENERAL ]— OPEN CURRENT DIRECTORY IN SUBLIME
-#
+##
 # `s` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN SUBLIME TEXT, OTHERWISE
 # OPENS THE GIVEN LOCATION.
-##
+####
 function s() {
     if [ $# -eq 0 ]; then
         subl -n .;
@@ -237,12 +237,12 @@ function s() {
     fi;
 }
 
-##
+###
 # —[ GENERAL ]— OPEN CURRENT DIRECTORY IN VISUAL STUDIO CODE
-#
+##
 # `a` wITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN VS CODE EDITOR, OTHERWISE
 # OPENS THE GIVEN LOCATION.
-##
+####
 function vs() {
     if [ $# -eq 0 ]; then
         code-insiders -n .;
@@ -251,12 +251,12 @@ function vs() {
     fi;
 }
 
-##
+###
 # —[ GENERAL ]— OPEN CURRENT DIRECTORY IN VIM
-#
+##
 # `v` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY IN VIM, OTHERWISE OPENS THE
 # GIVEN LOCATION.
-##
+####
 function v() {
     if [ $# -eq 0 ]; then
         vim .;
@@ -265,11 +265,11 @@ function v() {
     fi;
 }
 
-##
+###
 # —[ GENERAL ]— NORMALIZE `open` across Linux, macOS, and Windows.
-#
-# THIS IS NEEDED TO MAKE THE `o` FUNCTION (SEE BELOW) CROSS-PLATFORM.
 ##
+# THIS IS NEEDED TO MAKE THE `o` FUNCTION (SEE BELOW) CROSS-PLATFORM.
+####
 if [ ! $(uname -s) = 'Darwin' ]; then
     if grep -q Microsoft /proc/version; then
         # UBUNTU ON WINDOWS USING THE LINUX SUBSYSTEM
@@ -279,12 +279,12 @@ if [ ! $(uname -s) = 'Darwin' ]; then
     fi
 fi
 
-##
+###
 # —[ GENERAL ]— OPEN CURRENT DIRECTORY
-#
-#`o` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY, OTHERWISE OPENS THE
-# GIVEN LOCATION.
 ##
+##`o` WITH NO ARGUMENTS OPENS THE CURRENT DIRECTORY, OTHERWISE OPENS THE
+# GIVEN LOCATION.
+####
 function o() {
     if [ $# -eq 0 ]; then
         open .;
@@ -293,19 +293,19 @@ function o() {
     fi;
 }
 
-##
+###
 # `tre` IS A SHORTHAND FOR `tree` WITH HIDDEN FILES AND COLOR ENABLED, IGNORING
 # THE `.git` DIRECTORY, LISTING DIRECTORIES FIRST. THE OUTPUT GETS PIPED INTO
 # `less` WITH OPTIONS TO PRESERVE COLOR AND LINE NUMBERS, UNLESS THE OUTPUT IS
 # SMALL ENOUGH FOR ONE SCREEN.
-##
+####
 function tre() {
     tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
-##
+###
 # ALWAYS USE THE CORRECT PROGRAM TO EXTRACT FILES.
-##
+####
 function extract {
     if [ -z "$1" ]; then
         # DISPLAY USAGE IF NO PARAMETERS GIVEN
@@ -339,22 +339,22 @@ function extract {
     fi
 }
 
-##
+###
 # CONVERT HEX COLOR VALUE TO A (NEAREST) 0-256 COLOR INDEX
-##
+####
 function fromhex() {
-    hex=${1#"#"}
+    hex=${1##"##"}
     r=$(printf '0x%0.2s' "$hex")
-    g=$(printf '0x%0.2s' ${hex#??})
-    b=$(printf '0x%0.2s' ${hex#????})
+    g=$(printf '0x%0.2s' ${hex##??})
+    b=$(printf '0x%0.2s' ${hex##????})
     printf '%03d' "$(( (r<75?0:(r-35)/40)*6*6 +
                        (g<75?0:(g-35)/40)*6   +
                        (b<75?0:(b-35)/40)     + 16 ))"
 }
 
-##
+###
 # —[ GENERAL ]— IMPORT MONGO DATABASE
-##
+####
 function importmongodb() {
     # KRIS'S SOLUTION - JULY 19, 2017
     if [[ $1 =~ (.+)\/([^\/]+)\.(.{3})$ ]]; then
@@ -369,7 +369,7 @@ function importmongodb() {
         7z e $1 -o$LOC
     fi
 
-    # DATA IMPORT
+ #   # DATA IMPORT
     echo -e "${bold}${fgYellow}Importing Data ...${reset}"
     # dockerexec $3 "mongorestore --drop $4 --archive=$DOCKER_CONNECT_API_DB/$FILE"
     mongorestore --drop --gzip --archive=$LOC/$FILE $4
@@ -377,18 +377,18 @@ function importmongodb() {
     echo -e "${bold}${fgGreen}Done!${reset}"
 }
 
-#
+##
 # —[ DEVOPS ]— START ANSIBLE
-#
+##
 function startansible() {
     pyenv shell 2.7.13
     printf 'Now using Python v%s ... \n' ${PYENV_VERSION}
     source $PYTHON/personal/ansible/bin/activate
 }
 
-##
+###
 # —[ CONNECT ]— START CONNECT-API - (w/out PyCharm)
-##
+####
 function connectapistartserver() {
     cd $CONNECT_API &&
     # PULL LATEST CHANGES FROM GITHUB
@@ -398,13 +398,13 @@ function connectapistartserver() {
     # echo -e "${bold}${fgGreen}Done!${reset}"
     # echo $'\n'
 
-    # START MONGODB
+ #   # START MONGODB
     echo -e "${bold}${fgYellow}Starting MongoDB...${reset}"
     mongod --dbpath $DATA/db --fork --logpath /dev/null
     echo -e "${bold}${fgGreen}Done!${reset}"
     echo $'\n'
 
-    # START CONNECT API
+ #   # START CONNECT API
     echo -e "${bold}${fgYellow}Starting the Connect API development server...${reset}"
     source $CONNECT_API_VENV/bin/activate;
     env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" python manage.py runserver;
@@ -413,7 +413,7 @@ function connectapistartserver() {
     echo -e "${bold}${fgYellow}Shutting down the Connect API development server...${reset}"
     echo -e "${bold}${fgGreen}Done!${reset}"
 
-    # STOP MONGODB
+ #   # STOP MONGODB
     echo $'\n'
     echo -e "${bold}${fgYellow}Shutting down MongoDB...${reset}"
     mongo admin --eval 'db.shutdownServer()' > /dev/null;
@@ -421,33 +421,33 @@ function connectapistartserver() {
     echo
 }
 
-##
+###
 # —[ CONNECT ]— START CELERY
-##
+####
 function connectstartcelery() {
     cd $CONNECT_API &&
 
-    # WAIT FOR `connect-api` TO INITIALIZE
+ #   # WAIT FOR `connect-api` TO INITIALIZE
     echo -e "${bold}${fgYellow}Waiting for connect-api to initialize...${reset}"
     echo $'\n'
     sleep 10 &&
 
-    # STARTING CELERY
+ #   # STARTING CELERY
     echo -e "${bold}${fgYellow}Starting Celery...${reset}"
 
     source $CONNECT_API_VENV/bin/activate;
     env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" celery -A connect -l info worker;
     deactivate
 
-    # STOP CELERY
+ #   # STOP CELERY
     echo $'\n'
     echo -e "${bold}${fgYellow}Shutting down Celery...${reset}"
     echo -e "${bold}${fgGreen}Done!${reset}"
 }
 
-##
+###
 # —[ KEYCLOAK ]— GET AUTHENTICATION TOKEN
-##
+####
 function getauthtoken() {
     # BASE KEYCLOAK & API VARIABLE DEFINITION(S)
     KC_BASE_URL=https://sso2-dev.mbopartners.com/auth/realms;
@@ -455,14 +455,14 @@ function getauthtoken() {
     KC_CLIENT_ID=connect-web;
     CONNECT_API_URL=http://localhost:8000;
 
-    # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
+ #   # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
     echo -en "${bold}${fgBlue}Enter Username: ${reset}"
     read -r USERNAME_INPUT
     echo -en "${bold}${fgBlue}Enter Password: ${reset}"
     read -rs PASSWORD_INPUT
     echo
 
-    # NORMALIZING USER INPUT PARAMETERS
+ #   # NORMALIZING USER INPUT PARAMETERS
     KC_USERNAME=${USERNAME_INPUT,,};
     KC_PASSWORD=$PASSWORD_INPUT;
 
@@ -477,10 +477,10 @@ function getauthtoken() {
       | jq -r '.access_token' \
       | pbcopy;
 
-    # GRAB THE `ACCESS_TOKEN` FROM CLIPBOARD
+ #   # GRAB THE `ACCESS_TOKEN` FROM CLIPBOARD
     KC_ACCESS_TOKEN=$(pbpaste)
 
-    # COPY THE FULL SNIPPET TO THE CLIPBOARD
+ #   # COPY THE FULL SNIPPET TO THE CLIPBOARD
     echo -e "document.cookie=\"ACCESS_TOKEN=$KC_ACCESS_TOKEN;path=/;\"\\ndocument.cookie=\"CONNECT_API_URL=$CONNECT_API_URL;path=/;\"" | pbcopy;
     echo
     CLIPBOARD_CONTENTS=$(pbpaste)
@@ -489,9 +489,9 @@ function getauthtoken() {
     echo
 }
 
-##
+###
 # —[ KEYCLOAK ]— GET KEYCLOAK TOKEN
-##
+####
 function getkeycloaktoken() {
     if [ -z "${1}" ]; then
         # DISPLAY USAGE IF NO PARAMETERS GIVEN
@@ -501,14 +501,14 @@ function getkeycloaktoken() {
         # SAVE INITIAL BASH ARGUMENTS IN VARIABLE(S)
         ROLE_TYPE_INPUT="$1"
 
-        # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
+ #       # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
         echo -en "${bold}${fgViolet}Enter Username: ${reset}"
         read USERNAME_INPUT
         echo -en "${bold}${fgViolet}Enter Password: ${reset}"
         read -s PASSWORD_INPUT
         echo
 
-        # NORMALIZING USER INPUT(S)
+ #       # NORMALIZING USER INPUT(S)
         KC_USERNAME=${USERNAME_INPUT,,};
         KC_PASSWORD=$PASSWORD_INPUT;
         ROLE_TYPE=${ROLE_TYPE_INPUT,,};
@@ -519,21 +519,28 @@ function getkeycloaktoken() {
         deactivate;
         echo
 
-        # STORE CLIPBOARD CONTENTS IN VARIABLE
+ #       # STORE CLIPBOARD CONTENTS IN VARIABLE
         CLIPBOARD_CONTENTS=$(pbpaste);
         echo -e "${fgWhite}$CLIPBOARD_CONTENTS${reset}";
         echo
     fi
 }
 
-##
+###
 # —[ DOCKER ]— GET AUTHENTICATION TOKEN
-##
+####
 dockerssh() {
     dockerexec $1 /bin/bash
 }
 
 dockerexec() {
     sudo docker exec -i -t $1 $2
+}
+
+###
+# —[ GENERAL ]— FIND PROCESSES RUNNING ON A SPECIFICED PORT.
+####
+function portlistener() {
+    lsof -n -i:"$1" | grep LISTEN;
 }
 

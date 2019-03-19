@@ -4,13 +4,30 @@
 # ~/.bash_prompt
 #
 
+
+################################################################################
+#
+#
+# SET THE TERMINAL COLOR SCHEME TYPE.
+#
+################################################################################
+
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
     export TERM='gnome-256color';
 elif infocmp xterm-256color >/dev/null 2>&1; then
     export TERM='xterm-256color';
 fi;
 
-# FOREGROUND COLOR SCHEME
+
+################################################################################
+#
+# SET THE COLOR SCHEME(S).
+#
+################################################################################
+
+##
+# FOREGROUND COLOR SCHEME.
+##
 if tput setaf 1 &> /dev/null; then
     tput sgr0;
     bold=$(tput bold);
@@ -58,7 +75,9 @@ else
     fgWhite="\e[97m;"
 fi;
 
-# BACKGROUND COLOR SCHEME
+##
+# BACKGROUND COLOR SCHEME.
+##
 if tput setab 1 &> /dev/null; then
     tput sgr0;
     bgBlack=$(tput setab 16);
@@ -102,44 +121,51 @@ else
     bgWhite="\e[107m";
 fi;
 
+
+################################################################################
+#
+# SETup `.git_prompt`.
+#
+################################################################################
+
 prompt_git() {
     local s='';
     local branchName='';
 
-    # Check if the current directory is in a Git repository.
+    # CHECK IF THE CURRENT DIRECTORY IS IN A GIT REPOSITORY.
     if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
 
-        # check if the current directory is in .git before running git checks
+        # CHECK IF THE CURRENT DIRECTORY IS IN .GIT BEFORE RUNNING GIT CHECKS
         if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
 
-            # Ensure the index is up to date.
+            # ENSURE THE INDEX IS UP TO DATE.
             git update-index --really-refresh -q &>/dev/null;
 
-            # Check for uncommitted changes in the index.
+            # CHECK FOR UNCOMMITTED CHANGES IN THE INDEX.
             if ! $(git diff --quiet --ignore-submodules --cached); then
                 s+="${i_oct_plus} ";
             fi;
 
-            # Check for unstaged changes.
+            # CHECK FOR UNSTAGED CHANGES.
             if ! $(git diff-files --quiet --ignore-submodules --); then
                 s+="${i_oct_zap} ";
             fi;
 
-            # Check for untracked files.
+            # CHECK FOR UNTRACKED FILES.
             if [ -n "$(git ls-files --others --exclude-standard)" ]; then
                 s+="${i_oct_x} ";
             fi;
 
-            # Check for stashed files.
+            # CHECK FOR STASHED FILES.
             if $(git rev-parse --verify refs/stash &>/dev/null); then
                 s+="${i_oct_squirrel} ";
             fi;
 
         fi;
 
-        # Get the short symbolic ref.
-        # If HEAD isn’t a symbolic ref, get the short SHA for the latest commit
-        # Otherwise, just give up.
+        # GET THE SHORT SYMBOLIC REF.
+        # IF HEAD ISN’T A SYMBOLIC REF, GET THE SHORT SHA FOR THE LATEST COMMIT
+        # OTHERWISE, JUST GIVE UP.
         branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
             git rev-parse --short HEAD 2> /dev/null || \
             echo '(unknown)')";
@@ -154,7 +180,13 @@ prompt_git() {
     fi;
 }
 
-# Platform Dependent Prompt Symbols
+
+################################################################################
+#
+# PLATFORM DEPENDENT PROMPT SYMBOLS.
+#
+################################################################################
+
 if [[ -z "$PS_SYMBOL" ]]; then
     case "$(uname)" in
         Darwin)   PS_SYMBOL="${i_dev_apple} ";;
@@ -163,38 +195,69 @@ if [[ -z "$PS_SYMBOL" ]]; then
     esac
 fi
 
-# Highlight The User Name When Logged In As Root.
+
+################################################################################
+#
+# HIGHLIGHT THE USER NAME WHEN LOGGED IN AS ROOT.
+#
+################################################################################
+
 if [[ "${USER}" == "root" ]]; then
     userStyle="${bold}${fgRed}";
 else
     userStyle="${bold}${fgOrange}";
 fi;
 
-# Highlight The Hostname When Connected Via Ssh.
+
+################################################################################
+#
+# HIGHLIGHT THE HOSTNAME WHEN CONNECTED VIA SSH.
+#
+################################################################################
+
 if [[ "${SSH_TTY}" ]]; then
     hostStyle="${bold}${fgRed}";
 else
     hostStyle="${fgYellow}";
 fi;
 
+
+################################################################################
+#
+# CUSTOMIZE THE LEFT-SIDE OF THE BASH PROMPT.
+#
+################################################################################
+
 # SET THE TERMINAL TITLE TO THE CURRENT WORKING DIRECTORY.
 PS1="\[\033]0;\w\007\]";
-# NEWLINE
+
+# NEW LINE.
 PS1+="\n";
-# USERNAME
+
+# USERNAME.
 #PS1+="\[${userStyle}\]\u";
 #PS1+="\[${white}\]@";
-# HOST
+
+# HOST.
 #PS1+="\[${hostStyle}\]\h";
 #PS1+="\[${white}\] in ";
-# WORKING DIRECTORY
+
+# WORKING DIRECTORY.
 PS1+="\[${bgLightblue}${fgBlack}\] ${i_mdi_folder_open} ~/\W ";
-# GIT REPOSITORY DETAILS
+
+# GIT REPOSITORY DETAILS.
 PS1+="\[${bgGreen}\]\$(prompt_git \" ${i_oct_git_branch} \" \"\")\[${reset}\]";
 PS1+="\n";
-# OS SYMBOL
+
+# OS SYMBOL.
 PS1+="\[${fgGreen}\] ${PS_SYMBOL}\[${reset}\]";
 export PS1;
 
+
+################################################################################
+#
+# CUSTOMIZE THE RIGHT-SIDE OF THE BASH PROMPT.
+#
+################################################################################
 PS2="\[${fgYellow}\]→ \[${reset}\]";
 export PS2;

@@ -4,25 +4,15 @@ username=brucebentley
 repos[]=brucebentley/botkit-slack
 repos[]=brucebentley/bruceandmeghan
 repos[]=brucebentley/bruceandmeghan.com
+repos[]=brucebentley/brucebentley.dev
 repos[]=brucebentley/brucebentley.io
+repos[]=brucebentley/dev.brucebentley.io
 repos[]=brucebentley/docker4python
 repos[]=brucebentley/dotfiles
 repos[]=brucebentley/flickr-cli-uploader
 repos[]=brucebentley/nebular
 repos[]=brucebentley/our-wedding
 repos[]=brucebentley/recipes
-repos[]=mbopartnersinc/chef-keycloak
-repos[]=mbopartnersinc/connect-api
-repos[]=mbopartnersinc/connect-client-ng
-repos[]=mbopartnersinc/connect-emails
-repos[]=mbopartnersinc/connect-scripts
-repos[]=mbopartnersinc/dev-ops
-repos[]=mbopartnersinc/intranet
-repos[]=mbopartnersinc/keycloak
-repos[]=mbopartnersinc/mbo-client-suite
-repos[]=mbopartnersinc/mbo-docker
-repos[]=mbopartnersinc/mbo-keycloak
-repos[]=mbopartnersinc/pardot
 
 # If using Github Enterprise, change this to your GHE hostname
 #hostname=mygit.example.com

@@ -56,4 +56,5 @@ export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export EDITOR='vim';
 
 # SET THE DEFAULT AWS USER.
-export AWS_DEFAULT_PROFILE=default;
+#export AWS_DEFAULT_PROFILE=default;
+export AWS_DEFAULT_PROFILE=canvastest;
