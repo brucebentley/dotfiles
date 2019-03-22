@@ -1,15 +1,18 @@
 [submodule "zsh/plugins/pure"]
-	path = zsh/plugins/pure
-	url = git@github.com:sindresorhus/pure.git
+    path = zsh/plugins/pure
+    url = git@github.com:sindresorhus/pure.git
 [submodule "zsh/plugins/zsh-autopair"]
-	path = zsh/plugins/zsh-autopair
-	url = git@github.com:hlissner/zsh-autopair.git
+    path = zsh/plugins/zsh-autopair
+    url = git@github.com:hlissner/zsh-autopair.git
 [submodule "zsh/plugins/zsh-autosuggestions"]
-	path = zsh/plugins/zsh-autosuggestions
-	url = git@github.com:zsh-users/zsh-autosuggestions.git
+    path = zsh/plugins/zsh-autosuggestions
+    url = git@github.com:zsh-users/zsh-autosuggestions.git
 [submodule "zsh/plugins/zsh-syntax-highlighting"]
-	path = zsh/plugins/zsh-syntax-highlighting
-	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+    path = zsh/plugins/zsh-syntax-highlighting
+    url = git@github.com:zsh-users/zsh-syntax-highlighting.git
 [submodule "zsh/plugins/zsh-system-clipboard"]
-	path = zsh/plugins/zsh-system-clipboard
-	url = git@github.com:kutsan/zsh-system-clipboard.git
+    path = zsh/plugins/zsh-system-clipboard
+    url = git@github.com:kutsan/zsh-system-clipboard.git
+[submodule "zsh/plugins/powerlevel9k"]
+	path = zsh/plugins/powerlevel9k
+	url = git@github.com:bhilburn/powerlevel9k.git

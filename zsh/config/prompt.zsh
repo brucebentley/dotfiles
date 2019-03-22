@@ -89,4 +89,4 @@ title_text Bruce Bentley
 
 # Load Nerd Fonts With Powerlevel9k Theme For Zsh.
 POWERLEVEL9K_MODE='nerdfont-complete'
-source ${DOTFILES}/zsh/powerlevel9k/powerlevel9k.zsh-theme
+source ${DOTFILES}/zsh/plugins/powerlevel9k/powerlevel9k.zsh-theme
