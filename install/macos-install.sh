@@ -85,3 +85,9 @@ mas install 1176895641    # Spark               - Email App
 mas install 1109319285    # SSH Config Editor   - Easily Manage Your SSH Configurations
 mas install 425424353     # TheUnarchiver       - Unarchiving Utility
 mas install 1436522307    # Transmit 5          - Fast & Easy File Transfers
+
+#
+# INSTALL SAFARI EXTENSIONS ROM THE MAC APPSTORE.
+#   @URL: https://itunes.apple.com/us/story/id1377753262
+#
+mas install 957810159     # Raindrop.io         - All-In-One Bookmark Manager
