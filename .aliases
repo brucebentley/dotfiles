@@ -429,6 +429,6 @@ alias stoppostgres="brew services stop postgresql"
 #
 ################################################################################
 
-alias cleansnagit="rm -rfv ~/Library/Group\ Containers/*.com.techsmith.snagit/Snagit\ 2018/Temporary/*"
+alias cleansnagit="rm -rfv ~/Library/Group\ Containers/*.com.techsmith.snagit/Snagit\ 201*/Temporary/*"
 
 
