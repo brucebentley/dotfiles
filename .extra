@@ -124,10 +124,10 @@ CONNECT_WEBAPP="$MBO_CONNECT_HOME/connect-webapp-ng2"
 GIT_AUTHOR_NAME="Bruce Bentley"
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 git config --global user.name "$GIT_AUTHOR_NAME"
-GIT_AUTHOR_EMAIL="bruce.bentley@gocanvas.com"
+# GIT_AUTHOR_EMAIL="bruce.bentley@gocanvas.com"
 #GIT_AUTHOR_EMAIL="brucebentley@me.com"
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-git config --global user.email "$GIT_AUTHOR_EMAIL"
+# GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+# git config --global user.email "$GIT_AUTHOR_EMAIL"
 
 
 ################################################################################

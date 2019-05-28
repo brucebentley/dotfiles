@@ -97,13 +97,19 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 #
 ################################################################################
 
+##
 # THIS WILL SET YOUR WINDOW TITLE.
+##
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 
+##
 # iTerm SHELL INTEGRATION.
+##
 test -e "$HOME/.iterm2_shell_integration.bash" && source ~/.iterm2_shell_integration.`basename $SHELL`
 
+##
 # ADD CUSTOM BADGES.
+##
 function iterm2_print_user_vars() {
     iterm2_set_user_var badge $(dir_badges)
 }
@@ -145,15 +151,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-## Change Title Name Of Tab In Terminal.
+##
+# Change Title Name Of Tab In Terminal.
+##
 function title {
     echo -ne "\033]0;"$*"\007"
 }
 
-## Check For A `.nvmrc` File When Entering A Directory, Then
-## Automatically Activate The Required Version Of NodeJS. If The
-## Required Version Is Not Currently Installed, It Will Download,
-## Install & Activate The Correct Version For You.
+##
+# Check For A `.nvmrc` File When Entering A Directory, Then
+# Automatically Activate The Required Version Of NodeJS. If The
+# Required Version Is Not Currently Installed, It Will Download,
+# Install & Activate The Correct Version For You.
+##
 cd () {
   builtin cd "$@" && chNodeVersion;
 }
@@ -181,7 +191,6 @@ chNodeVersion() {
     nvm use default
   fi
 }
-
 chNodeVersion;
 
 
@@ -191,5 +200,8 @@ chNodeVersion;
 #
 ################################################################################
 
-# ADDED BY TRAVIS GEM
+##
+# ADDED BY TRAVIS GEM.
+##
 #[ -f /Users/bbentley/.travis/travis.sh ] && source /Users/bbentley/.travis/travis.sh
+

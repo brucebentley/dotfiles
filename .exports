@@ -4,9 +4,20 @@
 # ~/.exports
 #
 
+################################################################################
+#
+# GENERAL
+#
+################################################################################
+
+# MAKE VIM THE DEFAULT EDITOR.
+export EDITOR='vim';
+
 # INCREASE BASH HISTORY SIZE. ALLOW 32³ ENTRIES; THE DEFAULT IS 500.
 export HISTSIZE='32768';
 export HISTFILESIZE="${HISTSIZE}";
+
+##
 # OMIT DUPLICATES AND COMMANDS THAT BEGIN WITH A SPACE FROM HISTORY.
 export HISTCONTROL='ignoreboth';
 
@@ -20,11 +31,25 @@ export LESS_TERMCAP_md="${yellow}";
 # DON’T CLEAR THE SCREEN AFTER QUITTING A MANUAL PAGE.
 export MANPAGER='less -X';
 
+
+################################################################################
+#
+# GPG
+#
+################################################################################
+
 # AVOID ISSUES WITH `gpg` AS INSTALLED VIA HOMEBREW.
-# SEE https://stackoverflow.com/a/42265848/96656
+#   @SEE: https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty);
 #gpgconf --launch gpg-agent
 #export SSH_AUTH_SOCKET=$HOME/.gnupg/S.gpg-agent.ssh
+
+
+################################################################################
+#
+# GO
+#
+################################################################################
 
 # SETTING VARIABLES FOR `Go` INSTALLATION FOR THE `aws-cli`.
 #export GOPATH="$HOME/bin/go/go";
@@ -32,29 +57,61 @@ export GPG_TTY=$(tty);
 #export PATH="$PATH:$GOPATH/bin";
 #export PATH="$PATH:$GOROOT/bin";
 
+export CAROOT=~/dev/personal/certs;
+
+################################################################################
+#
+# NODE.JS
+#
+################################################################################
+
 # SET NODE MAX CPU SIZE.
 export NODE_OPTIONS=--max_old_space_size=4096
+
 # ENABLE PERSISTENT REPL HISTORY FOR `node`.
 export NODE_REPL_HISTORY=~/.node_history;
+
 # ALLOW 32³ ENTRIES; THE DEFAULT IS 1000.
 export NODE_REPL_HISTORY_SIZE='32768';
+
 # USE SLOPPY MODE BY DEFAULT, MATCHING WEB BROWSERS.
 export NODE_REPL_MODE='sloppy';
+
+
+################################################################################
+#
+# OPENSSL
+#
+################################################################################
 
 # SET THE OPENSSL DIRECTORIES TO USE FROM HOMEBREW.
 export CPPFLAGS="-I$(brew --prefix openssl)/include";
 export LDFLAGS="-L$(brew --prefix openssl)/lib";
 
+
+################################################################################
+#
+# PYTHON
+#
+################################################################################
+
 # SET CFLAGS TO AN ACCEPTED SAFE VALUES TO HELP HELP SPEED UP PYTHON.
 export CFLAGS='-O2';
+
 # MAKE PYTHON USE UTF-8 ENCODING FOR OUTPUT TO `stdin`, `stdout`, and `stderr`.
 export PYTHONIOENCODING='UTF-8';
+
 # TELL `pyenv-virtualenvwrapper` TO USE `pyenv` WHEN CREATING NEW PYTHON ENVIRONMENTS.
 export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
-# MAKE VIM THE DEFAULT EDITOR.
-export EDITOR='vim';
+
+################################################################################
+#
+# AWS
+#
+################################################################################
 
 # SET THE DEFAULT AWS USER.
-#export AWS_DEFAULT_PROFILE=default;
-export AWS_DEFAULT_PROFILE=canvastest;
+export AWS_DEFAULT_PROFILE=default;
+#export AWS_DEFAULT_PROFILE=canvastest;
+

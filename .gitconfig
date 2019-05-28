@@ -1,6 +1,6 @@
 [user]
 	name = Bruce Bentley
-	email = bruce.bentley@gocanvas.com
+	email = brucebentley@me.com
     signingkey = 67C8FE357295FA13
 
 # GoCanvas Conditional Git Configuration
@@ -99,7 +99,7 @@
     #editor = subl --wait
 
     # Use custom `.gitignore` and `.gitattributes`
-    excludesfile = ~/dotfiles/.gitignore_global
+	excludesfile = /Users/bruce.bentley/dotfiles/.gitignore_global
     attributesfile = ~/dotfiles/.gitattributes
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -147,7 +147,7 @@
     #   - https://nathanhoad.net/how-to-git-signing-commits/
     #   - https://sabbour.me/setting-up-signed-git-commits-on-macos/
     gpgsign = true
-    template = ~/dotfiles/.gitmessage
+	template = ~/dotfiles/.gitmessage
 
 [credential]
     helper = osxkeychain
@@ -211,3 +211,9 @@
 
 [url "git://gist.github.com/"]
     insteadOf = "gist:"
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

@@ -74,7 +74,7 @@ alias sudo='sudo '
 alias week='date +%V'
 
 ##
-# GET MACOS SOFTWARE UPDATES, AND UPDATE INSTALLED RUBY GEMS, HOMEBREW, NPM, AND THEIR INSTALLED PACKAGES.
+# GET macOS SOFTWARE UPDATES, AND UPDATE INSTALLED RUBY GEMS, HOMEBREW, NPM, AND THEIR INSTALLED PACKAGES.
 ##
 #alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
 alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
@@ -119,12 +119,12 @@ alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET
 command -v hd > /dev/null || alias hd="hexdump -C"
 
 ##
-# MACOS HAS NO `MD5SUM`, SO USE `MD5` AS A FALLBACK.
+# macOS HAS NO `MD5SUM`, SO USE `MD5` AS A FALLBACK.
 ##
 command -v md5sum > /dev/null || alias md5sum="md5"
 
 ##
-# MACOS HAS NO `SHA1SUM`, SO USE `SHASUM` AS A FALLBACK.
+# macOS HAS NO `SHA1SUM`, SO USE `SHASUM` AS A FALLBACK.
 ##
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
@@ -243,7 +243,7 @@ alias reload="exec ${SHELL} -l"
 alias path='echo -e ${PATH//:/\\n}'
 
 ##
-# ADD A "SPACER" TO THE MACOS DOCK.
+# ADD A "SPACER" TO THE macOS DOCK.
 ##
 alias adddockspacer="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}' && killall Dock";
 

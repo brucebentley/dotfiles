@@ -117,6 +117,14 @@ brew install yarn --ignore-dependencies
 
 
 ##################################################
+# DEVELOPMENT UTILITIES                          #
+##################################################
+# ENABLE SSL CERTIFICATE SUPPORT ON YOUR LOCAL DEV ENVIRONMENT.
+brew install mkcert
+brew install nss # if you use Firefox
+
+
+##################################################
 # CLEANUP                                        #
 ##################################################
 
