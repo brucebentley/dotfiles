@@ -447,7 +447,6 @@ dist/
 downloads/
 eggs/
 env/
-lib/
 lib64/
 parts/
 sdist/
@@ -548,10 +547,8 @@ ENV/
 venv/
 [Bb]in
 [Ii]nclude
-[Ll]ib
 [Ll]ib64
 [Ll]ocal
-[Ss]cripts
 pip-selfcheck.json
 pyvenv.cfg
 

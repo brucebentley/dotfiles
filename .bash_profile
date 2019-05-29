@@ -106,24 +106,27 @@ export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 # iTerm SHELL INTEGRATION.
 ##
 test -e "$HOME/.iterm2_shell_integration.bash" && source ~/.iterm2_shell_integration.`basename $SHELL`
+#!/usr/bin/env bash
 
 ##
-# ADD CUSTOM BADGES.
+# SET CUSTOM iTerm2 USER VARIABLES.
 ##
 function iterm2_print_user_vars() {
     iterm2_set_user_var badge $(dir_badges)
 }
 
+##
+# CUSTOM BADGES ON A DIRECTORY-BY-DIRECTOY BASIS, DEFINED IN `~/dotfiles/.badges`.
+##
 function dir_badges() {
     while read directory badge || [[ -n "$directory" ]]
     do
         if [[ "$PWD" == $directory* ]]; then
-            echo $badge
+            echo "$badge"
             break
         fi
-    done < "$HOME/dotfiles/.badges"
+    done < ~/dotfiles/.badges
 }
-
 
 ################################################################################
 #
