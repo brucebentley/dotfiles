@@ -2,6 +2,12 @@
 
 ![Screenshot of my shell prompt](https://i.imgur.com/rMPcESK.png)
 
+## Status
+
+[![Build status](https://badge.buildkite.com/e1c30d010ed7b1ce0a84bf722e3d7d61c2e4fee4618d9360d9.svg)](https://buildkite.com/gocanvas/dotfiles)
+[![pipeline status](https://gitlab.com/brucebentley/dotfiles/badges/macOS/Mojave/pipeline.svg)](https://gitlab.com/brucebentley/dotfiles/commits/macOS/Mojave 
+[![coverage report](https://gitlab.com/brucebentley/dotfiles/badges/macOS/Mojave/coverage.svg)](https://gitlab.com/brucebentley/dotfiles/commits/macOS/Mojave)
+
 ## Installation
 
 **Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
