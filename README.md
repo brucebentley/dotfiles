@@ -4,6 +4,7 @@
 
 ## Status
 
+[![Build status](https://badge.buildkite.com/e1c30d010ed7b1ce0a84bf722e3d7d61c2e4fee4618d9360d9.svg)](https://buildkite.com/gocanvas/dotfiles)
 [![pipeline status](https://gitlab.com/brucebentley/dotfiles/badges/macOS/Mojave/pipeline.svg)](https://gitlab.com/brucebentley/dotfiles/commits/macOS/Mojave 
 [![coverage report](https://gitlab.com/brucebentley/dotfiles/badges/macOS/Mojave/coverage.svg)](https://gitlab.com/brucebentley/dotfiles/commits/macOS/Mojave)
 
