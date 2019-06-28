@@ -52,6 +52,8 @@ if tput setaf 1 &> /dev/null; then
     fgDeeporange=$(tput setaf 202);
     fgBrown=$(tput setaf 94);
     fgGray=$(tput setaf 102);
+
+    export bold reset fgBlack fgRed fgGreen fgYellow fgBlue fgMagenta fgCyan fgWhite fgPink fgPurple fgDeeppurple fgIndigo fgLightblue fgTeal fgLightgreen fgLime fgAmber fgOrange fgDeeporange fgBrown fgGray;
 else
     bold='';
     reset="\e[0m";
@@ -72,6 +74,8 @@ else
     fgLightmagenta="\e[95m;"
     fgLightcyan="\e[96m;"
     fgWhite="\e[97m;"
+
+    export bold reset fgDefault fgBlack fgRed fgGreen fgYellow fgBlue fgMagenta fgCyan fgDarkgray fgLightgray fgLightred fgLightgreen fgLightyellow fgLightblue fgLightmagenta fgLightcyan fgWhite;
 fi;
 
 ##
@@ -100,6 +104,8 @@ if tput setab 1 &> /dev/null; then
     bgDeeporange=$(tput setab 202);
     bgBrown=$(tput setab 94);
     bgGray=$(tput setab 102);
+
+    export bgBlack bgRed bgGreen bgYellow bgBlue bgMagenta bgCyan bgWhite bgPink bgPurple bgDeeppurple bgIndigo bgLightblue bgTeal bgLightgreen bgLime bgAmber bgOrange bgDeeporange bgBrown bgGray;
 else
     bgDefault="\e[49m";
     bgBlack="\e[40m";
@@ -118,6 +124,8 @@ else
     bgLightmagenta="\e[105m";
     bgLightcyan="\e[106m";
     bgWhite="\e[107m";
+
+    export bgDefault bgBlack bgRed bgGreen bgYellow bgBlue bgMagenta bgCyan bgDarkgray bgLightgray bgLightred bgLightgreen bgLightyellow bgLightblue bgLightmagenta bgLightcyan bgWhite;
 fi;
 
 
@@ -132,7 +140,7 @@ prompt_git() {
     local branchName='';
 
     # CHECK IF THE CURRENT DIRECTORY IS IN A GIT REPOSITORY.
-    if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+    if [ "$(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}")" == '0' ]; then
 
         # CHECK IF THE CURRENT DIRECTORY IS IN .GIT BEFORE RUNNING GIT CHECKS
         if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
@@ -141,12 +149,12 @@ prompt_git() {
             git update-index --really-refresh -q &>/dev/null;
 
             # CHECK FOR UNCOMMITTED CHANGES IN THE INDEX.
-            if ! $(git diff --quiet --ignore-submodules --cached); then
+            if ! git diff --quiet --ignore-submodules --cached; then
                 s+="${i_oct_plus} ";
             fi;
 
             # CHECK FOR UNSTAGED CHANGES.
-            if ! $(git diff-files --quiet --ignore-submodules --); then
+            if ! git diff-files --quiet --ignore-submodules --; then
                 s+="${i_oct_zap} ";
             fi;
 
@@ -156,7 +164,7 @@ prompt_git() {
             fi;
 
             # CHECK FOR STASHED FILES.
-            if $(git rev-parse --verify refs/stash &>/dev/null); then
+            if git rev-parse --verify refs/stash &>/dev/null; then
                 s+="${i_oct_squirrel} ";
             fi;
 
@@ -203,8 +211,10 @@ fi
 
 if [[ "${USER}" == "root" ]]; then
     userStyle="${bold}${fgRed}";
+    export userStyle;
 else
     userStyle="${bold}${fgOrange}";
+    export userStyle;
 fi;
 
 
@@ -216,8 +226,10 @@ fi;
 
 if [[ "${SSH_TTY}" ]]; then
     hostStyle="${bold}${fgRed}";
+    export hostStyle;
 else
     hostStyle="${fgYellow}";
+    export hostStyle;
 fi;
 
 

@@ -29,31 +29,33 @@ alias g="git"
 ##
 if ls --color > /dev/null 2>&1; then # GNU `ls`
   colorflag="--color"
+  export colorflag
   export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
 else # macOS `ls`
   colorflag="-G"
+  export colorflag
   export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
 fi
 
 ##
 # LIST ALL FILES COLORIZED IN LONG FORMAT.
 ##
-alias l="ls -lF ${colorflag}"
+alias l='ls -lF ${colorflag}'
 
 ##
 # LIST ALL FILES COLORIZED IN LONG FORMAT, INCLUDING DOT FILES.
 ##
-alias la="ls -lAF ${colorflag}"
+alias la='ls -lAF ${colorflag}'
 
 ##
 # LIST ONLY DIRECTORIES.
 ##
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+alias lsd='ls -lF ${colorflag} | grep --color=never '^d''
 
 ##
 # ALWAYS USE COLOR OUTPUT FOR `LS`.
 ##
-alias ls="command ls ${colorflag}"
+alias ls='command ls ${colorflag}'
 
 ##
 # ALWAYS ENABLE COLORED `GREP` OUTPUT.
@@ -132,7 +134,7 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"
 # JAVASCRIPTCORE REPL.
 ##
 jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc";
-[ -e "${jscbin}" ] && alias jsc="${jscbin}";
+[ -e "${jscbin}" ] && alias jsc='${jscbin}';
 unset jscbin;
 
 ##
@@ -208,7 +210,7 @@ alias map="xargs -n1"
 # ONE OF @JANMOESEN’S PROTIP™S.
 ##
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-    alias "${method}"="lwp-request -m '${method}'"
+	alias "${method}"='lwp-request -m "$method"'
 done
 
 ##
@@ -235,7 +237,7 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 ##
 # RELOAD THE SHELL (I.E. INVOKE AS A LOGIN SHELL).
 ##
-alias reload="exec ${SHELL} -l"
+alias reload='exec ${SHELL} -l'
 
 ##
 # PRINT EACH PATH ENTRY ON A SEPARATE LINE.
@@ -245,7 +247,7 @@ alias path='echo -e ${PATH//:/\\n}'
 ##
 # ADD A "SPACER" TO THE macOS DOCK.
 ##
-alias adddockspacer="defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}' && killall Dock";
+alias adddockspacer="defaults write com.apple.dock persistent-apps -array-add '{\"tile-type\"=\"spacer-tile\";}' && killall Dock";
 
 
 #

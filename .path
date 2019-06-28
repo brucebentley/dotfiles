@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 #
 # ~/.path
 #
@@ -39,10 +41,10 @@ PATH="$(brew --prefix openssl)/bin:$PATH"
 # `pyenv` — "PYTHON ENVIRONMENT MANAGER".
 #
 ################################################################################
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if command -v pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # ENABLE AUTO-ACTIVATION OF `pyenv virtualenvs`.
-if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+if command -v pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # PATH FOR PYTHON.
 #PATH=/usr/local/share/python:$PATH
@@ -61,7 +63,7 @@ PATH=$PYENV_ROOT/bin:$PATH
 ################################################################################
 
 # ADD & LOAD `rbenv` EVERY TIME YOU OPEN A TERMINAL
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # FOR `rbenv`.
 RBENV_ROOT=$HOME/.rbenv
@@ -87,7 +89,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 COMPOSER_HOME=$HOME/.composer
 PATH=$COMPOSER_HOME/vendor/bin:$PATH
-
 
 ################################################################################
 #
