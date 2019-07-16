@@ -52,7 +52,7 @@ export GPG_TTY=$(tty);
 ################################################################################
 
 # SETTING VARIABLES FOR `Go` INSTALLATION FOR THE `aws-cli`.
-#export GOPATH="$HOME/bin/go/go";
+export GOPATH="$HOME/.go";
 #export GOROOT="/usr/local/opt/go/libexec";
 #export PATH="$PATH:$GOPATH/bin";
 #export PATH="$PATH:$GOROOT/bin";

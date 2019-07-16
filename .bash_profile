@@ -18,7 +18,7 @@ export PATH="$HOME/bin:$PATH";
 #   ~/.extra CAN BE USED FOR OTHER SETTINGS YOU DON'T WANT TO COMMIT.
 ##
 for file in ~/dotfiles/.{path,bash_prompt,exports,aliases,functions,extra,profile}; do
-    #shellcheck disable=1090
+    # shellcheck disable=1090
     [ -r "$file" ] && [ -f "$file" ] && . "$file";
 done;
 unset file;

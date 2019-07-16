@@ -1,0 +1,202 @@
+--
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- NOTIFICATIONS
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+--
+-- DEFAULT NOTIFICATION
+-- hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'W', function()
+--   hs.alert.show('Hello World!')
+-- end)
+
+-- macOS NATIVE NOTIFICATION
+hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'W', function()
+  hs.notify.new({title='Hammerspoon', informativeText='Hello World'}):send()
+end)
+
+
+--
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- WINDOW MANAGEMENT
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Something to note is that `hs.screen.frame()` does not include the menubar and
+-- dock, see `hs.screen.fullFrame()` if you need that) and set the frame of the
+-- window to occupy the left half of the screen.
+--
+-- SNAP WINDOW LEFT ( 50% )
+hs.hotkey.bind({'cmd', 'ctrl'}, 'Left', function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y
+  f.w = max.w / 2
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+-- SNAP WINDOW RIGHT ( 50% )
+hs.hotkey.bind({'cmd', 'ctrl'}, 'Right', function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x + (max.w / 2)
+  f.y = max.y
+  f.w = max.w / 2
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+-- SNAP WINDOW 100% ( FULL-WIDTH )
+hs.hotkey.bind({'cmd', 'ctrl'}, 'Up', function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y
+  f.w = max.w
+  f.h = max.h
+  win:setFrame(f)
+end)
+
+-- SNAP WINDOW 50% ( CENTER )
+hs.hotkey.bind({'cmd', 'ctrl'}, 'Down', function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x + (max.w / 8)
+  f.y = max.y + (max.h / 8)
+  f.w = max.w * 0.75
+  f.h = max.h * 0.75
+  win:setFrame(f)
+end)
+
+
+--
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- MORE COMPLEX WINDOW MOVEMENT
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- We can build on the simple window movement example to implement a set of
+-- keyboard shortcuts that allow us to move a window in all directions, using the
+-- nethack movement keys:
+--
+--     y   k   u
+--     h       l
+--     b   j   n
+--
+-- To do this, we simply need to repeat the previous hs.hotkey.bind() call with
+-- slightly different frame modifications:
+--
+-- MOVE WINDOW TOP-LEFT
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Y", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+
+  f.x = f.x - 10
+  f.y = f.y - 10
+  win:setFrame(f)
+end)
+
+-- MOVE WINDOW TOP-CENTER
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "K", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+
+  f.y = f.y - 10
+  win:setFrame(f)
+end)
+
+-- MOVE WINDOW TOP-RIGHT
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "U", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+
+  f.x = f.x + 10
+  f.y = f.y - 10
+  win:setFrame(f)
+end)
+
+-- MOVE WINDOW CENTER-LEFT
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "H", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+
+  f.x = f.x - 10
+  win:setFrame(f)
+end)
+
+-- MOVE WINDOW CENTER-RIGHT
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+
+  f.x = f.x + 10
+  win:setFrame(f)
+end)
+
+-- MOVE WINDOW BOTTOM-LEFT
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "B", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+
+  f.x = f.x - 10
+  f.y = f.y + 10
+  win:setFrame(f)
+end)
+
+-- MOVE WINDOW BOTTOM-CENTER
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "J", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+
+  f.y = f.y + 10
+  win:setFrame(f)
+end)
+
+-- MOVE WINDOW BOTTOM-RIGHT
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+
+  f.x = f.x + 10
+  f.y = f.y + 10
+  win:setFrame(f)
+end)
+
+
+--
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- CONFIGURATION RELOADING
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+--
+-- DEFAULT CONFIG RELOADING
+-- hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'R', function()
+--   hs.reload()
+-- end)
+-- hs.alert.show('Config Loaded!')
+
+-- FANCY CONFIG RELOADING
+function reloadConfig(files)
+    doReload = false
+    for _,file in pairs(files) do
+        if file:sub(-4) == '.lua' then
+            doReload = true
+        end
+    end
+    if doReload then
+        hs.reload()
+    end
+end
+myWatcher = hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', reloadConfig):start()
+hs.alert.show('Config Loaded!')
+
+-- SMART CONFIGURATION RELOADING WITH SPOONS
+hs.loadSpoon('ReloadConfiguration')
+spoon.ReloadConfiguration:start()
