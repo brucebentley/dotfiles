@@ -419,8 +419,25 @@ alias stopmongo="mongo admin --eval 'db.shutdownServer()' > /dev/null"
 #
 ################################################################################
 
-alias startmysql="brew services start mariadb"
-alias stopmysql="brew services stop mariadb"
+##
+# MariaDB
+##
+#alias startmysql="brew services start mariadb"
+#alias stopmysql="brew services stop mariadb"
+
+##
+# MySQL
+##
+#alias startmysql="brew services start mysql"
+#alias stopmysql="brew services stop mysql"
+#alias restartmysql="brew services restart mysql"
+
+##
+# MySQL ( v5.7 )
+##
+alias startmysql="brew services start mysql@5.7"
+alias stopmysql="brew services stop mysql@5.7"
+alias restartmysql="brew services restart mysql@5.7"
 
 
 ################################################################################
@@ -440,5 +457,4 @@ alias stoppostgres="brew services stop postgresql"
 ################################################################################
 
 alias cleansnagit="rm -rfv ~/Library/Group\ Containers/*.com.techsmith.snagit/Snagit\ 201*/Temporary/*"
-
 
