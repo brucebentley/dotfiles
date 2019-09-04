@@ -456,5 +456,17 @@ alias stoppostgres="brew services stop postgresql"
 #
 ################################################################################
 
-alias cleansnagit="rm -rfv ~/Library/Group\ Containers/*.com.techsmith.snagit/Snagit\ 201*/Temporary/*"
+alias cleansnagit="rm -rfv ~/Library/Group\ Containers/*.com.techsmith.snagit/Snagit*/Temporary/*";
+function cleancaptures() {
+    local captureDirectory=~/Dropbox/Personal/—\[\ NSFW\ ]\—/—\[\ CAPTURES\ ]\—;
+    local excludedFiles="Icon?";
+    local excludedFolders="*debris*";
 
+    echo -e "${bold}${fgYellow}Cleaning out ${captureDirectory} ... ${reset}";
+    find "${captureDirectory}" -type f ! -name "${excludedFiles}" ! -path "${excludedFolders}" -print -exec rm -rfv {} +;
+    echo -e "${bold}${fgYellow}Done! ${reset}";
+
+    echo -e "${bold}${fgYellow}Cleaning out SnagIt's temporary file directory ... ${reset}";
+    cleansnagit;
+    echo -e "${bold}${fgYellow}Done! ${reset}";
+}
