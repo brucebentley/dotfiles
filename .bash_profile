@@ -17,7 +17,7 @@ export PATH="$HOME/bin:$PATH";
 #   ~/.path CAN BE USED TO EXTEND `$PATH`.
 #   ~/.extra CAN BE USED FOR OTHER SETTINGS YOU DON'T WANT TO COMMIT.
 ##
-for file in ~/dotfiles/.{path,bash_prompt,exports,aliases,functions,extra,profile}; do
+for file in ~/dotfiles/.{path,bash_prompt,exports,aliases,functions,extra,profile,personal}; do
     # shellcheck disable=1090
     [ -r "$file" ] && [ -f "$file" ] && . "$file";
 done;
