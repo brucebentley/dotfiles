@@ -65,7 +65,7 @@ fi;
 ##
 # ENABLE TAB COMPLETION FOR `g` BY MARKING IT AS AN ALIAS FOR `git`.
 ##
-if type _git &> /dev/null && [ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ]; then
+if type _git &> /dev/null; then
     complete -o default -o nospace -F _git g;
 fi;
 

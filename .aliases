@@ -43,9 +43,9 @@ fi
 alias l='ls -lF ${colorflag}'
 
 ##
-# LIST ALL FILES COLORIZED IN LONG FORMAT, INCLUDING DOT FILES.
+# LIST ALL FILES COLORIZED IN LONG FORMAT, EXCLUDING . AND ..
 ##
-alias la='ls -lAF ${colorflag}'
+alias la="ls -lAF ${colorflag}"
 
 ##
 # LIST ONLY DIRECTORIES.
@@ -172,11 +172,11 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 ##
-# MERGE PDF FILES.
+# MERGE PDF FILES, PRESERVING HYPERLINKS.
 # @USAGE:
-#   `mergepdf -o output.pdf input{1,2,3}.pdf`
+#   `mergepdf input{1,2,3}.pdf`
 ##
-alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+alias mergepdf='gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
 
 ##
 # DISABLE SPOTLIGHT.

@@ -28,7 +28,7 @@ brew install findutils
 # Install GNU `sed`, OVERWRITING THE BUILT-IN `sed`.
 brew install gnu-sed --with-default-names
 
-# INSTALL BASH 4.
+# INSTALL A MODERN VERSION OF BASH.
 # NOTE: DON’T FORGET TO ADD `/usr/local/bin/bash` TO `/etc/shells` BEFORE
 # RUNNING `chsh`.
 brew install bash
@@ -101,6 +101,7 @@ brew install gmp
 #brew install exiv2
 brew install git
 brew install git-lfs
+brew install gs
 #brew install imagemagick --with-webp
 brew install lua
 #brew install lynx

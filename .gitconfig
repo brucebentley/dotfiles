@@ -21,7 +21,7 @@
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     # Pull in remote changes for the current repository and all its submodules
-    p = !"git pull; git submodule foreach git pull origin master"
+    p = git pull --recurse-submodules
 
     # Clone a repository including all submodules
     c = clone --recursive
@@ -191,7 +191,8 @@
 
 [push]
     # https://git-scm.com/docs/git-config#git-config-pushdefault
-    default = current
+    default = simple
+
     # Make `git push` push relevant annotated tags when pushing branches out.
     followTags = true
 
@@ -211,9 +212,11 @@
 
 [url "git://gist.github.com/"]
     insteadOf = "gist:"
+
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
+
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
