@@ -1,6 +1,8 @@
 # Bruce’s dotfiles
 
-![Screenshot of my shell prompt](https://i.imgur.com/rMPcESK.png)
+<p align="center">
+![Screenshot of my shell prompt](https://i.imgur.com/wmQPryP.png)
+</p>
 
 ## Status
 
