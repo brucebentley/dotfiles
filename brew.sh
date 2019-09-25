@@ -101,6 +101,7 @@ brew install gmp
 #brew install exiv2
 brew install git
 brew install git-lfs
+brew install git-secret
 brew install gs
 #brew install imagemagick --with-webp
 brew install lua
