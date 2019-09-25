@@ -900,3 +900,5 @@ Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
 
+.gitsecret/keys/random_seed
+!*.secret
