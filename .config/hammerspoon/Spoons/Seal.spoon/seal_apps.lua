@@ -1,9 +1,20 @@
+--- === Seal.plugins.apps ===
+---
+--- A plugin to add launchable apps/scripts, making Seal act as a launch bar
 local obj = {}
 obj.__index = obj
 obj.__name = "seal_apps"
 obj.appCache = {}
+
+--- Seal.plugins.apps.appSearchPaths
+--- Variable
+--- Table containing the paths to search for launchable items
+---
+--- Notes:
+---  * If you change this, you will need to call `spoon.Seal.plugins.apps:restart()` to force Spotlight to search for new items.
 obj.appSearchPaths = {
    "/Applications",
+   "/System/Applications",
    "~/Applications",
    "/Developer/Applications",
    "/Applications/Xcode.app/Contents/Applications",
@@ -30,6 +41,9 @@ local modifyNameMap = function(info, add)
       end
       if add then
          bundleID = item.kMDItemCFBundleIdentifier
+         if (not icon) and (bundleID) then
+           icon = hs.image.imageFromAppBundle(bundleID)
+         end
          obj.appCache[displayname] = {
             path = item.kMDItemPath,
             bundleID = bundleID,
@@ -53,12 +67,57 @@ local updateNameMap = function(obj, msg, info)
    end
 end
 
+--- Seal.plugins.apps:start()
+--- Method
+--- Starts the Spotlight app searcher
+---
+--- Paramters:
+---  * None
+---
+--- Returns:
+---  * None
+---
+--- Notes:
+---  * This is called automatically when the plugin is loaded
+function obj:start()
+    obj.spotlight = hs.spotlight.new():queryString([[ (kMDItemContentType = "com.apple.application-bundle") || (kMDItemContentType = "com.apple.systempreference.prefpane")  || (kMDItemContentType = "com.apple.applescript.text")  || (kMDItemContentType = "com.apple.applescript.script") ]])
+       :callbackMessages("didUpdate", "inProgress")
+       :setCallback(updateNameMap)
+       :searchScopes(obj.appSearchPaths)
+       :start()
+end
+
+--- Seal.plugins.apps:stop()
+--- Method
+--- Stops the Spotlight app searcher
+---
+--- Paramters:
+---  * None
+---
+--- Returns:
+---  * None
+function obj:stop()
+    obj.spotlight:stop()
+    obj.spotlight = nil
+    obj.appCache = {}
+end
+
+--- Seal.plugins.apps:restart()
+--- Method
+--- Restarts the Spotlight app searcher
+---
+--- Paramters:
+---  * None
+---
+--- Returns:
+---  * None
+function obj:restart()
+    self:stop()
+    self:start()
+end
+
 hs.application.enableSpotlightForNameSearches(true)
-obj.spotlight = hs.spotlight.new():queryString([[ (kMDItemContentType = "com.apple.application-bundle") || (kMDItemContentType = "com.apple.systempreference.prefpane")  || (kMDItemContentType = "com.apple.applescript.text")  || (kMDItemContentType = "com.apple.applescript.script") ]])
-   :callbackMessages("didUpdate", "inProgress")
-   :setCallback(updateNameMap)
-   :searchScopes(obj.appSearchPaths)
-   :start()
+obj:start()
 
 function obj:commands()
    return {kill = {

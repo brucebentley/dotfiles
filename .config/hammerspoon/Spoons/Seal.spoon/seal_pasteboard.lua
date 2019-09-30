@@ -48,7 +48,13 @@ function obj.choicesPasteboardCommand(query)
         choice["type"] = "copy"
         if pasteboardItem["uti"] then
             choice["subText"] = pasteboardItem["uti"]
-            choice["image"] = hs.image.imageFromAppBundle(pasteboardItem["uti"])
+            if hs.application.defaultAppForUTI then
+                local bundleID = hs.application.defaultAppForUTI(pasteboardItem["uti"])
+                print("Default app for "..pasteboardItem["uti"].." :: "..(bundleID or "(null)"))
+                if bundleID then
+                    choice["image"] = hs.image.imageFromAppBundle(bundleID)
+                end
+            end
         end
         table.insert(choices, choice)
     end
@@ -65,7 +71,7 @@ function obj.checkPasteboard()
     local pasteboard = hs.pasteboard.getContents()
     local shouldSave = false
     -- FIXME: Filter out things with UTIs documented at http://nspasteboard.org/
-    if pasteboard ~= obj.itemBuffer[#obj.itemBuffer]["text"] then
+    if (#obj.itemBuffer == 0) or (pasteboard ~= obj.itemBuffer[#obj.itemBuffer]["text"]) then
         local currentTypes = hs.pasteboard.allContentTypes()[1]
         for _,aType in pairs(currentTypes) do
             for _,uti in pairs({"de.petermaurer.TransientPasteboardType",
