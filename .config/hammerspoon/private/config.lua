@@ -28,13 +28,13 @@ hspoon_list = {
     -- "HSearch",
     "HSKeybindings",
     -- "Keychain",
-    -- "KSheet",
+    "KSheet",
     -- "Leanpub",
     -- "LookupSelection",
     -- "MenubarFlag",
     -- "MicMute",
     -- "MiroWindowsManager",
-    -- "ModalMgr",
+    "ModalMgr",
     -- "MountedVolumes",
     -- "MouseCircle",
     -- "MoveSpaces",
@@ -51,7 +51,7 @@ hspoon_list = {
     -- "SleepCorners",
     -- "SpeedMenu",
     -- "SpoonInstall",
-    "TextClipboardHistory",
+    -- "TextClipboardHistory",
     -- "TimeFlow",
     -- "TimeMachineProgress",
     -- "ToggleScreenRotation",
@@ -79,19 +79,22 @@ hspoon_list = {
 --
 hsapp_list = {
     --{key = 'a', name = 'Atom'},
-    {key = 'c', id = 'com.google.Chrome'},
+    {key = 'a', id = 'com.apple.ActivityMonitor'},
+    {key = 'c', name = 'Google Chrome'},
     --{key = 'd', name = 'ShadowsocksX'},
     --{key = 'e', name = 'Emacs'},
     {key = 'f', name = 'Finder'},
     {key = 'i', name = 'iTerm'},
     --{key = 'k', name = 'KeyCastr'},
-    {key = 'l', name = 'Sublime Text'},
+    {key = 'l', name = 'Slack'},
     --{key = 'm', name = 'MacVim'},
-    {key = 'o', id = 'com.apple.ActivityMonitor'},
+    {key = 'm', name = 'Firefox'},
     --{key = 'p', name = 'mpv'},
+    {key = 'p', name = 'Spotify'},
     --{key = 'r', name = 'VimR'},
     {key = 's', name = 'Safari'},
-    --{key = 't', name = 'Terminal'},
+    {key = 't', name = 'Terminal'},
+    {key = 'u', name = 'Sketch'},
     {key = 'v', name = 'Visual Studio Code - Insiders'},
     --{key = 'w', name = 'Mweb'},
     {key = 'y', id = 'com.apple.systempreferences'},
@@ -102,21 +105,21 @@ hsapp_list = {
 -- Modal supervisor keybinding, which can be used to temporarily disable ALL modal environments.
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsupervisor_keys = {{"cmd", "shift", "ctrl"}, "Q"}
+hsupervisor_keys = {{"cmd", "shift", "ctrl"}, "Q"}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Reload Hammerspoon configuration
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsreload_keys = {{"cmd", "shift", "ctrl"}, "R"}
+hsreload_keys = {{"cmd", "shift", "ctrl"}, "R"}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Toggle help panel of this configuration.
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- hshelp_keys = {{"alt", "shift"}, "/"}
+hshelp_keys = {{"alt", "shift"}, "/"}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -141,28 +144,28 @@ hsapp_list = {
 -- Window hints keybinding: Focuse to any window you want
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hswhints_keys = {"alt", "tab"}
+hswhints_keys = {"alt", "tab"}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- appM environment keybinding: Application Launcher
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsappM_keys = {"alt", "A"}
+hsappM_keys = {"alt", "A"}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- clipshowM environment keybinding: System clipboard reader
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsclipsM_keys = {"alt", "C"}
+-- hsclipsM_keys = {"alt", "C"}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Toggle the display of aria2 frontend
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsaria2_keys = {"alt", "D"}
+-- hsaria2_keys = {"alt", "D"}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -204,7 +207,7 @@ hsapp_list = {
 -- cheatsheetM environment keybinding: Cheatsheet copycat
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hscheats_keys = {"alt", "S"}
+-- hscheats_keys = {"alt", "S"}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -218,11 +221,11 @@ hsapp_list = {
 -- Type the URL and title of the frontmost web page open in Google Chrome or Safari.
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hstype_keys = {"alt", "V"}
+hstype_keys = {"alt", "V"}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Toggle Hammerspoon console
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsconsole_keys = {"alt", "Z"}
+hsconsole_keys = {"alt", "Z"}

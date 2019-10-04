@@ -8,14 +8,14 @@
 # CREATE A NEW DIRECTORY AND ENTER IT.
 ##
 function mkd() {
-    mkdir -p "$@" && cd "$_";
+    mkdir -p "${@}" && cd "$_" || exit;
 }
 
 ##
 # CHANGE WORKING DIRECTORY TO THE TOP-MOST FINDER WINDOW LOCATION.
 ##
 function cdf() { # short for `cdfinder`
-    cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
+    cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')" || exit;
 }
 
 ##
@@ -74,9 +74,9 @@ function fs() {
 # USE GIT’S COLORED DIFF WHEN AVAILABLE
 ##
 hash git &>/dev/null;
-if [ $? -eq 0 ]; then
+if [ "${1}" -eq 0 ]; then
     function diff() {
-        git diff --no-index --color-words "$@";
+        git diff --no-index --color-words "${@}";
     }
 fi;
 
@@ -84,7 +84,8 @@ fi;
 # CREATE A DATA URL FROM A FILE
 ##
 function dataurl() {
-    local mimeType=$(file -b --mime-type "$1");
+    local mimeType
+    mimeType=$(file -b --mime-type "$1");
     if [[ $mimeType == text/* ]]; then
         mimeType="${mimeType};charset=utf-8";
     fi
@@ -95,7 +96,7 @@ function dataurl() {
 # CREATE A GIT.IO SHORT URL
 ##
 function gitio() {
-    if [ -z "${1}" -o -z "${2}" ]; then
+    if [ -z "${1}" ] && [ -z "${2}" ]; then
         echo "Usage: \`gitio slug url\`";
         return 1;
     fi;
@@ -106,11 +107,21 @@ function gitio() {
 # START AN HTTP SERVER FROM A DIRECTORY, OPTIONALLY SPECIFYING THE PORT
 ##
 function server() {
-    local port="${1:-8000}";
-    sleep 1 && open "http://localhost:${port}/" &
+    local currentDir="${PWD##*/}";
+    local localhostname
+    localhostname="${1:-${currentDir}}";
+    local port
+    port="${2:-4443}";
+    local certpath
+    certpath="${3:-${HOME}/dev/Personal/certs/localhost.pem}";
+    local keypath
+    keypath="${3:-${HOME}/dev/Personal/certs/localhost-key.pem}";
+
+    sleep 1 && open "https://${localhostname}.dev.local:${port}/" &
+
     # SET THE DEFAULT CONTENT-TYPE TO `text/plain` INSTEAD OF `application/octet-stream`
     # AND SERVE EVERYTHING AS UTF-8 (ALTHOUGH NOT TECHNICALLY CORRECT, THIS DOESN’T BREAK ANYTHING FOR BINARY FILES)
-    python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
+    python "${DOTFILES}"/shellscripts/python/simple-server.py "${localhostname}" "${port}" "${certpath}" "${keypath}";
 }
 
 ##
@@ -119,7 +130,8 @@ function server() {
 ##
 function phpserver() {
     local port="${1:-4000}";
-    local ip=$(ipconfig getifaddr en1);
+    local ip
+    ip=$(ipconfig getifaddr en1);
     sleep 1 && open "http://${ip}:${port}/" &
     php -S "${ip}:${port}";
 }
@@ -128,9 +140,12 @@ function phpserver() {
 # COMPARE ORIGINAL AND GZIPPED FILE SIZE.
 ##
 function gz() {
-    local origsize=$(wc -c < "$1");
-    local gzipsize=$(gzip -c "$1" | wc -c);
-    local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
+    local origsize
+    origsize=$(wc -c < "$1");
+    local gzipsize
+    gzipsize=$(gzip -c "$1" | wc -c);
+    local ratio
+    ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
     printf "orig: %d bytes\n" "$origsize";
     printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
 }
@@ -158,7 +173,7 @@ function digga() {
 # UTF-8-ENCODE A STRING OF UNICODE SYMBOLS.
 ##
 function escape() {
-    printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u);
+    printf "\\\x%s" "$(printf \"%s\" "${@}" | xxd -p -c1 -u)";
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
     if [ -t 1 ]; then
         echo ""; # newline
@@ -169,7 +184,7 @@ function escape() {
 # DECODE \x{ABCD}-STYLE UNICODE ESCAPE SEQUENCES.
 ##
 function unidecode() {
-    perl -e "binmode(STDOUT, ':utf8'); print \"$@\"";
+    perl -e "binmode(STDOUT, ':utf8'); print \"${@}\"";
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
     if [ -t 1 ]; then
         echo ""; # newline
@@ -180,7 +195,7 @@ function unidecode() {
 # GET A CHARACTER’S UNICODE CODE POINT.
 ##
 function codepoint() {
-    perl -e "use utf8; print sprintf('U+%04X', ord(\"$@\"))";
+    perl -e "use utf8; print sprintf('U+%04X', ord(\"${@}\"))";
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
     if [ -t 1 ]; then
         echo ""; # newline
@@ -201,13 +216,14 @@ function getcertnames() {
     echo "Testing ${domain}…";
     echo ""; # newline
 
-    local tmp=$(echo -e "GET / HTTP/1.0\nEOT" \
-        | openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1);
+    tmp=$(echo -e "GET / HTTP/1.0\nEOT" | openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1);
+    local tmp
 
     if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
-        local certText=$(echo "${tmp}" \
+        certText=$(echo "${tmp}" \
             | openssl x509 -text -certopt "no_aux, no_header, no_issuer, no_pubkey, \
             no_serial, no_sigdump, no_signame, no_validity, no_version");
+        local certText
         echo "Common Name:";
         echo ""; # newline
         echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//" | sed -e "s/\/emailAddress=.*//";
@@ -270,7 +286,7 @@ function v() {
 ##
 # THIS IS NEEDED TO MAKE THE `o` FUNCTION (SEE BELOW) CROSS-PLATFORM.
 ####
-if [ ! $(uname -s) = 'Darwin' ]; then
+if [ ! "$(uname -s)" = 'Darwin' ]; then
     if grep -q Microsoft /proc/version; then
         # UBUNTU ON WINDOWS USING THE LINUX SUBSYSTEM
         alias open='explorer.exe';
@@ -309,32 +325,32 @@ function tre() {
 function extract {
     if [ -z "$1" ]; then
         # DISPLAY USAGE IF NO PARAMETERS GIVEN
-        echo -en "${bold}${violet}@USAGE:${reset}\n${yellow}extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>${reset}"
+        echo -en "@USAGE:\nextract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
         echo
     else
-        if [ -f $1 ] ; then
+        if [ -f "${1}" ] ; then
             # NAME=${1%.*}
             # mkdir $NAME && cd $NAME
             case $1 in
-                *.tar.bz2)   tar xvjf ./$1    ;;
-                *.tar.gz)    tar xvzf ./$1    ;;
-                *.tar.xz)    tar xvJf ./$1    ;;
-                *.lzma)      unlzma ./$1      ;;
-                *.bz2)       bunzip2 ./$1     ;;
-                *.rar)       unrar x -ad ./$1 ;;
-                *.gz)        gunzip ./$1      ;;
-                *.tar)       tar xvf ./$1     ;;
-                *.tbz2)      tar xvjf ./$1    ;;
-                *.tgz)       tar xvzf ./$1    ;;
-                *.zip)       unzip ./$1       ;;
-                *.Z)         uncompress ./$1  ;;
-                *.7z)        7z x ./$1        ;;
-                *.xz)        unxz ./$1        ;;
-                *.exe)       cabextract ./$1  ;;
-                *)           echo "extract: '$1' - unknown archive method" ;;
+                *.tar.bz2)   tar xvjf ./"${1}"    ;;
+                *.tar.gz)    tar xvzf ./"${1}"    ;;
+                *.tar.xz)    tar xvJf ./"${1}"    ;;
+                *.lzma)      unlzma ./"${1}"      ;;
+                *.bz2)       bunzip2 ./"${1}"     ;;
+                *.rar)       unrar x -ad ./"${1}" ;;
+                *.gz)        gunzip ./"${1}"      ;;
+                *.tar)       tar xvf ./"${1}"     ;;
+                *.tbz2)      tar xvjf ./"${1}"    ;;
+                *.tgz)       tar xvzf ./"${1}"    ;;
+                *.zip)       unzip ./"${1}"       ;;
+                *.Z)         uncompress ./"${1}"  ;;
+                *.7z)        7z x ./"${1}"        ;;
+                *.xz)        unxz ./"${1}"        ;;
+                *.exe)       cabextract ./"${1}"  ;;
+                *)           echo "extract: '${1}' - unknown archive method" ;;
             esac
         else
-            echo "$1 - file does not exist"
+            echo "${1} - file does not exist"
         fi
     fi
 }
@@ -345,8 +361,8 @@ function extract {
 function fromhex() {
     hex=${1##"##"}
     r=$(printf '0x%0.2s' "$hex")
-    g=$(printf '0x%0.2s' ${hex##??})
-    b=$(printf '0x%0.2s' ${hex##????})
+    g=$(printf '0x%0.2s' "${hex##??}")
+    b=$(printf '0x%0.2s' "${hex##????}")
     printf '%03d' "$(( (r<75?0:(r-35)/40)*6*6 +
                        (g<75?0:(g-35)/40)*6   +
                        (b<75?0:(b-35)/40)     + 16 ))"
@@ -366,15 +382,15 @@ function importmongodb() {
         if [ -n "$2" ]; then
             LOC=$2
         fi
-        7z e $1 -o$LOC
+        7z e "${1}" -o"${LOC}"
     fi
 
  #   # DATA IMPORT
-    echo -e "${bold}${fgYellow}Importing Data ...${reset}"
+    echo -e "Importing Data ..."
     # dockerexec $3 "mongorestore --drop $4 --archive=$DOCKER_CONNECT_API_DB/$FILE"
-    mongorestore --drop --gzip --archive=$LOC/$FILE $4
+    mongorestore --drop --gzip --archive="${LOC}/${FILE}" "${4}"
     echo $'\n'
-    echo -e "${bold}${fgGreen}Done!${reset}"
+    echo -e "Done!"
 }
 
 ##
@@ -382,15 +398,16 @@ function importmongodb() {
 ##
 function startansible() {
     pyenv shell 2.7.13
-    printf 'Now using Python v%s ... \n' ${PYENV_VERSION}
-    source $PYTHON/personal/ansible/bin/activate
+    printf 'Now using Python v%s ... \n' "${PYENV_VERSION}"
+    # shellcheck source=/dev/null
+    . "${PYTHON}/personal/ansible/bin/activate"
 }
 
 ###
 # —[ CONNECT ]— START CONNECT-API - (w/out PyCharm)
 ####
 function connectapistartserver() {
-    cd $CONNECT_API &&
+    cd "${CONNECT_API}" &&
     # PULL LATEST CHANGES FROM GITHUB
     # echo -e "${bold}${fgYellow}Pulling latest code from GitHub...${reset}"
     # git fetch origin &&
@@ -399,25 +416,26 @@ function connectapistartserver() {
     # echo $'\n'
 
  #   # START MONGODB
-    echo -e "${bold}${fgYellow}Starting MongoDB...${reset}"
-    mongod --dbpath $DATA/db --fork --logpath /dev/null
-    echo -e "${bold}${fgGreen}Done!${reset}"
+    echo -e "Starting MongoDB..."
+    mongod --dbpath "${DATA}"/db --fork --logpath /dev/null
+    echo -e "Done!"
     echo $'\n'
 
  #   # START CONNECT API
-    echo -e "${bold}${fgYellow}Starting the Connect API development server...${reset}"
-    source $CONNECT_API_VENV/bin/activate;
+    echo -e "Starting the Connect API development server..."
+    # shellcheck source=/dev/null
+    . "${CONNECT_API_VENV}/bin/activate";
     env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" python manage.py runserver;
     deactivate;
     echo $'\n'
-    echo -e "${bold}${fgYellow}Shutting down the Connect API development server...${reset}"
-    echo -e "${bold}${fgGreen}Done!${reset}"
+    echo -e "Shutting down the Connect API development server..."
+    echo -e "Done!"
 
  #   # STOP MONGODB
     echo $'\n'
-    echo -e "${bold}${fgYellow}Shutting down MongoDB...${reset}"
+    echo -e "Shutting down MongoDB..."
     mongo admin --eval 'db.shutdownServer()' > /dev/null;
-    echo -e "${bold}${fgGreen}Done!${reset}"
+    echo -e "Done!"
     echo
 }
 
@@ -425,24 +443,25 @@ function connectapistartserver() {
 # —[ CONNECT ]— START CELERY
 ####
 function connectstartcelery() {
-    cd $CONNECT_API &&
+    cd "${CONNECT_API}" &&
 
  #   # WAIT FOR `connect-api` TO INITIALIZE
-    echo -e "${bold}${fgYellow}Waiting for connect-api to initialize...${reset}"
+    echo -e "Waiting for connect-api to initialize..."
     echo $'\n'
     sleep 10 &&
 
  #   # STARTING CELERY
-    echo -e "${bold}${fgYellow}Starting Celery...${reset}"
+    echo -e "Starting Celery..."
 
-    source $CONNECT_API_VENV/bin/activate;
+    # shellcheck source=/dev/null
+    . "${CONNECT_API_VENV}/bin/activate";
     env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" celery -A connect -l info worker;
     deactivate
 
  #   # STOP CELERY
     echo $'\n'
-    echo -e "${bold}${fgYellow}Shutting down Celery...${reset}"
-    echo -e "${bold}${fgGreen}Done!${reset}"
+    echo -e "Shutting down Celery..."
+    echo -e "Done!"
 }
 
 ###
@@ -450,15 +469,15 @@ function connectstartcelery() {
 ####
 function getauthtoken() {
     # BASE KEYCLOAK & API VARIABLE DEFINITION(S)
-    KC_BASE_URL=https://sso2-dev.mbopartners.com/auth/realms;
-    KC_REALM_NAME=dev;
-    KC_CLIENT_ID=connect-web;
-    CONNECT_API_URL=http://localhost:8000;
+    local KC_BASE_URL=https://sso2-dev.mbopartners.com/auth/realms;
+    local KC_REALM_NAME=dev;
+    local KC_CLIENT_ID=connect-web;
+    local CONNECT_API_URL=http://localhost:8000;
 
  #   # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
-    echo -en "${bold}${fgBlue}Enter Username: ${reset}"
+    echo -en "Enter Username: "
     read -r USERNAME_INPUT
-    echo -en "${bold}${fgBlue}Enter Password: ${reset}"
+    echo -en "Enter Password: "
     read -rs PASSWORD_INPUT
     echo
 
@@ -466,7 +485,7 @@ function getauthtoken() {
     KC_USERNAME=${USERNAME_INPUT,,};
     KC_PASSWORD=$PASSWORD_INPUT;
 
-    echo -e "${bold}${fgYellow}Generating authenication token for $KC_USERNAME ... ${reset}";
+    echo -e "Generating authenication token for ${KC_USERNAME} ... ";
     curl -s \
       "${KC_BASE_URL}/${KC_REALM_NAME}/protocol/openid-connect/token" \
       -H 'Cache-Control: no-cache' -H 'Accept: application/json' \
@@ -481,11 +500,11 @@ function getauthtoken() {
     KC_ACCESS_TOKEN=$(pbpaste)
 
  #   # COPY THE FULL SNIPPET TO THE CLIPBOARD
-    echo -e "document.cookie=\"ACCESS_TOKEN=$KC_ACCESS_TOKEN;path=/;\"\\ndocument.cookie=\"CONNECT_API_URL=$CONNECT_API_URL;path=/;\"" | pbcopy;
+    echo -e "document.cookie=\"ACCESS_TOKEN=${KC_ACCESS_TOKEN};path=/;\"\\ndocument.cookie=\"CONNECT_API_URL=${CONNECT_API_URL};path=/;\"" | pbcopy;
     echo
     CLIPBOARD_CONTENTS=$(pbpaste)
     # DISPLAY THE OUTPUT TO THE USER IN TERMINAL
-    echo -e "${fgWhite}$CLIPBOARD_CONTENTS${reset}"
+    echo -e "${CLIPBOARD_CONTENTS}"
     echo
 }
 
@@ -495,17 +514,17 @@ function getauthtoken() {
 function getkeycloaktoken() {
     if [ -z "${1}" ]; then
         # DISPLAY USAGE IF NO PARAMETERS GIVEN
-        echo -en "${bold}${fgViolet}@USAGE:${reset}\n${fgYellow}getauthtoken <associate|enterprise>${reset}"
+        echo -en "@USAGE:\ngetauthtoken <associate|enterprise>"
         echo
     else
         # SAVE INITIAL BASH ARGUMENTS IN VARIABLE(S)
-        ROLE_TYPE_INPUT="$1"
+        ROLE_TYPE_INPUT="${1}"
 
  #       # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
-        echo -en "${bold}${fgViolet}Enter Username: ${reset}"
-        read USERNAME_INPUT
-        echo -en "${bold}${fgViolet}Enter Password: ${reset}"
-        read -s PASSWORD_INPUT
+        echo -en "Enter Username: "
+        read -r USERNAME_INPUT
+        echo -en "Enter Password: "
+        read -sr  PASSWORD_INPUT
         echo
 
  #       # NORMALIZING USER INPUT(S)
@@ -513,15 +532,16 @@ function getkeycloaktoken() {
         KC_PASSWORD=$PASSWORD_INPUT;
         ROLE_TYPE=${ROLE_TYPE_INPUT,,};
 
-        source $VENVS_MBO/local-start/bin/activate;
-        echo -e "${bold}${fgYellow}Generating authenication token for $KC_USERNAME ... ${reset}";
-        python $SCRIPTS_MBO/local_start/local_start.py -a connect-webapp -u $KC_USERNAME -p $KC_PASSWORD -v $ROLE_TYPE | pbcopy;
+        # shellcheck source=/dev/null
+        . "${VENVS_MBO}/local-start/bin/activate";
+        echo -e "Generating authenication token for $KC_USERNAME ...";
+        python "${SCRIPTS_MBO}"/local_start/local_start.py -a connect-webapp -u "${KC_USERNAME}" -p "${KC_PASSWORD}" -v "${ROLE_TYPE}" | pbcopy;
         deactivate;
         echo
 
  #       # STORE CLIPBOARD CONTENTS IN VARIABLE
         CLIPBOARD_CONTENTS=$(pbpaste);
-        echo -e "${fgWhite}$CLIPBOARD_CONTENTS${reset}";
+        echo -e "${CLIPBOARD_CONTENTS}";
         echo
     fi
 }
@@ -530,17 +550,17 @@ function getkeycloaktoken() {
 # —[ DOCKER ]— GET AUTHENTICATION TOKEN
 ####
 dockerssh() {
-    dockerexec $1 /bin/bash
+    dockerexec "${1}" /bin/bash
 }
 
 dockerexec() {
-    sudo docker exec -i -t $1 $2
+    sudo docker exec -i -t "${1}" "${2}"
 }
 
 ###
 # —[ GENERAL ]— FIND PROCESSES RUNNING ON A SPECIFICED PORT.
 ####
 function portlistener() {
-    lsof -n -i:"$1" | grep LISTEN;
+    lsof -n -i:"${1}" | grep LISTEN;
 }
 

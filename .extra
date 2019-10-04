@@ -9,25 +9,25 @@
 # WORKSPACES.
 #
 ################################################################################
-WORKSPACE="/Users/bruce.bentley"
+export WORKSPACE="/Users/bruce.bentley"
 
 #
 # —[ USER DIRECTORIES ]—
 #
-DESKTOP="$WORKSPACE/Desktop"
-DOCUMENTS="$WORKSPACE/Documents"
-DOWNLOADS="$WORKSPACE/Downloads"
-DROPBOX="$WORKSPACE/Dropbox"
-PICTURES="$WORKSPACE/Pictures"
-VIDEOS="$WORKSPACE/Videos"
-PROJECTS="$WORKSPACE/Projects"
-SITES="$WORKSPACE/Sites"
-BIN="$WORKSPACE/bin"
-DATA="$WORKSPACE/data"
-DEV="$WORKSPACE/dev"
-DOTFILES="$WORKSPACE/dotfiles"
-NOTES="$WORKSPACE/—[ DEV NOTES ]—"
-SSH="$WORKSPACE/.ssh"
+DESKTOP="${WORKSPACE}/Desktop"
+DOCUMENTS="${WORKSPACE}/Documents"
+DOWNLOADS="${WORKSPACE}/Downloads"
+DROPBOX="${WORKSPACE}/Dropbox"
+PICTURES="${WORKSPACE}/Pictures"
+VIDEOS="${WORKSPACE}/Videos"
+export PROJECTS="${WORKSPACE}/Projects"
+export SITES="${WORKSPACE}/Sites"
+BIN="${WORKSPACE}/bin"
+export DATA="${WORKSPACE}/data"
+DEV="${WORKSPACE}/dev"
+export DOTFILES="${WORKSPACE}/dotfiles"
+NOTES="${WORKSPACE}/—[ DEV NOTES ]—"
+export SSH="${WORKSPACE}/.ssh"
 
 
 ################################################################################
@@ -35,36 +35,36 @@ SSH="$WORKSPACE/.ssh"
 # DEV UTILITIES.
 #
 ################################################################################
-DEV_PERSONAL="$DEV/personal"
-DEV_GOCANVAS="$DEV/gocanvas"
-DEV_MBO="$DEV/mbo"
+export DEV_PERSONAL="${DEV}/personal"
+export DEV_GOCANVAS="${DEV}/gocanvas"
+DEV_MBO="${DEV}/mbo"
 
 #
 # —[ PERSONAL ]—
 #
-CERTS_PERSONAL="$DEV/certs"
-CERT_LOCALHOST="$DEV_CERTS/localhost"
-ENVIRONMENTS_PERSONAL="$DEV_PERSONAL/environments"
-SCRIPTS_PERSONAL="$DEV_PERSONAL/scripts"
-VENVS_PERSONAL="$DEV_PERSONAL/venvs"
+export CERTS_PERSONAL="${DEV_PERSONAL}/certs"
+export CERT_LOCALHOST="${DEV_CERTS}/localhost"
+export ENVIRONMENTS_PERSONAL="${DEV_PERSONAL}/environments"
+export SCRIPTS_PERSONAL="${DEV_PERSONAL}/scripts"
+export VENVS_PERSONAL="${DEV_PERSONAL}/venvs"
 
 #
 # —[ GoCanvas ]—
 #
-CERTS_GOCANVAS="$DEV_GOCANVAS/certs"
-CERT_GOCANVAS="$DEV_CERTS/gocanvas.com.test"
-ENVIRONMENTS_GOCANVAS="$DEV_GOCANVAS/environments"
-SCRIPTS_GOCANVAS="$DEV_GOCANVAS/scripts"
-VENVS_GOCANVAS="$DEV_GOCANVAS/venvs"
+export CERTS_GOCANVAS="${DEV_GOCANVAS}/certs"
+export CERT_GOCANVAS="${CERTS_GOCANVAS}/gocanvas.com.test"
+export ENVIRONMENTS_GOCANVAS="${DEV_GOCANVAS}/environments"
+export SCRIPTS_GOCANVAS="${DEV_GOCANVAS}/scripts"
+export VENVS_GOCANVAS="${DEV_GOCANVAS}/venvs"
 
 #
 # —[ MBO ]—
 #
-CERTS_MBO="$DEV_MBO/certs"
-CERT_MBOPARTNERS="$DEV_CERTS/mbopartners.com.test"
-ENVIRONMENTS_MBO="$DEV_MBO/environments"
-SCRIPTS_MBO="$DEV_MBO/scripts"
-VENVS_MBO="$DEV_MBO/venvs"
+CERTS_MBO="${DEV_MBO}/certs"
+CERT_MBOPARTNERS="${DEV_CERTS}/mbopartners.com.test"
+ENVIRONMENTS_MBO="${DEV_MBO}/environments"
+SCRIPTS_MBO="${DEV_MBO}/scripts"
+VENVS_MBO="${DEV_MBO}/venvs"
 
 
 ################################################################################
@@ -72,48 +72,50 @@ VENVS_MBO="$DEV_MBO/venvs"
 # PROJECTS.
 #
 ################################################################################
-GITHUB_PROJECTS="$PROJECTS/GitHub"
-GITLAB_PROJECTS="$PROJECTS/GitLab"
-GOCANVAS_PROJECTS="$PROJECTS/GoCanvas"
-MBO_PROJECTS="$PROJECTS/MBO"
-PERSONAL_PROJECTS="$PROJECTS/Personal"
-PROTOTYPES_PROJECTS="$PROJECTS/Prototypes"
-SAMPLES_PROJECTS="$PROJECTS/Samples"
+export GITHUB_PROJECTS="${PROJECTS}/GitHub"
+export GITLAB_PROJECTS="${PROJECTS}/GitLab"
+export GOCANVAS_PROJECTS="${PROJECTS}/GoCanvas"
+export MBO_PROJECTS="${PROJECTS}/MBO"
+export PERSONAL_PROJECTS="${PROJECTS}/Personal"
+export PROTOTYPES_PROJECTS="${PROJECTS}/Prototypes"
+export SAMPLES_PROJECTS="${PROJECTS}/Samples"
 
 #
 # —[ PERSONAL ]—
 #
-PERSONAL_DOTFILES="$PERSONAL_PROJECTS/dotfiles"
-PERSONAL_WEBSITE="$PERSONAL_PROJECTS/brucebentley.io"
-PERSONAL_UTILITIES="$PERSONAL_PROJECTS/utilities"
+PERSONAL_DOTFILES="${PERSONAL_PROJECTS}/dotfiles"
+PERSONAL_WEBSITE="${PERSONAL_PROJECTS}/brucebentley.io"
+PERSONAL_UTILITIES="${PERSONAL_PROJECTS}/utilities"
 
 #
 # —[ GoCanvas ]—
 #
-GOCANVAS_WEB_HOME="$GOCANVAS_PROJECTS/web"
-GOCANVAS_PILLARS_HOME="$GOCANVAS_PROJECTS/pillars"
+GOCANVAS_DISCOVERY_HOME="${GOCANVAS_PROJECTS}/discovery"
+GOCANVAS_RND_HOME="${GOCANVAS_PROJECTS}/rnd"
+GOCANVAS_WEB_HOME="${GOCANVAS_PROJECTS}/web"
+GOCANVAS_PILLARS_HOME="${GOCANVAS_PROJECTS}/pillars"
 
-WEB_APPBUILDER="$GOCANVAS_WEB_HOME/appbuilder"
-WEB_MAIN="$GOCANVAS_WEB_HOME/main"
+WEB_APPBUILDER="${GOCANVAS_WEB_HOME}/appbuilder"
+WEB_MAIN="${GOCANVAS_WEB_HOME}/main"
 
 #
 # —[ MBO ]—
 #
-MBO_CLIENTS_HOME="$MBO_PROJECTS/CLIENTS"
-MBO_CONNECT_HOME="$MBO_PROJECTS/CONNECT"
-MBO_DEVOPS_HOME="$MBO_PROJECTS/DEVOPS"
-MBO_DOCKER_HOME="$MBO_PROJECTS/DOCKER"
-MBO_INTRANET_HOME="$MBO_PROJECTS/INTRANET"
-MBO_KEYCLOAK_HOME="$MBO_PROJECTS/KEYCLOAK"
-MBO_MARKETING_HOME="$MBO_PROJECTS/MARKETING"
-MBO_MISC_HOME="$MBO_PROJECTS/MISC"
-MBO_PARDOT_HOME="$MBO_PROJECTS/PARDOT"
+MBO_CLIENTS_HOME="${MBO_PROJECTS}/CLIENTS"
+MBO_CONNECT_HOME="${MBO_PROJECTS}/CONNECT"
+MBO_DEVOPS_HOME="${MBO_PROJECTS}/DEVOPS"
+MBO_DOCKER_HOME="${MBO_PROJECTS}/DOCKER"
+MBO_INTRANET_HOME="${MBO_PROJECTS}/INTRANET"
+MBO_KEYCLOAK_HOME="${MBO_PROJECTS}/KEYCLOAK"
+MBO_MARKETING_HOME="${MBO_PROJECTS}/MARKETING"
+MBO_MISC_HOME="${MBO_PROJECTS}/MISC"
+MBO_PARDOT_HOME="${MBO_PROJECTS}/PARDOT"
 
-CONNECT_API="$MBO_CONNECT_HOME/connect-api"
-CONNECT_API_VENV="$VENVS_MBO/connect-api"
-CONNECT_API_ENVIRONMENT="$ENVIRONMENTS_MBO/connect-api"
-CONNECT_CLIENT="$MBO_CLIENTS_HOME/connect-client-ng"
-CONNECT_WEBAPP="$MBO_CONNECT_HOME/connect-webapp-ng2"
+CONNECT_API="${MBO_CONNECT_HOME}/connect-api"
+CONNECT_API_VENV="${VENVS_MBO}/connect-api"
+CONNECT_API_ENVIRONMENT="${ENVIRONMENTS_MBO}/connect-api"
+CONNECT_CLIENT="${MBO_CLIENTS_HOME}/connect-client-ng"
+CONNECT_WEBAPP="${MBO_CONNECT_HOME}/connect-webapp-ng2"
 
 
 ################################################################################
@@ -122,12 +124,12 @@ CONNECT_WEBAPP="$MBO_CONNECT_HOME/connect-webapp-ng2"
 #
 ################################################################################
 GIT_AUTHOR_NAME="Bruce Bentley"
-GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-git config --global user.name "$GIT_AUTHOR_NAME"
-# GIT_AUTHOR_EMAIL="bruce.bentley@gocanvas.com"
-#GIT_AUTHOR_EMAIL="brucebentley@me.com"
-# GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-# git config --global user.email "$GIT_AUTHOR_EMAIL"
+GIT_COMMITTER_NAME="${GIT_AUTHOR_NAME}"
+git config --global user.name "${GIT_AUTHOR_NAME}"
+GIT_AUTHOR_EMAIL="bruce.bentley@gocanvas.com"
+GIT_AUTHOR_EMAIL="brucebentley@me.com"
+GIT_COMMITTER_EMAIL="${GIT_AUTHOR_EMAIL}"
+git config --global user.email "${GIT_AUTHOR_EMAIL}"
 
 
 ################################################################################

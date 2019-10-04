@@ -1,3 +1,6 @@
+-- Global log level. Per-spoon log level can be configured in each Install:andUse block below.
+hs.logger.defaultLogLevel="info"
+
 hs.hotkey.alertDuration = 0
 hs.window.animationDuration = 0
 hs.hints.showTitleThresh = 0
@@ -15,13 +18,13 @@ if custom_config then
     dofile( os.getenv('HOME') .. '/.config/hammerspoon/private/config.lua')
     privatepath = hs.fs.pathToAbsolute(hs.configdir .. '/private/config.lua')
     if privatepath then
-        -- hs.notify.new({
-        --   title='Great Success!',
-        --   informativeText='Configuration was successfully loaded.',
-        --   contentImage="~/Pictures/GIF's/Giphy/DeezNuts.gif",
-        --   soundName='HA! Gotemmm'
-        -- }):send()
-        hs.alert('You have multiple config files in `~/.config/hammerspoon` & `~/.hammerspoon/private`.\nThe `~/.config/hammerspoon` one will be used.')
+        hs.notify.new({
+          title='Great Success!',
+          informativeText='Configuration was successfully loaded.',
+          contentImage="~/Pictures/GIF's/Giphy/DeezNuts.gif",
+          soundName='HA! Gotemmm'
+        }):send()
+        -- hs.alert('                      Multiple config files found:\n    ~/hammerspoon  &  ~/.hammerspoon/private\n      The `~/hammerspoon` one will be used.')
     end
 else
     -- otherwise fallback to 'classic' location.
@@ -95,28 +98,71 @@ hs.loadSpoon("ModalMgr")
 --
 if not hspoon_list then
     hspoon_list = {
-        --"AClock",
-        --"BingDaily",
-        "BrewInfo",
-        --"Calendar",
-        --"CircleClock",
+        -- "Asana",
+        -- "BingDaily",
+        -- "BrewInfo",
+        -- "Caffeine",
+        -- "Calendar",
+        -- "CircleClock",
+        -- "ClipboardTool",
         "ClipShow",
-        --"CountDown",
-        "FnMate",
-        --"HCalendar",
-        --"HSaria2",
-        --"HSearch",
+        -- "ColorPicker",
+        -- "Commander",
+        -- "CountDown",
+        -- "DeepLTranslate",
+        -- "Emojis",
+        -- "EvernoteOpenAndTag",
+        -- "FadeLogo",
+        -- "FnMate",
+        -- "HCalendar",
+        -- "HeadphoneAutoPause",
+        -- "HighSierraiTunesMediaFix",
+        -- "HoldToQuit",
+        -- "HSaria2",
+        -- "HSearch",
+        "HSKeybindings",
+        -- "Keychain",
         "KSheet",
-        "ReloadConfiguration",
-        "Seal",
-        "SpeedMenu",
-        "SpoonInstall",
-        --"TimeFlow",
-        --"UnsplashZ",
-        "WindowGrid",
-        "WindowHalfsAndThirds",
-        "WindowScreenLeftAndRight",
-        "WinWin"
+        -- "Leanpub",
+        -- "LookupSelection",
+        -- "MenubarFlag",
+        -- "MicMute",
+        -- "MiroWindowsManager",
+        "ModalMgr",
+        -- "MountedVolumes",
+        -- "MouseCircle",
+        -- "MoveSpaces",
+        -- "PasswordGenerator",
+        -- "Pastebin",
+        -- "PersonalHotspot",
+        -- "PopupTranslateSelection",
+        -- "RecursiveBinder",
+        -- "ReloadConfiguration",
+        -- "RoundedCorners",
+        -- "Seal",
+        -- "SendToOmniFocus",
+        -- "Shade",
+        -- "SleepCorners",
+        -- "SpeedMenu",
+        -- "SpoonInstall",
+        "TextClipboardHistory",
+        -- "TimeFlow",
+        -- "TimeMachineProgress",
+        -- "ToggleScreenRotation",
+        -- "ToggleSkypeMute",
+        -- "Token",
+        -- "Tunnelblick",
+        -- "UniversalArchive",
+        -- "UnsplashZ",
+        -- "URLDispatcher",
+        -- "USBDeviceActions",
+        -- "VolumeScroll",
+        -- "WifiNotifier",
+        -- "WiFiTransitions",
+        -- "WindowGrid",
+        -- "WindowHalfsAndThirds",
+        -- "WindowScreenLeftAndRight",
+        -- "WinWin"
     }
 end
 
@@ -154,12 +200,25 @@ cmodal:bind('', 'Q', 'Deactivate appM', function() spoon.ModalMgr:deactivate({"a
 cmodal:bind('', 'tab', 'Toggle Cheatsheet', function() spoon.ModalMgr:toggleCheatsheet() end)
 if not hsapp_list then
     hsapp_list = {
+        --{key = 'a', name = 'Atom'},
+        {key = 'a', id = 'com.apple.ActivityMonitor'},
+        {key = 'c', name = 'Google Chrome'},
+        --{key = 'd', name = 'ShadowsocksX'},
+        --{key = 'e', name = 'Emacs'},
         {key = 'f', name = 'Finder'},
-        {key = 'g', name = 'Google Chrome'},
         {key = 'i', name = 'iTerm'},
+        --{key = 'k', name = 'KeyCastr'},
+        {key = 'l', name = 'Slack'},
+        --{key = 'm', name = 'MacVim'},
+        {key = 'm', name = 'Firefox'},
+        --{key = 'p', name = 'mpv'},
+        {key = 'p', name = 'Spotify'},
+        --{key = 'r', name = 'VimR'},
         {key = 's', name = 'Safari'},
         {key = 't', name = 'Terminal'},
-        {key = 'v', id = 'com.apple.ActivityMonitor'},
+        {key = 'u', name = 'Sketch'},
+        {key = 'v', name = 'Visual Studio Code - Insiders'},
+        --{key = 'w', name = 'Mweb'},
         {key = 'y', id = 'com.apple.systempreferences'},
     }
 end
@@ -223,16 +282,16 @@ if spoon.ClipShow then
         spoon.ClipShow:toggleShow()
         spoon.ModalMgr:deactivate({"clipshowM"})
     end)
-    cmodal:bind('', 'S', 'Search with Bing', function()
+    cmodal:bind('', 'S', '[MacVim](https://github.com/macvim-dev) with Bing', function()
         spoon.ClipShow:openInBrowserWithRef("https://www.bing.com/search?q=")
         spoon.ClipShow:toggleShow()
         spoon.ModalMgr:deactivate({"clipshowM"})
     end)
-    cmodal:bind('', 'M', 'Open in MacVim', function()
-        spoon.ClipShow:openWithCommand("/usr/local/bin/mvim")
-        spoon.ClipShow:toggleShow()
-        spoon.ModalMgr:deactivate({"clipshowM"})
-    end)
+    -- cmodal:bind('', 'M', 'Open in MacVim', function()
+    --     spoon.ClipShow:openWithCommand("/usr/local/bin/mvim")
+    --     spoon.ClipShow:toggleShow()
+    --     spoon.ModalMgr:deactivate({"clipshowM"})
+    -- end)
     cmodal:bind('', 'F', 'Save to Desktop', function()
         spoon.ClipShow:saveToFile()
         spoon.ClipShow:toggleShow()
@@ -250,6 +309,11 @@ if spoon.ClipShow then
     end)
     cmodal:bind('', 'L', 'Open in Sublime Text', function()
         spoon.ClipShow:openWithCommand("/usr/local/bin/subl")
+        spoon.ClipShow:toggleShow()
+        spoon.ModalMgr:deactivate({"clipshowM"})
+    end)
+    cmodal:bind('', 'V', 'Open in Visual Studio Code', function()
+        spoon.ClipShow:openWithCommand("/usr/local/bin/code")
         spoon.ClipShow:toggleShow()
         spoon.ModalMgr:deactivate({"clipshowM"})
     end)
