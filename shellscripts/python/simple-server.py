@@ -4,7 +4,7 @@ import http.server
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import ssl
 
-BASE_DIR = sys.argv[1]
+BASE_DIR = os.path.dirname(__file__)
 HOSTNAME = os.path.join(BASE_DIR, '.dev.local')
 CERT_PATH = os.getenv('CERTS_PERSONAL')
 PORT = 4443

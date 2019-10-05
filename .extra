@@ -14,20 +14,20 @@ export WORKSPACE="/Users/bruce.bentley"
 #
 # —[ USER DIRECTORIES ]—
 #
-DESKTOP="${WORKSPACE}/Desktop"
-DOCUMENTS="${WORKSPACE}/Documents"
-DOWNLOADS="${WORKSPACE}/Downloads"
-DROPBOX="${WORKSPACE}/Dropbox"
-PICTURES="${WORKSPACE}/Pictures"
-VIDEOS="${WORKSPACE}/Videos"
-export PROJECTS="${WORKSPACE}/Projects"
-export SITES="${WORKSPACE}/Sites"
-BIN="${WORKSPACE}/bin"
-export DATA="${WORKSPACE}/data"
-DEV="${WORKSPACE}/dev"
+#DESKTOP=~/Desktop
+#DOCUMENTS=~/Documents
+#DOWNLOADS=~/Downloads
+#DROPBOX=~/Dropbox
+#PICTURES=~/Pictures
+#VIDEOS=~/Videos
+#PROJECTS=~/Projects
+#SITES=~/Sites
+#BIN=~/bin
+#DATA=~/data
+export DEV="${WORKSPACE}/dev"
 export DOTFILES="${WORKSPACE}/dotfiles"
-NOTES="${WORKSPACE}/—[ DEV NOTES ]—"
-export SSH="${WORKSPACE}/.ssh"
+#NOTES=~/Desktop/—[ DEV NOTES ]—
+#SSH=~/.ssh
 
 
 ################################################################################
@@ -35,15 +35,15 @@ export SSH="${WORKSPACE}/.ssh"
 # DEV UTILITIES.
 #
 ################################################################################
-export DEV_PERSONAL="${DEV}/personal"
-export DEV_GOCANVAS="${DEV}/gocanvas"
-DEV_MBO="${DEV}/mbo"
+export DEV_PERSONAL="${WORKSPACE}/dev/personal"
+export DEV_GOCANVAS="${WORKSPACE}/dev/gocanvas"
+#DEV_MBO="${DEV}/mbo"
 
 #
 # —[ PERSONAL ]—
 #
 export CERTS_PERSONAL="${DEV_PERSONAL}/certs"
-export CERT_LOCALHOST="${DEV_CERTS}/localhost"
+export CERT_LOCALHOST="${DEV_PERSONAL}/certs/localhost"
 export ENVIRONMENTS_PERSONAL="${DEV_PERSONAL}/environments"
 export SCRIPTS_PERSONAL="${DEV_PERSONAL}/scripts"
 export VENVS_PERSONAL="${DEV_PERSONAL}/venvs"
@@ -51,20 +51,20 @@ export VENVS_PERSONAL="${DEV_PERSONAL}/venvs"
 #
 # —[ GoCanvas ]—
 #
-export CERTS_GOCANVAS="${DEV_GOCANVAS}/certs"
-export CERT_GOCANVAS="${CERTS_GOCANVAS}/gocanvas.com.test"
-export ENVIRONMENTS_GOCANVAS="${DEV_GOCANVAS}/environments"
-export SCRIPTS_GOCANVAS="${DEV_GOCANVAS}/scripts"
-export VENVS_GOCANVAS="${DEV_GOCANVAS}/venvs"
+export CERTS_GOCANVAS="${DEV_GOCANVAS}/gocanvas/certs"
+export CERT_GOCANVAS="${DEV_GOCANVAS}/gocanvas/certs/gocanvas.com.test"
+#ENVIRONMENTS_GOCANVAS=~/dev/gocanvas/environments
+#SCRIPTS_GOCANVAS=~/dev/gocanvas/scripts
+#VENVS_GOCANVAS=~/dev/gocanvas/venvs
 
 #
 # —[ MBO ]—
 #
-CERTS_MBO="${DEV_MBO}/certs"
-CERT_MBOPARTNERS="${DEV_CERTS}/mbopartners.com.test"
-ENVIRONMENTS_MBO="${DEV_MBO}/environments"
-SCRIPTS_MBO="${DEV_MBO}/scripts"
-VENVS_MBO="${DEV_MBO}/venvs"
+#CERTS_MBO="${DEV_MBO}/certs"
+#CERT_MBOPARTNERS="${DEV_CERTS}/mbopartners.com.test"
+#ENVIRONMENTS_MBO="${DEV_MBO}/environments"
+#SCRIPTS_MBO="${DEV_MBO}/scripts"
+#VENVS_MBO="${DEV_MBO}/venvs"
 
 
 ################################################################################
@@ -72,50 +72,50 @@ VENVS_MBO="${DEV_MBO}/venvs"
 # PROJECTS.
 #
 ################################################################################
-export GITHUB_PROJECTS="${PROJECTS}/GitHub"
-export GITLAB_PROJECTS="${PROJECTS}/GitLab"
-export GOCANVAS_PROJECTS="${PROJECTS}/GoCanvas"
-export MBO_PROJECTS="${PROJECTS}/MBO"
-export PERSONAL_PROJECTS="${PROJECTS}/Personal"
-export PROTOTYPES_PROJECTS="${PROJECTS}/Prototypes"
-export SAMPLES_PROJECTS="${PROJECTS}/Samples"
+#GITHUB_PROJECTS=~/Projects/GitHub
+#GITLAB_PROJECTS=~/Projects/GitLab
+#GOCANVAS_PROJECTS=~/Projects/GoCanvas
+#MBO_PROJECTS=~/Projects/MBO
+#PERSONAL_PROJECTS=~/Projects/Personal
+#PROTOTYPES_PROJECTS=~/Projects/Prototypes
+#SAMPLES_PROJECTS=~/Projects/Samples
 
 #
 # —[ PERSONAL ]—
 #
-PERSONAL_DOTFILES="${PERSONAL_PROJECTS}/dotfiles"
-PERSONAL_WEBSITE="${PERSONAL_PROJECTS}/brucebentley.io"
-PERSONAL_UTILITIES="${PERSONAL_PROJECTS}/utilities"
+#PERSONAL_DOTFILES=~/Projects/Personal/dotfiles
+#PERSONAL_WEBSITE=~/Projects/Personal/brucebentley.io
+#PERSONAL_UTILITIES=~/Projects/Personal/utilities
 
 #
 # —[ GoCanvas ]—
 #
-GOCANVAS_DISCOVERY_HOME="${GOCANVAS_PROJECTS}/discovery"
-GOCANVAS_RND_HOME="${GOCANVAS_PROJECTS}/rnd"
-GOCANVAS_WEB_HOME="${GOCANVAS_PROJECTS}/web"
-GOCANVAS_PILLARS_HOME="${GOCANVAS_PROJECTS}/pillars"
+#GOCANVAS_DISCOVERY_HOME=~/Projects/GoCanvas/discovery
+#GOCANVAS_RND_HOME=~/Projects/GoCanvas/rnd
+#GOCANVAS_WEB_HOME=~/Projects/GoCanvas/web
+#GOCANVAS_PILLARS_HOME=~/Projects/GoCanvas/pillars
 
-WEB_APPBUILDER="${GOCANVAS_WEB_HOME}/appbuilder"
-WEB_MAIN="${GOCANVAS_WEB_HOME}/main"
+#WEB_APPBUILDER=~/Projects/GoCanvas/web/appbuilder
+#WEB_MAIN=~/Projects/GoCanvas/web/main
 
 #
 # —[ MBO ]—
 #
-MBO_CLIENTS_HOME="${MBO_PROJECTS}/CLIENTS"
-MBO_CONNECT_HOME="${MBO_PROJECTS}/CONNECT"
-MBO_DEVOPS_HOME="${MBO_PROJECTS}/DEVOPS"
-MBO_DOCKER_HOME="${MBO_PROJECTS}/DOCKER"
-MBO_INTRANET_HOME="${MBO_PROJECTS}/INTRANET"
-MBO_KEYCLOAK_HOME="${MBO_PROJECTS}/KEYCLOAK"
-MBO_MARKETING_HOME="${MBO_PROJECTS}/MARKETING"
-MBO_MISC_HOME="${MBO_PROJECTS}/MISC"
-MBO_PARDOT_HOME="${MBO_PROJECTS}/PARDOT"
+#MBO_CLIENTS_HOME="${MBO_PROJECTS}/CLIENTS"
+#MBO_CONNECT_HOME="${MBO_PROJECTS}/CONNECT"
+#MBO_DEVOPS_HOME="${MBO_PROJECTS}/DEVOPS"
+#MBO_DOCKER_HOME="${MBO_PROJECTS}/DOCKER"
+#MBO_INTRANET_HOME="${MBO_PROJECTS}/INTRANET"
+#MBO_KEYCLOAK_HOME="${MBO_PROJECTS}/KEYCLOAK"
+#MBO_MARKETING_HOME="${MBO_PROJECTS}/MARKETING"
+#MBO_MISC_HOME="${MBO_PROJECTS}/MISC"
+#MBO_PARDOT_HOME="${MBO_PROJECTS}/PARDOT"
 
-CONNECT_API="${MBO_CONNECT_HOME}/connect-api"
-CONNECT_API_VENV="${VENVS_MBO}/connect-api"
-CONNECT_API_ENVIRONMENT="${ENVIRONMENTS_MBO}/connect-api"
-CONNECT_CLIENT="${MBO_CLIENTS_HOME}/connect-client-ng"
-CONNECT_WEBAPP="${MBO_CONNECT_HOME}/connect-webapp-ng2"
+#CONNECT_API="${MBO_CONNECT_HOME}/connect-api"
+#CONNECT_API_VENV="${VENVS_MBO}/connect-api"
+#CONNECT_API_ENVIRONMENT="${ENVIRONMENTS_MBO}/connect-api"
+#CONNECT_CLIENT="${MBO_CLIENTS_HOME}/connect-client-ng"
+#CONNECT_WEBAPP="${MBO_CONNECT_HOME}/connect-webapp-ng2"
 
 
 ################################################################################
