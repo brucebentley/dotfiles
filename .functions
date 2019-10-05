@@ -8,7 +8,7 @@
 # CREATE A NEW DIRECTORY AND ENTER IT.
 ##
 function mkd() {
-    mkdir -p "${@}" && cd "$_" || exit;
+    mkdir -p "$ @" && cd "$_" || exit;
 }
 
 ##
@@ -96,7 +96,7 @@ function dataurl() {
 # CREATE A GIT.IO SHORT URL
 ##
 function gitio() {
-    if [ -z "${1}" ] && [ -z "${2}" ]; then
+    if [ -z "${1}" -o -z "${2}" ]; then
         echo "Usage: \`gitio slug url\`";
         return 1;
     fi;
@@ -140,12 +140,9 @@ function phpserver() {
 # COMPARE ORIGINAL AND GZIPPED FILE SIZE.
 ##
 function gz() {
-    local origsize
-    origsize=$(wc -c < "$1");
-    local gzipsize
-    gzipsize=$(gzip -c "$1" | wc -c);
-    local ratio
-    ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
+    local origsize=$(wc -c < "$1");
+    local gzipsize=$(gzip -c "$1" | wc -c);
+    local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
     printf "orig: %d bytes\n" "$origsize";
     printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
 }
@@ -173,7 +170,7 @@ function digga() {
 # UTF-8-ENCODE A STRING OF UNICODE SYMBOLS.
 ##
 function escape() {
-    printf "\\\x%s" "$(printf \"%s\" "${@}" | xxd -p -c1 -u)";s_client
+    printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u);
     # PRINT A NEWLINE UNLESS WE’RE PIPING THE OUTPUT TO ANOTHER PROGRAM.
     if [ -t 1 ]; then
         echo ""; # newline
@@ -361,8 +358,8 @@ function extract {
 function fromhex() {
     hex=${1##"##"}
     r=$(printf '0x%0.2s' "$hex")
-    g=$(printf '0x%0.2s' "${hex##??}")
-    b=$(printf '0x%0.2s' "${hex##????}")
+    g=$(printf '0x%0.2s' ${hex##??})
+    b=$(printf '0x%0.2s' ${hex##????})
     printf '%03d' "$(( (r<75?0:(r-35)/40)*6*6 +
                        (g<75?0:(g-35)/40)*6   +
                        (b<75?0:(b-35)/40)     + 16 ))"
@@ -372,12 +369,13 @@ function fromhex() {
 # —[ DOCKER ]— GET AUTHENTICATION TOKEN
 ####
 dockerssh() {
-    dockerexec "${1}" /bin/bash
+    dockerexec $1 /bin/bash
 }
 
 dockerexec() {
-    sudo docker exec -i -t "${1}" "${2}"
+    sudo docker exec -i -t $1 $2
 }
+
 
 ###
 # —[ GENERAL ]— FIND PROCESSES RUNNING ON A SPECIFICED PORT.
