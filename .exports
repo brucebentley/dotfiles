@@ -85,8 +85,10 @@ export NODE_REPL_MODE='sloppy';
 ################################################################################
 
 # SET THE OPENSSL DIRECTORIES TO USE FROM HOMEBREW.
-export CPPFLAGS="-I$(brew --prefix openssl)/include";
-export LDFLAGS="-L$(brew --prefix openssl)/lib";
+CPPFLAGS="-I$(brew --prefix openssl)/include";
+export CPPFLAGS;
+LDFLAGS="-L$(brew --prefix openssl)/lib";
+export LDFLAGS;
 
 
 ################################################################################
@@ -94,6 +96,9 @@ export LDFLAGS="-L$(brew --prefix openssl)/lib";
 # PYTHON
 #
 ################################################################################
+
+# PIP SHOULD ONLY RUN IF THERE IS A VIRTUALENV CURRENTLY ACTIVATED.
+export PIP_REQUIRE_VIRTUALENV=true;
 
 # SET CFLAGS TO AN ACCEPTED SAFE VALUES TO HELP HELP SPEED UP PYTHON.
 export CFLAGS='-O2';

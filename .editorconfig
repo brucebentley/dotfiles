@@ -8,21 +8,16 @@ root = true
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 [*]
-
-# Unix-style newlines with a newline ending every file
-
 charset = utf-8
 end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
-max_line_length = 120
 trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[*.{bash,sh,zsh}]
-
+[**.{bash,sh,zsh}]
 indent_size = 2
 indent_style = space
 insert_final_newline = true
@@ -30,27 +25,41 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[*.{js,json,ts}]
+[**.{css,less,sass,scss}]
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[**.{html,erb}]
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[**.{js,json,jsx,ts,tsx}]
 indent_size = 2
 indent_style = space
+insert_final_newline = true
 quote_type = single
 trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[*.md]
-
-# Markdown uses the trailing whitespaces.
-# https://daringfireball.net/projects/markdown/syntax#block
-
+[**.{md,mdx]
+indent_size = 4
+indent_style = space
+insert_final_newline = true
 max_line_length = 0
 trim_trailing_whitespace = false
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[*.py]
-
+[**.py]
 indent_size = 4
 indent_style = space
 insert_final_newline = true
@@ -58,33 +67,32 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[{*.rb,Rakefile}]
-
-indent_style = space
-indent_size = 2
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-[*.snippets]
-
+[{**.rb,Rakefile}]
 indent_style = space
 indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[*.vim]
+[**.snippets]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+[**.vim]
 indent_style = space
 indent_size = 4
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 [COMMIT_EDITMSG]
-
 max_line_length = 0
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 [Makefile]
-
 indent_style = tab

@@ -1,5 +1,16 @@
 # Bruce Bentley’s dotfiles
 
+## Status
+
+![Dependency Status](https://img.shields.io/librariesio/github/brucebentley/dotfiles?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAAAAAGzbPfSAAAAAXNSR0IArs4c6QAAAhJJREFUOMuNkrtrFGEUxX/z7SQrCZqHiBpfC5pCWdnIBhIQ8Y2NLxD9AwL2FoKFlbaC1oKVlY1oVFAbEbsg2tiIQgTt1A2JYXGTzOZnMbOPmERzimHmzLnfufd8NxIgEEXUkTOKYIKgkQB4HhBC9nkQBBkVY4Af3VjHSEGSgBEAZAcAiN1pWWoBhow/SgwYGX0E645kf69MNWsrDY7+4xlnIS7r887+l1qOdykK6aOsQNJG3VPtJElNAd0WQTxnLhW819FGeWIA7Zmi1T8x9M5QoQ0BZiBHgJARbRM3sAIVeNKxeRxKuSI83dJxG3AjHMj6HYYeDVRggTkAFmCmYZNhRyMdKFojr3oX0jukaO2E1p31e4tS+6qWbmmLmoaqJfZlVEElpYg0wPUvbaYCftJyS4XGDM7n/57xcX7Z2HeWJ9FEnq6M2t2YLcchOMIaU10B6n4ATqsOAnBB9RwAe9MczPa1qM6nhcOqQ+l7XQ3Z6CkWW1k0WDM7mifVALhcU/09BkCS2S0R7XxrExPbVxLNXUvUyaGqevKVmlxdLlIXbwaoqiW4OJtyTdG6+6of9gBNEWx41CY6VUlrRlgqSnsKQM+4L/qZT1YNPADTZ+Fhb/7XqqIYYPLSu39eXQwcfvOf+w1rWYIAdKT71AesB2BTF1AAoCuX2d0IXytuHYuAZxPffjJwDODB68/13oHhNS/dHwxZd3aootZjAAAAAElFTkSuQmCC&logoColor=%23ffffff&style=for-the-badge)
+![Last Commit ( Branch )](https://img.shields.io/github/last-commit/brucebentley/dotfiles/macOS/Mojave?logo=GitHub&logoColor=%23ffffff&style=for-the-badge)
+![License](https://img.shields.io/github/license/brucebentley/dotfiles?color=%23007ec5&logo=Open%20Source%20Initiative&logoColor=%23ffffff&style=for-the-badge)
+
+<br/>
+
+![Language Count](https://img.shields.io/github/languages/count/brucebentley/dotfiles?logo=GitHub&logoColor=%23ffffff&style=for-the-badge)
+![Repo Size ( MB )](https://img.shields.io/github/repo-size/brucebentley/dotfiles?logo=git&logoColor=%23ffffff&style=for-the-badge)
+
 <p align="center">
     <img src="https://i.imgur.com/wmQPryP.png" alt="Bruce Bentley's dotfiles">
 </p>
