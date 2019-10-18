@@ -566,3 +566,20 @@ function portlistener() {
     lsof -n -i:"${1}" | grep LISTEN;
 }
 
+function convertImages() {
+    if [ -z "$1" ]; then
+        # DISPLAY USAGE IF NO PARAMETERS GIVEN
+        echo -en "${bold}${violet}@USAGE:${reset}\n${yellow}convertImages <output_size>${reset}"
+        echo
+    else
+        local list;
+        list=$(ls ./*.jpg);
+
+        for img in $list; do
+        inname=$(convert -ping "$img" -format "%t" info:)
+        convert "$img" -resize "$1" "${inname}".png
+        done;
+        echo "Success: Optimised images in ./RESIZED";
+    fi
+}
+
