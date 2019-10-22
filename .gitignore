@@ -900,5 +900,15 @@ Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
 
+#########################
+## SECRETS & KEYS
+#########################
 .gitsecret/keys/random_seed
 !*.secret
+
+#########################
+## HAMMERSPOON
+#########################
+.[Cc]onfig/[Hh]ammerspoon/[Pp]rivate/*
+!.[Cc]onfig/[Hh]ammerspoon/[Pp]rivate/config-example.lua
+[Ss]poons/*

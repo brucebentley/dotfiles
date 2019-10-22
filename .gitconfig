@@ -1,6 +1,6 @@
 [user]
-	name = Bruce Bentley
-	email = brucebentley@me.com
+    name = Bruce Bentley
+    email = brucebentley@me.com
     signingkey = 67C8FE357295FA13
 
 # GoCanvas Conditional Git Configuration
@@ -12,7 +12,8 @@
     l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
     # View the current working tree status using the short format
-    s = status -s
+    #s = status -s
+    s = status --long
 
     # Show the diff between the latest commit and the current state
     d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
@@ -21,7 +22,7 @@
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     # Pull in remote changes for the current repository and all its submodules
-    p = !git pull --recurse-submodules
+    p = git pull --recurse-submodules
 
     # Clone a repository including all submodules
     c = clone --recursive
@@ -38,7 +39,8 @@
     remotes = remote -v
 
     # List aliases
-    aliases = config --get-regexp alias
+    #aliases = config --get-regexp alias
+    aliases = "!git config -l | grep alias | cut -c 7-"
 
     # Amend the currently staged files to the latest commit
     amend = commit --amend --reuse-message=HEAD
@@ -86,9 +88,6 @@
             git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
         fi \
     }; f"
-
-    # List aliases
-    la = "!git config -l | grep alias | cut -c 7-"
 
 [apply]
     # Detect whitespace errors when appying a patch
@@ -218,9 +217,9 @@
     insteadOf = "gist:"
 
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path =
 
 [mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
