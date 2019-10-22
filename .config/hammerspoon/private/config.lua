@@ -80,11 +80,12 @@ hspoon_list = {
 hsapp_list = {
     --{key = 'a', name = 'Atom'},
     {key = 'a', id = 'com.apple.ActivityMonitor'},
+    {key = 'b', name = 'Sketch'},
     {key = 'c', name = 'Google Chrome'},
     --{key = 'd', name = 'ShadowsocksX'},
     --{key = 'e', name = 'Emacs'},
     {key = 'f', name = 'Finder'},
-    {key = 'i', name = 'iTerm'},
+    {key = 'i', name = 'iTunes'},
     --{key = 'k', name = 'KeyCastr'},
     {key = 'l', name = 'Slack'},
     --{key = 'm', name = 'MacVim'},
@@ -93,8 +94,8 @@ hsapp_list = {
     {key = 'p', name = 'Spotify'},
     --{key = 'r', name = 'VimR'},
     {key = 's', name = 'Safari'},
-    {key = 't', name = 'Terminal'},
-    {key = 'u', name = 'Sketch'},
+    {key = 't', name = 'iTerm'},
+    {key = 'u', name = 'Sublime Text'},
     {key = 'v', name = 'Visual Studio Code - Insiders'},
     --{key = 'w', name = 'Mweb'},
     {key = 'y', id = 'com.apple.systempreferences'},
@@ -200,7 +201,7 @@ hsappM_keys = {"alt", "A"}
 -- resizeM environment keybinding: Windows manipulation
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsresizeM_keys = {"alt", "R"}
+--hsresizeM_keys = {"alt", "R"}[VLC Extensions - addons.videolan.org]
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -18,13 +18,13 @@ if custom_config then
     dofile( os.getenv('HOME') .. '/.config/hammerspoon/private/config.lua')
     privatepath = hs.fs.pathToAbsolute(hs.configdir .. '/private/config.lua')
     if privatepath then
-        hs.notify.new({
-          title='Great Success!',
-          informativeText='Configuration was successfully loaded.',
-          contentImage="~/Pictures/GIF's/Giphy/DeezNuts.gif",
-          soundName='HA! Gotemmm'
-        }):send()
-        -- hs.alert('                      Multiple config files found:\n    ~/hammerspoon  &  ~/.hammerspoon/private\n      The `~/hammerspoon` one will be used.')
+        -- hs.notify.new({
+        --   title='Great Success!',
+        --   informativeText='Configuration was successfully loaded.',
+        --   contentImage="~/Pictures/GIF's/Giphy/DeezNuts.gif",
+        --   soundName='HA! Gotemmm'
+        -- }):send()
+        hs.alert('                      Multiple config files found:\n    ~/hammerspoon  &  ~/.hammerspoon/private\n      The `~/hammerspoon` one will be used.')
     end
 else
     -- otherwise fallback to 'classic' location.
