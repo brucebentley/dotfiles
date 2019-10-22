@@ -21,9 +21,12 @@ PATH="/usr/local/lib:$PATH"
 PATH="/usr/local/sbin:$PATH"
 
 ##
-# HOMEBREW'S `coreutils` — `$(brew --prefix coreutils)/libexec/gnubin`.
+# HOMEBREW'S `gnubin` DIRECTORIES — `$(brew --prefix <utility>)/libexec/gnubin`.
 ##
 PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+PATH="$(brew --prefix findutils)/libexec/gnubin:$PATH"
+PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH"
+PATH="$(brew --prefix grep)/libexec/gnubin:$PATH"
 
 ##
 # HOMEBREW'S CURL --with-openssl.
@@ -104,6 +107,7 @@ PATH=$COMPOSER_HOME/vendor/bin:$PATH
 # GoLang
 #
 ################################################################################
+
 PATH=$PATH:$(go env GOPATH)/bin:$PATH
 
 
@@ -113,9 +117,12 @@ PATH=$PATH:$(go env GOPATH)/bin:$PATH
 #
 ################################################################################
 
-export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH="/usr/local/opt/imagemagick@6/lib/pkgconfig:$PKG_CONFIG_PATH"
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+PKG_CONFIG_PATH="$(brew --prefix)/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH
+PKG_CONFIG_PATH="$(brew --prefix)/opt/imagemagick@6/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH
+PATH="$(brew --prefix)/opt/imagemagick@6/bin:$PATH"
+export PATH
 
 
 ################################################################################
@@ -124,5 +131,5 @@ export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 #
 ################################################################################
 
-PATH="/usr/local/lib/prince/bin:$PATH"
+PATH="$(brew --prefix)/lib/prince/bin:$PATH"
 

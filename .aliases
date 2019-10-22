@@ -349,7 +349,19 @@ alias restartapache="sudo apachectl -k restart"
 # assh — ( Formerly, Advanced SSH Config )
 #
 ################################################################################
+
 alias assh="assh wrapper ssh"
+
+
+################################################################################
+#
+# Brew Graph
+#
+################################################################################
+
+alias brew-deps="brew deps --installed"
+#alias brew-graph="brew graph --installed | dot -Tpng -ograph.png && open graph.png"
+alias brew-graph="brew graph --installed --highlight-leaves | fdp -Tpng -ograph.png && open graph.png"
 
 
 ################################################################################
@@ -360,6 +372,7 @@ alias assh="assh wrapper ssh"
 
 alias startdnsmasq="sudo brew services start dnsmasq"
 alias stopdnsmasq="sudo brew services stop dnsmasq"
+alias restartdnsmasq="sudo brew services restart dnsmasq"
 
 
 ################################################################################
@@ -400,7 +413,7 @@ alias docker-clean-unused='docker system prune --all --force --volumes'
 #
 ################################################################################
 
-alias gitdelete='git branch | egrep -v "(master|staging|develop|\*)" | xargs git branch -D'
+alias gitdelete='git branch | egrep -v "(master|staging|develop|release_candidate\*)" | xargs git branch -D'
 
 
 ################################################################################
@@ -448,4 +461,16 @@ alias restartmysql="brew services restart mysql@5.7"
 
 alias startpostgres="brew services start postgresql"
 alias stoppostgres="brew services stop postgresql"
+
+
+################################################################################
+#
+# MANAGING MULTIPLE AWS EKS CLUSTERS
+#
+################################################################################
+
+alias eks-main-prod='export AWS_PROFILE=canvasprod && aws eks update-kubeconfig --name prod-eks && source <(kubectl completion bash)'
+alias eks-main-int='export AWS_PROFILE=canvasprod && aws eks update-kubeconfig --name int-eks && source <(kubectl completion bash)'
+alias eks-canvastest-int='export AWS_PROFILE=canvastest && aws eks update-kubeconfig --name int-eks && source <(kubectl completion bash)'
+alias eks-canvastest-int-gc-dev='export AWS_PROFILE=canvastest && aws eks update-kubeconfig --name int-eks && source <(kubectl completion bash) && kubectl config set-context $(kubectl config current-context) --namespace gc-dev'
 

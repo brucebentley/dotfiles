@@ -1,9 +1,12 @@
+#!/usr/bin/env bash
+
 #
 # ~/.profile
 #
 
 #export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
+export MANPATH
 
 ##
 # ANDROID SDK.
