@@ -909,6 +909,6 @@ ehthumbs_vista.db
 #########################
 ## HAMMERSPOON
 #########################
-.[Cc]onfig/[Hh]ammerspoon/[Pp]rivate/*
-!.[Cc]onfig/[Hh]ammerspoon/[Pp]rivate/config-example.lua
-[Ss]poons/*
+.config/hammerspoon/private/*
+!.config/hammerspoon/private/config-example.lua
+Spoons/*

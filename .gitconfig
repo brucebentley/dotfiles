@@ -1,6 +1,6 @@
 [user]
-    name = Bruce Bentley
-    email = brucebentley@me.com
+	name = Bruce Bentley
+	email = brucebentley@me.com
     signingkey = 67C8FE357295FA13
 
 # GoCanvas Conditional Git Configuration
@@ -9,11 +9,12 @@
 
 [alias]
     # View abbreviated SHA, description, and history graph of the latest 20 commits
-    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+    l = !git log --pretty=oneline -n 20 --graph --abbrev-commit
+    lg = !git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
     # View the current working tree status using the short format
     #s = status -s
-    s = status --long
+    s = !git status --long
 
     # Show the diff between the latest commit and the current state
     d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
@@ -22,7 +23,7 @@
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     # Pull in remote changes for the current repository and all its submodules
-    p =!git pull --recurse-submodules
+    p = !git pull --recurse-submodules
 
     # Clone a repository including all submodules
     c = clone --recursive
@@ -34,9 +35,9 @@
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
     # Show verbose output about tags, branches or remotes
-    tags = tag -l
-    branches = branch -a
-    remotes = remote -v
+    tags = !git tag -l
+    branches = !git branch -a
+    remotes = !git remote -v
 
     # List aliases
     #aliases = config --get-regexp alias

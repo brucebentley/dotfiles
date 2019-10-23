@@ -17,7 +17,7 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[**.{bash,sh,zsh}]
+[*.{bash,sh,zsh}]
 indent_size = 2
 indent_style = space
 insert_final_newline = true
@@ -25,7 +25,7 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[**.{css,less,sass,scss}]
+[*.{css,less,sass,scss}]
 indent_size = 4
 indent_style = space
 insert_final_newline = true
@@ -33,7 +33,7 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[**.{html,erb}]
+[*.{html,erb}]
 indent_size = 4
 indent_style = space
 insert_final_newline = true
@@ -41,7 +41,7 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[**.{js,json,jsx,ts,tsx}]
+[*.{js,json,jsx,ts,tsx}]
 indent_size = 2
 indent_style = space
 insert_final_newline = true
@@ -50,7 +50,7 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[**.{md,mdx]
+[*.md]
 indent_size = 4
 indent_style = space
 insert_final_newline = true
@@ -59,7 +59,7 @@ trim_trailing_whitespace = false
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[**.py]
+[*.py]
 indent_size = 4
 indent_style = space
 insert_final_newline = true
@@ -67,7 +67,7 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[{**.rb,Rakefile}]
+[{*.rb,Rakefile}]
 indent_style = space
 indent_size = 4
 insert_final_newline = true
@@ -75,7 +75,7 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[**.snippets]
+[*.snippets]
 indent_style = space
 indent_size = 4
 insert_final_newline = true
@@ -83,7 +83,7 @@ trim_trailing_whitespace = true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-[**.vim]
+[*.vim]
 indent_style = space
 indent_size = 4
 
