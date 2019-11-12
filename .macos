@@ -920,29 +920,31 @@ defaults write org.m0k.transmission RandomPort -bool true
 ################################################################################
 # KILL AFFECTED APPLICATIONS                                                   #
 ################################################################################
-
-for app in "Activity Monitor" \
-    "Address Book" \
-    "Calendar" \
-    "cfprefsd" \
-    "Contacts" \
-    "Dock" \
-    "Finder" \
-    "Google Chrome Canary" \
-    "Google Chrome" \
-    "Mail" \
-    "Messages" \
-    "Opera" \
-    "Photos" \
-    "Safari" \
-    #"SizeUp" \
-    #"Spectacle" \
-    "SystemUIServer" \
-    "Terminal" \
-    "Transmission" \
-    #"Tweetbot" \
-    #"Twitter" \
-    "iCal"; do
+APP_LIST=(
+    'Activity Monitor'
+    'Address Book'
+    'Calendar'
+    'cfprefsd'
+    'Contacts'
+    'Dock'
+    'Finder'
+    'Google Chrome Canary'
+    'Google Chrome'
+    'Mail'
+    'Messages'
+    'Opera'
+    'Photos'
+    'Safari'
+    #'SizeUp'
+    #'Spectacle'
+    'SystemUIServer'
+    #'Tweetbot'
+    #'Twitter'
+    'Terminal'
+    'Transmission'
+    'iCal'
+)
+for app in "${APP_LIST[@]}"; do
     killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."

@@ -386,165 +386,12 @@ function importmongodb() {
         7z e "$1" -o"$LOC"
     fi
 
- #   # DATA IMPORT
+    # DATA IMPORT
     echo -e "${bold}${fgYellow}Importing Data ...${reset}"
     # dockerexec $3 "mongorestore --drop $4 --archive=$DOCKER_CONNECT_API_DB/$FILE"
     mongorestore --drop --gzip --archive=$LOC/$FILE $4
     echo $'\n'
     echo -e "${bold}${fgGreen}Done!${reset}"
-}
-
-##
-# —[ DEVOPS ]— START ANSIBLE
-##
-function startansible() {
-    pyenv shell 2.7.13
-    printf 'Now using Python v%s ... \n' "${PYENV_VERSION}"
-    # shellcheck disable=1090
-    source "$PYTHON"/personal/ansible/bin/activate
-}
-
-###
-# —[ CONNECT ]— START CONNECT-API - (w/out PyCharm)
-####
-function connectapistartserver() {
-    cd "$CONNECT_API" &&
-    # PULL LATEST CHANGES FROM GITHUB
-    # echo -e "${bold}${fgYellow}Pulling latest code from GitHub...${reset}"
-    # git fetch origin &&
-    # git pull origin develop
-    # echo -e "${bold}${fgGreen}Done!${reset}"
-    # echo $'\n'
-
- #   # START MONGODB
-    echo -e "${bold}${fgYellow}Starting MongoDB...${reset}"
-    mongod --dbpath "$DATA"/db --fork --logpath /dev/null
-    echo -e "${bold}${fgGreen}Done!${reset}"
-    echo $'\n'
-
- #   # START CONNECT API
-    echo -e "${bold}${fgYellow}Starting the Connect API development server...${reset}"
-    # shellcheck disable=1090
-    source "$CONNECT_API_VENV"/bin/activate;
-    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" python manage.py runserver;
-    deactivate;
-    echo $'\n'
-    echo -e "${bold}${fgYellow}Shutting down the Connect API development server...${reset}"
-    echo -e "${bold}${fgGreen}Done!${reset}"
-
- #   # STOP MONGODB
-    echo $'\n'
-    echo -e "${bold}${fgYellow}Shutting down MongoDB...${reset}"
-    mongo admin --eval 'db.shutdownServer()' > /dev/null;
-    echo -e "${bold}${fgGreen}Done!${reset}"
-    echo
-}
-
-###
-# —[ CONNECT ]— START CELERY
-####
-function connectstartcelery() {
-    cd "$CONNECT_API" &&
-
- #   # WAIT FOR `connect-api` TO INITIALIZE
-    echo -e "${bold}${fgYellow}Waiting for connect-api to initialize...${reset}"
-    echo $'\n'
-    sleep 10 &&
-
- #   # STARTING CELERY
-    echo -e "${bold}${fgYellow}Starting Celery...${reset}"
-
-    # shellcheck disable=1090
-    source "$CONNECT_API_VENV"/bin/activate;
-    env MBO_ENV="development" DOTENV="$CONNECT_API_ENVIRONMENT/.connect-api.env" celery -A connect -l info worker;
-    deactivate
-
- #   # STOP CELERY
-    echo $'\n'
-    echo -e "${bold}${fgYellow}Shutting down Celery...${reset}"
-    echo -e "${bold}${fgGreen}Done!${reset}"
-}
-
-###
-# —[ KEYCLOAK ]— GET AUTHENTICATION TOKEN
-####
-function getauthtoken() {
-    # BASE KEYCLOAK & API VARIABLE DEFINITION(S)
-    KC_BASE_URL=https://sso2-dev.mbopartners.com/auth/realms;
-    KC_REALM_NAME=dev;
-    KC_CLIENT_ID=connect-web;
-    CONNECT_API_URL=http://localhost:8000;
-
- #   # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
-    echo -en "${bold}${fgBlue}Enter Username: ${reset}"
-    read -r USERNAME_INPUT
-    echo -en "${bold}${fgBlue}Enter Password: ${reset}"
-    read -rs PASSWORD_INPUT
-    echo
-
- #   # NORMALIZING USER INPUT PARAMETERS
-    KC_USERNAME=${USERNAME_INPUT,,};
-    KC_PASSWORD=$PASSWORD_INPUT;
-
-    echo -e "${bold}${fgYellow}Generating authenication token for $KC_USERNAME ... ${reset}";
-    curl -s \
-      "${KC_BASE_URL}/${KC_REALM_NAME}/protocol/openid-connect/token" \
-      -H 'Cache-Control: no-cache' -H 'Accept: application/json' \
-      -d "client_id=${KC_CLIENT_ID}" \
-      -d "username=${KC_USERNAME}" \
-      -d "password=${KC_PASSWORD}" \
-      -d 'grant_type=password' \
-      | jq -r '.access_token' \
-      | pbcopy;
-
- #   # GRAB THE `ACCESS_TOKEN` FROM CLIPBOARD
-    KC_ACCESS_TOKEN=$(pbpaste)
-
- #   # COPY THE FULL SNIPPET TO THE CLIPBOARD
-    echo -e "document.cookie=\"ACCESS_TOKEN=$KC_ACCESS_TOKEN;path=/;\"\\ndocument.cookie=\"CONNECT_API_URL=$CONNECT_API_URL;path=/;\"" | pbcopy;
-    echo
-    CLIPBOARD_CONTENTS=$(pbpaste)
-    # DISPLAY THE OUTPUT TO THE USER IN TERMINAL
-    echo -e "${fgWhite}$CLIPBOARD_CONTENTS${reset}"
-    echo
-}
-
-###
-# —[ KEYCLOAK ]— GET KEYCLOAK TOKEN
-####
-function getkeycloaktoken() {
-    if [ -z "${1}" ]; then
-        # DISPLAY USAGE IF NO PARAMETERS GIVEN
-        echo -en "${bold}${fgViolet}@USAGE:${reset}\n${fgYellow}getauthtoken <associate|enterprise>${reset}"
-        echo
-    else
-        # SAVE INITIAL BASH ARGUMENTS IN VARIABLE(S)
-        ROLE_TYPE_INPUT="$1"
-
- #       # CAPTURE USER INPUT(S) & STORE  IN VARIABLES(S)
-        echo -en "${bold}${fgViolet}Enter Username: ${reset}"
-        read -r USERNAME_INPUT
-        echo -en "${bold}${fgViolet}Enter Password: ${reset}"
-        read -rs PASSWORD_INPUT
-        echo
-
- #       # NORMALIZING USER INPUT(S)
-        KC_USERNAME=${USERNAME_INPUT,,};
-        KC_PASSWORD=$PASSWORD_INPUT;
-        ROLE_TYPE=${ROLE_TYPE_INPUT,,};
-
-        # shellcheck disable=1090
-        source "$VENVS_MBO"/local-start/bin/activate;
-        echo -e "${bold}${fgYellow}Generating authenication token for $KC_USERNAME ... ${reset}";
-        python "$SCRIPTS_MBO"/local_start/local_start.py -a connect-webapp -u "$KC_USERNAME" -p "$KC_PASSWORD" -v "$ROLE_TYPE" | pbcopy;
-        deactivate;
-        echo
-
- #       # STORE CLIPBOARD CONTENTS IN VARIABLE
-        CLIPBOARD_CONTENTS=$(pbpaste);
-        echo -e "${fgWhite}$CLIPBOARD_CONTENTS${reset}";
-        echo
-    fi
 }
 
 ###
@@ -557,7 +404,6 @@ dockerssh() {
 dockerexec() {
     sudo docker exec -i -t "${1}" "${2}"
 }
-
 
 ###
 # —[ GENERAL ]— FIND PROCESSES RUNNING ON A SPECIFICED PORT.

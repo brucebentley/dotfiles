@@ -44,7 +44,8 @@ PATH="$(brew --prefix openssl)/bin:$PATH"
 # `mysql` — v5.7
 #
 ################################################################################
-PATH="$(brew --prefix)/opt/mysql/bin:$PATH"
+#PATH="$(brew --prefix)/opt/mysql/bin:$PATH"
+PATH="$(brew --prefix)/opt/mysql@5.7/bin:$PATH"
 
 
 ################################################################################
