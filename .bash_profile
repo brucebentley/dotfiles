@@ -50,16 +50,15 @@ done;
 ##
 # ADD TAB COMPLETION FOR MANY BASH COMMANDS.
 ##
-if command -v brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
-    # ENSURE EXISTING HOMEBREW v1 COMPLETIONS CONTINUE TO WORK.
-    BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-    export BASH_COMPLETION_COMPAT_DIR
-
-    # shellcheck source=/usr/local/etc/profile.d/bash_completion.sh disable=1091
-    . "$(brew --prefix)/etc/profile.d/bash_completion.sh";
+if which brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
+    # Ensure existing Homebrew v1 completions continue to work
+    BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d";
+    export BASH_COMPLETION_COMPAT_DIR;
+    # shellcheck source=/dev/null
+    source "$(brew --prefix)/etc/profile.d/bash_completion.sh";
 elif [ -f /etc/bash_completion ]; then
     #shellcheck disable=1091
-    . /etc/bash_completion;
+    source /etc/bash_completion;
 fi;
 
 ##
@@ -72,40 +71,41 @@ fi;
 ##
 # ADD TAB COMPLETION FOR SSH HOSTNAMES BASED ON ~/.ssh/config, IGNORING WILDCARDS.
 ##
-# function __completeSSHHosts {
-#     COMPREPLY=()
-#     local currentWord=${COMP_WORDS[COMP_CWORD]}
-#     local completeHosts=$(
-#       cat "$HOME/.ssh/config" | \
-#         grep --extended-regexp "^Host +([^* ]+ +)*[^* ]+ *$" | \
-#         tr -s " " | \
-#         sed -E "s/^Host +//"
-#     )
-
-#     # COMPREPLY=( $(compgen -W "$completeHosts" -- "$currentWord") )
-#     mapfile -t COMPREPLY < <(compgen -W "$completeHosts" -- "$currentWord")
-#     return 0
-# }
-# complete -F __completeSSHHosts ssh
-
-_complete_ssh_hosts ()
-{
+function __completeSSHHosts {
     COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    comp_ssh_hosts=$(cmd < ~/.ssh/known_hosts 2>/dev/null | \
-                    cut -f 1 -d ' ' | \
-                    sed -e s/,.*//g | \
-                    grep -v ^# | \
-                    uniq | \
-                    grep -v "\[" ;
-                    cmd < ~/.ssh/config 2>/dev/null | \
-                    grep "^Host " | \
-                    awk '{print $2}'
-                    )
-    mapfile -t COMPREPLY < <(compgen -W "${comp_ssh_hosts}" -- "${cur}")
+    local currentWord=${COMP_WORDS[COMP_CWORD]}
+    completeHosts=$(
+      < "$HOME/.ssh/config" \
+        grep --extended-regexp "^Host +([^* ]+ +)*[^* ]+ *$" | \
+        tr -s " " | \
+        sed -E "s/^Host +//"
+    )
+    local completeHosts
+
+    # COMPREPLY=( $(compgen -W "$completeHosts" -- "$currentWord") )
+    mapfile -t COMPREPLY < <(compgen -W "$completeHosts" -- "$currentWord")
     return 0
 }
-complete -F _complete_ssh_hosts ssh
+complete -F __completeSSHHosts ssh
+
+# _complete_ssh_hosts ()
+# {
+#     COMPREPLY=()
+#     cur="${COMP_WORDS[COMP_CWORD]}"
+#     comp_ssh_hosts=$(cmd < ~/.ssh/known_hosts 2>/dev/null | \
+#                     cut -f 1 -d ' ' | \
+#                     sed -e s/,.*//g | \
+#                     grep -v ^# | \
+#                     uniq | \
+#                     grep -v "\[" ;
+#                     cmd < ~/.ssh/config 2>/dev/null | \
+#                     grep "^Host " | \
+#                     awk '{print $2}'
+#                     )
+#     mapfile -t COMPREPLY < <(compgen -W "${comp_ssh_hosts}" -- "${cur}")
+#     return 0
+# }
+# complete -F _complete_ssh_hosts ssh
 
 ##
 # ADD TAB COMPLETION FOR `defaults read|write nsglobaldomain`
@@ -118,44 +118,6 @@ complete -W "NSGlobalDomain" defaults;
 ##
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal" killall;
 
-
-################################################################################
-#
-# iTerm
-#
-################################################################################
-
-##
-# THIS WILL SET YOUR WINDOW TITLE.
-##
-export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
-
-##
-# iTerm SHELL INTEGRATION.
-##
-# shellcheck disable=1090
-test -e "$HOME/.iterm2_shell_integration.bash" && . ~/.iterm2_shell_integration."$(basename "$SHELL")"
-#!/usr/bin/env bash
-
-##
-# SET CUSTOM iTerm2 USER VARIABLES.
-##
-function iterm2_print_user_vars() {
-    iterm2_set_user_var badge "$(dir_badges)"
-}
-
-##
-# CUSTOM BADGES ON A DIRECTORY-BY-DIRECTOY BASIS, DEFINED IN `~/dotfiles/.badges`.
-##
-function dir_badges() {
-    while read -r directory badge || [[ -n "$directory" ]]
-    do
-        if [[ "$PWD" == $directory* ]]; then
-            echo "$badge"
-            break
-        fi
-    done < ~/dotfiles/.badges
-}
 
 ################################################################################
 #
@@ -195,9 +157,9 @@ export NVM_DIR="$HOME/.nvm"
 ##
 # Change Title Name Of Tab In Terminal.
 ##
-function title {
-    echo -ne "\033]0;\"$*\"\007"
-}
+#function title {
+#    echo -ne "\033]0;\"$*\"\007"
+#}
 
 ##
 # Check For A `.nvmrc` File When Entering A Directory, Then
@@ -249,3 +211,40 @@ chNodeVersion;
 ##
 #[ -f /Users/bbentley/.travis/travis.sh ] && source /Users/bbentley/.travis/travis.sh
 
+
+################################################################################
+#
+# iTerm
+#
+################################################################################
+
+##
+# THIS WILL SET YOUR WINDOW TITLE.
+##
+#export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
+
+##
+# iTerm SHELL INTEGRATION.
+##
+# shellcheck disable=1090
+test -e "$HOME/.iterm2_shell_integration.bash" && . "$HOME/.iterm2_shell_integration.bash"
+
+##
+# SET CUSTOM iTerm2 USER VARIABLES.
+##
+function iterm2_print_user_vars() {
+    iterm2_set_user_var badge "$(dir_badges)"
+}
+
+##
+# CUSTOM BADGES ON A DIRECTORY-BY-DIRECTOY BASIS, DEFINED IN `~/dotfiles/.badges`.
+##
+function dir_badges() {
+    while read -r directory badge || [[ -n "$directory" ]]
+    do
+        if [[ "$PWD" == $directory* ]]; then
+            echo "$badge"
+            break
+        fi
+    done < ~/dotfiles/.badges
+}
