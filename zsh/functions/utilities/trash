@@ -1,0 +1,18 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Move The Given File(S) To The Trash.
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function trash {
+    local path;
+    for path; do
+        # Make relative paths "absolutey".
+        [ "${path:0:1}" = '/' ] || path="$PWD/$1";
+
+        # Execute the AppleScript to nudge Finder.
+        echo "$(cat <<-EOD
+            tell application "Finder"
+                delete POSIX file "${path//\"/\"}"
+            end
+        EOD)" | osascript;
+    done;
+}

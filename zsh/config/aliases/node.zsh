@@ -1,54 +1,136 @@
-################################################################################
-#                                                                              #
-# NODE ALIASES                                                                 #
-#                                                                              #
-################################################################################
-
-##################################################
-# NPM                                            #
-##################################################
-alias np="npm"; # default npm install
-
-alias npi="npm i"; # install packages from package.json
-alias npis="npm i --save"; # install local package dependency
-alias npid="npm i --save-dev"; # install local package devDependency
-alias npig="npm i -g"; # install global package
-
-alias npl="npm ls --depth=0"; # list local packages
-alias nplg="npm ls -g --depth=0"; # list global packages
-
-alias nps="npm search"; # search packages
-
-alias npt="npm t"; # test packages
-
-alias npu="npm up"; # update local packages
-alias npug="npm up -g"; # update global packages
-
-alias npun="npm un"; # uninstall local packages
-alias npung="npm un -g"; # uninstall global packages
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Node Aliases for Zsh
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
-##################################################
-# YARN                                           #
-##################################################
-alias yar="yarn"; # default yarn install
+# - - - - - - - - - - - - - - - - - - - -
+# NPM
+# - - - - - - - - - - - - - - - - - - - -
 
-alias yarna="yarn add"; # add local package dependency
-alias yarnad="yarn add -D"; # add local package devDependency
-alias yarnap="yarn add -P"; # add local package peer dependency
-alias yarnag="yarn global add"; # add global package
-alias yarni="yarn install"; # install packages from package.json
+# Interactively Create A package.json File
+alias npmnew='npm init'
 
-alias yarnl="yarn list --depth=0"; # list local packages
-alias yarnlg="yarn global list --depth=0"; # list global packages
+# Interactively Create A package.json File ( Use Only Defaults And Not Prompt For Any Options )
+alias npmnewf='npm init -f'
 
-alias yarnr="yarn remove"; # remove local package
-alias yarnrg="yarn global remove"; # remove global package
+# Install Package / Dependencies
+alias npmI='npm i'
 
-alias yarns="yarn search"; # search packages
+# Install Package / Dependencies Globally
+alias npmg='npm i -g'
 
-alias yarnt="yarn test"; # test packages
+# Install And Save To Dependencies In package.json
+alias npmS='npm i -S'
 
-alias yarnu="yarn upgrade"; # upgrade local packages
-alias yarnui="yarn upgrade-interactive"; # interfactively upgrade local packages
-alias yarnuig="yarn global upgrade-interactive"; # interfactively upgrade global packages
+# Install And Save To Dependencies In package.json With An Exact Version
+alias npmSe='npm i -S -E'
+
+# Install And Save To devDependencies In package.json
+alias npmD='npm i -D'
+
+# Install And Save To devDependencies In package.json With An Exact Version
+alias npmDe='npm i -D -E'
+
+# Install And Save To optionalDependencies In package.json
+alias npmIo='npm i -O'
+
+# Install And Save To optionalDependencies In package.json With An Exact Version
+alias npmIoe='npm i -O -E'
+
+# Update Package(s)
+alias npmU='npm update'
+
+# Update Package(s) Globally
+alias npmUg='npm update -g'
+
+# Uninstall Package / Dependencies
+alias npmrm='npm rm'
+
+# Uninstall Package / Dependencies Globally
+alias npmrmg='npm rm -g'
+
+# Uninstall And Remove From Dependencies In package.json
+alias npmrms='npm rm -S'
+
+# Uninstall And Remove From devDependencies In package.json
+alias npmrmd='npm rm -D'
+
+# Uninstall And Remove From optionalDependencies In package.json
+alias npmrmo='npm rm -O'
+
+# Remove Extraneous Packages
+alias npmprn='npm prune'
+
+# Check Which NPM Modules Are Outdated
+alias npmO='npm outdated'
+
+# Symlink A Package Folder
+alias npmlnk='npm link'
+
+# List Packages
+alias npmL='npm list'
+
+# List Packages ( Only First Level )
+alias npmL0='npm list --depth=0'
+
+# List Packages Globally
+alias npmLg='npm list -g'
+
+# List Packages Globally ( Only First Level )
+alias npmLg0='npm list -g --depth=0'
+
+# Publish A Package
+alias npmP='npm publish'
+
+# Search In The NPM Database
+alias npmse='npm search'
+
+# Create Shrinkwrap
+alias npmsh='npm shrinkwrap'
+
+# Run `npm start`
+alias npmst='npm start'
+
+# Run `npm test`
+alias npmt='npm test'
+
+# Run Custom NPM Script
+alias npmR='npm run'
+
+# Run `npm audit`
+alias npmA='npm audit'
+
+# Run `npm audit fix`
+alias npmAf='npm audit fix'
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# Remove Lock Files
+# ! For Prevent Accidental Run
+# - - - - - - - - - - - - - - - - - - - -
+alias npmrsh!='rm -rf ./npm-shrinkwrap.json ./package-lock.json'
+alias npmrpl!='npmrsh!'
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# Clear `node_modules` In Current Directory
+# ! For Prevent Accidental Run
+# - - - - - - - - - - - - - - - - - - - -
+alias npmclr!='rm -rf ./node_modules/'
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# Reinstall Package
+# ! For Prevent Accidental Run
+# - - - - - - - - - - - - - - - - - - - -
+alias npmre!='npmclr! && npmI'
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# Reinstall Package With `remove-create package-lock`
+# ! For Prevent Accidental Run
+# - - - - - - - - - - - - - - - - - - - -
+alias npmres!='npmclr! && npmrsh! && npmI'
+

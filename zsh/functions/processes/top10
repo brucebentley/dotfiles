@@ -1,0 +1,12 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Show The Uptime ( Including Load ) And The Top 10 Processes By CPU Usage
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function top10 {
+    uptime;
+    if [[ "$OSTYPE" =~ ^darwin ]]; then
+        ps waux -r;
+    else
+        ps waux --sort='-%cpu';
+    fi | head -n 11 | cut -c "1-${COLUMNS:-80}";
+}

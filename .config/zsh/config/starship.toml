@@ -1,0 +1,70 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Starship Configuration - `~/.config/starship.toml`
+#
+#     Starship is the minimal, blazing fast, and extremely customizable
+#     prompt for any shell! The prompt shows information you need while
+#     you're working, while staying sleek and out of the way.
+#     https://starship.rs/
+#
+#     You can change default `~/.config/starship.toml` file location
+#     with `STARSHIP_CONFIG` environment variable:
+#
+#         export STARSHIP_CONFIG=~/.starship
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+add_newline = false             # Don't print a new line at the start of the prompt
+
+# Replace the "❯" symbol in the prompt with "⟶"
+[character]                     # The name of the module we are configuring is "character"
+#symbol = "➜"                    # The "symbol" segment is being set to "➜"
+symbol = "⟶"                    # The "symbol" segment is being set to "⟶"
+use_symbol_for_status = true    # Show "✖" when the command failed
+
+[directory]                     # The name of the module we are configuring is "directory"
+truncation_length = 5
+
+[git_branch]                    # The name of the module we are configuring is "git_branch"
+symbol = "🍣 "
+style = "bold yellow"
+
+[git_status]                    #
+conflicted = "⚔️ "
+ahead = "🏎️ 💨 "
+behind = "🐢 "
+diverged = "🔱 "
+untracked = "🛤️ "
+stashed = "📦 "
+modified = "📝 "
+staged = "🗃️ "
+renamed = "📛 "
+deleted = "🗑️ "
+prefix = "with "
+suffix = ""
+style = "bright-white"
+
+[hostname]                      # The name of the module we are configuring is "hostname"
+ssh_only = false
+prefix = "❮ "
+suffix = "❯"
+style = "bold dimmed white"
+disabled = true
+
+[memory_usage]                  # The name of the module we are configuring is "memory_usage"
+disabled = false
+show_percentage = true
+show_swap = true
+threshold = 30
+style = "bold dimmed green"
+
+[package]                       # The name of the module we are configuring is "package"
+disabled = true                 # Disable the package module, hiding it from the prompt completely
+
+[time]                          # The name of the module we are configuring is "time"
+disabled = false
+style = "bright-white"
+format = "🕙 %T"
+
+[username]                      # The name of the module we are configuring is "username"
+style_user = "bold dimmed blue"
+show_always = true

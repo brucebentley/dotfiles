@@ -1,46 +1,47 @@
 #!/usr/bin/env bash
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 # ~/.inputrc
 #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# MAKE TAB AUTOCOMPLETE REGARDLESS OF FILENAME CASE.
+# Make Tab Autocomplete Regardless Of Filename Case.
 set completion-ignore-case on
 
-# LIST ALL MATCHES IN CASE MULTIPLE POSSIBLE COMPLETIONS ARE POSSIBLE.
+# List All Matches In Case Multiple Possible Completions Are Possible.
 set show-all-if-ambiguous on
 
-# IMMEDIATELY ADD A TRAILING SLASH WHEN AUTOCOMPLETING SYMLINKS TO DIRECTORIES.
+# Immediately Add A Trailing Slash When Autocompleting Symlinks To Directories.
 set mark-symlinked-directories on
 
-# USE THE TEXT THAT HAS ALREADY BEEN TYPED AS THE PREFIX FOR SEARCHING THROUGH
-# COMMANDS (I.E. MORE INTELLIGENT UP/DOWN BEHAVIOR).
+# Use The Text That Has Already Been Typed As The Prefix For Searching Through
+# Commands ( e.g. More Intelligent Up/Down Behavior ).
 "\e[B": history-search-forward
 "\e[A": history-search-backward
 
-# DO NOT AUTOCOMPLETE HIDDEN FILES UNLESS THE PATTERN EXPLICITLY BEGINS WITH A DOT.
+# Do Not Autocomplete Hidden Files Unless The Pattern Explicitly Begins With A Dot.
 set match-hidden-files off
 
-# SHOW ALL AUTOCOMPLETE RESULTS AT ONCE.
+# Show All Autocomplete Results At Once.
 set page-completions off
 
-# IF THERE ARE MORE THAN 200 POSSIBLE COMPLETIONS FOR A WORD, ASK TO SHOW THEM ALL.
+# If There Are More Than 200 Possible Completions For A Word, Ask To Show Them All.
 set completion-query-items 200
 
-# SHOW EXTRA FILE INFORMATION WHEN COMPLETING, LIKE `ls -f` DOES.
+# Show Extra File Information When Completing, Like `ls -f` Does.
 set visible-stats on
 
-# BE MORE INTELLIGENT WHEN AUTOCOMPLETING BY ALSO LOOKING AT THE TEXT AFTER
-# THE CURSOR. FOR EXAMPLE, WHEN THE CURRENT LINE IS "cd ~/src/mozil", AND
-# THE CURSOR IS ON THE "Z", PRESSING TAB WILL NOT AUTOCOMPLETE IT TO "cd
-# ~/src/mozillail", BUT TO "cd ~/src/mozilla". (THIS IS SUPPORTED BY THE
-# READLINE USED BY BASH 4.).
+# Be More Intelligent When Autocompleting By Also Looking At The Text After The
+# Cursor. For Example, When The Current Line Is `cd ~/src/mozil`, And The Cursor
+# Is On The `z`, Pressing Tab Will Not Autocomplete It To `cd ~/src/mozillail`,
+# But To `cd ~/src/mozilla`. ( This Is Supported By The Readline Used By Bash 4 ).
 set skip-completed-text on
 
-# ALLOW UTF-8 INPUT AND OUTPUT, INSTEAD OF SHOWING STUFF LIKE $'\0123\0456'.
+# Allow UTF-8 Input And Output, Instead Of Showing Stuff Like $'\0123\0456'.
 set input-meta on
 set output-meta on
 set convert-meta off
 
-# USE ALT/META + DELETE TO DELETE THE PRECEDING WORD.
+# Use ALT/META + Delete To Delete The Preceding Word.
 "\e[3;3~": kill-word

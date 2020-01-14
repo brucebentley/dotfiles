@@ -1,0 +1,51 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Show A One-Line Process Tree Of The A Process
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Defaults to the current shell. By specifying this as a function
+# instead of a separate script, we avoid the extra shell process.
+#
+
+function process-tree {
+    pid="${1:-$$}";
+    orig_pid="$pid";
+    local commands=();
+    while [ "$pid" != "$ppid" ]; do
+        # Read the parent's process ID and the current process's command line.
+        {
+            read -d ' ' ppid;
+            read command;
+        } < <(ps c -p "$pid" -o ppid= -o command= | sed 's/^ *//');
+
+        # XXX This does not quite work yet with screen on OS x. Find out why.
+        # echo "PID: $pid // PPID: $ppid // CMD: $command" 1>&2;
+
+        # Stop when we have reached the first process, or an sshd/login process.
+        if [ -z "$ppid" ] || [ "$ppid" -eq 0 -o "$ppid" -eq 1 -o "$command" = 'login' -o "$command" = 'sshd' ]; then
+            # Include screen/xterm as the "root" process.
+            if [ "$command" = 'screen' -o "$command" = 'xterm' ]; then
+                commands=("$command" "${commands[@]}");
+            fi;
+            break;
+        fi;
+
+        # Insert the command in the front of the process array.
+        commands=("$command" "${commands[@]}");
+
+        # Prepare for the next iteration.
+        pid="$ppid";
+        ppid=;
+    done;
+
+    # Hide the first bash process.
+    set -- "${commands[@]}";
+    if [ "$1" = '-bash' -o "$1" = 'bash' ]; then
+        shift;
+        commands=("$@");
+    fi;
+
+    # Print the tree with the specified separator.
+    separator='→';
+    output="$(IFS="$separator"; echo "${commands[*]}")";
+    echo "${output//$separator/ $separator }";
+}
