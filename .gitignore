@@ -2,6 +2,7 @@
 # REPOSITORY-SPECIFIC FILES & DIRECTORIES
 ##################################################
 .personal
+**/personal.zsh
 
 ##################################################
 # macOS + OSX GENERATED FILES

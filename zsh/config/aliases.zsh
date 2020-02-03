@@ -758,3 +758,25 @@ alias eks-canvastest-int-gc-dev='export AWS_PROFILE=canvastest && \
           aws eks update-kubeconfig --name int-eks && \
           source <(kubectl completion bash) && \
           kubectl config set-context $(kubectl config current-context) --namespace gc-dev';
+
+# - - - - - - - - - - - - - - - - - - - -
+# Screen Captures
+# - - - - - - - - - - - - - - - - - - - -
+alias cleansnagit="rm -rfv ~/Library/Group\ Containers/*.com.techsmith.snagit/Snagit*/Temporary/*";
+
+function cleancaptures() {
+    local CAPTURE_DIRECTORY;
+    CAPTURE_DIRECTORY="$HOME/Dropbox/Personal/—[ NSFW ]—/—[ CAPTURES ]—";
+    local EXCLUDED_FILES;
+    EXCLUDED_FILES="Icon?";
+    local EXCLUDED_FOLDERS;
+    EXCLUDED_FOLDERS="*debris*";
+
+    echo -e "Cleaning out ${CAPTURE_DIRECTORY} ...";
+    find "${CAPTURE_DIRECTORY}" -type f ! -name "${EXCLUDED_FILES}" ! -path "${EXCLUDED_FOLDERS}" -print -exec rm -rfv {} +;
+    echo -e "Done!";
+
+    echo -e "Cleaning out SnagIt's temporary file directory ...";
+    cleansnagit;
+    echo -e "Done!";
+}

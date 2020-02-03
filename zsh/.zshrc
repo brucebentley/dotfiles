@@ -3,7 +3,7 @@
 # - - - - - - - - - - - - - - - - - - - -
 # Profiling Tools
 # - - - - - - - - - - - - - - - - - - - -
-PROFILE_STARTUP=true
+PROFILE_STARTUP=false
 if [[ "$PROFILE_STARTUP" == true ]]; then
     zmodload zsh/zprof
     # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
@@ -204,10 +204,10 @@ zplugin ice depth=1; zplugin light romkatv/powerlevel10k
 zplugin ice wait lucid
 zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
-zplugin ice wait'!' lucid
+zplugin ice wait lucid
 zplugin snippet OMZ::plugins/rbenv/rbenv.plugin.zsh
 
-zplugin ice wait'!' lucid
+zplugin ice wait lucid
 zplugin snippet OMZ::plugins/pyenv/pyenv.plugin.zsh
 
 # Load Docker Completion.
@@ -222,6 +222,11 @@ zplugin light zdharma/fast-syntax-highlighting
 
 zplugin ice wait atload"_zsh_autosuggest_start"
 zplugin light zsh-users/zsh-autosuggestions
+
+# Will use the array's value at the moment of plugin load
+# – this can matter in case of using Turbo mode
+array=( {exports,node,aliases,functions}.zsh )
+zplugin ice svn multisrc"$ZSH/config/$array" pick"/dev/null"
 
 # - - - - - - - - - - - - - - - - - - - -
 # cdr, persistent cd
@@ -253,13 +258,9 @@ setopt auto_pushd pushd_silent pushd_to_home
 setopt pushd_ignore_dups        # Remove Duplicate Entries
 setopt pushd_minus              # This Reverts The +/- Operators.
 
-# Aliases
-# Load the shell dotfiles, and then some:
-# * ~/.extra can be used for other settings you don’t want to commit.
-# for file in "$ZSH/config/{exports,aliases,functions}.zsh"; do
-#     [ -r "$file" ] && [ -f "$file" ] && source "$file"
-# done;
-
+# - - - - - - - - - - - - - - - - - - - -
+# Theme / Prompt Customization
+# - - - - - - - - - - - - - - - - - - - -
 # To Customize Prompt, Run `p10k configure` Or Edit `~/.p10k.zsh`.
 [[ ! -f ~/.p10k.zsh ]] || . ~/.p10k.zsh
 
