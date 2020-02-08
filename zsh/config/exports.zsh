@@ -183,7 +183,8 @@ export PKG_CONFIG_PATH="$(brew --prefix wget)/lib/pkgconfig"
 # - - - - - - - - - - - - - - - - - - - -
 # Composer
 # - - - - - - - - - - - - - - - - - - - -
-export PATH="$COMPOSER_HOME/vendor/bin:$PATH"
+export COMPOSER_HOME="${HOME}/.composer"
+export PATH="${COMPOSER_HOME}/vendor/bin:$PATH"
 
 # - - - - - - - - - - - - - - - - - - - -
 # ImageMagick

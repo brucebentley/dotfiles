@@ -8,10 +8,10 @@
 # `rbenv` — Python Environment Manager
 # - - - - - - - - - - - - - - - - - - - -
 
-zplugin ice atclone'PYENV_ROOT="$HOME/.pyenv" ./libexec/pyenv init - > zpyenv.zsh' \
+zinit ice atclone'PYENV_ROOT="$HOME/.pyenv" ./libexec/pyenv init - > zpyenv.zsh' \
     atinit'export PYENV_ROOT="$HOME/.pyenv"' atpull"%atclone" \
     as'command' pick'bin/pyenv' src"zpyenv.zsh" nocompile'!'
-zplugin light pyenv/pyenv
+zinit light pyenv/pyenv
 
 # # Load pyenv ( If Available )
 # if (( $+commands[pyenv] )) ; then

@@ -485,3 +485,12 @@ alias eks-main-int='export AWS_PROFILE=canvasprod && aws eks update-kubeconfig -
 alias eks-canvastest-int='export AWS_PROFILE=canvastest && aws eks update-kubeconfig --name int-eks && source <(kubectl completion bash)'
 alias eks-canvastest-int-gc-dev='export AWS_PROFILE=canvastest && aws eks update-kubeconfig --name int-eks && source <(kubectl completion bash) && kubectl config set-context $(kubectl config current-context) --namespace gc-dev'
 
+# - - - - - - - - - - - - - - - - - - - -
+# Code Editor + IDE
+# - - - - - - - - - - - - - - - - - - - -
+# Open .zshrc To Be Edited In Vs Code
+alias change='code-insiders ~/.bashrc'
+# Re-Run Source Command On .zshrc To Update Current Terminal Session With New Settings
+alias update='source ~/.bashrc'
+
+

@@ -22,6 +22,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 # - - - - - - - - - - - - - - - - - - - -
 # Homebrew Configuration
 # - - - - - - - - - - - - - - - - - - - -
@@ -31,6 +32,7 @@ export PATH="$HOME/bin:/usr/local/bin:$PATH"
 
 # Homebrew Requires This.
 export PATH="/usr/local/sbin:$PATH"
+
 
 # - - - - - - - - - - - - - - - - - - - -
 # Zsh Core Configuration
@@ -62,19 +64,6 @@ unset _comp_files
 promptinit
 setopt prompt_subst
 
-# - - - - - - - - - - - - - - - - - - - -
-# Zplugin Configuration
-# - - - - - - - - - - - - - - - - - - - -
-if [[ ! -d $HOME/.zplugin/bin ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing Zplugin…%f"
-    command mkdir -p "$HOME/.zplugin"
-    command git clone https://github.com/zdharma/zplugin "$HOME/.zplugin/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%F" || \
-        print -P "%F{160}▓▒░ The clone has failed.%F"
-fi
-. "$HOME/.zplugin/bin/zplugin.zsh"
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
 
 # - - - - - - - - - - - - - - - - - - - -
 # ZSH Settings
@@ -157,6 +146,72 @@ setopt hist_save_no_dups        # Do Not Write A Duplicate Event To The History 
 setopt hist_verify              # Do Not Execute Immediately Upon History Expansion.
 setopt extended_history         # Show Timestamp In History.
 
+setopt promptsubst              # Most Themes Use This Option.
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# zinit Configuration
+# - - - - - - - - - - - - - - - - - - - -
+__ZINIT="${ZDOTDIR:-$HOME}/.zinit/bin/zinit.zsh"
+
+if [[ ! -f "$__ZINIT" ]]; then
+    if (( $+commands[curl] )); then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+    else
+        echo 'curl not found' >&2
+        exit 1
+    fi
+fi
+
+. "$__ZINIT"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# Plugins
+# - - - - - - - - - - - - - - - - - - - -
+zinit wait lucid for \
+    OMZ::lib/compfix.zsh \
+    OMZ::lib/completion.zsh \
+    OMZ::lib/functions.zsh \
+    OMZ::lib/diagnostics.zsh \
+    OMZ::lib/git.zsh \
+    OMZ::lib/grep.zsh \
+    OMZ::lib/key-bindings.zsh \
+    OMZ::lib/misc.zsh \
+    OMZ::lib/spectrum.zsh \
+    OMZ::lib/termsupport.zsh \
+    OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
+    OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
+    OMZ::plugins/git-auto-fetch/git-auto-fetch.plugin.zsh \
+    OMZ::plugins/git/git.plugin.zsh \
+    htlsne/zplugin-rbenv \
+    OMZ::plugins/pyenv/pyenv.plugin.zsh \
+    OMZ::plugins/docker/_docker \
+    OMZ::plugins/composer/composer.plugin.zsh \
+    OMZ::plugins/thefuck/thefuck.plugin.zsh
+
+# Set OMZ Theme.
+PS1="READY >"
+zinit ice wait'!' lucid
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Semi-graphical .zshrc editor for zinit commands
+zinit load zdharma/zui
+zinit ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
+zinit load zdharma/zplugin-crasis
+
+# Recommended Be Loaded Last.
+zinit ice wait blockf lucid atpull'zinit creinstall -q .'
+zinit load zsh-users/zsh-completions
+
+zinit ice wait lucid atinit"zpcompinit; zpcdreplay" atload"unset 'FAST_HIGHLIGHT[chroma-whatis]' 'FAST_HIGHLIGHT[chroma-man]'"
+zinit load zdharma/fast-syntax-highlighting
+
+zinit ice wait lucid atload"_zsh_autosuggest_start"
+zinit load zsh-users/zsh-autosuggestions
+
 # - - - - - - - - - - - - - - - - - - - -
 # User Configuration
 # - - - - - - - - - - - - - - - - - - - -
@@ -169,64 +224,22 @@ setopt no_beep
 # Local Config
 # [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
-foreach piece (
+# Local plugins/completions/etc... {{{
+
+# Will use the array's value at the moment of plugin load
+# – this can matter in case of using Turbo mode
+# array=( {exports,node,aliases,functions}.zsh )
+# zinit load $ZSH/config/$array
+
+    foreach piece (
     exports.zsh
     node.zsh
     aliases.zsh
     functions.zsh
 ) {
-    source $ZSH/config/$piece
+    . $ZSH/config/$piece
 }
 
-# - - - - - - - - - - - - - - - - - - - -
-# Plugins
-# - - - - - - - - - - - - - - - - - - - -
-# Most Themes Use This Option.
-setopt promptsubst
-
-# OMZ Themes Use This Library.
-zplugin ice wait lucid
-zplugin snippet OMZ::lib/git.zsh
-
-zplugin ice wait lucid
-zplugin snippet OMZ::plugins/git/git.plugin.zsh
-# Load Two Oh My ZSH Files As Snippets, In Turbo:
-zplugin wait lucid for \
-    OMZ::lib/git.zsh \
-    OMZ::plugins/git/git.plugin.zsh
-
-# Set OMZ Theme.
-PS1="READY >"    # Provide A Nice Prompt Till The Theme Loads.
-zplugin ice wait'!' lucid
-zplugin ice depth=1; zplugin light romkatv/powerlevel10k
-
-# Example Functional Plugin.
-zplugin ice wait lucid
-zplugin snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
-
-zplugin ice wait lucid
-zplugin snippet OMZ::plugins/rbenv/rbenv.plugin.zsh
-
-zplugin ice wait lucid
-zplugin snippet OMZ::plugins/pyenv/pyenv.plugin.zsh
-
-# Load Docker Completion.
-zplugin ice wait as"completion" lucid
-zplugin snippet OMZ::plugins/docker/_docker
-
-zplugin ice wait blockf atpull'zplugin creinstall -q .'
-zplugin light zsh-users/zsh-completions
-
-zplugin ice wait atinit"zpcompinit; zpcdreplay"
-zplugin light zdharma/fast-syntax-highlighting
-
-zplugin ice wait atload"_zsh_autosuggest_start"
-zplugin light zsh-users/zsh-autosuggestions
-
-# Will use the array's value at the moment of plugin load
-# – this can matter in case of using Turbo mode
-array=( {exports,node,aliases,functions}.zsh )
-zplugin ice svn multisrc"$ZSH/config/$array" pick"/dev/null"
 
 # - - - - - - - - - - - - - - - - - - - -
 # cdr, persistent cd
@@ -257,6 +270,7 @@ setopt auto_pushd pushd_silent pushd_to_home
 
 setopt pushd_ignore_dups        # Remove Duplicate Entries
 setopt pushd_minus              # This Reverts The +/- Operators.
+
 
 # - - - - - - - - - - - - - - - - - - - -
 # Theme / Prompt Customization

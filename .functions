@@ -429,3 +429,15 @@ function convertImages() {
     fi
 }
 
+##
+# —[ FFMPEG ]— DOWNLOAD PROTECTED STREAMING VIDEOS USING THEIR `m3u8` PLAYLIST CHUNKS.
+##
+ffmpeg-dl() {
+    if [ -z "${1}" -o -z "${2}" ]; then
+        # DISPLAY USAGE IF NO PARAMETERS GIVEN
+        echo -en "${bold}${fgViolet}@USAGE:${reset}\t\`${fgYellow}ffmpeg-dl input-url output-file${reset}\`";
+        echo -en "${bold}${fgViolet}@EXAMPLE:${reset}\t\`${fgYellow}ffmpeg-dl http://example.com/video_url.m3u8 output.mp4${reset}\`";
+        return 1;
+    fi;
+    ffmpeg -i "${1}" -c copy -bsf:a aac_adtstoasc "${2}";
+}

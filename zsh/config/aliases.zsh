@@ -759,6 +759,20 @@ alias eks-canvastest-int-gc-dev='export AWS_PROFILE=canvastest && \
           source <(kubectl completion bash) && \
           kubectl config set-context $(kubectl config current-context) --namespace gc-dev';
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# Personal Aliases for Zsh
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# - - - - - - - - - - - - - - - - - - - -
+# Code Editor + IDE
+# - - - - - - - - - - - - - - - - - - - -
+# Open .zshrc To Be Edited In Vs Code
+alias change='code-insiders ~/.zshrc'
+# Re-Run Source Command On .zshrc To Update Current Terminal Session With New Settings
+alias update='source ~/.zshrc'
+
 # - - - - - - - - - - - - - - - - - - - -
 # Screen Captures
 # - - - - - - - - - - - - - - - - - - - -
@@ -780,3 +794,8 @@ function cleancaptures() {
     cleansnagit;
     echo -e "Done!";
 }
+
+# - - - - - - - - - - - - - - - - - - - -
+# Fun Stuff
+# - - - - - - - - - - - - - - - - - - - -
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
