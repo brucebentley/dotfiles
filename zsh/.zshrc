@@ -3,6 +3,7 @@
 # - - - - - - - - - - - - - - - - - - - -
 # Profiling Tools
 # - - - - - - - - - - - - - - - - - - - -
+
 PROFILE_STARTUP=false
 if [[ "$PROFILE_STARTUP" == true ]]; then
     zmodload zsh/zprof
@@ -12,9 +13,11 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
     setopt xtrace prompt_subst
 fi
 
+
 # - - - - - - - - - - - - - - - - - - - -
 # Instant Prompt
 # - - - - - - - - - - - - - - - - - - - -
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of `~/.zshrc`.
 # Initialization code that may require console input ( password prompts, [y/n]
 # confirmations, etc. ) must go above this block, everything else may go below.
@@ -26,8 +29,9 @@ fi
 # - - - - - - - - - - - - - - - - - - - -
 # Homebrew Configuration
 # - - - - - - - - - - - - - - - - - - - -
+
 # If You Come From Bash You Might Have To Change Your $PATH.
-# export PATH=:/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
+#   export PATH=:/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
 
 # Homebrew Requires This.
@@ -37,6 +41,7 @@ export PATH="/usr/local/sbin:$PATH"
 # - - - - - - - - - - - - - - - - - - - -
 # Zsh Core Configuration
 # - - - - - - - - - - - - - - - - - - - -
+
 # Install Functions.
 export XDG_CONFIG_HOME="$HOME/.config"
 export UPDATE_INTERVAL=15
@@ -68,6 +73,7 @@ setopt prompt_subst
 # - - - - - - - - - - - - - - - - - - - -
 # ZSH Settings
 # - - - - - - - - - - - - - - - - - - - -
+
 autoload -U colors && colors    # Load Colors.
 unsetopt case_glob              # Use Case-Insensitve Globbing.
 setopt globdots                 # Glob Dotfiles As Well.
@@ -146,21 +152,19 @@ setopt hist_save_no_dups        # Do Not Write A Duplicate Event To The History 
 setopt hist_verify              # Do Not Execute Immediately Upon History Expansion.
 setopt extended_history         # Show Timestamp In History.
 
-setopt promptsubst              # Most Themes Use This Option.
-
 
 # - - - - - - - - - - - - - - - - - - - -
-# zinit Configuration
+# Zinit Configuration
 # - - - - - - - - - - - - - - - - - - - -
+
 __ZINIT="${ZDOTDIR:-$HOME}/.zinit/bin/zinit.zsh"
 
 if [[ ! -f "$__ZINIT" ]]; then
-    if (( $+commands[curl] )); then
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
-    else
-        echo 'curl not found' >&2
-        exit 1
-    fi
+    print -P "%F{33}▓▒░ %F{220}Installing DHARMA Initiative Plugin Manager (zdharma/zinit)…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
 . "$__ZINIT"
@@ -169,52 +173,88 @@ autoload -Uz _zinit
 
 
 # - - - - - - - - - - - - - - - - - - - -
-# Plugins
+# Theme
 # - - - - - - - - - - - - - - - - - - - -
-zinit wait lucid for \
-    OMZ::lib/compfix.zsh \
-    OMZ::lib/completion.zsh \
-    OMZ::lib/functions.zsh \
-    OMZ::lib/diagnostics.zsh \
-    OMZ::lib/git.zsh \
-    OMZ::lib/grep.zsh \
-    OMZ::lib/key-bindings.zsh \
-    OMZ::lib/misc.zsh \
-    OMZ::lib/spectrum.zsh \
-    OMZ::lib/termsupport.zsh \
-    OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
-    OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
-    OMZ::plugins/git-auto-fetch/git-auto-fetch.plugin.zsh \
-    OMZ::plugins/git/git.plugin.zsh \
-    htlsne/zplugin-rbenv \
-    OMZ::plugins/pyenv/pyenv.plugin.zsh \
-    OMZ::plugins/docker/_docker \
-    OMZ::plugins/composer/composer.plugin.zsh \
-    OMZ::plugins/thefuck/thefuck.plugin.zsh
 
-# Set OMZ Theme.
+# Most Themes Use This Option.
+setopt promptsubst
+
+# These plugins provide many aliases - atload''
+zinit wait lucid for \
+        OMZ::lib/git.zsh \
+    atload"unalias grv" \
+        OMZ::plugins/git/git.plugin.zsh
+
+# Provide A Simple Prompt Till The Theme Loads
 PS1="READY >"
 zinit ice wait'!' lucid
 zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# Annexes
+# - - - - - - - - - - - - - - - - - - - -
+
+# Load a few important annexes, without Turbo (this is currently required for annexes)
+zinit light-mode compile"handler" for \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-bin-gem-node \
+    zinit-zsh/z-a-submods \
+    zdharma/declare-zsh
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# Plugins
+# - - - - - - - - - - - - - - - - - - - -
+
+zinit wait lucid light-mode for \
+      OMZ::lib/compfix.zsh \
+      OMZ::lib/completion.zsh \
+      OMZ::lib/functions.zsh \
+      OMZ::lib/diagnostics.zsh \
+      OMZ::lib/git.zsh \
+      OMZ::lib/grep.zsh \
+      OMZ::lib/key-bindings.zsh \
+      OMZ::lib/misc.zsh \
+      OMZ::lib/spectrum.zsh \
+      OMZ::lib/termsupport.zsh \
+      OMZ::plugins/git-auto-fetch/git-auto-fetch.plugin.zsh \
+  atinit"zicompinit; zicdreplay" \
+        zdharma/fast-syntax-highlighting \
+      OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh \
+      OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
+  atload"_zsh_autosuggest_start" \
+      zsh-users/zsh-autosuggestions \
+  as"completion" \
+      OMZ::plugins/docker/_docker \
+      OMZ::plugins/composer/composer.plugin.zsh \
+      OMZ::plugins/thefuck/thefuck.plugin.zsh
+
+# Recommended Be Loaded Last.
+zinit ice wait blockf lucid atpull'zinit creinstall -q .'
+zinit load zsh-users/zsh-completions
+
+# rbenv
+zinit ice has'rbenv' id-as'rbenv' atpull'%atclone' \
+    atclone"rbenv init - --no-rehash > htlsne/zplugin-rbenv"
+zinit load zdharma/null
+
+# pyenv
+zinit ice has'pyenv' id-as'pyenv' atpull'%atclone' \
+    atclone"pyenv init - --no-rehash > pyenv.plugin.zsh"
+zinit load zdharma/null
 
 # Semi-graphical .zshrc editor for zinit commands
 zinit load zdharma/zui
 zinit ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
 zinit load zdharma/zplugin-crasis
 
-# Recommended Be Loaded Last.
-zinit ice wait blockf lucid atpull'zinit creinstall -q .'
-zinit load zsh-users/zsh-completions
-
-zinit ice wait lucid atinit"zpcompinit; zpcdreplay" atload"unset 'FAST_HIGHLIGHT[chroma-whatis]' 'FAST_HIGHLIGHT[chroma-man]'"
-zinit load zdharma/fast-syntax-highlighting
-
-zinit ice wait lucid atload"_zsh_autosuggest_start"
-zinit load zsh-users/zsh-autosuggestions
 
 # - - - - - - - - - - - - - - - - - - - -
 # User Configuration
 # - - - - - - - - - - - - - - - - - - - -
+
 setopt no_beep
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -224,14 +264,7 @@ setopt no_beep
 # Local Config
 # [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
-# Local plugins/completions/etc... {{{
-
-# Will use the array's value at the moment of plugin load
-# – this can matter in case of using Turbo mode
-# array=( {exports,node,aliases,functions}.zsh )
-# zinit load $ZSH/config/$array
-
-    foreach piece (
+foreach piece (
     exports.zsh
     node.zsh
     aliases.zsh
@@ -244,6 +277,7 @@ setopt no_beep
 # - - - - - - - - - - - - - - - - - - - -
 # cdr, persistent cd
 # - - - - - - - - - - - - - - - - - - - -
+
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 DIRSTACKFILE="$HOME/.cache/zsh/dirs"
@@ -275,12 +309,15 @@ setopt pushd_minus              # This Reverts The +/- Operators.
 # - - - - - - - - - - - - - - - - - - - -
 # Theme / Prompt Customization
 # - - - - - - - - - - - - - - - - - - - -
+
 # To Customize Prompt, Run `p10k configure` Or Edit `~/.p10k.zsh`.
 [[ ! -f ~/.p10k.zsh ]] || . ~/.p10k.zsh
+
 
 # - - - - - - - - - - - - - - - - - - - -
 # End Profiling Script
 # - - - - - - - - - - - - - - - - - - - -
+
 if [[ "$PROFILE_STARTUP" == true ]]; then
     unsetopt xtrace
     exec 2>&3 3>&-

@@ -86,7 +86,7 @@ alias rm='rm -i';
 alias nano='nano -w';
 alias pico='nano';
 alias vi='vim';
-export EDITOR='vim';
+export EDITOR='nvim';
 
 # Make Sure "View" As-Is Works When stdin Is Not A Terminal And Prevent The
 # Normal Ensuing Keyboard Input Chaos.
@@ -162,10 +162,11 @@ function pro {
 
 # Always Use Colour Output For "ls".
 if [[ "$OSTYPE" =~ ^darwin ]]; then
-    alias ls='command ls -G';
-    COLORFLAG="-G";
+    alias ls='command ls --color=auto';
+    COLORFLAG="--color";
     export COLORFLAG;
-    export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx';
+    #export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx';
+    export LSCOLORS='gxfxcxdxbxGxDxabagacad';
 else
     alias ls='command ls --color=auto';
     COLORFLAG="--color"
@@ -174,16 +175,28 @@ else
 fi;
 
 # List All Files Colorized In Long Format.
-alias l="ls -lF ${COLORFLAG}"
+#alias l="ls -lF ${COLORFLAG}"
 
 # List All Files Colorized In Long Format, Excluding . And ..
-alias la="ls -lAF ${COLORFLAG}"
+#alias la="ls -lAF ${COLORFLAG}"
 
 # List Only Directories.
-alias lsd="ls -lF ${COLORFLAG} | grep --color=never '^d'"
+#alias lsd="ls -lF ${COLORFLAG} | grep --color=never '^d'"
 
 # Always Use Color Output For `ls`.
 alias ls="command ls ${COLORFLAG}"
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# ColorLS
+# - - - - - - - - - - - - - - - - - - - -
+alias l='colorls --gs --sd'
+alias la='colorls -1A --sd --gs --report '
+alias ll='colorls -lA --sd --gs --report '
+alias lsd='colorls -1d --sd --gs --report '
+alias lsf='colorls -1f --sd --gs --report '
+alias lsg='colorls -A --sd --gs --report '
+alias lst='colorls -A --sd --tree '
 
 
 # - - - - - - - - - - - - - - - - - - - -
