@@ -49,6 +49,9 @@
     # Credit an author on the latest commit
     credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 
+    # Create an empty commit with message & push to the remote origin, triggering a build pipeline
+    empty = "!e() { git commit --allow-empty -m \"$1\" && git push; } e"
+
     # Interactive rebase with the given number of latest commits
     reb = "!r() { git rebase -i HEAD~$1; }; r"
 
