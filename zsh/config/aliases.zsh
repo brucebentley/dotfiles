@@ -615,6 +615,10 @@ alias brew-deps="brew deps --installed"
 #alias brew-graph="brew graph --installed | dot -tpng -ograph.png && open graph.png"
 alias brew-graph="brew graph --installed --highlight-leaves | fdp -tpng -ograph.png && open graph.png"
 
+# - - - - - - - - - - - - - - - - - - - -
+# Git
+# - - - - - - - - - - - - - - - - - - - -
+alias gitdelete='git branch | egrep -v "(master|staging|develop|release_candidate\*)" | xargs git branch -D'
 
 # - - - - - - - - - - - - - - - - - - - -
 # Google Chrome
@@ -786,29 +790,30 @@ alias change='code-insiders ~/.zshrc'
 # Re-Run Source Command On .zshrc To Update Current Terminal Session With New Settings
 alias update='source ~/.zshrc'
 
+
 # - - - - - - - - - - - - - - - - - - - -
-# Screen Captures
+# Rails
 # - - - - - - - - - - - - - - - - - - - -
-alias cleansnagit="rm -rfv ~/Library/Group\ Containers/*.com.techsmith.snagit/Snagit*/Temporary/*";
-
-function cleancaptures() {
-    local CAPTURE_DIRECTORY;
-    CAPTURE_DIRECTORY="$HOME/Dropbox/Personal/—[ NSFW ]—/—[ CAPTURES ]—";
-    local EXCLUDED_FILES;
-    EXCLUDED_FILES="Icon?";
-    local EXCLUDED_FOLDERS;
-    EXCLUDED_FOLDERS="*debris*";
-
-    echo -e "Cleaning out ${CAPTURE_DIRECTORY} ...";
-    find "${CAPTURE_DIRECTORY}" -type f ! -name "${EXCLUDED_FILES}" ! -path "${EXCLUDED_FOLDERS}" -print -exec rm -rfv {} +;
-    echo -e "Done!";
-
-    echo -e "Cleaning out SnagIt's temporary file directory ...";
-    cleansnagit;
-    echo -e "Done!";
+# Look For A Specific Line In `config_secure.yml` Across All Rails Applications In A Shared Web Instance.
+get_rails_config() {
+  # If No Argument For The Rails Environment Name Is Passed In, Display An Alert & Usage Example.
+  if [ -z "${1}" ]; then
+    echo -en "No Rails environment was specified!\n"
+    echo
+    echo -en "${bold}${violet}@USAGE:${reset}\n\t${yellow}$ get_rails_config [RAILS_ENV]\n"
+    echo
+    echo -en "${bold}${violet}@EXAMPLE:${reset}\n\t$ get_rails_config demo"
+    echo
+  else
+    # Locally Scope These To Prevent Any Chance Of OS-Level Environment Variable Inheritance.
+    local RAILS_ENV="${1}";
+    local WEB_ROOT='/var/www/html';
+    grep -H -R "${RAILS_ENV}:" "${WEB_ROOT}"/*/shared/system/config_secure.yml;
+  fi
 }
+
 
 # - - - - - - - - - - - - - - - - - - - -
 # Fun Stuff
 # - - - - - - - - - - - - - - - - - - - -
-alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+alias rr='curl -s -L https://gist.githubusercontent.com/brucebentley/c3e854a922fffae785897ac442ab70b3/raw/452a47d06b3b47eb8ccd2c50684a02c008b46330/roll.sh | bash'

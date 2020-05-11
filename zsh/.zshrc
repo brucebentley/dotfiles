@@ -271,6 +271,7 @@ foreach piece (
     node.zsh
     aliases.zsh
     functions.zsh
+    personal.zsh
 ) {
     . $ZSH/config/$piece
 }
@@ -325,3 +326,20 @@ if [[ "$PROFILE_STARTUP" == true ]]; then
     exec 2>&3 3>&-
     zprof > ~/zshprofile$(date +'%s')
 fi
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# iTerm2 Shell Integration
+# - - - - - - - - - - - - - - - - - - - -
+test -e "$HOME/.iterm2_shell_integration.zsh" && . "$HOME/.iterm2_shell_integration.zsh" || true
+
+iterm2_print_user_vars() {
+    # Extend This To Add Whatever You Want To Have Printed Out In The Status Bar.
+    iterm2_set_user_var nodeVersion $(node -v)
+    iterm2_set_user_var pwd $(pwd)
+
+    iterm2_set_user_var awsProfile $AWS_PROFILE
+
+    # KUBECONTEXT=$(CTX=$(kubectl config current-context) 2> /dev/null;if [ $? -eq 0 ]; then echo $CTX;fi)
+    # iterm2_set_user_var kubeContext $KUBECONTEXT
+}

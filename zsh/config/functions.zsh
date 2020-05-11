@@ -113,6 +113,26 @@ function server() {
     python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port";
 }
 
+function server() {
+    local currentDir="${PWD##*/}";
+    local localhostname
+    localhostname="${1:-${currentDir}}";
+    local port
+    port="${2:-4443}";
+    local certpath
+    certpath="${3:-${HOME}/dev/Personal/certs/localhost.pem}";
+    local keypath
+    keypath="${3:-${HOME}/dev/Personal/certs/localhost-key.pem}";
+
+    sleep 1 && open "https://${localhostname}.dev.local:${port}/" &
+
+    # SET THE DEFAULT CONTENT-TYPE TO `text/plain` INSTEAD OF `application/octet-stream`
+    # AND SERVE EVERYTHING AS UTF-8 (ALTHOUGH NOT TECHNICALLY CORRECT, THIS DOESN’T BREAK ANYTHING FOR BINARY FILES)
+    python "${HOME}"/dotfiles/shellscripts/python/simple-server.py "${localhostname}" "${port}" "${certpath}" "${keypath}";
+}
+
+
+
 #
 # —[ GENERAL ]— START A PHP SERVER FROM A DIRECTORY, OPTIONALLY SPECIFYING THE PORT
 # (REQUIRES PHP 5.4.0+.)

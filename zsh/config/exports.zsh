@@ -29,8 +29,8 @@ case $OSTYPE {
   export GNU_FINDUTILS_MAN_HOME='$(brew --prefix)/opt/findutils/libexec/gnuman'
   export GNU_GREP_HOME='$(brew --prefix grep)/libexec/gnubin'
   export GNU_GREP_MAN_HOME='$(brew --prefix grep)/libexec/gnuman'
-  export OPENSSL_HOME='$(brew --prefix)/opt/openssl/bin'
-  export OPENSSL_MAN_HOME='$(brew --prefix)/opt/openssl/man'
+  export OPENSSL_HOME='$(brew --prefix)/opt/openssl@1.1/bin'
+  export OPENSSL_MAN_HOME='$(brew --prefix)/opt/openssl@1.1/man'
   export JAVA_HOME=/usr/libexec/java_home
 
   path=(
@@ -141,10 +141,10 @@ export MANPAGER="nvim +'set filetype=man' -"
 export PATH="$(brew --prefix wget)/bin:$PATH"
 
 # Set The OpenSSL Directories To Use From Homebrew.
-export LDFLAGS="-L$(brew --prefix wget)/lib"
-export CPPFLAGS="-I$(brew --prefix wget)/include"
+export LDFLAGS="-L$(brew --prefix)/opt/openssl@1.1/lib"
+export CPPFLAGS="-I$(brew --prefix)/opt/openssl@1.1/include"
 # For Pkg-Config To Find Openssl You May Need To Set.
-export PKG_CONFIG_PATH="$(brew --prefix wget)/lib/pkgconfig"
+export PKG_CONFIG_PATH="$(brew --prefix)/opt/openssl@1.1/lib/pkgconfig"
 
 # - - - - - - - - - - - - - - - - - - - -
 # Default Pager
@@ -211,6 +211,26 @@ export PATH="$(brew --prefix)/opt/mysql@5.7/bin:$PATH"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
+# Environment Configuration
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# - - - - - - - - - - - - - - - - - - - -
+# AWS CLI
+# - - - - - - - - - - - - - - - - - - - -
+# Set The Default AWS Profile To Use
+#
+# Available Profiles
+#   - Default ( brucebentley )
+#   - administrator
+#   - bbentley
+#   - canvas-test
+#   - optimizely
+export AWS_DEFAULT_PROFILE="default"
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
 # Utilities
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -223,7 +243,7 @@ export PATH="$(brew --prefix)/opt/mysql@5.7/bin:$PATH"
 # - - - - - - - - - - - - - - - - - - - -
 # Sketch
 # - - - - - - - - - - - - - - - - - - - -
-#export PATH="Sketch.app/Contents/Resources/sketchtool/bin:$PATH"
+export PATH="Sketch.app/Contents/Resources/sketchtool/bin:$PATH"
 
 # - - - - - - - - - - - - - - - - - - - -
 # Transmission
