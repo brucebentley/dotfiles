@@ -59,35 +59,34 @@ echo -e "APPLE ID: $SIGNED_IN_USER"
 #
 # INSTALL APPS FROM THE MAC APPSTORE.
 #
-mas install 1333542190    # 1Password           - Password Manager
+mas install 1333542190    # 1Password 7         - Password Manager
+mas install 1402042596    # AdBlock             - Ad & Popup Blocker ( Safari Extension )
+#mas install 1287445660    # Agenda              - Date Focused Note Taking
 mas install 937984704     # Amphetamine         - Powerful "Keep-Awake" Utility
-mas install 1287445660    # Agenda              - Date Focused Note Taking
 mas install 1091189122    # Bear                - Elegant Writing & Note Taking
-mas install 603117688     # CCMenu              - Displays Project Build Status In macOS Menu Bar
-mas install 420939835     # Clipboard History   - Clipboard Management Utility
-mas install 549083868     # Display Menu        - Change Display Settings From The macOS Menu Bar
-mas install 715464874     # Disk Map            - Visualize Hard Drive Usage & Free Space
-mas install 413857545     # Divvy               - Window Management & Organization
-mas install 406056744     # Evernote            - Notepad, Organizer & Journal
+#mas install 603117688     # CCMenu              - Displays Project Build Status In macOS Menu Bar
+mas install 420939835     # ClipboardHistory    - Clipboard Management Utility
+#mas install 549083868     # Display Menu        - Change Display Settings From The macOS Menu Bar
+#mas install 715464874     # Disk Map            - Visualize Hard Drive Usage & Free Space
+#mas install 413857545     # Divvy               - Window Management & Organization
+#mas install 406056744     # Evernote            - Notepad, Organizer & Journal
 mas install 412448059     # ForkLift            - File Manager and FTP/SFTP/WebDAV/Amazon S3 client
-mas install 926036361     # LastPass            - Password Manager
+mas install 1472777122    # Honey               - Smart Shopping Assistant ( Safari Extension )
 mas install 409183694     # Keynote             - Presentations
-mas install 441258766     # Magnet              - Organize Your Workspace
+mas install 926036361     # LastPass            - Password Manager
+#mas install 441258766     # Magnet              - Organize Your Workspace
+mas install 1295203466    # Microsoft RDP       - Remote Desktop Management
 mas install 540348655     # Monosnap            - Screenshot Editor
-mas install 1295203466    # Microsoft RDP 10    - Remote Desktop Management
 mas install 409203825     # Numbers             - Spreadsheets
 mas install 409201541     # Pages               - Document Processor
-mas install 639968404     # Parcel              - Delivery Tracking
-mas install 568494494     # Pocket              - News & Read It Later
-mas install 425955336     # Skitch              - Screenshots, Annotations & Markup
+#mas install 639968404     # Parcel              - Delivery Tracking
+mas install 568494494     # Pocket              - Save Articles, Videos & For Later
+#mas install 957810159     # Raindrop.io         - All-In-One Bookmark Manager ( Safari Extension )
+mas install 1477385213    # Save to Pocket      - Capture Stories For Later ( Safari Extension )
+#mas install 425955336     # Skitch              - Screenshots, Annotations & Markup
 mas install 1006087419    # SnippetsLab         - Code Snippet Organizer & Library
-mas install 1176895641    # Spark               - Email App
-mas install 1109319285    # SSH Config Editor   - Easily Manage Your SSH Configurations
-mas install 425424353     # TheUnarchiver       - Unarchiving Utility
-mas install 1436522307    # Transmit 5          - Fast & Easy File Transfers
-
-#
-# INSTALL SAFARI EXTENSIONS ROM THE MAC APPSTORE.
-#   @URL: https://itunes.apple.com/us/story/id1377753262
-#
-mas install 957810159     # Raindrop.io         - All-In-One Bookmark Manager
+mas install 1176895641    # Spark               - The Best Personal Email Client
+#mas install 1109319285    # SSH Config Editor   - Easily Manage Your SSH Configurations
+mas install 425424353     # The Unarchiver      - Unarchiving Utility
+#mas install 1436522307    # Transmit 5          - Fast & Easy File Transfers
+mas install 497799835     # Xcode               - Apple's Integrated Development Environment
