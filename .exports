@@ -113,7 +113,7 @@ export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 ################################################################################
 #
-# AWS
+# AWS CLI
 #
 ################################################################################
 
@@ -121,3 +121,15 @@ export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export AWS_DEFAULT_PROFILE=default;
 #export AWS_DEFAULT_PROFILE=canvastest;
 
+# - - - - - - - - - - - - - - - - - - - -
+# AWS CLI
+# - - - - - - - - - - - - - - - - - - - -
+# Set The Default AWS Profile To Use
+#
+# Available Profiles
+#   - default ( brucebentley )
+#   - administrator
+#   - bbentley
+#   - canvas-test
+#   - optimizely
+export AWS_DEFAULT_PROFILE="default"
