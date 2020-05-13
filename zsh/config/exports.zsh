@@ -31,7 +31,6 @@ case $OSTYPE {
   export GNU_GREP_MAN_HOME='$(brew --prefix grep)/libexec/gnuman'
   export OPENSSL_HOME='$(brew --prefix)/opt/openssl@1.1/bin'
   export OPENSSL_MAN_HOME='$(brew --prefix)/opt/openssl@1.1/man'
-  export JAVA_HOME=/usr/libexec/java_home
 
   path=(
     $GNU_COREUTILS_HOME

@@ -231,21 +231,12 @@ zinit wait lucid light-mode for \
       OMZ::plugins/composer/composer.plugin.zsh \
       OMZ::plugins/thefuck/thefuck.plugin.zsh \
       htlsne/zplugin-rbenv \
-      OMZ::plugins/pyenv/pyenv.plugin.zsh
+      OMZ::plugins/pyenv/pyenv.plugin.zsh \
+      OMZ::plugins/jenv/jenv.plugin.zsh
 
 # Recommended Be Loaded Last.
 zinit ice wait blockf lucid atpull'zinit creinstall -q .'
 zinit load zsh-users/zsh-completions
-
-# rbenv
-# zinit ice has'rbenv' id-as'rbenv' atpull'%atclone' \
-#     atclone"rbenv init - --no-rehash > htlsne/zplugin-rbenv"
-# zinit load zdharma/null
-
-# pyenv
-# zinit ice has'pyenv' id-as'pyenv' atpull'%atclone' \
-#     atclone"pyenv init - --no-rehash > pyenv.plugin.zsh"
-# zinit load zdharma/null
 
 # Semi-graphical .zshrc editor for zinit commands
 zinit load zdharma/zui
@@ -259,9 +250,6 @@ zinit load zdharma/zplugin-crasis
 
 setopt no_beep
 # export MANPATH="/usr/local/man:$MANPATH"
-
-# Load Custom Executable Functions
-# [[ -f "$ZSH/config/functions.zsh" ]] && source "$ZSH/config/functions.zsh"
 
 # Local Config
 # [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
