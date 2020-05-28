@@ -11,11 +11,11 @@
 
 path=(
   "$HOME/.local/bin"
+  $path
   /usr/bin
   /bin
   /usr/sbin
   /sbin
-  $path
 )
 
 # - - - - - - - - - - - - - - - - - - - -
