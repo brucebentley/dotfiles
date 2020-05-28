@@ -6,7 +6,7 @@
    *    - avoid
    *    - always
    */
-  "arrowParens": "avoid",
+  "arrowParens": "always",
 
   /**
    *  Print spaces between brackets.
@@ -34,7 +34,7 @@
    *    - "crlf"
    *    - "cr"
    */
-  "endOfLine": "auto",
+  "endOfLine": "lf",
 
   /**
    *  Specify the input filepath. This will be used to do parser inference.
