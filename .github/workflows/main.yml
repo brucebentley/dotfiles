@@ -4,12 +4,9 @@ name: ShellCheck
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
   pull_request:
-    branches: [ master ]
-
-name: 'Trigger: Push action'
-
+    branches: [ master, develop ]
 jobs:
   build:
     name: ShellCheck
@@ -25,4 +22,4 @@ jobs:
       run:  brew install shellcheck
 
     - name: Run ShellCheck on these files
-      run:  sh shellscripts/*.sh install/*.sh
+      run:  sh zsh/*.zsh shellscripts/*.sh install/*.sh
