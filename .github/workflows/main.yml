@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: ShellCheck
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ master ]
   pull_request:
-    branches: [ master, develop ]
+    branches: [ master ]
 
 name: 'Trigger: Push action'
 
@@ -25,4 +25,4 @@ jobs:
       run:  brew install shellcheck
 
     - name: Run ShellCheck on these files
-      run:  sh zsh/*.zsh shellscripts/*.sh install/*.sh
+      run:  sh shellscripts/*.sh install/*.sh
