@@ -22,4 +22,4 @@ jobs:
       run:  brew install shellcheck
 
     - name: Run ShellCheck on these files
-      run:  sh zsh/*.zsh shellscripts/*.sh install/*.sh
+      run:  sh zsh/.zshrc zsh/*+/*.zsh
