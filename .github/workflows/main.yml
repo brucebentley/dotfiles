@@ -11,7 +11,7 @@ on:
 name: 'Trigger: Push action'
 
 jobs:
-  shellcheck:
+  build:
     name: ShellCheck
     runs-on: macos-latest
 
