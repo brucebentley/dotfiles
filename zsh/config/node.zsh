@@ -8,7 +8,7 @@
 # - - - - - - - - - - - - - - - - - - - -
 # NVM
 # - - - - - - - - - - - - - - - - - - - -
-export NVM_DIR="$HOME/.nvm";
+export NVM_DIR="$HOME/.config/nvm";
 # shellcheck disable=1090
 [ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"                      # This Loads nvm
 # shellcheck disable=1090

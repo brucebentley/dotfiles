@@ -776,6 +776,9 @@ alias eks-canvastest-int-gc-dev='export AWS_PROFILE=canvastest && \
           source <(kubectl completion bash) && \
           kubectl config set-context $(kubectl config current-context) --namespace gc-dev';
 
+alias disco-aws='export AWS_ACCESS_KEY_ID=AKIAIGTRERL3GCGFBASQ && \
+          export AWS_SECRET_ACCESS_KEY=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';
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 # Personal Aliases for Zsh
