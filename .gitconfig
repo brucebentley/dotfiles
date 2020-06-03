@@ -1,7 +1,7 @@
 [user]
 	name = Bruce Bentley
 	email = brucebentley@me.com
-    signingkey = 67C8FE357295FA13
+    signingkey = 98111A03CB7D124B
 
 # GoCanvas Conditional Git Configuration
 [includeIf "gitdir:~/Projects/GoCanvas/"]
