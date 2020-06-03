@@ -24,38 +24,47 @@ alias ss="cd ~/.ssh"
 
 alias g="git"
 
-##
-# DETECT WHICH `LS` FLAVOR IS IN USE.
-##
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-  colorflag="--color"
-  export colorflag
-  export LS_COLORS='no=00:fi=00:di=01;31:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
-else # macOS `ls`
-  colorflag="-G"
-  export colorflag
-  export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx'
-fi
+# - - - - - - - - - - - - - - - - - - - -
+# Directory Listing
+# - - - - - - - - - - - - - - - - - - - -
 
-##
-# LIST ALL FILES COLORIZED IN LONG FORMAT.
-##
-alias l='ls -lF ${colorflag}'
+# Always Use Colour Output For "ls".
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+    alias ls='command ls --color=auto';
+    COLORFLAG="--color";
+    export COLORFLAG;
+    #export LSCOLORS='BxBxhxDxfxhxhxhxhxcxcx';
+    export LSCOLORS='gxfxcxdxbxGxDxabagacad';
+else
+    alias ls='command ls --color=auto';
+    COLORFLAG="--color"
+    export COLORFLAG
+    export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:';
+fi;
 
-##
-# LIST ALL FILES COLORIZED IN LONG FORMAT, EXCLUDING . AND ..
-##
-alias la="ls -lAF ${colorflag}"
+# List All Files Colorized In Long Format.
+#alias l="ls -lF ${COLORFLAG}"
 
-##
-# LIST ONLY DIRECTORIES.
-##
-alias lsd='ls -lF ${colorflag} | grep --color=never '^d''
+# List All Files Colorized In Long Format, Excluding . And ..
+#alias la="ls -lAF ${COLORFLAG}"
 
-##
-# ALWAYS USE COLOR OUTPUT FOR `LS`.
-##
-alias ls='command ls ${colorflag}'
+# List Only Directories.
+#alias lsd="ls -lF ${COLORFLAG} | grep --color=never '^d'"
+
+# Always Use Color Output For `ls`.
+alias ls="command ls ${COLORFLAG}"
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# ColorLS
+# - - - - - - - - - - - - - - - - - - - -
+alias l='colorls --gs --sd'
+alias la='colorls -1A --sd --gs --report '
+alias ll='colorls -lA --sd --gs --report '
+alias lsd='colorls -1d --sd --gs --report '
+alias lsf='colorls -1f --sd --gs --report '
+alias lsg='colorls -A --sd --gs --report '
+alias lst='colorls -A --sd --tree '
 
 ##
 # ALWAYS ENABLE COLORED `GREP` OUTPUT.
