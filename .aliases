@@ -52,7 +52,7 @@ fi;
 #alias lsd="ls -lF ${COLORFLAG} | grep --color=never '^d'"
 
 # Always Use Color Output For `ls`.
-alias ls="command ls ${COLORFLAG}"
+alias ls='command ls "${COLORFLAG}"'
 
 
 # - - - - - - - - - - - - - - - - - - - -
@@ -66,13 +66,17 @@ alias lsf='colorls -1f --sd --gs --report '
 alias lsg='colorls -A --sd --gs --report '
 alias lst='colorls -A --sd --tree '
 
-##
-# ALWAYS ENABLE COLORED `GREP` OUTPUT.
-# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
-##
+
+# - - - - - - - - - - - - - - - - - - - -
+# Grep
+# - - - - - - - - - - - - - - - - - - - -
+
+# Always Enable Colored `grep` Output.
+# Note: `grep_options="--color=auto"` Is Deprecated, Hence The Alias Usage.
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
 
 ##
 # ENABLE ALIASES TO BE SUDO’ED.

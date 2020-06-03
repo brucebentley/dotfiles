@@ -29,13 +29,14 @@ fi
 # - - - - - - - - - - - - - - - - - - - -
 # Homebrew Configuration
 # - - - - - - - - - - - - - - - - - - - -
-
 # If You Come From Bash You Might Have To Change Your $PATH.
 #   export PATH=:/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
-export PATH="$HOME/bin:/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH"
 
 # Homebrew Requires This.
-export PATH="/usr/local/sbin:$PATH"
+#export PATH="/usr/local/sbin:$PATH"
+
+BREW_PREFIX=$(brew --prefix)
 
 
 # - - - - - - - - - - - - - - - - - - - -
@@ -331,3 +332,6 @@ iterm2_print_user_vars() {
     # KUBECONTEXT=$(CTX=$(kubectl config current-context) 2> /dev/null;if [ $? -eq 0 ]; then echo $CTX;fi)
     # iterm2_set_user_var kubeContext $KUBECONTEXT
 }
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
