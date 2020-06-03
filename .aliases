@@ -497,6 +497,7 @@ alias eks-main-prod='export AWS_PROFILE=canvasprod && aws eks update-kubeconfig 
 alias eks-main-int='export AWS_PROFILE=canvasprod && aws eks update-kubeconfig --name int-eks && source <(kubectl completion bash)'
 alias eks-canvastest-int='export AWS_PROFILE=canvastest && aws eks update-kubeconfig --name int-eks && source <(kubectl completion bash)'
 alias eks-canvastest-int-gc-dev='export AWS_PROFILE=canvastest && aws eks update-kubeconfig --name int-eks && source <(kubectl completion bash) && kubectl config set-context $(kubectl config current-context) --namespace gc-dev'
+alias disco-aws='export AWS_PROFILE=gc-dev-disco';
 
 # - - - - - - - - - - - - - - - - - - - -
 # Code Editor + IDE

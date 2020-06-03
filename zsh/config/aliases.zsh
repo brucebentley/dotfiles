@@ -761,23 +761,24 @@ alias docker-clean-unused='docker system prune --all --force --volumes'
 
 alias eks-main-prod='export AWS_PROFILE=canvasprod && \
           aws eks update-kubeconfig --name prod-eks && \
-          source <(kubectl completion bash)';
+          source <(kubectl completion zsh)';
 
 alias eks-main-int='export AWS_PROFILE=canvasprod && \
           aws eks update-kubeconfig --name int-eks && \
-          source <(kubectl completion bash)';
+          source <(kubectl completion zsh)';
 
 alias eks-canvastest-int='export AWS_PROFILE=canvastest && \
           aws eks update-kubeconfig --name int-eks && \
-          source <(kubectl completion bash)';
+          source <(kubectl completion zsh)';
 
 alias eks-canvastest-int-gc-dev='export AWS_PROFILE=canvastest && \
           aws eks update-kubeconfig --name int-eks && \
-          source <(kubectl completion bash) && \
+          source <(kubectl completion zsh) && \
           kubectl config set-context $(kubectl config current-context) --namespace gc-dev';
 
-alias disco-aws='export AWS_ACCESS_KEY_ID=AKIAIGTRERL3GCGFBASQ && \
-          export AWS_SECRET_ACCESS_KEY=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';
+alias aws eks update-kubeconfig --name int-eks && kubectl config set-context $(kubectl config current-context) && source <(kubectl completion zsh)
+
+alias disco-aws='export AWS_PROFILE=gc-dev-disco';
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
