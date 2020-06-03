@@ -221,9 +221,9 @@ export PATH="$(brew --prefix)/opt/mysql@5.7/bin:$PATH"
 #
 # Available Profiles
 #   - Default ( brucebentley )
-#   - administrator
+#   - administrator@brucebentley
 #   - bbentley
-#   - canvas-test
+#   - canvastest
 #   - optimizely
 export AWS_DEFAULT_PROFILE="default"
 
