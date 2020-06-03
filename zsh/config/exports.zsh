@@ -177,7 +177,7 @@ export PKG_CONFIG_PATH="$(brew --prefix wget)/lib/pkgconfig"
 # - - - - - - - - - - - - - - - - - - - -
 # NVM
 # - - - - - - - - - - - - - - - - - - - -
-# export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$HOME/.config/nvm"
 
 # - - - - - - - - - - - - - - - - - - - -
 # Composer

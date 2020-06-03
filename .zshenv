@@ -16,5 +16,5 @@ if [[ ! -f "$dotdir/.zshrc" ]] && [[ -f "$dotdir/zshrc" ]]; then
 elif [[ -f "$dotdir/.zshrc" ]]; then
     ZDOTDIR="$dotdir"
 else
-    echo 'no zshrc' > $HOME/nozshrc
+    echo 'no zshrc' > "$HOME/nozshrc"
 fi
