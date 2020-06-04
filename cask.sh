@@ -105,9 +105,9 @@ development_cask_list=(
     postman             # Collaboration Platform For API Development
     sequel-pro          # Desktop GUI For Interacting With MySQL Databases
     sourcetree          # Desktop GUI For Git
-    #vagrant            # Tool For Building & Managing Virtual Machine Environments
-    #vagrant-manager    # Manage Your Vagrant Machines In One Place
-    #virtualbox         # Virtualization Product For Running Virtual Machines
+    vagrant            # Tool For Building & Managing Virtual Machine Environments
+    vagrant-manager    # Manage Your Vagrant Machines In One Place
+    virtualbox         # Virtualization Product For Running Virtual Machines
 )
 for dev_cask in "${development_cask_list[@]}"
 do
@@ -127,6 +127,7 @@ misc_cask_list=(
     bartender          # Manage The macOS Menu Bar
     #bitbar            # Put Anything In Your macOS Menu Bar
     box-drive          # Box.com Cloud Storage & Collaboration Platform
+    browserstacklocal  # Test Your localhost Or Any Internal Server In Your Network
     #caffeine          # Prevent Your Mac From Automatically Going To Sleep
     calibre            # E-Book Management
     #cloudapp          # Record Video, Webcam, Gifs, Capture Your Screen And Share It Instantly To The Cloud
@@ -135,10 +136,10 @@ misc_cask_list=(
     dropbox            # Cloud Storage & Collaboration Platform
     duet               # Turn Your iOS Or Android Device Into A High Performance Second Display For Your Mac & PC
     #evernote          # Save, Sync & Share Everything
-    #flickr-uploadr    # Flickr Desktop Uploader
+    flickr-uploadr    # Flickr Desktop Uploader
     #gimp              # Free & Open Source Image Editor
     hammerspoon        # Automation Utility For macOS
-    #handbrake         # Open-Source Video Transcoder
+    handbrake         # Open-Source Video Transcoder
     imageoptim         # Lossless Image Compressor
     #inkscape          # Vector Graphics Editor
     istat-menus        # Display Stats In Your macOS Menu Bar
@@ -187,7 +188,7 @@ do
 done
 
 # Search & Install All Available Nerd Fonts ( 50+ )
-brew cask install $( brew search font | grep nerd | tr '\n' ' ' )
+brew cask install "$( brew search font | grep nerd | tr '\n' ' ' )"
 
 
 #

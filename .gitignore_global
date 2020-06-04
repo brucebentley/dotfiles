@@ -4,6 +4,8 @@
 *.DS_Store
 .AppleDouble
 .LSOverride
+# For iCloud Drive
+*.icloud
 
 #########################
 ## ICON MUST END WITH TWO \r
@@ -50,6 +52,11 @@ Temporary Items
 *.tgz
 *.xz
 *.zip
+
+#########################
+## ASDF
+#########################
+.tool-versions
 
 #########################
 ## COMPILED SOURCE PACKAGES
@@ -108,6 +115,9 @@ _thumbs/
 #########################
 bin/*
 .bundle/*
+.bundle
+/bundle/
+vendor/bundle
 
 
 ##################################################
@@ -373,6 +383,9 @@ bower_components/
 node_modules/
 jspm_packages/
 typings/
+# For Storybook (React, Javascropt)
+storybook-static/
+
 
 #########################
 ## LOCK FILES
@@ -556,19 +569,17 @@ pyvenv.cfg
 ##################################################
 # RUBY & RAILS
 ##################################################
-*.bridgesupport
-*.rbc
-**.orig
-.bundle
 .byebug_history
 .dat*
+.githubrc
 .powenv
 .repl_history
 .rspec
+.ruby-gemset
 .rvmrc
-build-iPhoneOS/
-build-iPhoneSimulator/
-bundle/
+*.bridgesupport
+*.rbc
+**.orig
 /coverage/
 /db/*.sqlite3
 /db/*.sqlite3-journal
@@ -581,6 +592,8 @@ bundle/
 /spec/tmp
 /test/tmp/
 /test/version_tmp/
+build-iPhoneOS/
+build-iPhoneSimulator/
 capybara-*.html
 pickle-email-*.html
 rerun.txt
@@ -892,3 +905,9 @@ Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
 
+#########################
+## ZSH
+#########################
+.zcompdump
+.*history
+_cache*

@@ -144,6 +144,7 @@ ctf_tools_list=(
     #ucspi-tcp                  # Tools for building TCP client-server applications
     #xpdf                       # PDF Viewer
     xz                          # General-purpose data compression with high compression ratio
+    yarn                        # JavaScript package manager
 )
 for ctf_tool in "${ctf_tools_list[@]}"
 do
@@ -158,6 +159,8 @@ done
 #
 useful_tools_list=(
     ack                         # Search tool like `grep`, but optimized for programmers
+    autoconf                    # Automatic configure script builder
+    bfg                         # Remove large files or passwords from Git history like git-filter-branch
     cmake                       # Cross-platform `make`
     dnsmasq                     # Lightweight DNS forwarder & DHCP server
     exiftool                    # Perl lib for reading & writing EXIF metadata
@@ -167,8 +170,10 @@ useful_tools_list=(
     gs                          # Interpreter for PostScript and PDF
     #heroku                     #
     htop                        # Improved top ( interactive process viewer )
+    icu4c                       # C/C++ and Java libraries for Unicode and globalization
     imagemagick --with-webp     # Tools & libraries to manipulate images in many formats
     jq                          # Lightweight and flexible command-line JSON processor
+    libmagic                    # Implementation of the file(1) command
     lua                         # Powerful, lightweight programming language
     #lynx                       # Text-based web browser
     mas                         # Mac App Store command-line interface
@@ -180,7 +185,7 @@ useful_tools_list=(
     pigz                        # Parallel gzip
     pinentry                    # Passphrase entry dialog utilizing the Assuan protocol
     pinentry-mac                # Pinentry for GPG on Mac
-    pkg-con                     #
+    pkg-config                  # Manage compile and link flags for libraries
     #pv                         # Monitor data's progress through a pipe
     readline                    # Library for command-line editing
     rename                      # Perl-powered file rename script with many helpful built-ins
@@ -222,6 +227,7 @@ done
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 dev_tools_list=(
+    awscli                              #
     #helm                               # The Kubernetes Package Manager
     imagemagick@6 --build-from-source   # Tools & Libraries To Manipulate Images In Many Formats
     sphinx                              # Full-Text Search Engine
@@ -229,6 +235,8 @@ dev_tools_list=(
     mysql@5.7                           # Open Source Relational Database Management System
     overmind                            # Process Manager For Procfile-Based Applications And tmux
     v8@3.15                             # Google's JavaScript Engine
+    kubectl                             # Kubernetes command-line interface
+    minikube                            # Run a Kubernetes cluster locally
 )
 for dev_tool in "${dev_tools_list[@]}"
 do
@@ -255,6 +263,50 @@ brew services start mysql@5.7
 # Run the secure installation setup for MySQL.
 #   DO NOT set a password for the `root` user during this setup!
 /usr/local/bin/mysql_secure_installation
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Install Development Environment Managers
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+dev_env_manager_list=(
+    ruby-build                          # Install various Ruby versions and implementations
+    rbenv                               # Ruby version management
+    rbenv-default-gems                  # Auto-installs gems for Ruby installs
+    rbenv-gemset                        # Adds basic gemset support to rbenv
+    pyenv                               # Python version management
+    pyenv-virtualenv                    # Pyenv plugin to manage virtualenv
+    pyenv-virtualenvwrapper             # Alternative to pyenv for managing virtualenvs
+    jenv                                # Manage your Java environment
+)
+for dev_env_manager in "${dev_env_manager_list[@]}"
+do
+    brew install "${dev_env_manager}"
+done
+
+# Initialize rbenv
+rbenv init
+
+# Install rbenv-alias Plugin
+mkdir -p "$(rbenv root)/plugins" && git clone git://github.com/tpope/rbenv-aliases.git "$(rbenv root)/plugins/rbenv-aliases"
+rbenv alias --auto
+
+# List Of Default Gems
+default_gems_list=(
+  colorls
+  bundler
+  debase
+  geminabox
+  keycutter
+  rails --pre
+  ruby-debug-ide
+  rubocop
+  solargraph
+)
+for g in "${default_gems_list[@]}"
+do
+  echo "${g}" >> "$(rbenv root)/default-gems"
+done
 
 
 #
