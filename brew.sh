@@ -193,6 +193,7 @@ useful_tools_list=(
     shellcheck                  # Static analysis and lint tool, for (ba)sh scripts
     shfmt                       # Autoformat shell script source code
     ssh-copy-id                 # Add a public key to a remote machine's authorized_keys file
+    svn                 # Version control system designed to be a better CVS
     thefuck                     # Programatically correct mistyped console commands
     tmux                        # Terminal multiplexer
     tree                        # Display directories as trees ( with optional color/HTML output )
