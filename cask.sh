@@ -126,17 +126,17 @@ misc_cask_list=(
     authy              # 2FA Client & Backup
     bartender          # Manage The macOS Menu Bar
     #bitbar            # Put Anything In Your macOS Menu Bar
-    box-drive          # Box.com Cloud Storage & Collaboration Platform
-    browserstacklocal  # Test Your localhost Or Any Internal Server In Your Network
+    #box-drive          # Box.com Cloud Storage & Collaboration Platform
+    #browserstacklocal  # Test Your localhost Or Any Internal Server In Your Network
     #caffeine          # Prevent Your Mac From Automatically Going To Sleep
     calibre            # E-Book Management
     #cloudapp          # Record Video, Webcam, Gifs, Capture Your Screen And Share It Instantly To The Cloud
     #dash              # Docuementation Manager
     discord            # Communicate Over Voice, Video, And Text
     dropbox            # Cloud Storage & Collaboration Platform
-    duet               # Turn Your iOS Or Android Device Into A High Performance Second Display For Your Mac & PC
+    #duet               # Turn Your iOS Or Android Device Into A High Performance Second Display For Your Mac & PC
     #evernote          # Save, Sync & Share Everything
-    flickr-uploadr    # Flickr Desktop Uploader
+    #flickr-uploadr    # Flickr Desktop Uploader
     #gimp              # Free & Open Source Image Editor
     hammerspoon        # Automation Utility For macOS
     handbrake         # Open-Source Video Transcoder
@@ -144,7 +144,7 @@ misc_cask_list=(
     #inkscape          # Vector Graphics Editor
     istat-menus        # Display Stats In Your macOS Menu Bar
     #licecap           # Simple Animated Screen Captures
-    keybase            # End-To-End Encryption For Things That Matter
+    #keybase            # End-To-End Encryption For Things That Matter
     megasync           # Automated Synchronisation Between Your Computer And Your Mega Cloud
     #mou               # Markdown Editor
     nordvpn            # VPN Client For NordVPN
@@ -156,7 +156,7 @@ misc_cask_list=(
     slack              # Communication & Sharing Platform For Individuals, Teams & Organizations
     spotify            # Desktop Player For The Online Digital Music Service
     #screenflow        # Video Editing & Screen Recording
-    #synergy           # Share Keyboard/Mouse Between Computers
+    synergy           # Share Keyboard/Mouse Between Computers
     transmission       # Cross-Platform BitTorrent Client
     vlc                # Open-Source Portable Cross-Platform Media Player
     #webtorrent        # Streaming Torrent Client

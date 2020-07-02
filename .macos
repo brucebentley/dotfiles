@@ -987,8 +987,8 @@ APP_LIST=(
     'Contacts'
     'Dock'
     'Finder'
-    'Google Chrome Canary'
-    'Google Chrome'
+    #'Google Chrome Canary'
+    #'Google Chrome'
     'iCal'
     'Mail'
     'Messages'
@@ -1001,7 +1001,7 @@ APP_LIST=(
     'Terminal'
     #'Tweetbot'
     #'Twitter'
-    'Transmission'
+    #'Transmission'
 )
 for app in "${APP_LIST[@]}"; do
     killall "${app}" &> /dev/null

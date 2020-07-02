@@ -101,17 +101,17 @@ done
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #brew tap bramstein/webfonttools
-font_tools_list=(
+#font_tools_list=(
     #sfnt2woff                  # Convert existing TrueType/OpenType fonts to WOFF format
     #sfnt2woff-zopfli           # WOFF utilities with Zopfli compression
     #sfntly                     # Library for Using, Editing, and Creating SFNT-based Fonts
     #woff2                      # Compress fonts with Brotli into WOFF2 format
     #freetype                   # Software library to render fonts
-)
-for font_tool in "${font_tools_list[@]}"
-do
-    brew install "${font_tool}"
-done
+#)
+#for font_tool in "${font_tools_list[@]}"
+#do
+    #brew install "${font_tool}"
+#done
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -178,7 +178,7 @@ useful_tools_list=(
     #lynx                       # Text-based web browser
     mas                         # Mac App Store command-line interface
     neovim                      # Ambitious Vim-fork focused on extensibility and agility
-    newman                      # Command-line collection runner for Postman
+    #newman                     # Command-line collection runner for Postman
     ngrep                       # Network Grep
     nss                         # Libraries for security-enabled client and server applications
     p7zip                       # 7-Zip ( high compression file archiver ) implementation
@@ -193,7 +193,7 @@ useful_tools_list=(
     shellcheck                  # Static analysis and lint tool, for (ba)sh scripts
     shfmt                       # Autoformat shell script source code
     ssh-copy-id                 # Add a public key to a remote machine's authorized_keys file
-    svn                 # Version control system designed to be a better CVS
+    svn                         # Version control system designed to be a better CVS
     thefuck                     # Programatically correct mistyped console commands
     tmux                        # Terminal multiplexer
     tree                        # Display directories as trees ( with optional color/HTML output )
@@ -229,7 +229,7 @@ done
 #
 dev_tools_list=(
     awscli                              #
-    #helm                               # The Kubernetes Package Manager
+    helm                                # The Kubernetes Package Manager
     imagemagick@6 --build-from-source   # Tools & Libraries To Manipulate Images In Many Formats
     sphinx                              # Full-Text Search Engine
     redis                               # Persistent Key-Value Database, With Built-In Net Interface
@@ -272,13 +272,14 @@ brew services start mysql@5.7
 #
 dev_env_manager_list=(
     ruby-build                          # Install various Ruby versions and implementations
-    rbenv                               # Ruby version management
-    rbenv-default-gems                  # Auto-installs gems for Ruby installs
-    rbenv-gemset                        # Adds basic gemset support to rbenv
-    pyenv                               # Python version management
-    pyenv-virtualenv                    # Pyenv plugin to manage virtualenv
-    pyenv-virtualenvwrapper             # Alternative to pyenv for managing virtualenvs
-    jenv                                # Manage your Java environment
+    asdf                                # Manage multiple runtime versions with a single CLI tool.
+    #rbenv                              # Ruby version management
+    #rbenv-default-gems                 # Auto-installs gems for Ruby installs
+    #rbenv-gemset                       # Adds basic gemset support to rbenv
+    #pyenv                              # Python version management
+    #pyenv-virtualenv                   # Pyenv plugin to manage virtualenv
+    #pyenv-virtualenvwrapper            # Alternative to pyenv for managing virtualenvs
+    #jenv                               # Manage your Java environment
 )
 for dev_env_manager in "${dev_env_manager_list[@]}"
 do
@@ -286,28 +287,28 @@ do
 done
 
 # Initialize rbenv
-rbenv init
+#rbenv init
 
 # Install rbenv-alias Plugin
-mkdir -p "$(rbenv root)/plugins" && git clone git://github.com/tpope/rbenv-aliases.git "$(rbenv root)/plugins/rbenv-aliases"
-rbenv alias --auto
+#mkdir -p "$(rbenv root)/plugins" && git clone git://github.com/tpope/rbenv-aliases.git "$(rbenv root)/plugins/rbenv-aliases"
+#rbenv alias --auto
 
 # List Of Default Gems
-default_gems_list=(
-  colorls
-  bundler
-  debase
-  geminabox
-  keycutter
-  rails --pre
-  ruby-debug-ide
-  rubocop
-  solargraph
-)
-for g in "${default_gems_list[@]}"
-do
-  echo "${g}" >> "$(rbenv root)/default-gems"
-done
+#default_gems_list=(
+  #colorls
+  #bundler
+  #debase
+  #geminabox
+  #keycutter
+  #rails --pre
+  #ruby-debug-ide
+  #rubocop
+  #solargraph
+#)
+#for g in "${default_gems_list[@]}"
+#do
+  #echo "${g}" >> "$(rbenv root)/default-gems"
+#done
 
 
 #

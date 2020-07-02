@@ -170,6 +170,11 @@ fi
 
 . "$__ZINIT"
 autoload -Uz _zinit
+if [ "$(whoami)" = "YOUR_NON_ADMIN_USER" ]; then
+  compinit -i    # Ignore Insecure Directories
+else
+  compinit
+fi
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 
@@ -231,9 +236,9 @@ zinit wait lucid light-mode for \
       OMZ::plugins/docker/_docker \
       OMZ::plugins/composer/composer.plugin.zsh \
       OMZ::plugins/thefuck/thefuck.plugin.zsh \
-      htlsne/zplugin-rbenv \
-      OMZ::plugins/pyenv/pyenv.plugin.zsh \
-      OMZ::plugins/jenv/jenv.plugin.zsh
+      #htlsne/zplugin-rbenv \
+      #OMZ::plugins/pyenv/pyenv.plugin.zsh \
+      #OMZ::plugins/jenv/jenv.plugin.zsh
 
 # Recommended Be Loaded Last.
 zinit ice wait blockf lucid atpull'zinit creinstall -q .'
@@ -299,6 +304,12 @@ setopt pushd_minus              # This Reverts The +/- Operators.
 
 
 # - - - - - - - - - - - - - - - - - - - -
+# Initialize ASDF
+# - - - - - - - - - - - - - - - - - - - -
+[[ ! -f "$(brew --prefix asdf)/asdf.sh" ]] || . "$(brew --prefix asdf)/asdf.sh"
+
+
+# - - - - - - - - - - - - - - - - - - - -
 # Theme / Prompt Customization
 # - - - - - - - - - - - - - - - - - - - -
 
@@ -329,11 +340,10 @@ iterm2_print_user_vars() {
 
     iterm2_set_user_var awsProfile $AWS_PROFILE
 
-    # KUBECONTEXT=$(CTX=$(kubectl config current-context) 2> /dev/null;if [ $? -eq 0 ]; then echo $CTX;fi)
-    # iterm2_set_user_var kubeContext $KUBECONTEXT
+    #KUBECONTEXT=$(CTX=$(kubectl config current-context) 2> /dev/null;if [ $? -eq 0 ]; then echo $CTX;fi)
+    #iterm2_set_user_var kubeContext $KUBECONTEXT
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 

@@ -509,6 +509,36 @@ hs.hotkey.bind({'cmd', 'ctrl'}, 'Down', function()
   win:setFrame(f)
 end)
 
+-- MOVE WINDOW 1 SCREEN LEFT ( 50% )
+hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'Left', function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y
+  f.w = max.w
+  f.h = max.h
+  win:setFrame(f)
+  win:moveOneScreenWest()
+end)
+
+-- MOVE WINDOW 1 SCREEN RIGHT ( 50% )
+hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'Right', function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y
+  f.w = max.w
+  f.h = max.h
+  win:setFrame(f)
+  win:moveOneScreenEast()
+end)
+
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
