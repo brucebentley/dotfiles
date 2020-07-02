@@ -80,8 +80,7 @@ export EDITOR='nvim'
 # GNUpg
 # - - - - - - - - - - - - - - - - - - - -
 # Avoid issues with `gpg` as installed via homebrew. See: https://stackoverflow.com/a/42265848/96656
-GPG_TTY=$(tty)
-export GPG_TTY
+export GPG_TTY=$(tty)
 #gpgconf --launch gpg-agent
 #export SSH_AUTH_SOCKET=$HOME/.gnupg/S.gpg-agent.ssh
 
