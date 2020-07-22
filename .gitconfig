@@ -194,6 +194,7 @@
 
 [pull]
     default = current
+    rebase = false
 
 [push]
     # https://git-scm.com/docs/git-config#git-config-pushdefault

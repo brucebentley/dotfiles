@@ -250,6 +250,20 @@ zinit ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
 zinit load zdharma/zplugin-crasis
 
 
+### Fix Slowness Of Pastes With `zsh-syntax-highlighting`.
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+### Fix Slowness Of Pastes
+
+
 # - - - - - - - - - - - - - - - - - - - -
 # User Configuration
 # - - - - - - - - - - - - - - - - - - - -
