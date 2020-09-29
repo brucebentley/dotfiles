@@ -1,4 +1,3 @@
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 # Zsh Exports
@@ -8,34 +7,41 @@
 # - - - - - - - - - - - - - - - - - - - -
 # Initialize $PATH with system binaries
 # - - - - - - - - - - - - - - - - - - - -
-
-path=(
-  "$HOME/.local/bin"
-  $path
-  /usr/bin
-  /bin
-  /usr/sbin
-  /sbin
-)
+# path=(
+#   "$HOME/.local/bin"
+#   $path
+#   /usr/bin
+#   /bin
+#   /usr/sbin
+#   /sbin
+# )
 
 # - - - - - - - - - - - - - - - - - - - -
 # Platform Specific Variables
 # - - - - - - - - - - - - - - - - - - - -
 case $OSTYPE {
   darwin*)
-  export GNU_COREUTILS_HOME='$(brew --prefix)/opt/coreutils/libexec/gnubin'
-  export GNU_COREUTILS_MAN_HOME='$(brew --prefix)/opt/coreutils/libexec/gnuman'
-  export GNU_FINDUTILS_HOME='$(brew --prefix)/opt/findutils/libexec/gnubin'
-  export GNU_FINDUTILS_MAN_HOME='$(brew --prefix)/opt/findutils/libexec/gnuman'
-  export GNU_GREP_HOME='$(brew --prefix grep)/libexec/gnubin'
-  export GNU_GREP_MAN_HOME='$(brew --prefix grep)/libexec/gnuman'
-  export OPENSSL_HOME='$(brew --prefix)/opt/openssl@1.1/bin'
-  export OPENSSL_MAN_HOME='$(brew --prefix)/opt/openssl@1.1/man'
+  # Coreutils
+  export GNU_COREUTILS_HOME="$(brew --prefix coreutils)/libexec/gnubin"
+  export GNU_COREUTILS_MAN_HOME="$(brew --prefix coreutils)/libexec/gnuman"
+  # Findutils
+  export GNU_FINDUTILS_HOME="$(brew --prefix findutils)/libexec/gnubin"
+  export GNU_FINDUTILS_MAN_HOME="$(brew --prefix findutils)/libexec/gnuman"
+  # Grep
+  export GNU_GREP_HOME="$(brew --prefix grep)/libexec/gnubin"
+  export GNU_GREP_MAN_HOME="$(brew --prefix grep)/libexec/gnuman"
+  # GNU-Sed
+  export GNU_SED_HOME="$(brew --prefix gnu-sed)/libexec/gnubin"
+  export GNU_SED_MAN_HOME="$(brew --prefix gnu-sed)/libexec/gnuman"
+  # OpenSSL
+  export OPENSSL_HOME="$(brew --prefix openssl)/bin"
+  export OPENSSL_MAN_HOME="$(brew --prefix openssl)/share/man"
 
   path=(
     $GNU_COREUTILS_HOME
     $GNU_FINDUTILS_HOME
     $GNU_GREP_HOME
+    $GNU_SED_HOME
     $OPENSSL_HOME
     $path
   )
@@ -44,21 +50,12 @@ case $OSTYPE {
     $GNU_COREUTILS_MAN_HOME
     $GNU_FINDUTILS_MAN_HOME
     $GNU_GREP_MAN_HOME
+    $GNU_SED_MAN_HOME
     $OPENSSL_MAN_HOME
     $manpath
   )
   ;;
 }
-
-# Coreutils
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-# Findutils
-export PATH="$(brew --prefix findutils)/libexec/gnubin:$PATH"
-# GNU-Sed
-export PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH"
-# Grep
-export PATH="$(brew --prefix grep)/libexec/gnubin:$PATH"
-
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
@@ -67,62 +64,11 @@ export PATH="$(brew --prefix grep)/libexec/gnubin:$PATH"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # - - - - - - - - - - - - - - - - - - - -
-# Default Editor
-# - - - - - - - - - - - - - - - - - - - -
-export EDITOR='nvim'
-
-# - - - - - - - - - - - - - - - - - - - -
-# BROWSER
-# - - - - - - - - - - - - - - - - - - - -
-#export BROWSER='xdg-open'
-
-# - - - - - - - - - - - - - - - - - - - -
 # GNUpg
 # - - - - - - - - - - - - - - - - - - - -
-# Avoid issues with `gpg` as installed via homebrew. See: https://stackoverflow.com/a/42265848/96656
+# Avoid issues with `gpg` as installed via homebrew
+# See: https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty)
-#gpgconf --launch gpg-agent
-#export SSH_AUTH_SOCKET=$HOME/.gnupg/S.gpg-agent.ssh
-
-# - - - - - - - - - - - - - - - - - - - -
-# Less
-# - - - - - - - - - - - - - - - - - - - -
-# export LESS=" \
-#     --ignore-case \
-#     --tilde \
-#     --chop-long-lines \
-#     --status-column \
-#     --LONG-PROMPT \
-#     --jump-target=10 \
-#     --RAW-CONTROL-CHARS \
-#     --clear-screen \
-#     --silent \
-#     --tabs=4 \
-#     --shift=5"
-# #export LESSOPEN="| highlight ${HIGHLIGHT_OPTIONS} -- %s 2>/dev/null"    # Use `highlight` program to try to highlight
-#                                                                         # opened file according to its extension.
-# export LESSHISTFILE="${HOME}/.config/less/lesshistory"                  # Command and search history file.
-# export LESSKEYRC="${HOME}/.config/less/lesskey"                         # Path of the uncompiled lesskey file.
-# export LESSKEY="${LESSKEYRC}.lwc"                                       # Path of the compiled lesskey file.
-# export LESS_TERMCAP_md=$(tput bold; tput setaf 4)                       # Turn on bold mode.
-# export LESS_TERMCAP_me=$(tput sgr0)                                     # Turn off all attributes.
-# export LESS_TERMCAP_so=$(tput bold; tput setaf 3)                       # Begin standout mode.
-# export LESS_TERMCAP_se=$(tput rmso; tput sgr0)                          # Exit standout mode.
-# export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 250)          # Begin underline mode.
-# export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)                          # Exit underline mode.
-# export LESS_TERMCAP_mr=$(tput rev)                                      # Turn on reverse video mode.
-# export LESS_TERMCAP_mh=$(tput dim)                                      # Turn on half-bright mode.
-# export LESS_TERMCAP_ZN=$(tput ssubm)                                    # Enter subscript mode.
-# export LESS_TERMCAP_ZV=$(tput rsubm)                                    # End subscript mode.
-# export LESS_TERMCAP_ZO=$(tput ssupm)                                    # Enter superscript mode.
-# export LESS_TERMCAP_ZW=$(tput rsupm)                                    # End superscript mode.
-
-# - - - - - - - - - - - - - - - - - - - -
-# Locale
-# - - - - - - - - - - - - - - - - - - - -
-export LANG='en_US.UTF-8'
-export LC_ALL='en_US.UTF-8'
-export LANGUAGE='en_US.UTF-8'
 
 # - - - - - - - - - - - - - - - - - - - -
 # MAN
@@ -134,97 +80,17 @@ export MANPAGER="nvim +'set filetype=man' -"
 
 
 # - - - - - - - - - - - - - - - - - - - -
-# OpenSSL
+# macOS
 # - - - - - - - - - - - - - - - - - - - -
-export PATH="$(brew --prefix wget)/bin:$PATH"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Pkg-Config
+  export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig:$(brew --prefix krb5)/lib/pkgconfig:$(brew --prefix libedit)/lib/pkgconfig:$(brew --prefix libxml2)/lib/pkgconfig:$(brew --prefix openssl)/lib/pkgconfig:$(brew --prefix imagemagick@6)/lib/pkgconfig"
 
-# Set The OpenSSL Directories To Use From Homebrew.
-export LDFLAGS="-L$(brew --prefix)/opt/openssl@1.1/lib"
-export CPPFLAGS="-I$(brew --prefix)/opt/openssl@1.1/include"
-# For Pkg-Config To Find Openssl You May Need To Set.
-export PKG_CONFIG_PATH="$(brew --prefix)/opt/openssl@1.1/lib/pkgconfig"
+  # For compilers to find & use Homebrew-installed formulae
+  export LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix imagemagick@6)/lib"
+  export CPPFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix imagemagick@6)/include"
 
-# - - - - - - - - - - - - - - - - - - - -
-# Default Pager
-# - - - - - - - - - - - - - - - - - - - -
-export PAGER='less'
-
-# - - - - - - - - - - - - - - - - - - - -
-# Term
-# - - - - - - - - - - - - - - - - - - - -
-export TERM='xterm-256color'
-
-# - - - - - - - - - - - - - - - - - - - -
-# Wget
-# - - - - - - - - - - - - - - - - - - - -
-export WGETRC="${HOME}/.config/wget/wgetrc"
-export PATH="$(brew --prefix wget)/bin:$PATH"
-
-# Set The Wget Directories To Use From Homebrew.
-export LDFLAGS="-L$(brew --prefix wget)/lib"
-export CPPFLAGS="-I$(brew --prefix wget)/include"
-# For Pkg-Config To Find Wget You May Need To Set.
-export PKG_CONFIG_PATH="$(brew --prefix wget)/lib/pkgconfig"
-
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-# DEV Essentials
-#
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-# - - - - - - - - - - - - - - - - - - - -
-# NVM
-# - - - - - - - - - - - - - - - - - - - -
-export NVM_DIR="$HOME/.config/nvm"
-
-# - - - - - - - - - - - - - - - - - - - -
-# Composer
-# - - - - - - - - - - - - - - - - - - - -
-export COMPOSER_HOME="${HOME}/.composer"
-export PATH="${COMPOSER_HOME}/vendor/bin:$PATH"
-
-# - - - - - - - - - - - - - - - - - - - -
-# ImageMagick
-# - - - - - - - - - - - - - - - - - - - -
-export PATH="$(brew --prefix)/opt/imagemagick@6/bin:$PATH"
-
-# Set The Imagemagick Directories To Use From Homebrew.
-export LDFLAGS="-L$(brew --prefix)/opt/imagemagick@6/lib"
-export CPPFLAGS="-I$(brew --prefix)/opt/imagemagick@6/include"
-# For Pkg-Config To Find Imagemagick You May Need To Set.
-export PKG_CONFIG_PATH="$(brew --prefix imagemagick@6)/lib/pkgconfig"
-
-# - - - - - - - - - - - - - - - - - - - -
-# Go
-# - - - - - - - - - - - - - - - - - - - -
-export GOPATH="$HOME/.go"
-export PATH="$PATH:$(go env GOPATH)/bin:$PATH"
-
-# - - - - - - - - - - - - - - - - - - - -
-# MySQL
-# - - - - - - - - - - - - - - - - - - - -
-export PATH="$(brew --prefix)/opt/mysql@5.7/bin:$PATH"
-
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-# Environment Configuration
-#
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-# - - - - - - - - - - - - - - - - - - - -
-# AWS CLI
-# - - - - - - - - - - - - - - - - - - - -
-# Set The Default AWS Profile To Use
-#
-# Available Profiles
-#   - Default ( brucebentley )
-#   - administrator@brucebentley
-#   - bbentley
-#   - canvastest
-#   - optimizely
-export AWS_DEFAULT_PROFILE="default"
+fi
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -234,6 +100,26 @@ export AWS_DEFAULT_PROFILE="default"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # - - - - - - - - - - - - - - - - - - - -
+# Bison
+# - - - - - - - - - - - - - - - - - - - -
+#export PATH="$(brew --prefix bison)/bin:$PATH"
+
+# - - - - - - - - - - - - - - - - - - - -
+# Composer
+# - - - - - - - - - - - - - - - - - - - -
+#export PATH="$COMPOSER_HOME/vendor/bin:$PATH"
+
+# - - - - - - - - - - - - - - - - - - - -
+# ImageMagick
+# - - - - - - - - - - - - - - - - - - - -
+#export PATH="$(brew --prefix imagemagick@6)/bin:$PATH"
+
+# - - - - - - - - - - - - - - - - - - - -
+# MySQL
+# - - - - - - - - - - - - - - - - - - - -
+#export PATH="$(brew --prefix mysql@5.7)/bin:$PATH"
+
+# - - - - - - - - - - - - - - - - - - - -
 # Prince
 # - - - - - - - - - - - - - - - - - - - -
 #export PATH="$(brew --prefix)/lib/prince/bin:$PATH"
@@ -241,9 +127,4 @@ export AWS_DEFAULT_PROFILE="default"
 # - - - - - - - - - - - - - - - - - - - -
 # Sketch
 # - - - - - - - - - - - - - - - - - - - -
-export PATH="Sketch.app/Contents/Resources/sketchtool/bin:$PATH"
-
-# - - - - - - - - - - - - - - - - - - - -
-# Transmission
-# - - - - - - - - - - - - - - - - - - - -
-export TRANSMISSION_HOME="${HOME}/.config/transmission"
+#export PATH="$SKETCH_APP_CONTENTS/Resources/sketchtool/bin:$PATH"

@@ -88,6 +88,7 @@ git_tools_list=(
     git-extras                  # Small git utilities
     git-flow                    # Extensions to follow Vincent Driessen's branching model
     git-secret                  # Bash-tool to store the private data inside a git repo
+    gh                          # GitHub CLI ( command-line tool )
 )
 for git_tool in "${git_tools_list[@]}"
 do
@@ -177,6 +178,7 @@ useful_tools_list=(
     lua                         # Powerful, lightweight programming language
     #lynx                       # Text-based web browser
     mas                         # Mac App Store command-line interface
+    neofetch                    # Fast, highly customisable system info script
     neovim                      # Ambitious Vim-fork focused on extensibility and agility
     #newman                     # Command-line collection runner for Postman
     ngrep                       # Network Grep
@@ -285,30 +287,6 @@ for dev_env_manager in "${dev_env_manager_list[@]}"
 do
     brew install "${dev_env_manager}"
 done
-
-# Initialize rbenv
-#rbenv init
-
-# Install rbenv-alias Plugin
-#mkdir -p "$(rbenv root)/plugins" && git clone git://github.com/tpope/rbenv-aliases.git "$(rbenv root)/plugins/rbenv-aliases"
-#rbenv alias --auto
-
-# List Of Default Gems
-#default_gems_list=(
-  #colorls
-  #bundler
-  #debase
-  #geminabox
-  #keycutter
-  #rails --pre
-  #ruby-debug-ide
-  #rubocop
-  #solargraph
-#)
-#for g in "${default_gems_list[@]}"
-#do
-  #echo "${g}" >> "$(rbenv root)/default-gems"
-#done
 
 
 #

@@ -816,6 +816,17 @@ get_rails_config() {
   fi
 }
 
+# - - - - - - - - - - - - - - - - - - - -
+# 1Password-CLI
+# - - - - - - - - - - - - - - - - - - - -
+alias opsignin='eval "$(op signin brucebentley)"';
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# Display
+# - - - - - - - - - - - - - - - - - - - -
+alias monitorconfig='displayplacer "id:5C98910F-FDCE-794B-0C79-B7A29C225017 res:1792x1120 hz:59 color_depth:8 scaling:n origin:(0,0) degree:0" "id:850796AC-890B-2D42-3297-C418D7B29BE1 res:2560x1080 hz:60 color_depth:8 scaling:off origin:(-2560,-120) degree:0"'
+
 
 # - - - - - - - - - - - - - - - - - - - -
 # Fun Stuff

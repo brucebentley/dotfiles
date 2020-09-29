@@ -27,16 +27,54 @@ fi
 
 
 # - - - - - - - - - - - - - - - - - - - -
+# $PATH Configuration
+# - - - - - - - - - - - - - - - - - - - -
+typeset -U path  # No duplicates
+path=()
+
+# On some other systems /usr/bin links to /bin; use the full path to prevent dupes.
+_prepath() {
+    for dir in "$@"; do
+        dir=${dir:A}
+        [[ ! -d "$dir" ]] && return
+        path=("$dir" $path[@])
+    done
+}
+_postpath() {
+    for dir in "$@"; do
+        dir=${dir:A}
+        [[ ! -d "$dir" ]] && return
+        path=($path[@] "$dir")
+    done
+}
+
+_prepath /bin /sbin /usr/bin /usr/sbin
+_prepath "${BREW_PREFIX}/bin" "${BREW_PREFIX}/sbin"
+
+_postpath "$(brew --prefix bison)/bin"
+_postpath "$COMPOSER_HOME/vendor/bin"
+_postpath "$(brew --prefix imagemagick@6)/bin"
+_postpath "$(brew --prefix mysql@5.7)/bin"
+_postpath "$SKETCH_APP_CONTENTS/Resources/sketchtool/bin"
+
+_prepath "$HOME/.local/bin"
+_prepath "$HOME/bin"
+
+unfunction _prepath
+unfunction _postpath
+
+
+# - - - - - - - - - - - - - - - - - - - -
 # Homebrew Configuration
 # - - - - - - - - - - - - - - - - - - - -
 # If You Come From Bash You Might Have To Change Your $PATH.
 #   export PATH=:/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
-export PATH="/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH"
+# export PATH="/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH"
 
 # Homebrew Requires This.
 #export PATH="/usr/local/sbin:$PATH"
 
-BREW_PREFIX=$(brew --prefix)
+# BREW_PREFIX=$(brew --prefix)
 
 
 # - - - - - - - - - - - - - - - - - - - -
@@ -44,14 +82,14 @@ BREW_PREFIX=$(brew --prefix)
 # - - - - - - - - - - - - - - - - - - - -
 
 # Install Functions.
-export XDG_CONFIG_HOME="$HOME/.config"
+#export XDG_CONFIG_HOME="$HOME/.config"
 export UPDATE_INTERVAL=15
 
-export DOTFILES="$HOME/dotfiles"
-export ZSH="$HOME/dotfiles/zsh"
+#export DOTFILES="$HOME/dotfiles"
+#export ZSH="$HOME/dotfiles/zsh"
 
-export CACHEDIR="$HOME/.local/share"
-[[ -d "$CACHEDIR" ]] || mkdir -p "$CACHEDIR"
+#export CACHEDIR="$HOME/.local/share"
+#[[ -d "$CACHEDIR" ]] || mkdir -p "$CACHEDIR"
 
 # Load The Prompt System And Completion System And Initilize Them.
 autoload -Uz compinit promptinit
@@ -127,7 +165,7 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "$HOME/.zcompcache"
+zstyle ':completion::complete:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
 zstyle ':completion:*' list-colors $LS_COLORS
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -135,9 +173,6 @@ zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 zstyle ':completion:*' rehash true
 
 # History.
-HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"
-HISTSIZE=100000
-SAVEHIST=5000
 setopt appendhistory notify
 unsetopt beep nomatch
 
@@ -158,22 +193,24 @@ setopt extended_history         # Show Timestamp In History.
 # Zinit Configuration
 # - - - - - - - - - - - - - - - - - - - -
 
-__ZINIT="${ZDOTDIR:-$HOME}/.zinit/bin/zinit.zsh"
+ZINIT_HOME="${ZINIT_HOME:-${ZPLG_HOME:-${ZDOTDIR:-$HOME}/.zinit}}"
+ZINIT_BIN_DIR_NAME="${${ZINIT_BIN_DIR_NAME:-$ZPLG_BIN_DIR_NAME}:-bin}"
 
-if [[ ! -f "$__ZINIT" ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing DHARMA Initiative Plugin Manager (zdharma/zinit)…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+if [[ ! -f $ZINIT_HOME/$ZINIT_BIN_DIR_NAME/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$ZINIT_HOME" && command chmod g-rwX "$ZINIT_HOME"
+    command git clone https://github.com/zdharma/zinit "$ZINIT_HOME/$ZINIT_BIN_DIR_NAME" && \\
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \\
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-. "$__ZINIT"
+source "$ZINIT_HOME/$ZINIT_BIN_DIR_NAME/zinit.zsh"
+
 autoload -Uz _zinit
 if [ "$(whoami)" = "YOUR_NON_ADMIN_USER" ]; then
-  compinit -i    # Ignore Insecure Directories
+    compinit -i    # Ignore Insecure Directories
 else
-  compinit
+    compinit
 fi
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
@@ -201,13 +238,13 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # Annexes
 # - - - - - - - - - - - - - - - - - - - -
 
-# Load a few important annexes, without Turbo (this is currently required for annexes)
-zinit light-mode compile"handler" for \
-    zinit-zsh/z-a-patch-dl \
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
     zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-bin-gem-node \
-    zinit-zsh/z-a-submods \
-    zdharma/declare-zsh
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
 
 
 # - - - - - - - - - - - - - - - - - - - -
@@ -276,12 +313,12 @@ setopt no_beep
 
 foreach piece (
     exports.zsh
-    node.zsh
+    #node.zsh
     aliases.zsh
     functions.zsh
     personal.zsh
 ) {
-    . $ZSH/config/$piece
+    . "${ZDOTDIR}/config/$piece"
 }
 
 
@@ -291,7 +328,7 @@ foreach piece (
 
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
-DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+DIRSTACKFILE="${ZDOTDIR:-$HOME}/.cache/zsh/dirs"
 
 # Make `DIRSTACKFILE` If It 'S Not There.
 if [[ ! -a $DIRSTACKFILE ]]; then
@@ -327,8 +364,8 @@ setopt pushd_minus              # This Reverts The +/- Operators.
 # Theme / Prompt Customization
 # - - - - - - - - - - - - - - - - - - - -
 
-# To Customize Prompt, Run `p10k configure` Or Edit `~/.p10k.zsh`.
-[[ ! -f ~/.p10k.zsh ]] || . ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f "${ZDOTDIR:-$HOME}/.p10k.zsh" ]] || source "${ZDOTDIR:-$HOME}/.p10k.zsh"
 
 
 # - - - - - - - - - - - - - - - - - - - -
@@ -345,7 +382,7 @@ fi
 # - - - - - - - - - - - - - - - - - - - -
 # iTerm2 Shell Integration
 # - - - - - - - - - - - - - - - - - - - -
-test -e "$HOME/.iterm2_shell_integration.zsh" && . "$HOME/.iterm2_shell_integration.zsh" || true
+test -e "${ZDOTDIR:-$HOME}/.iterm2_shell_integration.zsh" && . "${ZDOTDIR:-$HOME}/.iterm2_shell_integration.zsh" || true
 
 iterm2_print_user_vars() {
     # Extend This To Add Whatever You Want To Have Printed Out In The Status Bar.
@@ -357,7 +394,3 @@ iterm2_print_user_vars() {
     #KUBECONTEXT=$(CTX=$(kubectl config current-context) 2> /dev/null;if [ $? -eq 0 ]; then echo $CTX;fi)
     #iterm2_set_user_var kubeContext $KUBECONTEXT
 }
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-

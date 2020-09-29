@@ -623,3 +623,42 @@ ffmpeg-dl() {
     fi;
     ffmpeg -i "${1}" -c copy -bsf:a aac_adtstoasc "${2}.mp4";
 }
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+# ZSH
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Cache Binary Initialization Command Output
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# This helps to avoid the time to execute it in the future.
+#
+# @usage: `_evalcache <command> <generation args...>`
+# Source: https://github.com/mroth/evalcache
+function _evalcache () {
+    local cacheFile="$ZSH_EVALCACHE_DIR/init-${1##*/}.sh"
+
+    if [ "$ZSH_EVALCACHE_DISABLE" = "true" ]; then
+        eval "$("$@")"
+    elif [ -s "$cacheFile" ]; then
+        source "$cacheFile"
+    else
+        if type "$1" > /dev/null; then
+            (>&2 echo "$1 initialization not cached, caching output of: $*")
+            mkdir -p "$ZSH_EVALCACHE_DIR"
+            "$@" > "$cacheFile"
+            source "$cacheFile"
+        else
+            echo "evalcache ERROR: $1 is not installed or in PATH"
+        fi
+    fi
+}
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Benchmarks The Current $SHELL
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function bench_shell() {
+    for i in $(seq 1 10); do /usr/bin/time $SHELL -i -c exit; done
+}

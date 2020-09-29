@@ -1,0 +1,6 @@
+neovim
+pip
+pipenv
+pylint
+setuptools
+wheel

@@ -24,6 +24,9 @@ BREW_PREFIX=$(brew --prefix)
 brew_tap_list=(
     homebrew/cask-versions
     homebrew/cask-fonts
+    homebrew/cask-drivers
+    mongodb/brew
+    brew tap jakehilborn/jakehilborn
 )
 for tap in "${brew_tap_list[@]}"
 do
@@ -133,6 +136,7 @@ misc_cask_list=(
     #cloudapp          # Record Video, Webcam, Gifs, Capture Your Screen And Share It Instantly To The Cloud
     #dash              # Docuementation Manager
     discord            # Communicate Over Voice, Video, And Text
+    displayplacer      # Command Line Utility To Configure Multi-Display Resolutions & Arrangements. Essentially XRandR For macOS.
     dropbox            # Cloud Storage & Collaboration Platform
     #duet               # Turn Your iOS Or Android Device Into A High Performance Second Display For Your Mac & PC
     #evernote          # Save, Sync & Share Everything
@@ -148,12 +152,14 @@ misc_cask_list=(
     megasync           # Automated Synchronisation Between Your Computer And Your Mega Cloud
     #mou               # Markdown Editor
     nordvpn            # VPN Client For NordVPN
+    philips-hue-sync   # Highlight & Amplify Your In-Game Actions With Your Philip's Hue Smart Lights.
     plex-media-player  # A Client-Server Media Player
     #plex-media-server # Organize & Store Your Media Library For Playback With Plex Media Clients
     prince             # Convert HTML to PDF
     sketch             # Vector Graphics Editor For Macos
     sketchpacks        # Sketch Plugin Manager
     slack              # Communication & Sharing Platform For Individuals, Teams & Organizations
+    snagit             # Capture, Record & Share Video, Webcam, Gifs, Screenshots & More
     spotify            # Desktop Player For The Online Digital Music Service
     #screenflow        # Video Editing & Screen Recording
     synergy           # Share Keyboard/Mouse Between Computers
@@ -166,6 +172,28 @@ for misc_cask in "${misc_cask_list[@]}"
 do
     brew cask install "${misc_cask}"
 done
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Install Quick Look Plugins
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+ql_plugins_list=(
+    qlcolorcode        #
+    qlmarkdown         #
+    qlprettypatch      #
+    qlstephen          #
+    quicklook-csv      #
+    quicklook-json     #
+    suspicious-package #
+    webpquicklook      #
+)
+for ql_plugin in "${ql_plugins_list[@]}"
+do
+    brew cask install "${ql_plugin}" && qlmanage -r
+done
+
 
 
 #
@@ -187,8 +215,67 @@ do
     brew cask install "font-${font}"
 done
 
+# Nerd Fonts
+nerd_font_cask_list=(
+    3270
+    agave
+    anonymice
+    arimo
+    aurulent-sans-mono
+    bigblue-terminal
+    bitstream-vera-sans-mono
+    blex-mono
+    caskaydia-cove
+    code-new-roman
+    cousine
+    daddy-time-mono
+    dejavu-sans-mono
+    droid-sans-mono
+    fantasque-sans-mono
+    fira-code
+    fira-mono
+    go-mono
+    gohunerd-font
+    hack
+    hackgen-nerd
+    hasklug
+    heavy-data
+    hurmit
+    im-writing
+    inconsolata-go
+    inconsolata-lgc
+    inconsolata
+    iosevka
+    jetbrains-mono
+    lekton
+    liberation
+    meslo-lg
+    monofur
+    monoid
+    mononoki
+    mplus
+    noto
+    open-dyslexic
+    overpass
+    pronerd-font
+    proggy-clean-tt
+    roboto-mono
+    sauce-code-pro
+    shure-tech-mono
+    space-mono
+    terminess-ttf
+    tinos
+    ubuntu-mono
+    ubuntu
+    victor-mono
+)
+
 # Search & Install All Available Nerd Fonts ( 50+ )
-brew cask install "$( brew search font | grep nerd | tr '\n' ' ' )"
+#brew cask install "$( brew search font | grep nerd | tr '\n' ' ' )"
+for nerd_font in "${nerd_font_cask_list[@]}"
+do
+    brew cask install "font-${nerd_font}"
+done
 
 
 #
@@ -198,3 +285,6 @@ brew cask install "$( brew search font | grep nerd | tr '\n' ' ' )"
 #
 # Remove Outdated Versions From The Cellar
 brew cleanup
+
+
+brew tap jakehilborn/jakehilborn && brew install

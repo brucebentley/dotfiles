@@ -5,19 +5,29 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # - - - - - - - - - - - - - - - - - - - -
-# `rbenv` — Python Environment Manager
+# Virtual Environments
 # - - - - - - - - - - - - - - - - - - - -
+# Function that behaves similar to `pyenv virtualenv`.
+#
+function venv --argument-names 'python_version' --description 'Create virtualenv named the same as current directory'
+  set -l python_bin
 
-zinit ice atclone'PYENV_ROOT="$HOME/.pyenv" ./libexec/pyenv init - > zpyenv.zsh' \
-    atinit'export PYENV_ROOT="$HOME/.pyenv"' atpull"%atclone" \
-    as'command' pick'bin/pyenv' src"zpyenv.zsh" nocompile'!'
-zinit light pyenv/pyenv
+  if not test -n "$python_version"
+    # Use default python version set by asdf
+    set python_bin ($HOME/.asdf/bin/asdf which python)
+  else
+    set python_bin $ASDF_DIR/installs/python/$python_version/bin/python
+  end
 
-# # Load pyenv ( If Available )
-# if (( $+commands[pyenv] )) ; then
-#     eval "$(pyenv init -)";
-#     eval "$(pyenv virtualenv-init -)";
+  set -l venv_name (basename $PWD | tr . -)
 
-#     export PYENV_ROOT="$HOME/.pyenv";   # FOR `pyenv`
-#     PATH="$PYENV_ROOT/bin:$PATH";       # For Custom Scripts
-# fi;
+  echo
+  if not test -e $python_bin
+    echo "Python version `$python_version` is not installed."
+    return 1
+  end
+
+  echo Creating virtualenv `$venv_name`
+  $python_bin -m venv $HOME/.virtualenvs/$venv_name
+  source $HOME/.virtualenvs/$venv_name/bin/activate.fish
+end

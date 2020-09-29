@@ -1,38 +1,355 @@
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# macOS + OSX Generated Files
+# Windows Generated Files
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 
-.AppleDouble
-.DS_Store
-.LSOverride
+# Folder Configuration File
+Desktop.ini
 
-# For iCloud Drive
-*.icloud
+# Recycle Bin Used On File Shares
+$RECYCLE.BIN/
 
-# Icon Must End With Two \r
-#Icon
-
-# Thumbnails
-._*
+# Thumbnail Cache Files
 Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
 
-# Files That Might Appear In The Root Of A Volume
-.com.apple.timemachine.donotpresent
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
+# Windows Shortcuts
+*.lnk
 
-# Directories Potentially Created On Remote AFP Shares
-.apdisk
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Windows Installer Files
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.cab
+*.msi
+*.msm
+*.msp
+
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Visual Studio
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+_UpgradeReport_Files/
+.vs/
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+*.sln.docstates
+*.suo
+*.user
+*.userosscache
+*.userprefs
+*.VisualState.xml
+*~
+~$*
+Backup*/
+ClientBin/
+dlldata.c
+orleans.codegen.cs
+TestResult.xml
+UpgradeLog*.htm
+UpgradeLog*.XML
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# .NET Core
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+.builds
+*_i.c
+*_i.h
+*_p.c
+*.ilk
+*.log
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.pidb
+*.rsp
+*.sbr
+*.scc
+*.svclog
+*.tlb
+*.tlh
+*.tli
+*.tmp
+*.tmp_proj
+*.vspscc
+*.vssscc
+**/Properties/launchSettings.json
+artifacts/
+project.fragment.lock.json
+project.lock.json
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Build Results
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+[Bb]in/
+[Bb]uild[Ll]og.*
+[Dd]ebug/
+[Dd]ebugPS/
+[Dd]ebugPublic/
+[Ll]og/
+[Oo]bj/
+[Rr]elease/
+[Rr]eleasePS/
+[Rr]eleases/
+[Tt]est[Rr]esult*/
+bld/
+x64/
+x86/
+#wwwroot/
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Business Intelligence Projects
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.bim_*.settings
+*.bim.layout
+*.rdl.data
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Click-Once Directory
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+publish/
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Coderush
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+.cr/
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# DocProject Is A Documentation Generator Add-In
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+DocProject/buildhelp/
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/*.HxC
+DocProject/Help/*.HxT
+DocProject/Help/html
+DocProject/Help/Html2
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# DotCover Is A Code Coverage Tool
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.dotCover
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Fake - F# Make
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+.fake/
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# GhostDoc Plugin Setting File
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.GhostDoc.xml
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Guidance Automation Toolkit
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.gpState
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Installshield Output Folder
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+[Ee]xpress/
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Jetbrains Rider
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.sln.iml
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# JustCode Is A .NET Coding Add-In
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+.JustCode
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Microsoft Azure Web App Publish Settings
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.build.csdef
+csx/
+ecf/
+PublishScripts/
+rcf/
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Microsoft Fakes
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+FakesAssemblies/
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Node.Js Tools For Visual Studio
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+.ntvs_analysis.dat
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Nuget Packages
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+
+*.nupkg
+*.nuget.props
+*.nuget.targets
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Packages Folder
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+# CAN BE IGNORED BECAUSE OF PACKAGE RESTORE
+**/packages/*
+!**/packages/build/
+#!**/packages/repositories.config
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Publish Web Output
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.[Pp]ublish.xml
+*.azurePubxml
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Python Tools For Visual Studio (PTVS)
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+__pycache__/
+*.pyc
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Ria/Silverlight Projects
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+Generated_Code/
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Sql Server Files
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.ldf
+*.mdf
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Visual C++ Cache Files
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+*.aps
+*.cachefile
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.VC.opendb
+ipch/
+
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Windows Store App Package Files & Directories
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+
+_pkginFo.Txt
+Apppackages/
+Bundleartifacts/
+Package.Storeassociation.Xml
 
 
 #
@@ -281,33 +598,48 @@ tags
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# XCode
+# Visual Studio 6
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
-# Remember To Update:
-#   global/xcode.gitignore
-#   objective-c.gitignore
-#   swift.gitignore
+
+# Auto-Generated Workspace File (Contains Which Files Were Open Etc.)
+*.vbw
+
+# Build Logs
+*.plg
+
+# Workspace Options Files
+*.opt
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Visual Studio
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 
-# Build Generated
-DerivedData/
+# Cache Files
+*.[Cc]ache
 
-# Various Settings
-*.mode1v3
-*.mode2v3
-*.pbxuser
-*.perspectivev3
-xcuserdata/
-!default.mode1v3
-!default.mode2v3
-!default.pbxuser
-!default.perspectivev3
+# But Keep Track Of Directories Ending In .cache
+!*.[Cc]ache/
 
-# Other
-*.moved-aside
-*.xccheckout
-*.xcscmblueprint
+# Code Coverage Results
+*.coverage
+*.coveragexml
+
+# Lightswitch Build Output
+**/*.DesktopClient/GeneratedArtifacts
+**/*.DesktopClient/ModelManifest.xml
+**/*.HTMLClient/GeneratedArtifacts
+**/*.Server/GeneratedArtifacts
+**/*.Server/ModelManifest.xml
+_Pvt_Extensions
+
+# Profiler
+*.psess
+*.sap
+*.vsp
+*.vspx
 
 
 #
@@ -524,9 +856,6 @@ vendor/bundle
 # Gems
 gems
 
-# Foreman & Overmind
-Procfile*
-
 # Yard Artifacts
 .yardoc
 _yardoc
@@ -604,5 +933,4 @@ wp-content/plugins/hello.php
 #/readme.html
 #/sitemap.xml
 #/sitemap.xml.gz
-
 

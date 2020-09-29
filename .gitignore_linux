@@ -1,39 +1,46 @@
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# macOS + OSX Generated Files
+# Linux Generated Files
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 
-.AppleDouble
-.DS_Store
-.LSOverride
+*~
 
-# For iCloud Drive
-*.icloud
 
-# Icon Must End With Two \r
-#Icon
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# KDE Directory Preferences
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
 
-# Thumbnails
-._*
-Thumbs.db
+.directory
 
-# Files That Might Appear In The Root Of A Volume
-.com.apple.timemachine.donotpresent
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Linux Trash Folder
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Might Appear On Any Partition Or Disk
+#
 
-# Directories Potentially Created On Remote AFP Shares
-.apdisk
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
+.Trash-*
 
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# .nfs Files
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Created When An Open File Is Removed But Is Still Being Accessed
+#
+
+.nfs*
+
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Temporary Files
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Can Be Created If A Process Still Has A Handle Open Of A Deleted File
+#
+
+.fuse_hidden*
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -92,16 +99,6 @@ _thumbs/
 build/
 dist/
 
-#
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Dropbox
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-
-.dropbox
-.dropbox.attr
-.dropbox.cache
-
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -130,23 +127,6 @@ log*/
 /demo.sql
 /demo.sqldump
 #docs/
-
-
-#
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# MICROSOFT OFFICE
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-
-# Autosave & Temporary Files
-~$*.doc*
-~$*.ppt*
-~$*.xls*
-~$*.vsd*
-
-# Backup Files
-*.xlk
-*.vsdx
 
 
 #
@@ -277,37 +257,6 @@ tags
 !.vscode/launch.json
 !.vscode/settings.json
 !.vscode/tasks.json
-
-
-#
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# XCode
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-# Remember To Update:
-#   global/xcode.gitignore
-#   objective-c.gitignore
-#   swift.gitignore
-#
-
-# Build Generated
-DerivedData/
-
-# Various Settings
-*.mode1v3
-*.mode2v3
-*.pbxuser
-*.perspectivev3
-xcuserdata/
-!default.mode1v3
-!default.mode2v3
-!default.pbxuser
-!default.perspectivev3
-
-# Other
-*.moved-aside
-*.xccheckout
-*.xcscmblueprint
 
 
 #
@@ -524,9 +473,6 @@ vendor/bundle
 # Gems
 gems
 
-# Foreman & Overmind
-Procfile*
-
 # Yard Artifacts
 .yardoc
 _yardoc
@@ -604,5 +550,4 @@ wp-content/plugins/hello.php
 #/readme.html
 #/sitemap.xml
 #/sitemap.xml.gz
-
 
