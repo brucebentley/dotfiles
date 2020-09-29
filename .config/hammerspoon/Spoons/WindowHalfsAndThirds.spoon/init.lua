@@ -104,11 +104,15 @@ obj._window_state_name_to_rect = {
    bottom_40      = {0.00,0.60,1.00,0.40},
    bottom_60      = {0.00,0.40,1.00,0.60},
    left_third     = {0.00,0.00,0.33,1.00},
-   middle_third_h = {0.33,0.00,0.33,1.00},
+   left_two_third = {0.00,0.00,0.67,1.00},
+   middle_third_h = {0.33,0.00,0.34,1.00},
    right_third    = {0.67,0.00,0.33,1.00},
+   right_two_third = {0.33,0.00,0.67,1.00},
    top_third      = {0.00,0.00,1.00,0.33},
-   middle_third_v = {0.00,0.33,1.00,0.33},
+   top_two_third  = {0.00,0.00,1.00,0.67},
+   middle_third_v = {0.00,0.33,1.00,0.34},
    bottom_third   = {0.00,0.67,1.00,0.33},
+   bottom_two_third = {0.00,0.33,1.00,0.67},
    top_left       = {0.00,0.00,0.50,0.50},
    top_right      = {0.50,0.00,0.50,0.50},
    bottom_left    = {0.00,0.50,0.50,0.50},
@@ -130,29 +134,37 @@ end
 --   (example below)
 obj._window_moves = {
    left_half = {"left_half", left_half = "left_40", left_40 = "left_60"},
+   half_left = {"left_half"},
    -- if `action` `left_half` is requested without a match in this table, move to `left_half`
    -- if `action` `left_half` is requested from `window_state_name` `left_half`, move to `left_40`
    -- if `action` `left_half` is requested from `window_state_name` `left_40`, move to `left_60`
    -- rationale: if a user requests a move to `left_half` and they're already there they're expressing a user need
    --   and it's our job to work out what that need is. Let's give them some other `left_half`ish options.
    right_half = {"right_half", right_half = "right_40", right_40 = "right_60"},
+   half_right = {"right_half"},
    top_half = {"top_half", top_half = "top_40", top_40 = "top_60"},
+   half_top = {"top_half"},
    bottom_half = {"bottom_half", bottom_half = "bottom_40", bottom_40 = "bottom_60"},
+   half_bottom = {"bottom_half"},
    third_left = {"left_third", left_third = "right_third", middle_third_h = "left_third", right_third = "middle_third_h",
                                right_half = "middle_third_h"},
    third_right = {"right_third", left_third = "middle_third_h", middle_third_h = "right_third", right_third = "left_third",
                                  left_half = "middle_third_h"},
    left_third = {"left_third"}, -- `left_third` is a `window_state` specific `action`, not a relative action
                                 -- it is not part of the default hotkey mapping
+   left_two_third = {"left_two_third"},
    middle_third_h = {"middle_third_h"},
    right_third = {"right_third"},
+   right_two_third = {"right_two_third"},
    third_up = {"top_third", top_third = "bottom_third", middle_third_v = "top_third", bottom_third = "middle_third_v",
                             bottom_half = "middle_third_v"},
    third_down = {"bottom_third", top_third = "middle_third_v", middle_third_v = "bottom_third", bottom_third = "top_third",
                                  top_half = "middle_third_v"},
    top_third = {"top_third"},
+   top_two_third = {"top_two_third"},
    middle_third_v = {"middle_third_v"},
    bottom_third = {"bottom_third"},
+   bottom_two_third = {"bottom_two_third"},
    top_left = {"top_left"},
    top_right = {"top_right"},
    bottom_left = {"bottom_left"},
@@ -267,19 +279,27 @@ end
 --- Returns:
 ---  * the WindowHalfsAndThirds object
 obj.leftHalf       = hs.fnutils.partial(obj.resizeCurrentWindow, "left_half")
+obj.halfLeft       = hs.fnutils.partial(obj.resizeCurrentWindow, "half_left")
 obj.rightHalf      = hs.fnutils.partial(obj.resizeCurrentWindow, "right_half")
+obj.halfRight      = hs.fnutils.partial(obj.resizeCurrentWindow, "half_right")
 obj.topHalf        = hs.fnutils.partial(obj.resizeCurrentWindow, "top_half")
+obj.halfTop        = hs.fnutils.partial(obj.resizeCurrentWindow, "half_top")
 obj.bottomHalf     = hs.fnutils.partial(obj.resizeCurrentWindow, "bottom_half")
+obj.halfBottom     = hs.fnutils.partial(obj.resizeCurrentWindow, "half_bottom")
 obj.thirdLeft      = hs.fnutils.partial(obj.resizeCurrentWindow, "third_left")
 obj.thirdRight     = hs.fnutils.partial(obj.resizeCurrentWindow, "third_right")
 obj.leftThird      = hs.fnutils.partial(obj.resizeCurrentWindow, "left_third")
+obj.leftTwoThird   = hs.fnutils.partial(obj.resizeCurrentWindow, "left_two_third")
 obj.middleThirdH   = hs.fnutils.partial(obj.resizeCurrentWindow, "middle_third_h")
 obj.rightThird     = hs.fnutils.partial(obj.resizeCurrentWindow, "right_third")
+obj.rightTwoThird  = hs.fnutils.partial(obj.resizeCurrentWindow, "right_two_third")
 obj.thirdUp        = hs.fnutils.partial(obj.resizeCurrentWindow, "third_up")
 obj.thirdDown      = hs.fnutils.partial(obj.resizeCurrentWindow, "third_down")
 obj.topThird       = hs.fnutils.partial(obj.resizeCurrentWindow, "top_third")
+obj.topTwoThird    = hs.fnutils.partial(obj.resizeCurrentWindow, "top_two_third")
 obj.middleThirdV   = hs.fnutils.partial(obj.resizeCurrentWindow, "middle_third_v")
 obj.bottomThird    = hs.fnutils.partial(obj.resizeCurrentWindow, "bottom_third")
+obj.bottomTwoThird = hs.fnutils.partial(obj.resizeCurrentWindow, "bottom_two_third")
 obj.topLeft        = hs.fnutils.partial(obj.resizeCurrentWindow, "top_left")
 obj.topRight       = hs.fnutils.partial(obj.resizeCurrentWindow, "top_right")
 obj.bottomLeft     = hs.fnutils.partial(obj.resizeCurrentWindow, "bottom_left")
@@ -414,9 +434,13 @@ end
 function obj:bindHotkeys(mapping)
    local action_to_method_map = {
       left_half = self.leftHalf,
+      half_left = self.halfLeft,
       right_half = self.rightHalf,
+      half_right = self.halfRight,
       top_half = self.topHalf,
+      half_top = self.halfTop,
       bottom_half = self.bottomHalf,
+      half_bottom = self.halfBottom,
       third_left = self.thirdLeft,
       third_right = self.thirdRight,
       third_up = self.thirdUp,
@@ -424,11 +448,15 @@ function obj:bindHotkeys(mapping)
       max = self.maximize,
       max_toggle = self.toggleMaximized,
       left_third = self.leftThird,
+      left_two_third = self.leftTwoThird,
       middle_third_h = self.middleThirdH,
       right_third = self.rightThird,
+      right_two_third = self.rightTwoThird,
       top_third = self.topThird,
+      top_two_third = self.topTwoThird,
       middle_third_v = self.middleThirdV,
       bottom_third = self.bottomThird,
+      bottom_two_third = self.bottomTwoThird,
       top_left = self.topLeft,
       top_right = self.topRight,
       bottom_left = self.bottomLeft,

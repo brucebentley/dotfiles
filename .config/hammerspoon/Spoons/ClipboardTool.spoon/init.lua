@@ -40,6 +40,11 @@ obj.max_entry_size = 4990
 --- Whether to check the maximum size of an entry. Defaults to `false`.
 obj.max_size = getSetting('max_size', false)
 
+--- ClipboardTool.show_copied_alert
+--- Variable
+--- If `true`, show an alert when a new item is added to the history, i.e. has been copied.
+obj.show_copied_alert = true
+
 --- ClipboardTool.honor_ignoredidentifiers
 --- Variable
 --- If `true`, check the data identifiers set in the pasteboard and ignore entries which match those listed in `ClipboardTool.ignoredIdentifiers`. The list of identifiers comes from http://nspasteboard.org. Defaults to `true`
@@ -144,7 +149,11 @@ function obj:_processSelectedItem(value)
       if value.action and actions[value.action] then
          actions[value.action](value)
       elseif value.text then
-         pasteboard.setContents(value.text)
+         if value.type == "text" then
+            pasteboard.setContents(value.text)
+         elseif value.type == "image" then 
+            pasteboard.writeObjects(hs.image.imageFromURL(value.data))
+         end
 --         self:pasteboardToClipboard(value.text)
          if (self.paste_on_select) then
             hs.eventtap.keyStroke({"cmd"}, "v")
@@ -179,7 +188,7 @@ function obj:dedupe_and_resize(list)
    local hashes={}
    for i,v in ipairs(list) do
       if #res < self.hist_size then
-         local hash=hashfn(v)
+         local hash=hashfn(v.content)
          if (not self.deduplicate) or (not hashes[hash]) then
             table.insert(res, v)
             hashes[hash]=true
@@ -198,8 +207,8 @@ end
 ---
 --- Returns:
 ---  * None
-function obj:pasteboardToClipboard(item)
-   table.insert(clipboard_history, 1, item)
+function obj:pasteboardToClipboard(item_type, item)
+   table.insert(clipboard_history, 1, {type=item_type, content=item})
    clipboard_history = self:dedupe_and_resize(clipboard_history)
    _persistHistory() -- updates the saved history
 end
@@ -216,7 +225,7 @@ function obj:pasteAllWithDelimiter(row, delimiter)
 --      pasteboard.setContents(entry)
 --      os.execute("sleep 0.2")
 --      hs.eventtap.keyStroke({"cmd"}, "v")
-       hs.eventtap.keyStrokes(entry)
+       hs.eventtap.keyStrokes(entry.content)
 --      os.execute("sleep 0.2")
       hs.eventtap.keyStrokes(delimiter)
 --      os.execute("sleep 0.2")
@@ -277,8 +286,14 @@ end
 function obj:_populateChooser()
    menuData = {}
    for k,v in pairs(clipboard_history) do
-      if (type(v) == "string") then
-         table.insert(menuData, {text=v, subText=""})
+      if (v.type == "text") then
+         table.insert(menuData, { text = v.content,
+                                  type = v.type})
+      elseif (v.type == "image") then
+         table.insert(menuData, { text = "《Image data》",
+                                  type = v.type,
+                                  data = v.content,
+                                  image = hs.image.imageFromURL(v.content)})
       end
    end
    if #menuData == 0 then
@@ -352,7 +367,12 @@ function obj:checkAndStorePasteboard()
          current_clipboard = pasteboard.getContents()
          self.logger.df("current_clipboard = %s", tostring(current_clipboard))
          if (current_clipboard == nil) and (pasteboard.readImage() ~= nil) then
-            self.logger.df("Images not yet supported - ignoring image contents in clipboard")
+            current_clipboard = pasteboard.readImage()
+            self:pasteboardToClipboard("image", current_clipboard:encodeAsURLString())
+            if self.show_copied_alert then
+                hs.alert.show("Copied image")
+            end
+            self.logger.df("Adding image (hashed) %s to clipboard history clipboard", hashfn(current_clipboard:encodeAsURLString()))
          elseif current_clipboard ~= nil then
            local size = #current_clipboard
            if obj.max_size and size > obj.max_entry_size then
@@ -363,9 +383,11 @@ function obj:checkAndStorePasteboard()
                 size = #current_clipboard
                 end
             end
-            hs.alert.show("Copied " .. size .. " chars")
+            if self.show_copied_alert then
+                hs.alert.show("Copied " .. size .. " chars")
+            end
             self.logger.df("Adding %s to clipboard history", current_clipboard)
-            self:pasteboardToClipboard(current_clipboard)
+            self:pasteboardToClipboard("text", current_clipboard)
          else
             self.logger.df("Ignoring nil clipboard content")
          end
