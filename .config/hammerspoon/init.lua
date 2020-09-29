@@ -1,9 +1,24 @@
--- Global log level. Per-spoon log level can be configured in each Install:andUse block below.
+--
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Hammerspoon Configuration
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+--
+
+-- Global Log Level. Per-spoon Log Level Can Be Configured In Each Install:anduse Block Below.
 hs.logger.defaultLogLevel="info"
 
+hyper = {'ctrl'}
+cmd_hyper = {'cmd', 'ctrl'}
+shift_hyper = {'cmd', 'ctrl', 'shift'}
+super_hyper = {'cmd', 'ctrl', 'alt'}
+alt_hyper = {'alt', 'tab'}
+
 hs.hotkey.alertDuration = 0
-hs.window.animationDuration = 0
+hs.window.animationDuration = 0.2
+hs.window.setFrameCorrectness = true
 hs.hints.showTitleThresh = 0
+
+col = hs.drawing.color.x11
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -27,15 +42,15 @@ if custom_config then
         hs.alert('                      Multiple config files found:\n    ~/hammerspoon  &  ~/.hammerspoon/private\n      The `~/hammerspoon` one will be used.')
     end
 else
-    -- otherwise fallback to 'classic' location.
+    -- Otherwise Fallback To 'classic' Location.
     if not privatepath then
         privatepath = hs.fs.pathToAbsolute(hs.configdir .. '/private')
-        -- Create `~/.hammerspoon/private` directory if not exists.
+        -- Create `~/.hammerspoon/private` Directory If It Doesn't Exist.
         hs.fs.mkdir(hs.configdir .. '/private')
     end
     privateconf = hs.fs.pathToAbsolute(hs.configdir .. '/private/config.lua')
     if privateconf then
-        -- Load awesomeconfig file if exists
+        -- Load Private Config File If It Exists.
         require('private/config')
     end
 end
@@ -45,16 +60,13 @@ end
 -- CONFIGURATION RELOADING
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- DEFAULT CONFIG RELOADING
---
--- hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'R', function()
---   hs.reload()
--- end)
--- hs.alert.show('Config Loaded!')
+-- Default Config Reloading.
+--hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'R', function()
+--  hs.reload()
+--end)
+--hs.alert.show('Config Loaded!')
 
---
--- FANCY CONFIG RELOADING
---
+-- Fancy Config Reloading.
 function reloadConfig(files)
     doReload = false
     for _,file in pairs(files) do
@@ -69,124 +81,62 @@ end
 myWatcher = hs.pathwatcher.new(os.getenv('HOME') .. '/.config/hammerspoon/', reloadConfig):start()
 hs.alert.show('Config Loaded!')
 
--- SMART CONFIGURATION RELOADING WITH SPOONS
+-- Smart Configuration Reloading With Spoons.
 hs.loadSpoon('ReloadConfiguration')
 spoon.ReloadConfiguration:start()
-
 
 hsreload_keys = hsreload_keys or {{"cmd", "shift", "ctrl"}, "R"}
 if string.len(hsreload_keys[2]) > 0 then
     hs.hotkey.bind(hsreload_keys[1], hsreload_keys[2], "Reload Configuration", function() hs.reload() end)
 end
 
-
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- ModalMgr
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- ModalMgr Spoon must be loaded explicitly, because this repository heavily relies upon it.
---
+-- Modalmgr Spoon Must Be Loaded Explicitly, Because This Repository Heavily Relies Upon It.
 hs.loadSpoon("ModalMgr")
+
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- DEFAULT SPOONS LIST
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- Define default Spoons which will be loaded later.
---
-if not hspoon_list then
-    hspoon_list = {
-        -- "Asana",
-        -- "BingDaily",
-        -- "BrewInfo",
-        -- "Caffeine",
-        -- "Calendar",
-        -- "CircleClock",
-        -- "ClipboardTool",
-        "ClipShow",
-        -- "ColorPicker",
-        -- "Commander",
-        -- "CountDown",
-        -- "DeepLTranslate",
-        -- "Emojis",
-        -- "EvernoteOpenAndTag",
-        -- "FadeLogo",
-        -- "FnMate",
-        -- "HCalendar",
-        -- "HeadphoneAutoPause",
-        -- "HighSierraiTunesMediaFix",
-        -- "HoldToQuit",
-        -- "HSaria2",
-        -- "HSearch",
-        "HSKeybindings",
-        -- "Keychain",
-        "KSheet",
-        -- "Leanpub",
-        -- "LookupSelection",
-        -- "MenubarFlag",
-        -- "MicMute",
-        -- "MiroWindowsManager",
-        "ModalMgr",
-        -- "MountedVolumes",
-        -- "MouseCircle",
-        -- "MoveSpaces",
-        -- "PasswordGenerator",
-        -- "Pastebin",
-        -- "PersonalHotspot",
-        -- "PopupTranslateSelection",
-        -- "RecursiveBinder",
-        -- "ReloadConfiguration",
-        -- "RoundedCorners",
-        -- "Seal",
-        -- "SendToOmniFocus",
-        -- "Shade",
-        -- "SleepCorners",
-        -- "SpeedMenu",
-        -- "SpoonInstall",
-        "TextClipboardHistory",
-        -- "TimeFlow",
-        -- "TimeMachineProgress",
-        -- "ToggleScreenRotation",
-        -- "ToggleSkypeMute",
-        -- "Token",
-        -- "Tunnelblick",
-        -- "UniversalArchive",
-        -- "UnsplashZ",
-        -- "URLDispatcher",
-        -- "USBDeviceActions",
-        -- "VolumeScroll",
-        -- "WifiNotifier",
-        -- "WiFiTransitions",
-        -- "WindowGrid",
-        -- "WindowHalfsAndThirds",
-        -- "WindowScreenLeftAndRight",
-        -- "WinWin"
-    }
-end
+-- Define Default Spoons Which Will Be Loaded Later.
+-- if not hspoon_list then
+--     hspoon_list = {
+--         'Caffeine',
+--         'ClipShow',
+--         'HSKeybindings',
+--         'KSheet',
+--         'ModalMgr',
+--         'SpoonInstall',
+--         'TextClipboardHistory'
+--     }
+-- end
 
--- Load those Spoons
-for _, v in pairs(hspoon_list) do
-    hs.loadSpoon(v)
-end
+-- Load Those Spoons
+-- for _, v in pairs(hspoon_list) do
+--     hs.loadSpoon(v)
+-- end
+hs.loadSpoon("SpoonInstall")
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- CREATE / REGISTER MODAL KEYBINDINGS ENVIRONMENTS
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- Register windowHints (Register a keybinding which is NOT modal environment with modal supervisor)
+-- Register WindowHints ( Register A Keybinding Which Is Not Modal Environment With Modal Supervisor)
 --
-hswhints_keys = hswhints_keys or {"alt", "tab"}
+hswhints_keys = hswhints_keys or {'alt', 'tab'}
 if string.len(hswhints_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hswhints_keys[1], hswhints_keys[2], 'Show Window Hints', function()
         spoon.ModalMgr:deactivateAll()
         hs.hints.windowHints()
     end)
 end
-
-
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -239,21 +189,19 @@ for _, v in ipairs(hsapp_list) do
     end
 end
 
-
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -˝ - - -
 -- REGISTER KEYBINDINGS FOR MODAL SUPERVISOR
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
-hsappM_keys = hsappM_keys or {"alt", "A"}
+hsappM_keys = hsappM_keys or {'alt', 'A'}
 if string.len(hsappM_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hsappM_keys[1], hsappM_keys[2], "Enter AppM Environment", function()
         spoon.ModalMgr:deactivateAll()
-        -- Show the keybindings cheatsheet once appM is activated
+        -- Show The Keybindings Cheatsheet Once Appm Is Activated.
         spoon.ModalMgr:activate({"appM"}, "#FFBD2E", true)
     end)
 end
-
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -318,13 +266,13 @@ if spoon.ClipShow then
         spoon.ModalMgr:deactivate({"clipshowM"})
     end)
 
-    -- Register clipshowM with modal supervisor
+    -- Register Clipshowm With Modal Supervisor.
     hsclipsM_keys = hsclipsM_keys or {"alt", "C"}
     if string.len(hsclipsM_keys[2]) > 0 then
         spoon.ModalMgr.supervisor:bind(hsclipsM_keys[1], hsclipsM_keys[2], "Enter clipshowM Environment", function()
-            -- We need to take action upon hsclipsM_keys is pressed, since pressing another key to showing ClipShow panel is redundant.
+            -- We Need To Take Action Upon Hsclipsm_keys Is Pressed, Since Pressing Another Key To Showing Clipshow Panel Is Redundant.
             spoon.ClipShow:toggleShow()
-            -- Need a little trick here. Since the content type of system clipboard may be "URL", in which case we don't need to activate clipshowM.
+            -- Need A Little Trick Here. Since The Content Type Of System Clipboard May Be "url", In Which Case We Don't Need To Activate clipshowM.
             if spoon.ClipShow.canvas:isShowing() then
                 spoon.ModalMgr:deactivateAll()
                 spoon.ModalMgr:activate({"clipshowM"})
@@ -333,15 +281,14 @@ if spoon.ClipShow then
     end
 end
 
-
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- REGISTER HAMMERSPOON API MANUAL
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- Open Hammerspoon manual in default browser.
+-- Open Hammerspoon Manual In Default Browser.
 --
-hsman_keys = hsman_keys or {"alt", "H"}
+hsman_keys = hsman_keys or {'alt', 'H'}
 if string.len(hsman_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hsman_keys[1], hsman_keys[2], "Read Hammerspoon Manual", function()
         hs.doc.hsdocs.forceExternalBrowser(true)
@@ -350,19 +297,17 @@ if string.len(hsman_keys[2]) > 0 then
     end)
 end
 
-
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- REGISTER LOCK SCREEN
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- hslock_keys = hslock_keys or {"alt", "L"}
+-- hslock_keys = hslock_keys or {'alt', 'L'}
 -- if string.len(hslock_keys[2]) > 0 then
 --     spoon.ModalMgr.supervisor:bind(hslock_keys[1], hslock_keys[2], "Lock Screen", function()
 --         hs.caffeinate.lockScreen()
 --     end)
 -- end
-
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -383,8 +328,8 @@ if spoon.KSheet then
         spoon.ModalMgr:deactivate({"cheatsheetM"})
     end)
 
-    -- Register cheatsheetM with modal supervisor
-    hscheats_keys = hscheats_keys or {"alt", "S"}
+    -- Register cheatsheetM With Modal Supervisor.
+    hscheats_keys = hscheats_keys or {'alt', 'S'}
     if string.len(hscheats_keys[2]) > 0 then
         spoon.ModalMgr.supervisor:bind(hscheats_keys[1], hscheats_keys[2], "Enter cheatsheetM Environment", function()
             spoon.KSheet:show()
@@ -394,15 +339,13 @@ if spoon.KSheet then
     end
 end
 
-
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- REGISTER BROWSER TAB TYPIST
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- Type URL of current tab of running browser in markdown format. i.e. [title](link)
---
-hstype_keys = hstype_keys or {"alt", "V"}
+-- Type URL Of Current Tab Of Running Browser In Markdown Format. i.e. [title](link).
+hstype_keys = hstype_keys or {'alt', 'V'}
 if string.len(hstype_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hstype_keys[1], hstype_keys[2], "Type Browser Link", function()
         local safari_running = hs.application.applicationsForBundleID("com.apple.Safari")
@@ -417,17 +360,15 @@ if string.len(hstype_keys[2]) > 0 then
     end)
 end
 
-
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- REGISTER HAMMERSPOON CONSOLE
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
-hsconsole_keys = hsconsole_keys or {"alt", "Z"}
+hsconsole_keys = hsconsole_keys or {'alt', 'Z'}
 if string.len(hsconsole_keys[2]) > 0 then
     spoon.ModalMgr.supervisor:bind(hsconsole_keys[1], hsconsole_keys[2], "Toggle Hammerspoon Console", function() hs.toggleConsole() end)
 end
-
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -440,21 +381,20 @@ end
 -- end)
 
 -- macOS NATIVE NOTIFICATION
-hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'W', function()
+hs.hotkey.bind(super_hyper, 'W', function()
   hs.notify.new({title='Hammerspoon', informativeText='Hello World'}):send()
 end)
-
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- WINDOW MANAGEMENT
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
--- Something to note is that `hs.screen.frame()` does not include the menubar and
--- dock, see `hs.screen.fullFrame()` if you need that) and set the frame of the
--- window to occupy the left half of the screen.
+-- Something To Note Is That `hs.screen.frame()` Does Not Include The Menubar And
+-- Dock, See `hs.screen.fullframe()` If You Need That) And Set The Frame Of The
+-- Window To Occupy The Left Half Of The Screen.
 --
 -- SNAP WINDOW LEFT ( 50% )
-hs.hotkey.bind({'cmd', 'ctrl'}, 'Left', function()
+hs.hotkey.bind(cmd_hyper, 'Left', function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -464,11 +404,11 @@ hs.hotkey.bind({'cmd', 'ctrl'}, 'Left', function()
   f.y = max.y
   f.w = max.w / 2
   f.h = max.h
-  win:setFrame(f)
+  win:setFrameWithWorkarounds(f)
 end)
 
 -- SNAP WINDOW RIGHT ( 50% )
-hs.hotkey.bind({'cmd', 'ctrl'}, 'Right', function()
+hs.hotkey.bind(cmd_hyper, 'Right', function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -478,11 +418,11 @@ hs.hotkey.bind({'cmd', 'ctrl'}, 'Right', function()
   f.y = max.y
   f.w = max.w / 2
   f.h = max.h
-  win:setFrame(f)
+  win:setFrameWithWorkarounds(f)
 end)
 
 -- SNAP WINDOW 100% ( FULL-WIDTH )
-hs.hotkey.bind({'cmd', 'ctrl'}, 'Up', function()
+hs.hotkey.bind(cmd_hyper, 'Up', function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -492,11 +432,11 @@ hs.hotkey.bind({'cmd', 'ctrl'}, 'Up', function()
   f.y = max.y
   f.w = max.w
   f.h = max.h
-  win:setFrame(f)
+  win:setFrameWithWorkarounds(f)
 end)
 
 -- SNAP WINDOW 50% ( CENTER )
-hs.hotkey.bind({'cmd', 'ctrl'}, 'Down', function()
+hs.hotkey.bind(cmd_hyper, 'Down', function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -506,131 +446,52 @@ hs.hotkey.bind({'cmd', 'ctrl'}, 'Down', function()
   f.y = max.y + (max.h / 8)
   f.w = max.w * 0.75
   f.h = max.h * 0.75
-  win:setFrame(f)
-end)
-
--- MOVE WINDOW 1 SCREEN LEFT ( 50% )
-hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'Left', function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w
-  f.h = max.h
-  win:setFrame(f)
-  win:moveOneScreenWest()
-end)
-
--- MOVE WINDOW 1 SCREEN RIGHT ( 50% )
-hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'Right', function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w
-  f.h = max.h
-  win:setFrame(f)
-  win:moveOneScreenEast()
+  win:setFrameWithWorkarounds(f)
 end)
 
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
--- MORE COMPLEX WINDOW MOVEMENT
+-- DUAL MONITOR FUNCTIONS
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
--- We can build on the simple window movement example to implement a set of
--- keyboard shortcuts that allow us to move a window in all directions, using the
--- nethack movement keys:
 --
---     y   k   u
---     h       l
---     b   j   n
---
--- To do this, we simply need to repeat the previous hs.hotkey.bind() call with
--- slightly different frame modifications:
---
--- MOVE WINDOW TOP-LEFT
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Y", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
+function toEastMonitor()
+    local win = hs.window.focusedWindow()
+    win:moveToScreen(win:screen():toEast())
+end
 
-  f.x = f.x - 10
-  f.y = f.y - 10
-  win:setFrame(f)
-end)
+function toWestMonitor()
+    local win = hs.window.focusedWindow()
+    win:moveToScreen(win:screen():toWest())
+end
 
--- MOVE WINDOW TOP-CENTER
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "K", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
+function toNorthMonitor()
+    local win = hs.window.focusedWindow()
+    win:moveToScreen(win:screen():toNorth())
+end
 
-  f.y = f.y - 10
-  win:setFrame(f)
-end)
+function toSouthMonitor()
+    local win = hs.window.focusedWindow()
+    win:moveToScreen(win:screen():toSouth())
+end
 
--- MOVE WINDOW TOP-RIGHT
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "U", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
+local leftScreen = hs.screen{x=-1,y=0}
+local centerScreen = hs.screen{x=-0,y=0}
+local rightScreen = hs.screen{x=1,y=0}
+local topScreen = hs.screen{x=-0,y=-1}
+local bottomScreen = hs.screen{x=-0,y=1}
 
-  f.x = f.x + 10
-  f.y = f.y - 10
-  win:setFrame(f)
-end)
-
--- MOVE WINDOW CENTER-LEFT
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "H", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-
-  f.x = f.x - 10
-  win:setFrame(f)
-end)
-
--- MOVE WINDOW CENTER-RIGHT
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-
-  f.x = f.x + 10
-  win:setFrame(f)
-end)
-
--- MOVE WINDOW BOTTOM-LEFT
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "B", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-
-  f.x = f.x - 10
-  f.y = f.y + 10
-  win:setFrame(f)
-end)
-
--- MOVE WINDOW BOTTOM-CENTER
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "J", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-
-  f.y = f.y + 10
-  win:setFrame(f)
-end)
-
--- MOVE WINDOW BOTTOM-RIGHT
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-
-  f.x = f.x + 10
-  f.y = f.y + 10
-  win:setFrame(f)
-end)
-
+lg_screen = hs.screen.find('LG ULTRAWIDE')
+if lg_screen then
+    x, y = lg_screen:position()
+    if x == 0 then
+        hs.hotkey.bind(shift_hyper, hs.keycodes.map['Up'], toNorthMonitor)
+        hs.hotkey.bind(shift_hyper, hs.keycodes.map['Down'], toSouthMonitor)
+    else
+        hs.hotkey.bind(shift_hyper, hs.keycodes.map['Right'], toEastMonitor)
+        hs.hotkey.bind(shift_hyper, hs.keycodes.map['Left'], toWestMonitor)
+    end
+end
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

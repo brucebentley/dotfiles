@@ -1,74 +1,89 @@
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-- Private Hammerspoon Configuration
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+--
+
+-- Hotkey Definition - CAPS is mapped to CTRL using karabiner --
+hyper = {'ctrl'}
+cmd_hyper = {'cmd', 'ctrl'}
+shift_hyper = {'cmd', 'ctrl', 'shift'}
+super_hyper = {'cmd', 'ctrl', 'alt'}
+alt_hyper = {'alt', 'tab'}
+
+--
+-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Specify Spoons which will be loaded
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
 hspoon_list = {
-    -- "Asana",
-    -- "BingDaily",
-    -- "BrewInfo",
-    -- "Caffeine",
-    -- "Calendar",
-    -- "CircleClock",
-    -- "ClipboardTool",
-    -- "ClipShow",
-    -- "ColorPicker",
-    -- "Commander",
-    -- "CountDown",
-    -- "DeepLTranslate",
-    -- "Emojis",
-    -- "EvernoteOpenAndTag",
-    -- "FadeLogo",
-    -- "FnMate",
-    -- "HCalendar",
-    -- "HeadphoneAutoPause",
-    -- "HighSierraiTunesMediaFix",
-    -- "HoldToQuit",
-    "HSaria2",
-    -- "HSearch",
-    "HSKeybindings",
-    -- "Keychain",
-    "KSheet",
-    -- "Leanpub",
-    -- "LookupSelection",
-    -- "MenubarFlag",
-    -- "MicMute",
-    -- "MiroWindowsManager",
-    "ModalMgr",
-    -- "MountedVolumes",
-    -- "MouseCircle",
-    -- "MoveSpaces",
-    -- "PasswordGenerator",
-    -- "Pastebin",
-    -- "PersonalHotspot",
-    -- "PopupTranslateSelection",
-    -- "RecursiveBinder",
-    -- "ReloadConfiguration",
-    -- "RoundedCorners",
-    -- "Seal",
-    -- "SendToOmniFocus",
-    -- "Shade",
-    -- "SleepCorners",
-    -- "SpeedMenu",
-    -- "SpoonInstall",
-    -- "TextClipboardHistory",
-    -- "TimeFlow",
-    -- "TimeMachineProgress",
-    -- "ToggleScreenRotation",
-    -- "ToggleSkypeMute",
-    -- "Token",
-    -- "Tunnelblick",
-    -- "UniversalArchive",
-    -- "UnsplashZ",
-    -- "URLDispatcher",
-    -- "USBDeviceActions",
-    -- "VolumeScroll",
-    -- "WifiNotifier",
-    -- "WiFiTransitions",
-    -- "WindowGrid",
-    -- "WindowHalfsAndThirds",
-    -- "WindowScreenLeftAndRight",
-    -- "WinWin"
+    -- 'AClock',
+    -- 'AllBrightness',
+    -- 'Asana',
+    -- 'BingDaily',
+    -- 'BonjourLauncher',
+    -- 'BrewInfo',
+    -- 'Calendar',
+    -- 'CircleClock',
+    -- 'ClipboardTool',
+    -- 'ColorPicker',
+    -- 'Commander',
+    -- 'CountDown',
+    -- 'DeepLTranslate',
+    -- 'EjectMenu',
+    -- 'Emojis',
+    -- 'EvernoteOpenAndTag',
+    -- 'FadeLogo',
+    -- 'FnMate',
+    -- 'HCalendar',
+    -- 'HSaria2',
+    -- 'HSearch',
+    -- 'Hammer',
+    -- 'HeadphoneAutoPause',
+    -- 'HighSierraiTunesMediaFix',
+    -- 'HoldToQuit',
+    -- 'Keychain',
+    -- 'Leanpub',
+    -- 'LookupSelection',
+    -- 'MenubarFlag',
+    -- 'MicMute',
+    -- 'MiroWindowsManager',
+    -- 'MountedVolumes',
+    -- 'MouseCircle',
+    -- 'MoveSpaces',
+    -- 'MusicAppMediaFix',
+    -- 'PasswordGenerator',
+    -- 'Pastebin',
+    -- 'PersonalHotspot',
+    -- 'PopupTranslateSelection',
+    -- 'PushToTalk',
+    -- 'RecursiveBinder',
+    -- 'ReloadConfiguration',
+    -- 'RoundedCorners',
+    -- 'Seal',
+    -- 'SendToOmniFocus',
+    -- 'Shade',
+    -- 'SleepCorners',
+    -- 'SpeedMenu',
+    -- 'TimeFlow',
+    -- 'TimeMachineProgress',
+    -- 'ToggleScreenRotation',
+    -- 'ToggleSkypeMute',
+    -- 'Token',
+    -- 'Tunnelblick',
+    -- 'TurboBoost',
+    -- 'URLDispatcher',
+    -- 'USBDeviceActions',
+    -- 'UniversalArchive',
+    -- 'UnsplashRandom',
+    -- 'UnsplashZ',
+    -- 'VolumeScroll',
+    -- 'WiFiTransitions',
+    -- 'WifiNotifier',
+    -- 'WinWin',
+    -- 'WindowGrid',
+    -- 'WindowHalfsAndThirds',
+    -- 'WindowScreenLeftAndRigh'
 }
 
 
@@ -80,12 +95,11 @@ hspoon_list = {
 hsapp_list = {
     --{key = 'a', name = 'Atom'},
     {key = 'a', id = 'com.apple.ActivityMonitor'},
-    {key = 'b', name = 'Sketch'},
     {key = 'c', name = 'Google Chrome'},
     --{key = 'd', name = 'ShadowsocksX'},
     --{key = 'e', name = 'Emacs'},
     {key = 'f', name = 'Finder'},
-    {key = 'i', name = 'iTunes'},
+    {key = 'i', name = 'iTerm'},
     --{key = 'k', name = 'KeyCastr'},
     {key = 'l', name = 'Slack'},
     --{key = 'm', name = 'MacVim'},
@@ -94,8 +108,8 @@ hsapp_list = {
     {key = 'p', name = 'Spotify'},
     --{key = 'r', name = 'VimR'},
     {key = 's', name = 'Safari'},
-    {key = 't', name = 'iTerm'},
-    {key = 'u', name = 'Sublime Text'},
+    {key = 't', name = 'Terminal'},
+    {key = 'u', name = 'Sketch'},
     {key = 'v', name = 'Visual Studio Code - Insiders'},
     --{key = 'w', name = 'Mweb'},
     {key = 'y', id = 'com.apple.systempreferences'},
@@ -106,21 +120,21 @@ hsapp_list = {
 -- Modal supervisor keybinding, which can be used to temporarily disable ALL modal environments.
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
-hsupervisor_keys = {{"cmd", "shift", "ctrl"}, "Q"}
+hsupervisor_keys = {shift_hyper, 'Q'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Reload Hammerspoon configuration
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
-hsreload_keys = {{"cmd", "shift", "ctrl"}, "R"}
+hsreload_keys = {shift_hyper, 'R'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Toggle help panel of this configuration.
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
-hshelp_keys = {{"alt", "shift"}, "/"}
+hshelp_keys = {alt_hyper, '/'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -145,88 +159,88 @@ hshelp_keys = {{"alt", "shift"}, "/"}
 -- Window hints keybinding: Focuse to any window you want
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
-hswhints_keys = {"alt", "tab"}
+hswhints_keys = {'alt', 'tab'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- appM environment keybinding: Application Launcher
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
-hsappM_keys = {"alt", "A"}
+hsappM_keys = {'alt', 'A'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- clipshowM environment keybinding: System clipboard reader
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- hsclipsM_keys = {"alt", "C"}
+-- hsclipsM_keys = {'alt', 'C'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Toggle the display of aria2 frontend
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- hsaria2_keys = {"alt", "D"}
+-- hsaria2_keys = {'alt', 'D'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Launch Hammerspoon Search
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsearch_keys = {"alt", "G"}
+--hsearch_keys = {'alt', 'G'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Read Hammerspoon and Spoons API manual in default browser
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsman_keys = {"alt", "H"}
+hsman_keys = {'alt', 'H'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- countdownM environment keybinding: Visual countdown
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hscountdM_keys = {"alt", "I"}
+--hscountdM_keys = {'alt', 'I'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Lock computer's screen
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hslock_keys = {"alt", "L"}
+--hslock_keys = {'alt', 'L'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- resizeM environment keybinding: Windows manipulation
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsresizeM_keys = {"alt", "R"}[VLC Extensions - addons.videolan.org]
+--hsresizeM_keys = {'alt', 'R'}[VLC Extensions - addons.videolan.org]
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- cheatsheetM environment keybinding: Cheatsheet copycat
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
--- hscheats_keys = {"alt", "S"}
+-- hscheats_keys = {'alt', 'S'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Show digital clock above all windows
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
---hsaclock_keys = {"alt", "T"}
+--hsaclock_keys = {'alt', 'T'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Type the URL and title of the frontmost web page open in Google Chrome or Safari.
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
-hstype_keys = {"alt", "V"}
+hstype_keys = {'alt', 'V'}
 
 --
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -- Toggle Hammerspoon console
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
-hsconsole_keys = {"alt", "Z"}
+hsconsole_keys = {'alt', 'Z'}
