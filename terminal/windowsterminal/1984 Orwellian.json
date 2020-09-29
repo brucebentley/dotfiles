@@ -1,0 +1,21 @@
+{
+  "name": "1984 Orwellian",
+  "black": "#000000",
+  "red": "#e74946",
+  "green": "#4cb605",
+  "yellow": "#fcd395",
+  "blue": "#356fe4",
+  "purple": "#fcbe95",
+  "cyan": "#3fc4ce",
+  "white": "#f1f1f1",
+  "brightBlack": "#000000",
+  "brightRed": "#e74946",
+  "brightGreen": "#4cb605",
+  "brightYellow": "#fcd395",
+  "brightBlue": "#356fe4",
+  "brightPurple": "#fcbe95",
+  "brightCyan": "#3fc4ce",
+  "brightWhite": "#f1f1f1",
+  "background": "#2e2923",
+  "foreground": "#f1f1f1"
+}

@@ -1,0 +1,21 @@
+{
+  "name": "1984",
+  "black": "#000000",
+  "red": "#ff16b0",
+  "green": "#b3f361",
+  "yellow": "#ffea16",
+  "blue": "#46bdff",
+  "purple": "#f806fa",
+  "cyan": "#59e1e3",
+  "white": "#ffffff",
+  "brightBlack": "#000000",
+  "brightRed": "#ff16b0",
+  "brightGreen": "#b3f361",
+  "brightYellow": "#ffea16",
+  "brightBlue": "#46bdff",
+  "brightPurple": "#f806fa",
+  "brightCyan": "#6be4e6",
+  "brightWhite": "#ffffff",
+  "background": "#0d0f31",
+  "foreground": "#ffffff"
+}

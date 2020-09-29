@@ -1,0 +1,21 @@
+{
+  "name": "Oceanic Material",
+  "black": "#000000",
+  "red": "#f44336",
+  "green": "#4caf50",
+  "yellow": "#ffeb3b",
+  "blue": "#2196f3",
+  "purple": "#9c27b0",
+  "cyan": "#00bcd4",
+  "white": "#b3b3b3",
+  "brightBlack": "#8a8a8a",
+  "brightRed": "#e57373",
+  "brightGreen": "#81c784",
+  "brightYellow": "#fff176",
+  "brightBlue": "#64b5f6",
+  "brightPurple": "#ba68c8",
+  "brightCyan": "#4dd0e1",
+  "brightWhite": "#ffffff",
+  "background": "#253239",
+  "foreground": "#cdd3df"
+}

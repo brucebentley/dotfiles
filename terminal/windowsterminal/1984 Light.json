@@ -1,0 +1,21 @@
+{
+  "name": "1984 Light",
+  "black": "#000000",
+  "red": "#ff16b0",
+  "green": "#00af4f",
+  "yellow": "#ff8d01",
+  "blue": "#0098fd",
+  "purple": "#f806fa",
+  "cyan": "#00b2be",
+  "white": "#ffffff",
+  "brightBlack": "#000000",
+  "brightRed": "#ff16b0",
+  "brightGreen": "#00af4f",
+  "brightYellow": "#ff8d01",
+  "brightBlue": "#0098fd",
+  "brightPurple": "#f806fa",
+  "brightCyan": "#00b2be",
+  "brightWhite": "#ffffff",
+  "background": "#e4e5f5",
+  "foreground": "#19152c"
+}

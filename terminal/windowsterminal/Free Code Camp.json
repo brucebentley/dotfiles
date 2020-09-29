@@ -1,0 +1,21 @@
+{
+  "name": "Free Code Camp",
+  "black": "#000000",
+  "red": "#ff4025",
+  "green": "#8cca33",
+  "yellow": "#ff9c2a",
+  "blue": "#2db9ff",
+  "purple": "#ba68c8",
+  "cyan": "#006400",
+  "white": "#ffffff",
+  "brightBlack": "#ffffff",
+  "brightRed": "#ff6d58",
+  "brightGreen": "#8cca33",
+  "brightYellow": "#ffee18",
+  "brightBlue": "#2db9ff",
+  "brightPurple": "#ba68c8",
+  "brightCyan": "#006400",
+  "brightWhite": "#ffffff",
+  "background": "#282a36",
+  "foreground": "#f9f9f5"
+}
