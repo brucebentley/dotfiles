@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -187,7 +187,7 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bo
 #sudo systemsetup -settimezone "America/New_York" > /dev/null
 
 # Stop iTunes From Responding To The Keyboard Media Keys
-#launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
 
 #
@@ -211,7 +211,7 @@ sudo pmset -a displaysleep 15
 # Disable Machine Sleep While Charging
 sudo pmset -c sleep 0
 
-# Set Machine Sleep To 5 Minutes On Battery
+# Set Machine Sleep To 15 Minutes On Battery
 sudo pmset -b sleep 15
 
 # Set Standby Delay To 24 Hours (Default Is 1 Hour)
@@ -332,9 +332,9 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Disable Disk Image Verification
-defaults write com.apple.frameworks.diskimages skip-verify -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+#defaults write com.apple.frameworks.diskimages skip-verify -bool true
+#defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+#defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
 # Automatically Open A New Finder Window When A Volume Is Mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
@@ -521,7 +521,7 @@ defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
 
-# Show The Full Url In The Address Bar (Note: This Still Hides The Scheme)
+# Show The Full URL In The Address Bar (Note: This Still Hides The Scheme)
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
 # Set Safari’s Home Page To `about:blank` For Faster Loading
@@ -566,17 +566,17 @@ defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true
 defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
 
 # Disable Autofill
-defaults write com.apple.Safari AutoFillFromAddressBook -bool false
-defaults write com.apple.Safari AutoFillPasswords -bool false
-defaults write com.apple.Safari AutoFillCreditCardData -bool false
-defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
+#defaults write com.apple.Safari AutoFillFromAddressBook -bool false
+#defaults write com.apple.Safari AutoFillPasswords -bool false
+#defaults write com.apple.Safari AutoFillCreditCardData -bool false
+#defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
 
 # Warn About Fraudulent Websites
 defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
 
 # Disable Plug-Ins
-defaults write com.apple.Safari WebKitPluginsEnabled -bool false
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
+#defaults write com.apple.Safari WebKitPluginsEnabled -bool false
+#defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
 
 # Disable Java
 defaults write com.apple.Safari WebKitJavaEnabled -bool false
@@ -593,7 +593,7 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 #defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 #defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 
-# Enable “do Not Track”
+# Enable “Do Not Track”
 defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 
 # Update Extensions Automatically
@@ -640,7 +640,7 @@ defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnab
 # Disable Spotlight Indexing For Any Volume That Gets Mounted & Has Not Yet
 # Been Indexed Before.
 # Use `sudo mdutil -i off "/Volumes/foo"` To Stop Indexing Any Volume.
-#sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
 # Change Indexing Order & Disable Some Search Results
 # Yosemite-Specific Search Results (Remove Them If You Are Using Macos 10.9 Or Older):
@@ -686,7 +686,7 @@ sudo mdutil -E / > /dev/null
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Terminal & Iterm2
+# Terminal & iTerm2
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 
@@ -701,7 +701,7 @@ tell application "Terminal"
     local allOpenedWindows
     local initialOpenedWindows
     local windowID
-    set themeName to "Solarized Dark xterm-256color"
+    set themeName to "Palenight"
 
     (* Store The IDs Of All The Open Terminal Windows. *)
     set initialOpenedWindows to id of every window
@@ -709,7 +709,7 @@ tell application "Terminal"
     (* Open The Custom Theme So That It Gets Added To The List
        Of Available Terminal Themes (Note: This Will Open Two
        Additional Terminal Windows). *)
-    do shell script "open '$HOME/dotfiles/init/" & themeName & ".terminal'"
+    do shell script "open '$HOME/dotfiles/terminal/terminal/" & themeName & ".terminal'"
 
     (* Wait A Little Bit To Ensure That The Custom Theme Is Added. *)
     delay 1
@@ -804,7 +804,7 @@ defaults write com.apple.addressbook ABShowDebugMenu -bool true
 # Enable Dashboard Dev Mode (Allows Keeping Widgets On The Desktop)
 #defaults write com.apple.dashboard devmode -bool true
 
-# Enable The Debug Menu In Ical (Pre-10.8)
+# Enable The Debug Menu In iCal (Pre-10.8)
 defaults write com.apple.iCal IncludeDebugMenu -bool true
 
 # Use Plain Text Mode For New Textedit Documents
@@ -907,16 +907,6 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Gpgmail 2
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-
-# Disable Signing Emails By Default
-#defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault -bool false
-
-
-#
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Opera & Opera Developer
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
@@ -928,30 +918,9 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Sizeup
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-
-# Start SizeUp At Login
-#defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
-
-# Don’t Show The Preferences Window On Next Start
-#defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
-
-
-#
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Spectacle
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-
-# Set Up My Preferred Keyboard Shortcuts
-#cp -r init/spectacle.json ~/Library/Application\ Support/Spectacle/Shortcuts.json 2> /dev/null
-
-
-# - - - - - - - - - - - - - - - - - - - -
 # SUBLIME TEXT
-# - - - - - - - - - - - - - - - - - - - -
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
 
 # Install Sublime Text Settings
 #cp -r "${HOME}/dotfiles/sublime/*" "${HOME}/Library/Application\ Support/Sublime\ Text*/Packages/User" 2> /dev/null
@@ -1008,44 +977,6 @@ defaults write org.m0k.transmission RandomPort -bool true
 
 #
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Twitter
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-
-# Disable Smart Quotes As It’s Annoying For Code Tweets
-#defaults write com.twitter.twitter-mac AutomaticQuoteSubstitutionEnabled -bool false
-
-# Show The App Window When Clicking The Menu Bar Icon
-#defaults write com.twitter.twitter-mac MenuItemBehavior -int 1
-
-# Enable The Hidden ‘develop’ Menu
-#defaults write com.twitter.twitter-mac ShowDevelopMenu -bool true
-
-# Open Links In The Background
-#defaults write com.twitter.twitter-mac openLinksInBackground -bool true
-
-# Allow Closing The ‘new Tweet’ Window By Pressing `Esc`
-#defaults write com.twitter.twitter-mac ESCClosesComposeWindow -bool true
-
-# Show Full Names Rather Than Twitter Handles
-#defaults write com.twitter.twitter-mac ShowFullNames -bool true
-
-# Hide The App In The Background If It’s Not The Front-Most Window
-#defaults write com.twitter.twitter-mac HideInBackground -bool true
-
-
-#
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Tweetbot
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#
-
-# Bypass The Annoyingly Slow t.co Url Shortener
-#defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
-
-
-#
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Kill Affected Applications
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
@@ -1065,13 +996,9 @@ APP_LIST=(
     #'Opera'
     'Photos'
     'Safari'
-    #'SizeUp'
-    #'Spectacle'
     'SystemUIServer'
     'Terminal'
-    #'Tweetbot'
-    #'Twitter'
-    #'Transmission'
+    'Transmission'
 )
 for app in "${APP_LIST[@]}"; do
     killall "${app}" &> /dev/null

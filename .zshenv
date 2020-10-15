@@ -28,12 +28,39 @@ export DIRENV_LOG_FORMAT=""
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Export Environment Variables
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Make Less The Default Pager, And Specify Some Useful Defaults.
+less_options=(
+    # If The Entire Text Fits On One Screen, Just Show It And Quit. ( Be More
+    # Like "cat" And Less Like "more". )
+    --quit-if-one-screen
+
+    # Do Not Clear The Screen First.
+    --no-init
+
+    # Like "smartcase" In Vim: Ignore Case Unless The Search Pattern Is Mixed.
+    --ignore-case
+
+    # Do Not Automatically Wrap Long Lines.
+    --chop-long-lines
+
+    # Allow ANSI Colour Escapes, But No Other Escapes.
+    --RAW-CONTROL-CHARS
+
+    # Do Not Ring The Bell When Trying To Scroll Past The End Of The Buffer.
+    --quiet
+
+    # Do Not Complain When We Are On A Dumb Terminal.
+    --dumb
+);
+export LESS="${less_options[*]}";
+unset less_options;
+
 # Pager
 export PAGER=less
 
 # Term
-export TERM=rxvt-256color
-#export TERM=xterm-256color
+#export TERM=rxvt-256color
+export TERM=xterm-256color
 
 # Editor
 export EDITOR=nvim
@@ -101,18 +128,6 @@ export GIT_REVIEW_BASE=master   # See gitconfig
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 export GO_HOME="$HOME/.go"
 export GO_CACHE="$XDG_CACHE_HOME/go-build"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# i3
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#export I3_CONFIG="$XDG_CONFIG_HOME/i3"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# NPM
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#export NPM_PATH="$XDG_CONFIG_HOME/node_modules"
-#export NPM_BIN="$XDG_CONFIG_HOME/node_modules/bin"
-#export NPM_CONFIG_PREFIX="$XDG_CONFIG_HOME/node_modules"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Transmission

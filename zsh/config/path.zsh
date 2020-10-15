@@ -27,7 +27,7 @@ export PATH="$(brew --prefix grep)/libexec/gnubin:$PATH"
 # - - - - - - - - - - - - - - - - - - - -
 # Bison
 # - - - - - - - - - - - - - - - - - - - -
-export PATH="$(brew --prefix bison)/bin:$PATH"
+#export PATH="$(brew --prefix bison)/bin:$PATH"
 
 # - - - - - - - - - - - - - - - - - - - -
 # ImageMagick

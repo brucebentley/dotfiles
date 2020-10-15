@@ -41,18 +41,22 @@ alias .....="cd ../../../.."
 alias ~="cd ~"
 alias -- -="cd -"
 
-# Shortcuts.
-alias d="cd ~/Documents"
-alias dl="cd ~/Downloads"
-alias dr="cd ~/Dropbox"
-alias dt="cd ~/Desktop"
-alias p="cd ~/Projects"
-alias s="cd ~/Sites"
-alias data="cd ~/data"
-alias dev="cd ~/dev"
-alias dot="cd ~/dotfiles"
-alias ss="cd ~/.ssh"
+# Directory Shortcuts.
+# Define directory shortcuts with `hash -d` so you can use `cd ~x` and `vim ~x/file`
+# instead of `cd /very/long/and/often/accessed/path`.
+hash -d d==$HOME/Documents
+hash -d dl=$HOME/Downloads
+hash -d dr=$HOME/Dropbox
+hash -d dt=$HOME/Desktop
+hash -d p=$HOME/Projects
+hash -d s=$HOME/Sites
+hash -d data=$HOME/data
+hash -d dev=$HOME/dev
+hash -d dot=$HOME/dotfiles
+hash -d ss=$HOME/.ssh
+hash -d gc=$HOME/Projects/GoCanvas
 
+hashcwd() { hash -d "$1"="$PWD" }
 
 # - - - - - - - - - - - - - - - - - - - -
 # Paths + Binaries
@@ -86,7 +90,7 @@ alias rm='rm -i';
 alias nano='nano -w';
 alias pico='nano';
 alias vi='vim';
-export EDITOR='nvim';
+#export EDITOR='nvim';
 
 # Make Sure "View" As-Is Works When stdin Is Not A Terminal And Prevent The
 # Normal Ensuing Keyboard Input Chaos.
@@ -98,34 +102,6 @@ function view {
     fi;
     command view "${args[@]}";
 }
-
-# Make Less The Default Pager, And Specify Some Useful Defaults.
-less_options=(
-    # If The Entire Text Fits On One Screen, Just Show It And Quit. ( Be More
-    # Like "cat" And Less Like "more". )
-    --quit-if-one-screen
-
-    # Do Not Clear The Screen First.
-    --no-init
-
-    # Like "smartcase" In Vim: Ignore Case Unless The Search Pattern Is Mixed.
-    --ignore-case
-
-    # Do Not Automatically Wrap Long Lines.
-    --chop-long-lines
-
-    # Allow ANSI Colour Escapes, But No Other Escapes.
-    --RAW-CONTROL-CHARS
-
-    # Do Not Ring The Bell When Trying To Scroll Past The End Of The Buffer.
-    --quiet
-
-    # Do Not Complain When We Are On A Dumb Terminal.
-    --dumb
-);
-export LESS="${less_options[*]}";
-unset less_options;
-export PAGER='less';
 
 # Make "less" Transparently Unpack Archives Etc.
 if [ -x /usr/bin/lesspipe ]; then

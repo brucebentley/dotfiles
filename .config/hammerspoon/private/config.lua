@@ -93,10 +93,11 @@ hspoon_list = {
 -- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 --
 hsapp_list = {
+    {key = '1', id = '1Password7'},
     --{key = 'a', name = 'Atom'},
-    {key = 'a', id = 'com.apple.ActivityMonitor'},
+    {key = 'a', id = 'Authy'},
     {key = 'c', name = 'Google Chrome'},
-    --{key = 'd', name = 'ShadowsocksX'},
+    {key = 'd', name = 'Discord'},
     --{key = 'e', name = 'Emacs'},
     {key = 'f', name = 'Finder'},
     {key = 'i', name = 'iTerm'},
@@ -113,6 +114,7 @@ hsapp_list = {
     {key = 'v', name = 'Visual Studio Code - Insiders'},
     --{key = 'w', name = 'Mweb'},
     {key = 'y', id = 'com.apple.systempreferences'},
+    {key = 'z', id = 'com.apple.ActivityMonitor'},
 }
 
 --
