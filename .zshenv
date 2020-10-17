@@ -130,6 +130,13 @@ export GO_HOME="$HOME/.go"
 export GO_CACHE="$XDG_CACHE_HOME/go-build"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Karabiner
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+export KARABINER_HOME="$XDG_CONFIG_HOME/karabiner"
+#export KARABINER_CONFIG_FILE="$KARABINER_HOME/karabiner.json"
+export GOKU_EDN_CONFIG_FILE="$KARABINER_HOME/karabiner.edn"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Transmission
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 export TRANSMISSION_HOME="$XDG_CONFIG_HOME/transmission"

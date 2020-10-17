@@ -105,7 +105,7 @@
     #editor = subl --wait
 
     # Use custom `.gitignore` and `.gitattributes`
-    excludesfile = ~/dotfiles/.gitignore_global
+	excludesfile = /Users/bruce/dotfiles/.gitignore_global
     attributesfile = ~/dotfiles/.gitattributes
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -222,9 +222,9 @@
     insteadOf = "gist:"
 
 [difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-    path =
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 
 [mergetool "sourcetree"]
-    cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
