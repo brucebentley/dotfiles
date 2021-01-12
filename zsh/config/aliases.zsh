@@ -87,10 +87,10 @@ alias rm='rm -i';
 # - - - - - - - - - - - - - - - - - - - -
 # Editors + Pagers
 # - - - - - - - - - - - - - - - - - - - -
-alias nano='nano -w';
-alias pico='nano';
-alias vi='vim';
-#export EDITOR='nvim';
+alias nano="nano -w";
+alias pico="nano";
+alias vi="vim";
+#export EDITOR="nvim";
 
 # Make Sure "View" As-Is Works When stdin Is Not A Terminal And Prevent The
 # Normal Ensuing Keyboard Input Chaos.
@@ -621,7 +621,10 @@ alias restartdnsmasq="sudo brew services restart dnsmasq"
 # - - - - - - - - - - - - - - - - - - - -
 
 #alias startmongo='mongod --dbpath ~/data/db --fork --logpath /dev/null'
+alias startmongo='brew services start mongodb-community'
 #alias stopmongo='mongo admin --eval 'db.shutdownserver()' > /dev/null'
+alias stopmongo='brew services stop mongodb-community'
+alias restartmongo='brew services restart mongodb-community'
 
 
 # - - - - - - - - - - - - - - - - - - - -
@@ -649,6 +652,15 @@ alias restartmysql57='brew services restart mysql@5.7'
 
 alias startpostgres='brew services start postgresql'
 alias stoppostgres='brew services stop postgresql'
+
+
+# - - - - - - - - - - - - - - - - - - - -
+# Redis
+# - - - - - - - - - - - - - - - - - - - -
+
+alias startredis='brew services start redis'
+alias stopredis='brew services stop redis'
+alias restartredis='brew services restart redis'
 
 
 # - - - - - - - - - - - - - - - - - - - -

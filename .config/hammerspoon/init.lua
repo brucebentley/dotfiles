@@ -39,7 +39,7 @@ if custom_config then
         --   contentImage="~/Pictures/GIF's/Giphy/DeezNuts.gif",
         --   soundName='HA! Gotemmm'
         -- }):send()
-        hs.alert('                      Multiple config files found:\n    ~/hammerspoon  &  ~/.hammerspoon/private\n      The `~/hammerspoon` one will be used.')
+        hs.alert('\t\tMultiple config files found:\n\n\t\t\t\t~/hammerspoon\n\t\t~/.hammerspoon/private\n\n\tDefault ~/hammerspoon will be used.')
     end
 else
     -- Otherwise Fallback To 'classic' Location.

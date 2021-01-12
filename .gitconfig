@@ -153,7 +153,7 @@
     #   - https://nathanhoad.net/how-to-git-signing-commits/
     #   - https://sabbour.me/setting-up-signed-git-commits-on-macos/
     gpgsign = true
-    template = ~/dotfiles/.gitmessage
+	template = ~/dotfiles/.gitmessage
 
 [credential]
     helper = osxkeychain

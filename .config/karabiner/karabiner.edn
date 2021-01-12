@@ -1,96 +1,46 @@
-;; edn spec https://github.com/edn-format/edn
-{;;;; define things
- ;; define devices
- :devices {:hhkb-bt [{:vendor_id 1278 :product_id 51966}]
-           :hhkb [{:vendor_id 2131 :product_id 256}]}
-
- ;; define application identifiers
- :applications {:chrome ["^com\\.google\\.Chrome$"]
-                :chrome-canary [ "^com\\.google\\.Chrome\\.canary$"]
-                :chromes ["^com\\.google\\.Chrome$" "^com\\.google\\.Chrome\\.canary$"]}
-
- :input-sources {:squirrel {:input_mode_id "com.googlecode.rimeime.inputmethod.Squirrel"
-                            :input_source_id "com.googlecode.rimeime.inputmethod.Squirrel.Rime"
-                            :language "zh-Hans"}
-                 :us {:input_mode_id ""
-                      :input_source_id "com.apple.keylayout.US"
-                      :language "en"}}
-
- :templates {:launch "osascript -e 'tell application \"Alfred 3\" to run trigger \"launch%s\" in workflow \"yqrashawn.workflow.launcher\" with argument \"\"'"}
- ;; define alias for modifers
- :modifiers {:11 [:left_command :left_control]
-             :111 [:left_command :left_control :left_option]
-             :1111 [:left_command :left_control :left_option :left_shift]
-             :ccos [:left_command :left_control :left_option :left_shift]
-             :11111 [:fn :left_command :left_control :left_option :left_shift]
-             :spacebar-modifier {:mandatory [:left_command :left_control] :optional [:left_shift]}
-             :fn&lcommand&lcontrol&loption&lshift [:fn :left_command :left_control :left_option :left_shift]}
-
- ;; define froms
- ;; use in <from>
- :froms {:1 {:key :d}
-         :2 {:key :d :modi :1}
-         :3 {:key :d :modi :left_command}
-         :4 {:key :d :modi [:left_command :right_shift]}
-         :5 {:key :d :modi {:mandatory [:left_command :right_shift]}}
-         :6 {:key :d :modi {:mandatory [:left_command :right_shift]
-                            :optional [:caps_lock]}}
-         :7 {:ckey :display_brightness_decrement}
-         :8 {:ckey :display_brightness_decrement :modi :left_command}
-         :9 {:pkey :button4 :modi :left_command}
-         :10 {:sim [:a :b] :modi :left_command}
-         :11 {:sim [:a :b]
-              :simo {:interrupt true
-                     :dorder :insensitive}
-              :modi :left_command}}
-
- ;; define tos
- ;; use in <to>
- :tos {:macos-defin {:key :d :modifiers [:left_command :left_control]}
-       :alf--search-help "osascript -e 'tell application \"Alfred 3\" to run trigger \"helpSearch\" in workflow \"com.tedwise.menubarsearch\" with argument \"\"'"}
-
- ;;;; helper function to generate things little bit quicker
- ;; quick define "layers" or "state" feature(use set_variable)
- ;; can use as conditions in rule list
- ;; {:<layer name> {:from <froms>}}
- :simlayers {:vi-mode {:key :d}}
- :simlayer-threshold 250
-
- ;; main list
- :main
- ;; [<from> <to>] or
- ;; [<from> <to> <conditions>] or
- ;; [<from> <to> <conditions> <other options>]
- ;; <from> can be keywords defined in froms or keycodes without `{:not-from true}`
- ;; <to> can be keywords defined in tos, keycodes without `{:not-to true}`, string (shell script)
- ;; <conditions> can be keywords defined in layers, devices, applications
- ;; <other options> {:other {:parameters {:to_delayed_action_delay_milliseconds 100 :basic.to_if_alone_timeout_milliseconds 500 :basic.to_if_held_down_threshold_milliseconds 250}} }
- [{:des "a to 1" :rules [[:a :1]]} ;; a to 1
-  {:des "command a to control 1" :rules [:!Ca :!T1]} ;; command a to control 1
-  {:des "my spacebar to control 1" :rules [:my-spacebar :!T1]} ;; my-spacebar to control 1
-  {:des "press b to insert 12" :rules [:b [:1 :2]]}  ;; key to key
-  {:des "c to example osascript" :rules [:c "osascript -e 'display dialog \"example apple script\"'"]} ;; key to shell script
-  {:des "d to 1 then example osascript" :rules [:d [:1 "osascript -e 'display dialog \"example apple script\"'"]]} ;; key to key then shell script
-  {:des "simultaneous e f to 3" :rules [[:e :f] :3]} ;; simultaneous key to key
-  {:des "g to 4 when variable vi-mode is 1" :rules [:g :4 :vi-mode]} ;; vi-mode is 1
-  {:des "h to 5 when variable vi-mode is not 1" :rules [:h :5 :!vi-mode]} ;; vi-mode is 0
-  {:des "i to 6 only for device hhkb-bt" :rules [:i :6 :hhkb-bt]} ;; key to key in layer b (in layer a) specific to hhkb-bt device
-  {:des "j to 7 on hhkb-bt when variable vi-mode is 1" :rules [:j :7 [:vi-mode :hhkb-bt]]} ;; multiple condition
-  {:des "press h insert 8 then set variable some-mode to 0" :rules [:h [:8 {:set ["some-mode" 0]}]]}] ;; h to 8 and set_variable
-
- ;; code won't read cheatsheet section
- ;; ! stand for mandatory
- ;; # stand for optional
- ;; C T O S for left command control optional shift
- ;; F for fn
- ;; need to prefix C T O S F with ! or #
- :cheatsheet {:!Ca "command a" ;; mandatory left_command
-              :!Ta "control a" ;; mandatory left_control
-              :!Oa "option a"
-              :!Sa "shift a"
-              :#Sa "shift a" ;; keycode a, optional left_shift
-              :!CTOa "command control option a"
-              :!Cspacebar "command space"
-              :!Fa "fn a"
-              :##a "keycode a optional any"
-              :!!a "mandatory hyper(control command option shift) a "}}
+{:simlayers {:caps_lock-mode {:key :caps_lock}},
+ :main [{:des "capskey",
+         :rules [:caps_lock-mode
+                 [:open_bracket :!TOopen_bracket]
+                 [:close_bracket :!TOclose_bracket]
+                 [:semicolon :!TOsemicolon]
+                 [:quote :!TOquote]
+                 [:comma :!TOcomma]
+                 [:period :!TOperiod]
+                 [:slash :!TOslash]
+                 [:a :!TOa]
+                 [:b :!TOb]
+                 [:c :!TOc]
+                 [:d :!TOd]
+                 [:e :!TOe]
+                 [:f :!TOf]
+                 [:g :!TOg]
+                 [:h :!TOh]
+                 [:i :!TOi]
+                 [:j :!TOj]
+                 [:k :!TOk]
+                 [:l :!TOl]
+                 [:m :!TOm]
+                 [:n :!TOn]
+                 [:o :!TOo]
+                 [:p :!TOp]
+                 [:q :!TOq]
+                 [:r :!TOr]
+                 [:s :!TOs]
+                 [:t :!TOt]
+                 [:u :!TOu]
+                 [:v :!TOv]
+                 [:w :!TOw]
+                 [:x :!TOx]
+                 [:y :!TOy]
+                 [:z :!TOz]
+                 [:1 :!TO1]
+                 [:2 :!TO2]
+                 [:3 :!TO3]
+                 [:4 :!TO4]
+                 [:5 :!TO5]
+                 [:6 :!TO6]
+                 [:7 :!TO7]
+                 [:8 :!TO8]
+                 [:9 :!TO9]
+                 [:0 :!TO0]]}]}

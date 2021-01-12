@@ -151,6 +151,7 @@ misc_cask_list=(
     #keybase            # End-To-End Encryption For Things That Matter
     megasync           # Automated Synchronisation Between Your Computer And Your Mega Cloud
     #mou               # Markdown Editor
+    nucleo             # Collect, Customize & Export All Your Icons
     nordvpn            # VPN Client For NordVPN
     philips-hue-sync   # Highlight & Amplify Your In-Game Actions With Your Philip's Hue Smart Lights.
     plex-media-player  # A Client-Server Media Player
@@ -180,14 +181,20 @@ done
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 ql_plugins_list=(
-    qlcolorcode        #
-    qlmarkdown         #
+    qlcolorcode        # Preview source code files with syntax highlighting
+    qlImageSize        # Display image size and resolution
+    qlmarkdown         # Preview Markdown files
     qlprettypatch      #
-    qlstephen          #
+    qlstephen          # Preview plain text files without a file extension ( e.g. README, CHANGELOG, index.styl, etc. )
+    qlvideo            # Preview most types of video files, as well as their thumbnails, cover art and metadata
     quicklook-csv      #
-    quicklook-json     #
-    suspicious-package #
-    webpquicklook      #
+    quicklook-json     # Preview JSON files
+    suspicious-package # Preview the contents of a standard Apple installer package
+    webpquicklook      # Preview WebP images ( Note: this is included in `qlImageSize`, use this if you don't like qlImageSize )
+    #BetterZipQL        # Preview archives ( Note: The BetterZipQL plugin was integrated with the BetterZip app )
+    quicklookase       # Preview Adobe ASE Color Swatches generated with Adobe products ( e.g. Photoshop, Illustrator, Color CC, etc. )
+    ProvisionQL        # Preview iOS / macOS app and provision information
+    quicklookapk       #
 )
 for ql_plugin in "${ql_plugins_list[@]}"
 do

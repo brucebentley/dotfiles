@@ -10,9 +10,9 @@ usage() { echo "Usage: $0 [-f <fps, defaults to 15>] [-w <width, defaults to 480
 
 # Default Variables
 #fps=15
-fps=30
+fps=15
 #width=480
-width=720
+width=1080
 
 # getopts To Process The Command Line Arguments
 while getopts ":f:w:" opt; do

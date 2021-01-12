@@ -64,10 +64,10 @@ alias rm='rm -i';
 # - - - - - - - - - - - - - - - - - - - -
 # Editors + Pagers
 # - - - - - - - - - - - - - - - - - - - -
-alias nano='nano -w';
-alias pico='nano';
-alias vi='vim';
-export EDITOR='vim';
+alias nano="nano -w";
+alias pico="nano";
+alias vi="vim";
+#export EDITOR="nvim";
 
 # Make Sure "View" As-Is Works When stdin Is Not A Terminal And Prevent The
 # Normal Ensuing Keyboard Input Chaos.

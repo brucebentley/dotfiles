@@ -9,7 +9,7 @@
 # WORKSPACES.
 #
 ################################################################################
-export WORKSPACE="/Users/bruce.bentley"
+export WORKSPACE="/Users/bruce"
 
 #
 # —[ USER DIRECTORIES ]—

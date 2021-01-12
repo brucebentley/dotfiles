@@ -1,0 +1,81 @@
+{
+    "$schema": "http://json.schemastore.org/prettierrc",
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "embeddedLanguageFormatting": "auto",
+    "endOfLine": "lf",
+    "htmlWhitespaceSensitivity": "css",
+    "insertPragma": false,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": false,
+    "pluginSearchDirs": [],
+    "plugins": [],
+    "printWidth": 140,
+    "proseWrap": "preserve",
+    "quoteProps": "as-needed",
+    "rangeEnd": -1,
+    "rangeStart": 0,
+    "requirePragma": false,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "useTabs": false,
+    "vueIndentScriptAndStyle": false,
+    "overrides": [
+        {
+            "files": ".prettierrc",
+            "options": { "parser": "json" }
+        },
+        {
+            "files": ["**/*.html", "**/*.erb"],
+            "options": {
+                "parser": "html",
+                "tabWidth": 4
+            }
+        },
+        {
+            "files": ["**/*.css", "**/*.scss", "**/*.sass"],
+            "options": { "tabWidth": 4 }
+        },
+        {
+            "files": ["**/*.js", "**/*.json", "**/*.jsonc", "**/*.ts"],
+            "options": { "tabWidth": 2 }
+        },
+        {
+            "files": ["**/*.md", "**/*.mdx"],
+            "options": {
+                "editor.formatOnPaste": false,
+                "editor.formatOnSave": false,
+                "files.trimTrailingWhitespace": false,
+                "tabWidth": 4
+            }
+        },
+        {
+            "files": ["**/*.php"],
+            "options": {
+                "editor.formatOnSave": false,
+                "tabWidth": 4
+            }
+        },
+        {
+            "files": ["**/*.ruby"],
+            "options": { "tabWidth": 4 }
+        },
+        {
+            "files": ["**/*.{zlogin,zlogout,zprofile,zsh*}", "**/*.{bash*,inputrc,profile,sh}"],
+            "options": {
+                "files.insertFinalNewline": true,
+                "tabWidth": 4
+            }
+        },
+        {
+            "files": ["**/*.{yaml,yml}"],
+            "options": {
+                "editor.defaultFormatter": "redhat.vscode-yaml",
+                "editor.formatOnSave": false,
+                "files.trimTrailingWhitespace": false
+            }
+        }
+    ]
+}

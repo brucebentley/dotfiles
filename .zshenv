@@ -63,8 +63,8 @@ export PAGER=less
 export TERM=xterm-256color
 
 # Editor
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 # Locale
 export LANG=en_US.UTF-8
