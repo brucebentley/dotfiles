@@ -437,7 +437,7 @@ alias docker-clean-unused='docker system prune --all --force --volumes'
 #
 ################################################################################
 
-alias gitdelete='git branch | egrep -v "(master|staging|develop|release_candidate\*)" | xargs git branch -D'
+alias gitdelete='git branch | egrep -v "(main|master|staging|develop|release|release_candidate\*)" | xargs git branch -D'
 
 
 ################################################################################

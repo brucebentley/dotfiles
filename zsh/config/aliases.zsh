@@ -589,12 +589,12 @@ alias restartapache="sudo apachectl -k restart"
 
 alias brew-deps="brew deps --installed"
 #alias brew-graph="brew graph --installed | dot -tpng -ograph.png && open graph.png"
-alias brew-graph="brew graph --installed --highlight-leaves | fdp -tpng -ograph.png && open graph.png"
+alias brew-graph="brew graph --installed --highlight-leaves | fdp -Tpng -ograph.png && open graph.png"
 
 # - - - - - - - - - - - - - - - - - - - -
 # Git
 # - - - - - - - - - - - - - - - - - - - -
-alias gitdelete='git branch | egrep -v "(master|staging|develop|release_candidate\*)" | xargs git branch -D'
+alias gitdelete='git branch | egrep -v "(main|master|staging|develop|release|release_candidate\*)" | xargs git branch -D'
 
 # - - - - - - - - - - - - - - - - - - - -
 # Google Chrome

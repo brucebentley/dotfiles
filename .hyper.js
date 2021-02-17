@@ -4,8 +4,7 @@ module.exports = {
     fontSize: 15,
 
     // font family with optional fallbacks
-    fontFamily:
-      '"Fira Code", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
+    fontFamily: '"Fira Code", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: 'rgba(255, 255, 255, 0.9)',
@@ -111,6 +110,7 @@ module.exports = {
     'hyper-snazzy',
     //'hyper-solarized-dark',
     //'hyperpower',
+    'nord-hyper',
   ],
 
   // in development, you can create a directory under

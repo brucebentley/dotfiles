@@ -77,13 +77,13 @@ macos_apps_list=(
     425424353       # [ $5.99 ]   The Unarchiver     - Unarchiving Utility                          ( 1.0.11 )
     497799835       # [ Free ]    Xcode              - Apple'S IDE                                  ( 12.3 )
 
-
     # - - - - - - - - - - - - - - - - - - - -
     # Purchased Apps Not Currently Installed
     # - - - - - - - - - - - - - - - - - - - -
     #1402042596     # [ Free ]    AdBlock            - Ad & Popup Blocker ( Safari )                ( 1.27.0 )
     #406056744      # [ Free ]    Evernote           - Notepad, Organizer & Journal                 ( 10.5.7 )
     #1472777122     # [ Free ]    Honey              - Smart Shopping Assistant ( Safari )          ( 12.4.7 )
+    #408981434      # [ Free ]    iMovie             - Make Your Own Movie Magic                    ( 10.2.2 )
     #409183694      # [ Free ]    Keynote            - Presentations                                ( 10.3.8 )
     #409203825      # [ Free ]    Numbers            - Spreadsheets                                 ( 10.3.5 )
     #409201541      # [ Free ]    Pages              - Document Processor                           ( 10.3.5 )
@@ -124,7 +124,7 @@ macos_homekit_apps_list=(
     # - - - - - - - - - - - - - - - - - - - -
     # Installed Apps
     # - - - - - - - - - - - - - - - - - - - -
-
+    #1476136371     # [ FREE  ]   iWifi - Speed & Signal   - Internet Scanner, Analyzer             ( 1.0.5 )
 
     # - - - - - - - - - - - - - - - - - - - -
     # Purchased Apps Not Currently Installed

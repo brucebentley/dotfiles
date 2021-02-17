@@ -1,0 +1,21 @@
+{
+    "caret_extra_bottom": 2,
+    "caret_extra_top": 2,
+    "caret_extra_width": 2,
+    "caret_style": "phase",
+    // "color_scheme": "Packages/MarkdownEditing/MarkdownEditor.tmTheme",
+    // "color_scheme": "Packages/Agila Theme/Markdown/Oceanic Next Origin Markdown.tmTheme",
+    "color_scheme": "Packages/Agila Theme/Markdown/Oceanic Next Markdown.tmTheme",
+    "ensure_newline_at_eof_on_save": false,
+    "extensions":
+    [
+        "md",
+        "mmd",
+        "mdwn",
+        "mdown"
+    ],
+    "line_numbers": true,
+    "tab_size": 4,
+    "trim_trailing_white_space_on_save": false,
+    "wrap_width": 140
+}

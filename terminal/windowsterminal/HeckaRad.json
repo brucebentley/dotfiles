@@ -1,0 +1,21 @@
+{
+  "name": "HeckaRad",
+  "black": "#2f327c",
+  "red": "#ff5495",
+  "green": "#d8ff4e",
+  "yellow": "#fffc7e",
+  "blue": "#7dd9e4",
+  "purple": "#f55eb4",
+  "cyan": "#a8ffef",
+  "white": "#cff0e8",
+  "brightBlack": "#391ab5",
+  "brightRed": "#ff427c",
+  "brightGreen": "#c8ff00",
+  "brightYellow": "#f8d846",
+  "brightBlue": "#84f9fe",
+  "brightPurple": "#d53690",
+  "brightCyan": "#83fee8",
+  "brightWhite": "#cbfff2",
+  "background": "#170a2e",
+  "foreground": "#e33c7f"
+}

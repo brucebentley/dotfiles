@@ -119,10 +119,6 @@ setopt globdots                 # Glob Dotfiles As Well.
 setopt extendedglob             # Use Extended Globbing.
 setopt autocd                   # Automatically Change Directory If A Directory Is Entered.
 
-# Smart URLs.
-autoload -Uz url-quote-magic
-zle -N self-insert url-quote-magic
-
 # General.
 setopt brace_ccl                # Allow Brace Character Class List Expansion.
 setopt combining_chars          # Combine Zero-Length Punctuation Characters ( Accents ) With The Base Character.
@@ -286,19 +282,24 @@ zinit load zdharma/zui
 zinit ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
 zinit load zdharma/zplugin-crasis
 
+# Load url-quote-magic & bracketed-paste-magic.
+autoload -U url-quote-magic bracketed-paste-magic
+zle -N self-insert url-quote-magic
+zle -N bracketed-paste bracketed-paste-magic
 
 ### Fix Slowness Of Pastes With `zsh-syntax-highlighting`.
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
   zle -N self-insert url-quote-magic
 }
-
 pastefinish() {
   zle -N self-insert $OLD_SELF_INSERT
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
-### Fix Slowness Of Pastes
+
+# Make sure zsh-autosuggestions does not interfere with bracketed-paste.
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
 
 # - - - - - - - - - - - - - - - - - - - -

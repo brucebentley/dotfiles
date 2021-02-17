@@ -1,0 +1,10 @@
+// SublimeLinter Settings - User
+{
+    "paths": {
+        "linux": [],
+        "osx": [
+            "~/.local/share/asdf/shims"
+        ],
+        "windows": []
+    }
+}

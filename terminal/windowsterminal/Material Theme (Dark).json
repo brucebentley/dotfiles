@@ -1,0 +1,21 @@
+{
+  "name": "Material Theme (Dark)",
+  "black": "#2c2c2c",
+  "red": "#c62828",
+  "green": "#558b2f",
+  "yellow": "#f9a825",
+  "blue": "#1565c0",
+  "purple": "#6a1e9a",
+  "cyan": "#00838f",
+  "white": "#f2f2f2",
+  "brightBlack": "#545454",
+  "brightRed": "#ef5350",
+  "brightGreen": "#8bc34a",
+  "brightYellow": "#ffeb3b",
+  "brightBlue": "#64b5f6",
+  "brightPurple": "#ba68c8",
+  "brightCyan": "#26c6da",
+  "brightWhite": "#e0e0e0",
+  "background": "#2e2e2d",
+  "foreground": "#eaeaea"
+}

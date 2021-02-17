@@ -1,0 +1,8 @@
+[
+  {
+    "keys": [ "ctrl+m" ],
+    "command": "markdown_preview",
+    "args": { "target": "browser", "parser": "github" }
+  },
+  { "keys": [ "ctrl+alt+f" ], "command": "js_prettier" }
+]

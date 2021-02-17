@@ -1,0 +1,21 @@
+{
+  "name": "Hiberbee",
+  "black": "#333333",
+  "red": "#ed6b88",
+  "green": "#b4da82",
+  "yellow": "#f9d778",
+  "blue": "#49b0f1",
+  "purple": "#a89fec",
+  "cyan": "#90dae6",
+  "white": "#c8c8c8",
+  "brightBlack": "#b3b3b3",
+  "brightRed": "#ff006e",
+  "brightGreen": "#92e600",
+  "brightYellow": "#ffc700",
+  "brightBlue": "#00b1f7",
+  "brightPurple": "#997aff",
+  "brightCyan": "#66d9ef",
+  "brightWhite": "#ffffff",
+  "background": "#1a1a1a",
+  "foreground": "#e6e6e6"
+}

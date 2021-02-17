@@ -1,0 +1,53 @@
+{
+    "debug": false,
+
+    "additional_cli_args": {
+        "--config": "~/.prettierrc",
+        "--config": "${DOTFILES}/prettier/.prettierrc",
+        "--config": "${project_path}/.prettierrc",
+        // "--config": "${XDG_CONFIG_HOME}/prettier/.prettierrc",
+
+        // "--config-precedence": "file-override",
+        // "--ignore-path": "${file_path}/.prettierignore",
+        // "--with-node-modules": "",
+        // "--plugin-search-dir": "$folder"
+    },
+    "allow_inline_formatting": false,
+    "auto_format_on_save": true,
+    "auto_format_on_save_excludes": [
+        "**/.vagrant/**",
+        "**/{.bundle,bundle}/**",
+        "**/{.tmp,tmp}/**",
+        "**/bower_components/**",
+        "**/dist/**",
+        "**/node_modules/**",
+        "**/typings/**",
+        "**/*.{md,mmd,mdwn,mdown,markdown}",
+        "**/*.{yaml,yml}",
+        "**/*.lock"
+    ],
+    "auto_format_on_save_requires_prettier_config": false,
+    "custom_file_extensions": [],
+    "disable_prettier_cursor_offset": false,
+    "disable_tab_width_auto_detection": false,
+    "max_file_size_limit": -1,
+    "node_path": "$NVM_BIN",
+    "prettier_cli_path": "~/.local/share/asdf/shims/prettier",
+
+    "prettier_options": {
+        "arrowParens": "always",
+        "bracketSpacing": true,
+        "htmlWhitespaceSensitivity": "css",
+        "jsxBracketSameLine": true,
+        //"parser": "babel",
+        "printWidth": 140,
+        "proseWrap": "preserve",
+        "quoteProps": "as-needed",
+        "requirePragma": false,
+        "semi": false,
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "es5",
+        "vueIndentScriptAndStyle": false
+    }
+}

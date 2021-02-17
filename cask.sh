@@ -45,7 +45,7 @@ core_cask_list=(
 )
 for core_cask in "${core_cask_list[@]}"
 do
-    brew cask install "${core_cask}"
+    brew install --cask "${core_cask}"
 done
 
 
@@ -71,7 +71,7 @@ browser_cask_list=(
 )
 for browser in "${browser_cask_list[@]}"
 do
-    brew cask install "${browser}"
+    brew install --cask "${browser}"
 done
 
 
@@ -86,7 +86,7 @@ code_editor_cask_list=(
 )
 for editor in "${code_editor_cask_list[@]}"
 do
-    brew cask install "${editor}"
+    brew install --cask "${editor}"
 done
 
 
@@ -114,7 +114,7 @@ development_cask_list=(
 )
 for dev_cask in "${development_cask_list[@]}"
 do
-    brew cask install "${dev_cask}"
+    brew install --cask "${dev_cask}"
 done
 
 
@@ -171,7 +171,7 @@ misc_cask_list=(
 )
 for misc_cask in "${misc_cask_list[@]}"
 do
-    brew cask install "${misc_cask}"
+    brew install --cask "${misc_cask}"
 done
 
 
@@ -198,7 +198,7 @@ ql_plugins_list=(
 )
 for ql_plugin in "${ql_plugins_list[@]}"
 do
-    brew cask install "${ql_plugin}" && qlmanage -r
+    brew install --cask "${ql_plugin}" && qlmanage -r
 done
 
 
@@ -219,7 +219,7 @@ font_cask_list=(
 )
 for font in "${font_cask_list[@]}"
 do
-    brew cask install "font-${font}"
+    brew install --cask "font-${font}"
 done
 
 # Nerd Fonts
@@ -278,10 +278,10 @@ nerd_font_cask_list=(
 )
 
 # Search & Install All Available Nerd Fonts ( 50+ )
-#brew cask install "$( brew search font | grep nerd | tr '\n' ' ' )"
+#brew install --cask "$( brew search font | grep nerd | tr '\n' ' ' )"
 for nerd_font in "${nerd_font_cask_list[@]}"
 do
-    brew cask install "font-${nerd_font}"
+    brew install --cask "font-${nerd_font}"
 done
 
 
