@@ -46,7 +46,7 @@ for file in "$srcDir"/*."$srcExt"; do
     #          Using The Destination Directory, The Stripped Down Filename & Destination File
     #          Extenstion. Include Your Options In Between. The Quotes Are Required For Bash
     #          To Treat Each Variable As A String.
-    ffmpeg -i "$file" $opts "$destDir"/"$baseName"."$destExt";
+    ffmpeg -i "$file" "$opts" "$destDir"/"$baseName"."$destExt";
 
 done
 
@@ -62,9 +62,6 @@ echo "Conversion from ${srcExt} to ${destExt} complete!"
 # This Works!
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 # mkdir encoded
 # for f in *.mp4; do
 #     ffmpeg -i "$f" -c:v libx264 -crf 23 -preset medium -c:a copy -movflags +faststart "encoded/${f%.*}.mp4";
@@ -78,5 +75,8 @@ echo "Conversion from ${srcExt} to ${destExt} complete!"
 
 # for f in *.mp3; do ffmpeg -i "$f" -c:a aac -b:a 192k m4a/"${f%.mp3}.m4a"; done
 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-find . -name '*.mp3' -type f -exec bash -c 'base64 "$0" > "${0%.mp3}.txt"' {} \;
+# find . -name '*.mp3' -type f -exec bash -c 'base64 "$0" > "${0%.mp3}.txt"' {} \;
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

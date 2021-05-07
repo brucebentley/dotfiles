@@ -267,8 +267,10 @@ zinit wait lucid light-mode for \
       zsh-users/zsh-autosuggestions \
   as"completion" \
       OMZ::plugins/docker/_docker \
+      OMZ::plugins/docker-compose/_docker-compose \
       OMZ::plugins/composer/composer.plugin.zsh \
       OMZ::plugins/thefuck/thefuck.plugin.zsh \
+      OMZ::plugins/wp-cli/wp-cli.plugin.zsh \
       #htlsne/zplugin-rbenv \
       #OMZ::plugins/pyenv/pyenv.plugin.zsh \
       #OMZ::plugins/jenv/jenv.plugin.zsh
