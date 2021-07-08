@@ -242,7 +242,7 @@ nerd_font_cask_list=(
     fira-code
     fira-mono
     go-mono
-    gohunerd-font
+    gohufont
     hack
     hackgen-nerd
     hasklug
@@ -264,7 +264,7 @@ nerd_font_cask_list=(
     noto
     open-dyslexic
     overpass
-    pronerd-font
+    profont
     proggy-clean-tt
     roboto-mono
     sauce-code-pro
