@@ -1,0 +1,175 @@
+{
+  "extractor": {
+    "base-directory": "./gallery-dl/",
+    "parent-directory": false,
+    "postprocessors": null,
+    "archive": null,
+    "cookies": null,
+    "cookies-update": true,
+    "proxy": null,
+    "skip": true,
+
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
+    "retries": 4,
+    "timeout": 30.0,
+    "verify": true,
+
+    "sleep": 0,
+    "sleep-request": 0,
+    "sleep-extractor": 0,
+
+    "path-restrict": "auto",
+    "path-replace": "_",
+    "path-remove": "\\u0000-\\u001f\\u007f",
+    "extension-map": {
+      "jpeg": "jpg",
+      "jpe": "jpg",
+      "jfif": "jpg",
+      "jif": "jpg",
+      "jfi": "jpg"
+    },
+
+    "deviantart": {
+      "client-id": null,
+      "client-secret": null,
+      "extra": false,
+      "flat": true,
+      "folders": false,
+      "include": "gallery",
+      "journals": "html",
+      "mature": true,
+      "metadata": false,
+      "original": true,
+      "quality": 100,
+      "wait-min": 0
+    },
+
+    "flickr": {
+      "videos": true,
+      "size-max": null
+    },
+
+    "gfycat": {
+      "format": "mp4"
+    },
+
+    "imgbb": {
+      "username": "",
+      "password": "?"
+    },
+
+    "imgur": {
+      "mp4": true
+    },
+
+    "instagram": {
+      "username": "",
+      "password": "",
+      "include": "posts",
+      "sleep-request": 5.0,
+      "videos": true
+    },
+
+    "oauth": {
+      "browser": true,
+      "cache": true,
+      "port": 6414
+    },
+
+    "pinterest": {
+      "sections": true,
+      "videos": true
+    },
+
+    "reddit": {
+      "comments": 0,
+      "filename": "{author}-{subreddit}-{filename}.{extension}",
+      "directory": ["Reddit", "{user[id]}"],
+      "morecomments": false,
+      "date-min": 0,
+      "date-max": 253402210800,
+      "date-format": "%Y-%m-%dT%H:%M:%S",
+      "id-min": "0",
+      "id-max": "zik0zj",
+      "recursion": 0,
+      "videos": true,
+      "user-agent": "Python:gallery-dl:0.8.4 (by /u/mikf1)"
+    },
+
+    "redgifs": {
+      "format": "mp4"
+    },
+
+    "smugmug": {
+      "videos": true
+    },
+
+    "tumblr": {
+      "avatar": false,
+      "external": false,
+      "inline": true,
+      "posts": "all",
+      "reblogs": true
+    },
+
+    "twitter": {
+      "username": null,
+      "password": null,
+      "cards": false,
+      "conversations": false,
+      "quoted": false,
+      "replies": true,
+      "retweets": false,
+      "text-tweets": false,
+      "twitpic": false,
+      "users": "timeline",
+      "videos": true
+    },
+
+    "unsplash": {
+      "format": "raw"
+    },
+
+    "vsco": {
+      "videos": true
+    }
+  },
+
+  "downloader": {
+    "filesize-min": null,
+    "filesize-max": null,
+    "mtime": true,
+    "part": true,
+    "part-directory": null,
+    "rate": null,
+    "retries": 4,
+    "timeout": 30.0,
+    "verify": true,
+
+    "http": {
+      "adjust-extensions": true,
+      "headers": null
+    },
+
+    "ytdl": {
+      "format": null,
+      "forward-cookies": false,
+      "logging": true,
+      "module": "youtube_dl",
+      "outtmpl": null,
+      "raw-options": null
+    }
+  },
+
+  "output": {
+    "mode": "auto",
+    "progress": true,
+    "shorten": true,
+    "skip": true,
+    "log": "[{name}][{levelname}] {message}",
+    "logfile": null,
+    "unsupportedfile": null
+  },
+
+  "netrc": false
+}

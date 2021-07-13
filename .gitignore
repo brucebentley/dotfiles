@@ -908,6 +908,11 @@ ehthumbs_vista.db
 !*.secret
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## gallery-dl
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+.config/gallery-dl/config.json
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ## HAMMERSPOON
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .config/hammerspoon/private/*
