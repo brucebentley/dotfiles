@@ -1,7 +1,7 @@
 golang 1.15.2
 java openjdk-15
 nodejs 16.3.0
-php 7.4.10 7.3.22
+php 8.0.8 7.4.10
 python 3.9.1
 ruby 2.7.2
 gcloud 323.0.0

@@ -54,7 +54,8 @@ hash -d data=$HOME/data
 hash -d dev=$HOME/dev
 hash -d dot=$HOME/dotfiles
 hash -d ss=$HOME/.ssh
-hash -d gc=$HOME/Projects/GoCanvas
+hash -d personal=$HOME/Projects/Personal
+hash -d gocanvas=$HOME/Projects/GoCanvas
 
 hashcwd() { hash -d "$1"="$PWD" }
 

@@ -19,8 +19,8 @@
 #SITES=~/Sites
 #BIN=~/bin
 #DATA=~/data
-export DEV="${WORKSPACE}/dev"
-export DOTFILES="${WORKSPACE}/dotfiles"
+export DEV="${HOME}/dev"
+export DOTFILES="${HOME}/dotfiles"
 #NOTES=~/Desktop/—[ DEV NOTES ]—
 #SSH=~/.ssh
 
@@ -29,31 +29,20 @@ export DOTFILES="${WORKSPACE}/dotfiles"
 # DEV Utilities
 # - - - - - - - - - - - - - - - - - - - -
 
-export DEV_PERSONAL="${WORKSPACE}/dev/personal"
-export DEV_GOCANVAS="${WORKSPACE}/dev/gocanvas"
-#DEV_MBO="${DEV}/mbo"
+export DEV_PERSONAL="${HOME}/dev/Personal"
+export DEV_GOCANVAS="${HOME}/dev/GoCanvas"
 
 # Personal
 export CERTS_PERSONAL="${DEV_PERSONAL}/certs"
-export CERT_LOCALHOST="${DEV_PERSONAL}/certs/localhost"
-export ENVIRONMENTS_PERSONAL="${DEV_PERSONAL}/environments"
+export CERT_LOCALHOST="${CERTS_PERSONAL}/localhost"
+export ENVS_PERSONAL="${DEV_PERSONAL}/environments"
 export SCRIPTS_PERSONAL="${DEV_PERSONAL}/scripts"
 export VENVS_PERSONAL="${DEV_PERSONAL}/venvs"
 
 # GoCanvas
 export CERTS_GOCANVAS="${DEV_GOCANVAS}/gocanvas/certs"
-export CERT_GOCANVAS="${DEV_GOCANVAS}/gocanvas/certs/gocanvas.com.test"
 #ENVIRONMENTS_GOCANVAS=~/dev/gocanvas/environments
 #SCRIPTS_GOCANVAS=~/dev/gocanvas/scripts
-#VENVS_GOCANVAS=~/dev/gocanvas/venvs
-
-
-# MBO
-#CERTS_MBO="${DEV_MBO}/certs"
-#CERT_MBOPARTNERS="${DEV_CERTS}/mbopartners.com.test"
-#ENVIRONMENTS_MBO="${DEV_MBO}/environments"
-#SCRIPTS_MBO="${DEV_MBO}/scripts"
-#VENVS_MBO="${DEV_MBO}/venvs"
 
 
 # - - - - - - - - - - - - - - - - - - - -
