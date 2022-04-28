@@ -1,11 +1,44 @@
 [user]
-	name = Bruce Bentley
-	email = brucebentley@me.com
+    name = Bruce Bentley
+    email = brucebentley@me.com
     signingkey = 8E784AA825D1CB90
 
-# GoCanvas Conditional Git Configuration
-[includeIf "gitdir:~/Projects/GoCanvas/"]
-    path = ~/dotfiles/.gitconfig-gocanvas
+# Conditional for Work Git Configuration
+[includeIf "gitdir:~/Projects/AEM/"]
+    path = C:\\Users\\bbentley\\.gitconfig-work
+
+[core]
+    autocrlf = false
+
+    # Use Sublime Text as the default editor.
+    #     `-n -w` Opens a new window & waits for the files to be closed before returning.
+    #editor = code --wait
+    editor = code-insiders --wait
+    #editor = subl --wait
+
+    # Use custom `.gitignore` and `.gitattributes`
+    excludesfile = C:\\Users\\bbentley\\.gitignore_global
+    attributesfile = C:\\Users\\bbentley\\.gitattributes
+
+    # Treat spaces before tabs, lines that are indented with 8 or more spaces, and
+    # all kinds of trailing whitespace as an error.
+    # [default] trailing-space: looks for spaces at the end of a line
+    # [default] space-before-tab: looks for spaces before tabs at the beginning of
+    # a line
+    whitespace = space-before-tab,tab-in-indent,trailing-space,tabwidth=4
+
+    # Make `git rebase` safer on macOS
+    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+    trustctime = false
+
+    # Prevent showing files whose names contain non-ASCII symbols as unversioned.
+    # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+    precomposeunicode = false
+
+    # Speed up commands involving untracked files such as `git status`.
+    # https://git-scm.com/docs/git-update-index#_untracked_cache
+    untrackedCache = true
+    longpaths = true
 
 [alias]
     # View abbreviated SHA, description, and history graph of the latest 20 commits
@@ -97,34 +130,6 @@
     # Detect whitespace errors when appying a patch
     whitespace = fix
 
-[core]
-    # Use Sublime Text as the default editor.
-    #     `-n -w` Opens a new window & waits for the files to be closed before returning.
-    #editor = code --wait
-    editor = code-insiders --wait
-    #editor = subl --wait
-
-    # Use custom `.gitignore` and `.gitattributes`
-	excludesfile = /Users/bruce/dotfiles/.gitignore_global
-    attributesfile = ~/dotfiles/.gitattributes
-
-    # Treat spaces before tabs and all kinds of trailing whitespace as an error
-    # [default] trailing-space: looks for spaces at the end of a line
-    # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
-    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
-
-    # Make `git rebase` safer on macOS
-    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
-    trustctime = false
-
-    # Prevent showing files whose names contain non-ASCII symbols as unversioned.
-    # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
-    precomposeunicode = false
-
-    # Speed up commands involving untracked files such as `git status`.
-    # https://git-scm.com/docs/git-update-index#_untracked_cache
-    untrackedCache = true
-
 [checkout]
     defaultRemote = origin
 
@@ -156,10 +161,12 @@
     #   - https://nathanhoad.net/how-to-git-signing-commits/
     #   - https://sabbour.me/setting-up-signed-git-commits-on-macos/
     gpgsign = true
-	template = ~/dotfiles/.gitmessage
+    template = ~/dotfiles/.gitmessage
+    # template = C:\\Users\\bbentley\\.gitmessage
 
 [credential]
     helper = osxkeychain
+    # helper = manager-core
 
 [diff]
     # Detect copies as well as renames
@@ -186,6 +193,7 @@
 
 [gpg]
     program = /usr/local/bin/gpg
+    # program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
 
 [help]
     # Automatically correct and execute mistyped commands
@@ -207,7 +215,10 @@
     # Make `git push` push relevant annotated tags when pushing branches out.
     followTags = true
 
-# URL shorthands
+[tag]
+    forceSignAnnotated = true
+
+# URL Shorthands
 [url "git@github.com:"]
     insteadOf = "gh:"
     pushInsteadOf = "github:"
@@ -224,10 +235,12 @@
 [url "git://gist.github.com/"]
     insteadOf = "gist:"
 
+# Sourcetree Configuration
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+    cmd = '' \"$LOCAL\" \"$REMOTE\"
+    path =
 
 [mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    # cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    cmd = "'' "
+    trustExitCode = true
